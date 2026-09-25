@@ -1,0 +1,2433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Class XI Biology Chapter 6 Mock Test - Qashqarian Academy</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+          },
+          colors: {
+            sky: {
+              50:'#F0F8F8', 100:'#DFF3F2', 200:'#BFE4E7', 300:'#8FCDD5',
+              400:'#4FA9B9', 500:'#1F869B', 600:'#056C82', 700:'#0A5263',
+              800:'#0B4352', 900:'#0B3340'
+            },
+            science: {
+              50:'#F0F8F8', 100:'#DFF3F2', 200:'#BFE4E7', 300:'#8FCDD5',
+              400:'#4FA9B9', 500:'#1F869B', 600:'#056C82', 700:'#0A5263',
+              800:'#0B4352', 900:'#0B3340'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- React 18 & ReactDOM -->
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+  <!-- Babel for JSX -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #f0f7ff;
+    }
+    .watermark-bg {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(-12deg);
+      pointer-events: none;
+      user-select: none;
+      z-index: 0;
+      opacity: 0.035;
+      text-align: center;
+      white-space: nowrap;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: #f1f5f9;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 4px;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fadeIn {
+      animation: fadeIn 0.25s ease-out forwards;
+    }
+    @media print {
+      .no-print { display: none !important; }
+      body { background: white; color: black; }
+    }
+  </style>
+</head>
+<body class="text-slate-800 antialiased selection:bg-sky-200 selection:text-sky-900 min-h-screen">
+  <header class="sticky top-0 z-50 bg-[#0B132B] border-b border-cyan-900/40 shadow-md">
+    <div class="max-w-5xl mx-auto px-4 py-2.5 flex items-center justify-between">
+      <a href="#" class="flex items-center gap-2">
+        <img src="../../../../images/brand/logo.png" alt="Qashqarian Academy" class="w-10 h-10 object-contain">
+        <div>
+          <div class="text-base md:text-lg font-extrabold text-white tracking-tight leading-none">Qashqarian</div>
+          <div class="text-[10px] md:text-xs text-[#FF9F1C] font-extrabold tracking-[0.2em] mt-1 leading-none">ACADEMY</div>
+        </div>
+      </a>
+      <a href="../../index.html" class="text-[11px] font-semibold text-slate-300 hover:text-white border border-white/20 rounded-lg px-2.5 py-1">
+        ← Biology Quizzes
+      </a>
+    </div>
+  </header>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const { useState, useEffect, useMemo } = React;
+
+    // SVG Icon Component
+    const Icon = ({ name, className = "w-5 h-5" }) => {
+      const props = {
+        className,
+        xmlns: "http://www.w3.org/2000/svg",
+        viewBox: "0 0 24 24",
+        fill: "none",
+        stroke: "currentColor",
+        strokeWidth: "2",
+        strokeLinecap: "round",
+        strokeLinejoin: "round"
+      };
+
+      switch (name) {
+        case "clock":
+          return <svg {...props}><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>;
+        case "award":
+          return <svg {...props}><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 22 12 17 17 22 15.79 13.88"/></svg>;
+        case "check":
+          return <svg {...props}><polyline points="20 6 9 17 4 12"/></svg>;
+        case "x":
+          return <svg {...props}><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>;
+        case "arrow-left":
+          return <svg {...props}><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>;
+        case "arrow-right":
+          return <svg {...props}><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>;
+        case "rotate-ccw":
+          return <svg {...props}><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>;
+        case "book-open":
+          return <svg {...props}><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>;
+        case "shield":
+          return <svg {...props}><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>;
+        case "zap":
+          return <svg {...props}><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>;
+        case "bar-chart":
+          return <svg {...props}><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg>;
+        case "info":
+          return <svg {...props}><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>;
+        case "alert-triangle":
+          return <svg {...props}><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>;
+        case "flag":
+          return <svg {...props}><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>;
+        case "grid":
+          return <svg {...props}><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>;
+        case "search":
+          return <svg {...props}><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>;
+        case "printer":
+          return <svg {...props}><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>;
+        case "key":
+          return <svg {...props}><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg>;
+        default:
+          return <svg {...props}><circle cx="12" cy="12" r="10"/></svg>;
+      }
+    };
+
+    const QUESTIONS = [
+      // SLO 6.1.1
+      {
+        id: 1,
+        slo: "SLO 6.1.1: Characteristic Features of Prokaryotes",
+        question: "Which structural feature is completely absent in all prokaryotic cells?",
+        options: ["Cell membrane", "70S ribosomes", "Membrane-bound nucleus", "Circular DNA"],
+        correct: 2,
+        explanation: "Prokaryotes completely lack a membrane-bound nucleus and organelle membranes; their genetic material lies in a nucleoid region.",
+        wrongExplanations: [
+          "Cell membrane is present in all prokaryotes to enclose the cytoplasm.",
+          "70S ribosomes are characteristic protein-synthesizing structures of all prokaryotes.",
+          "Membrane-bound nucleus is correct (it is completely absent in prokaryotes).",
+          "Circular DNA is present as the main bacterial chromosome and plasmids."
+        ]
+      },
+      {
+        id: 2,
+        slo: "SLO 6.1.1: Characteristic Features of Prokaryotes",
+        question: "The major chemical component that provides rigidity to most bacterial cell walls is:",
+        options: ["Cellulose", "Chitin", "Peptidoglycan", "Phospholipid"],
+        correct: 2,
+        explanation: "Peptidoglycan (murein) forms a polymer network of sugars and amino acids providing rigidity to bacterial cell walls.",
+        wrongExplanations: [
+          "Cellulose forms plant and algal cell walls.",
+          "Chitin forms fungal cell walls and arthropod exoskeletons.",
+          "Peptidoglycan is correct.",
+          "Phospholipids compose the cell membrane, not the rigid wall structure."
+        ]
+      },
+      {
+        id: 3,
+        slo: "SLO 6.1.1: Characteristic Features of Prokaryotes",
+        question: "Prokaryotic cellular ribosomes differ from eukaryotic cytosolic ribosomes because prokaryotic ribosomes are:",
+        options: ["80S in size", "70S in size", "Attached to the endoplasmic reticulum", "Enclosed inside membrane vesicles"],
+        correct: 1,
+        explanation: "Prokaryotic ribosomes are 70S (composed of 50S and 30S subunits), whereas eukaryotic cytosolic ribosomes are 80S.",
+        wrongExplanations: [
+          "80S ribosomes belong to eukaryotic cytosolic ribosomes.",
+          "70S size is correct.",
+          "Prokaryotes lack endoplasmic reticulum entirely.",
+          "Prokaryotic ribosomes float freely in cytoplasm, not inside vesicles."
+        ]
+      },
+      {
+        id: 4,
+        slo: "SLO 6.1.1: Characteristic Features of Prokaryotes",
+        question: "Where is the main genetic material located inside a prokaryotic bacterial cell?",
+        options: ["Within a double-membrane nuclear envelope", "Suspended directly in the cytoplasm within a nucleoid region", "Inside a specialized nucleolus", "Bound to histone proteins inside a chromosome matrix"],
+        correct: 1,
+        explanation: "In prokaryotes, circular double-stranded DNA resides directly in an irregular cytoplasmic region called the nucleoid.",
+        wrongExplanations: [
+          "Prokaryotes lack a double-membrane nuclear envelope.",
+          "Suspended in nucleoid region is correct.",
+          "Nucleoli exist only inside eukaryotic nuclei.",
+          "Bacterial DNA is usually not bound to true histone proteins."
+        ]
+      },
+      {
+        id: 5,
+        slo: "SLO 6.1.1: Characteristic Features of Prokaryotes",
+        question: "Which of the following cellular processes occurs across the plasma membrane in prokaryotes due to the lack of mitochondria?",
+        options: ["DNA transcription", "Protein translation", "Cellular respiration and ATP synthesis", "Lipid droplet storage"],
+        correct: 2,
+        explanation: "Because prokaryotes lack mitochondria, respiratory electron transport enzymes and ATP synthases are located directly on the plasma membrane.",
+        wrongExplanations: [
+          "Transcription occurs within the cytosol/nucleoid region.",
+          "Translation occurs on 70S cytosolic ribosomes.",
+          "Cellular respiration and ATP synthesis across plasma membrane is correct.",
+          "Lipid droplet storage occurs in cytoplasmic inclusion bodies."
+        ]
+      },
+
+      // SLO 6.2.1
+      {
+        id: 6,
+        slo: "SLO 6.2.1: Characteristic Features of Archaebacteria",
+        question: "Archaebacteria are distinguished from eubacteria primarily by possessing cell walls that lack:",
+        options: ["Peptidoglycan", "Proteins", "Lipids", "Polysaccharides"],
+        correct: 0,
+        explanation: "Archaebacterial cell walls lack peptidoglycan (they often contain pseudomurein, glycoprotein, or protein layers instead).",
+        wrongExplanations: [
+          "Peptidoglycan is absent in archaebacteria, making option A correct.",
+          "Proteins are present in S-layer archaebacterial cell walls.",
+          "Lipids are component parts of cell membrane and cell envelopes.",
+          "Polysaccharides are often present in pseudomurein walls."
+        ]
+      },
+      {
+        id: 7,
+        slo: "SLO 6.2.1: Characteristic Features of Archaebacteria",
+        question: "Which group of archaebacteria produces gas in anaerobic environments such as marshes and the digestive tracts of cows?",
+        options: ["Halophiles", "Methanogens", "Acidophiles", "Thermophiles"],
+        correct: 1,
+        explanation: "Methanogens are obligate anaerobic archaebacteria that convert carbon dioxide and hydrogen into methane gas (CH4).",
+        wrongExplanations: [
+          "Halophiles live in hyper-saline environments.",
+          "Methanogens is correct.",
+          "Acidophiles thrive in highly acidic conditions.",
+          "Thermophiles thrive in extremely high temperatures."
+        ]
+      },
+      {
+        id: 8,
+        slo: "SLO 6.2.1: Characteristic Features of Archaebacteria",
+        question: "[Real-Life Scenario] A microbiologist collects water samples from a geothermal hot spring with temperatures exceeding 85°C. Which specialized archaebacteria are most likely thriving in this extreme environment?",
+        options: ["Thermoacidophiles", "Extreme halophiles", "Nitrifying bacteria", "Cyanobacteria"],
+        correct: 0,
+        explanation: "Thermoacidophiles adapt to survive high temperatures (>80°C) and highly acidic geothermal environments.",
+        wrongExplanations: [
+          "Thermoacidophiles is correct.",
+          "Extreme halophiles thrive in hyper-saline waters, not high heat.",
+          "Nitrifying bacteria are eubacteria involved in nitrogen conversion in soil.",
+          "Cyanobacteria are photosynthetic eubacteria found in normal fresh/marine waters."
+        ]
+      },
+      {
+        id: 9,
+        slo: "SLO 6.2.1: Characteristic Features of Archaebacteria",
+        question: "Organisms thriving in hyper-saline environments like the Dead Sea or Great Salt Lake belong to the group:",
+        options: ["Methanogens", "Thermoacidophiles", "Extreme halophiles", "Psychrophiles"],
+        correct: 2,
+        explanation: "Extreme halophiles possess specialized physiological adaptations allowing them to thrive in saturated salt solutions.",
+        wrongExplanations: [
+          "Methanogens live in anaerobic marshlands and digestive tracts.",
+          "Thermoacidophiles live in hot acidic environments.",
+          "Extreme halophiles is correct.",
+          "Psychrophiles thrive in freezing cold environments."
+        ]
+      },
+      {
+        id: 10,
+        slo: "SLO 6.2.1: Characteristic Features of Archaebacteria",
+        question: "How do the cell membrane lipids of archaebacteria differ structurally from those of true bacteria?",
+        options: ["They contain unbranched fatty acid chains linked by ester bonds", "They contain branched hydrocarbon chains linked by ether bonds", "They consist purely of inorganic phosphate crystals", "They lack hydrophobic tails completely"],
+        correct: 1,
+        explanation: "Archaebacterial membranes contain branched phytanyl chains attached to glycerol via ether linkages, granting high thermal and chemical stability.",
+        wrongExplanations: [
+          "Ester-linked unbranched chains are characteristic of eubacteria and eukaryotes.",
+          "Ether-linked branched hydrocarbon chains is correct.",
+          "Membranes are organic lipid layers, not inorganic crystals.",
+          "Archaebacterial lipids retain hydrophobic hydrocarbon chains."
+        ]
+      },
+
+      // SLO 6.2.2
+      {
+        id: 11,
+        slo: "SLO 6.2.2: Discovery, Occurrence, and Habitat of Bacteria",
+        question: "Who was the first scientist to observe living bacteria, which he described as 'animalcules,' using a single-lens microscope in 1676?",
+        options: ["Louis Pasteur", "Robert Koch", "Anton van Leeuwenhoek", "Ferdinand Cohn"],
+        correct: 2,
+        explanation: "Anton van Leeuwenhoek designed high-quality hand-ground lenses and discovered living microbes ('animalcules') in 1676.",
+        wrongExplanations: [
+          "Louis Pasteur developed germ theory and pasteurization in the 19th century.",
+          "Robert Koch formulated Koch's postulates for disease causation later in 1884.",
+          "Anton van Leeuwenhoek is correct.",
+          "Ferdinand Cohn classified bacterial morphology in 1872."
+        ]
+      },
+      {
+        id: 12,
+        slo: "SLO 6.2.2: Discovery, Occurrence, and Habitat of Bacteria",
+        question: "Bacteria are described as 'ubiquitous' because they:",
+        options: ["Require sunlight to survive", "Are found almost everywhere on Earth, including air, water, soil, and living hosts", "Live exclusively inside human intestinal tracts", "Only exist in icy polar regions"],
+        correct: 1,
+        explanation: "Ubiquitous means existing everywhere; bacteria inhabit virtually every environment on Earth from deep biosphere to atmosphere.",
+        wrongExplanations: [
+          "Many bacteria are chemotrophic or heterotrophic and do not require light.",
+          "Found almost everywhere on Earth is correct.",
+          "Bacteria exist far beyond human intestines.",
+          "Bacteria live across all thermal zones, not just polar regions."
+        ]
+      },
+      {
+        id: 13,
+        slo: "SLO 6.2.2: Discovery, Occurrence, and Habitat of Bacteria",
+        question: "[Real-Life Scenario] A dental student scrapes scrapings from human teeth and examines them under a microscope, observing microscopic organisms moving around. Historically, this experiment mirrors the discovery made by:",
+        options: ["Anton van Leeuwenhoek", "Alexander Fleming", "Robert Hooke", "Edward Jenner"],
+        correct: 0,
+        explanation: "Leeuwenhoek famously examined dental plaque scrapings under his microscope and reported observing swimming micro-organisms.",
+        wrongExplanations: [
+          "Anton van Leeuwenhoek is correct.",
+          "Alexander Fleming discovered penicillin in 1928.",
+          "Robert Hooke observed dead cork cells in 1665.",
+          "Edward Jenner developed the smallpox vaccine in 1796."
+        ]
+      },
+      {
+        id: 14,
+        slo: "SLO 6.2.2: Discovery, Occurrence, and Habitat of Bacteria",
+        question: "Which German botanist formally introduced the term 'Bacteria' in 1828?",
+        options: ["Christian Gottfried Ehrenberg", "Robert Brown", "Carl Linnaeus", "Joseph Lister"],
+        correct: 0,
+        explanation: "Christian Gottfried Ehrenberg introduced the symbol and word 'Bacteria' (derived from Greek for small rod) in 1828.",
+        wrongExplanations: [
+          "Christian Gottfried Ehrenberg is correct.",
+          "Robert Brown discovered the cell nucleus in 1831.",
+          "Carl Linnaeus developed binomial nomenclature.",
+          "Joseph Lister pioneered antiseptic surgery."
+        ]
+      },
+      {
+        id: 15,
+        slo: "SLO 6.2.2: Discovery, Occurrence, and Habitat of Bacteria",
+        question: "Bacteria that can survive in extreme environmental conditions unsuitable for most life forms are known as:",
+        options: ["Pathogens", "Saprophytes", "Extremophiles", "Parasites"],
+        correct: 2,
+        explanation: "Extremophiles are microbes adapted to extreme physical or chemical conditions like hyper-salinity, intense heat, or pH extremes.",
+        wrongExplanations: [
+          "Pathogens are disease-causing organisms.",
+          "Saprophytes feed on dead decaying matter.",
+          "Extremophiles is correct.",
+          "Parasites derive nutrients at host expense."
+        ]
+      },
+
+      // SLO 6.2.3
+      {
+        id: 16,
+        slo: "SLO 6.2.3: Morphological Diversity (Shapes) of Bacteria",
+        question: "Bacteria that are naturally spherical or oval in shape are classified as:",
+        options: ["Bacilli", "Cocci", "Spirilla", "Vibrios"],
+        correct: 1,
+        explanation: "Cocci (singular: coccus) are spherical or oval-shaped bacteria.",
+        wrongExplanations: [
+          "Bacilli are rod-shaped.",
+          "Cocci is correct.",
+          "Spirilla are spiral/helical rigid rods.",
+          "Vibrios are comma-shaped."
+        ]
+      },
+      {
+        id: 17,
+        slo: "SLO 6.2.3: Morphological Diversity (Shapes) of Bacteria",
+        question: "Which morphological term describes rod-shaped bacteria?",
+        options: ["Coccus", "Vibrio", "Bacillus", "Spirochete"],
+        correct: 2,
+        explanation: "Bacilli (singular: bacillus) are cylindrical or rod-shaped bacterial cells.",
+        wrongExplanations: [
+          "Coccus is spherical.",
+          "Vibrio is comma-shaped.",
+          "Bacillus is correct.",
+          "Spirochete is flexible, spiral-shaped."
+        ]
+      },
+      {
+        id: 18,
+        slo: "SLO 6.2.3: Morphological Diversity (Shapes) of Bacteria",
+        question: "[Real-Life Scenario] A patient visits a clinic with a severe sore throat. A throat swab culture reveals spherical bacteria arranged in long, flexible chains. The doctor correctly identifies these bacteria as:",
+        options: ["Staphylococci", "Streptococci", "Diplobacilli", "Spirilla"],
+        correct: 1,
+        explanation: "Streptococci are spherical bacteria (cocci) that divide in a single plane to form chains.",
+        wrongExplanations: [
+          "Staphylococci form irregular grape-like clusters.",
+          "Streptococci is correct.",
+          "Diplobacilli are pairs of rod-shaped cells.",
+          "Spirilla are spiral-shaped."
+        ]
+      },
+      {
+        id: 19,
+        slo: "SLO 6.2.3: Morphological Diversity (Shapes) of Bacteria",
+        question: "Bacteria shaped like rigid commas or curved rods, such as the causative agent of cholera, are called:",
+        options: ["Vibrios", "Spirochetes", "Streptobacilli", "Sarcinae"],
+        correct: 0,
+        explanation: "Vibrios are short, curved, comma-shaped rigid rods (e.g., Vibrio cholerae).",
+        wrongExplanations: [
+          "Vibrios is correct.",
+          "Spirochetes are flexible wavy spirals.",
+          "Streptobacilli are chains of rod-shaped cells.",
+          "Sarcinae are cubical packets of 8 cocci cells."
+        ]
+      },
+      {
+        id: 20,
+        slo: "SLO 6.2.3: Morphological Diversity (Shapes) of Bacteria",
+        question: "Irregular grape-like clusters of spherical bacterial cells are described as:",
+        options: ["Streptococci", "Staphylococci", "Tetrads", "Spirilla"],
+        correct: 1,
+        explanation: "Staphylococci divide in multiple planes to produce irregular grape-like clusters of cocci.",
+        wrongExplanations: [
+          "Streptococci form linear chains.",
+          "Staphylococci is correct.",
+          "Tetrads form square groups of 4 cells.",
+          "Spirilla are spiral-shaped."
+        ]
+      },
+
+      // SLO 6.2.4
+      {
+        id: 21,
+        slo: "SLO 6.2.4: Gram-Positive vs. Gram-Negative Bacteria",
+        question: "When subjected to the Gram-staining procedure, Gram-positive bacteria retain the primary stain and appear:",
+        options: ["Pink or red", "Purple or crystal violet", "Bright green", "Colorless"],
+        correct: 1,
+        explanation: "Gram-positive bacteria have thick peptidoglycan layers that retain the primary crystal violet dye, appearing dark purple.",
+        wrongExplanations: [
+          "Pink/red color belongs to Gram-negative bacteria counterstained with safranin.",
+          "Purple or crystal violet is correct.",
+          "Bright green is not a result of Gram staining.",
+          "Colorless describes cells prior to staining or after decolorization before safranin."
+        ]
+      },
+      {
+        id: 22,
+        slo: "SLO 6.2.4: Gram-Positive vs. Gram-Negative Bacteria",
+        question: "Why do Gram-negative bacteria appear pink or red under a light microscope after Gram staining?",
+        options: ["Their thick peptidoglycan wall absorbs safranin permanently", "They lack a cell membrane", "Their thin peptidoglycan layer loses crystal violet during alcohol decolorization and takes up counterstain safranin", "They possess teichoic acids that repel purple dye"],
+        correct: 2,
+        explanation: "Alcohol washes crystal violet out of thin Gram-negative peptidoglycan and dissolves outer lipids, allowing uptake of safranin counterstain.",
+        wrongExplanations: [
+          "Gram-negative walls have thin peptidoglycan, not thick.",
+          "Gram-negative bacteria possess cell membranes.",
+          "Loss of crystal violet and uptake of safranin counterstain is correct.",
+          "Teichoic acids are found in Gram-positive cells."
+        ]
+      },
+      {
+        id: 23,
+        slo: "SLO 6.2.4: Gram-Positive vs. Gram-Negative Bacteria",
+        question: "[Real-Life Scenario] A medical lab technologist stains a sputum sample. Microscopic analysis shows pink rod-shaped bacteria with an outer lipid membrane containing lipopolysaccharide (LPS). How should the technologist classify these bacteria?",
+        options: ["Gram-positive bacilli", "Gram-negative bacilli", "Gram-positive cocci", "Archaebacterial spirilla"],
+        correct: 1,
+        explanation: "Pink staining indicates Gram-negative, rod shape indicates bacilli, and LPS is characteristic of Gram-negative outer membranes.",
+        wrongExplanations: [
+          "Gram-positive would stain purple.",
+          "Gram-negative bacilli is correct.",
+          "Cocci are spherical, not rod-shaped.",
+          "Archaebacteria lack peptidoglycan and standard LPS membrane architecture."
+        ]
+      },
+      {
+        id: 24,
+        slo: "SLO 6.2.4: Gram-Positive vs. Gram-Negative Bacteria",
+        question: "Which chemical compound is present exclusively in the cell walls of Gram-positive bacteria?",
+        options: ["Lipopolysaccharide (LPS)", "Teichoic acid", "Outer phospholipid membrane", "Chitin"],
+        correct: 1,
+        explanation: "Teichoic and lipoteichoic acids run through the thick peptidoglycan wall of Gram-positive bacteria exclusively.",
+        wrongExplanations: [
+          "Lipopolysaccharide (LPS) is present in Gram-negative outer membranes.",
+          "Teichoic acid is correct.",
+          "Outer membrane is characteristic of Gram-negative bacteria.",
+          "Chitin is found in fungi, not bacteria."
+        ]
+      },
+      {
+        id: 25,
+        slo: "SLO 6.2.4: Gram-Positive vs. Gram-Negative Bacteria",
+        question: "Gram-negative bacterial cell walls are structurally more complex than Gram-positive walls because Gram-negative walls contain:",
+        options: ["A thick 90% peptidoglycan layer", "An outer membrane rich in lipopolysaccharides and porin proteins", "Abundant teichoic and lipoteichoic acids", "A solid cellulose matrix"],
+        correct: 1,
+        explanation: "Gram-negative walls feature a bilayer outer membrane containing LPS, porins, and phospholipids enclosing a periplasmic space.",
+        wrongExplanations: [
+          "Thick 90% peptidoglycan describes Gram-positive walls.",
+          "Outer membrane with LPS and porins is correct.",
+          "Teichoic acids belong to Gram-positive bacteria.",
+          "Cellulose is absent in bacterial walls."
+        ]
+      },
+
+      // SLO 6.2.5
+      {
+        id: 26,
+        slo: "SLO 6.2.5: Relate the Function of Components of Bacterial Cell",
+        question: "In bacterial cells, mesosomes are invaginations of the plasma membrane that primarily function in:",
+        options: ["Flagellar propulsion", "Cellular respiration and DNA replication support", "Protein storage", "Capsule production"],
+        correct: 1,
+        explanation: "Mesosomes increase membrane surface area to support respiratory enzyme complexes and aid chromosome segregation during binary fission.",
+        wrongExplanations: [
+          "Flagellar propulsion relies on basal body rotary motors.",
+          "Cellular respiration and DNA replication support is correct.",
+          "Protein storage occurs in cytoplasmic inclusion bodies.",
+          "Capsules are secreted outside the cell wall."
+        ]
+      },
+      {
+        id: 27,
+        slo: "SLO 6.2.5: Relate the Function of Components of Bacterial Cell",
+        question: "Under harsh, unfavorable environmental conditions, certain bacteria form highly resistant, dormant structures called:",
+        options: ["Plasmids", "Endospores", "Mesosomes", "Heterocysts"],
+        correct: 1,
+        explanation: "Endospores are extremely resistant, dehydrated dormant structures produced inside cells to survive heat, desiccation, and radiation.",
+        wrongExplanations: [
+          "Plasmids are extra-chromosomal DNA rings.",
+          "Endospores is correct.",
+          "Mesosomes are membrane folds.",
+          "Heterocysts are nitrogen-fixing cells in cyanobacteria."
+        ]
+      },
+      {
+        id: 28,
+        slo: "SLO 6.2.5: Relate the Function of Components of Bacterial Cell",
+        question: "[Real-Life Scenario] A clinical strain of Staphylococcus aureus becomes resistant to multiple antibiotics without altering its main chromosomal DNA. Which small, circular extra-chromosomal DNA molecule is responsible for carrying these antibiotic-resistance genes?",
+        options: ["Nucleoid", "Plasmid", "Mesosome", "Ribosome"],
+        correct: 1,
+        explanation: "Plasmids are autonomous double-stranded circular DNA fragments that often carry antibiotic-resistance genes (R-factors).",
+        wrongExplanations: [
+          "Nucleoid contains the primary essential genome.",
+          "Plasmid is correct.",
+          "Mesosomes are membrane folds.",
+          "Ribosomes synthesize proteins from RNA."
+        ]
+      },
+      {
+        id: 29,
+        slo: "SLO 6.2.5: Relate the Function of Components of Bacterial Cell",
+        question: "Bacterial flagella provide locomotion and are structurally composed of repeating subunits of the protein:",
+        options: ["Tubulin", "Actin", "Flagellin", "Pilin"],
+        correct: 2,
+        explanation: "Prokaryotic flagella consist of globular protein subunits called flagellin arranged in a helical filament.",
+        wrongExplanations: [
+          "Tubulin forms eukaryotic microtubules.",
+          "Actin forms microfilaments.",
+          "Flagellin is correct.",
+          "Pilin forms pili/fimbriae."
+        ]
+      },
+      {
+        id: 30,
+        slo: "SLO 6.2.5: Relate the Function of Components of Bacterial Cell",
+        question: "[Real-Life Scenario] A pathogenic bacterium invades a human bloodstream. White blood cells struggle to engulf and destroy the pathogen because a sticky gelatinous layer surrounds its cell wall. What is this protective outer coating?",
+        options: ["Cell membrane", "Capsule", "Peptidoglycan wall", "Endospore"],
+        correct: 1,
+        explanation: "Bacterial capsules are polysaccharide coats that protect bacteria from phagocytosis by host immune cells.",
+        wrongExplanations: [
+          "Cell membrane lies beneath the cell wall.",
+          "Capsule is correct.",
+          "Peptidoglycan wall provides structural shape but is recognized by immune factors.",
+          "Endospores are internal survival structures, not surface slime capsules."
+        ]
+      },
+
+      // SLO 6.3.1
+      {
+        id: 31,
+        slo: "SLO 6.3.1: Differentiate Types of Nutrition in Bacteria",
+        question: "Heterotrophic bacteria differ from autotrophic bacteria because heterotrophs:",
+        options: ["Synthesize organic food from carbon dioxide using sunlight", "Obtain organic carbon and nutrients from preformed organic matter", "Oxidize inorganic sulfur compounds for energy", "Produce oxygen during photosynthesis"],
+        correct: 1,
+        explanation: "Heterotrophs cannot fix inorganic carbon (CO2) and must absorb ready-made organic molecules from external sources.",
+        wrongExplanations: [
+          "Synthesizing food from CO2 and light describes photoautotrophs.",
+          "Obtaining nutrients from preformed organic matter is correct.",
+          "Oxidizing inorganic sulfur describes chemoautotrophs.",
+          "Oxygen production occurs in oxygenic autotrophs."
+        ]
+      },
+      {
+        id: 32,
+        slo: "SLO 6.3.1: Differentiate Types of Nutrition in Bacteria",
+        question: "Bacteria that break down dead organic matter and decay animal or plant remains are classified as:",
+        options: ["Parasites", "Saprophytes", "Obligate autotrophs", "Symbionts"],
+        correct: 1,
+        explanation: "Saprophytic bacteria secrete digestive enzymes onto dead organic matter to absorb dissolved nutrients.",
+        wrongExplanations: [
+          "Parasites feed on living host tissues.",
+          "Saprophytes is correct.",
+          "Autotrophs manufacture their own organic food.",
+          "Symbionts live in mutually beneficial living associations."
+        ]
+      },
+      {
+        id: 33,
+        slo: "SLO 6.3.1: Differentiate Types of Nutrition in Bacteria",
+        question: "[Real-Life Scenario] Legume plants such as peas and beans grow well in nitrogen-deficient soil because Rhizobium bacteria live inside their root nodules. Both the plant and the bacteria benefit from this arrangement. What type of nutrition is this?",
+        options: ["Parasitic nutrition", "Symbiotic nutrition", "Saprophytic nutrition", "Chemosynthetic autotrophy"],
+        correct: 1,
+        explanation: "Symbiotic mutualism involves two species living together where both organisms benefit (Rhizobium fixes nitrogen; plant supplies carbohydrates).",
+        wrongExplanations: [
+          "Parasitic nutrition causes harm to one organism.",
+          "Symbiotic nutrition is correct.",
+          "Saprophytes feed on dead matter.",
+          "Chemosynthesis involves inorganic chemical oxidation."
+        ]
+      },
+      {
+        id: 34,
+        slo: "SLO 6.3.1: Differentiate Types of Nutrition in Bacteria",
+        question: "Bacterial pathogens that live inside or on a living host and cause harm or disease are termed:",
+        options: ["Mutualists", "Saprophytes", "Parasites", "Commensals"],
+        correct: 2,
+        explanation: "Parasites derive nutrition directly from a living host cell or organism, causing harm or pathology.",
+        wrongExplanations: [
+          "Mutualists benefit the host.",
+          "Saprophytes feed on dead remains.",
+          "Parasites is correct.",
+          "Commensals live on hosts without harming or benefiting them."
+        ]
+      },
+      {
+        id: 35,
+        slo: "SLO 6.3.1: Differentiate Types of Nutrition in Bacteria",
+        question: "Nitrifying bacteria in soil obtain energy by oxidizing inorganic compounds such as ammonia to nitrite. These bacteria are:",
+        options: ["Photoautotrophs", "Chemoautotrophs", "Photoheterotrophs", "Parasites"],
+        correct: 1,
+        explanation: "Chemoautotrophs derive energy from oxidizing inorganic chemical bonds (like ammonia or nitrites) to fix carbon dioxide.",
+        wrongExplanations: [
+          "Photoautotrophs use sunlight energy.",
+          "Chemoautotrophs is correct.",
+          "Photoheterotrophs use light for energy but require organic carbon sources.",
+          "Parasites require living hosts."
+        ]
+      },
+
+      // SLO 6.3.2
+      {
+        id: 36,
+        slo: "SLO 6.3.2: Differentiate Chlorophyll in Bacteria and Plants",
+        question: "Bacteriochlorophyll differs from plant chlorophyll a because bacteriochlorophyll:",
+        options: ["Absorbs light in the infrared and longer wavelength spectrum", "Is localized inside double-membrane chloroplasts", "Releases oxygen gas as a byproduct", "Uses water as a hydrogen donor"],
+        correct: 0,
+        explanation: "Bacteriochlorophyll absorbs light at longer wavelengths (infrared spectrum, ~800–900 nm), allowing growth in dim or deep water environments.",
+        wrongExplanations: [
+          "Absorbing light in infrared wavelengths is correct.",
+          "Bacteriochlorophyll is located on chromatophores, not in chloroplasts.",
+          "Bacterial photosynthesis is anoxygenic (no oxygen release).",
+          "Bacterial photosynthesis uses H2S or other compounds, not water."
+        ]
+      },
+      {
+        id: 37,
+        slo: "SLO 6.3.2: Differentiate Chlorophyll in Bacteria and Plants",
+        question: "What hydrogen donor is utilized by photosynthetic purple sulfur bacteria during photosynthesis instead of water (H₂O)?",
+        options: ["Carbon dioxide (CO₂)", "Hydrogen sulfide (H₂S)", "Oxygen gas (O₂)", "Glucose (C₆H₁₂O₆)"],
+        correct: 1,
+        explanation: "Purple sulfur bacteria use hydrogen sulfide (H2S) as an electron/hydrogen donor, depositing elemental sulfur instead of releasing oxygen.",
+        wrongExplanations: [
+          "CO2 is the carbon source being reduced, not the hydrogen donor.",
+          "Hydrogen sulfide (H2S) is correct.",
+          "O2 is an oxidized byproduct of water, not a hydrogen donor.",
+          "Glucose is the synthesized product."
+        ]
+      },
+      {
+        id: 38,
+        slo: "SLO 6.3.2: Differentiate Chlorophyll in Bacteria and Plants",
+        question: "Plant photosynthesis is oxygenic (produces O₂), whereas bacterial photosynthesis in purple and green sulfur bacteria is:",
+        options: ["Oxygenic", "Anoxygenic (does not produce O₂)", "Aerobic", "Respirative"],
+        correct: 1,
+        explanation: "Bacterial photosynthesis does not split water molecules and therefore does not generate oxygen gas (anoxygenic).",
+        wrongExplanations: [
+          "Oxygenic describes cyanobacteria and plants.",
+          "Anoxygenic is correct.",
+          "Aerobic relates to oxygen consumption during cellular respiration.",
+          "Respirative refers to catabolic oxidation."
+        ]
+      },
+      {
+        id: 39,
+        slo: "SLO 6.3.2: Differentiate Chlorophyll in Bacteria and Plants",
+        question: "[Real-Life Scenario] A biology student collects mud from the bottom of an anaerobic lake containing purple sulfur bacteria. When exposed to light, these bacteria perform photosynthesis but release yellow sulfur granules instead of oxygen gas. Why does this occur?",
+        options: ["They use H₂S as an electron donor instead of H₂O", "They lack bacteriochlorophyll", "They split carbon dioxide to release sulfur", "Their cell wall absorbs oxygen gas"],
+        correct: 0,
+        explanation: "Splitting H2S generates elemental sulfur (S) granules rather than splitting H2O to generate oxygen gas (O2).",
+        wrongExplanations: [
+          "They use H2S as an electron donor instead of H2O is correct.",
+          "Purple sulfur bacteria possess bacteriochlorophyll.",
+          "Carbon dioxide contains no sulfur atoms.",
+          "Oxygen is not produced in the reaction."
+        ]
+      },
+      {
+        id: 40,
+        slo: "SLO 6.3.2: Differentiate Chlorophyll in Bacteria and Plants",
+        question: "In photosynthetic bacteria, photosynthetic pigments are embedded in:",
+        options: ["Chloroplast thylakoid membranes", "Invaginated plasma membrane folds or chromatophores", "The nuclear membrane", "Cytosolic ribosomes"],
+        correct: 1,
+        explanation: "Prokaryotes lack chloroplasts; pigments reside within specialized plasma membrane invaginations called chromatophores or thylakoids.",
+        wrongExplanations: [
+          "Prokaryotes lack organelle-bound chloroplasts.",
+          "Invaginated plasma membrane folds or chromatophores is correct.",
+          "Prokaryotes lack nuclear membranes.",
+          "Ribosomes are involved in protein translation, not light capture."
+        ]
+      },
+
+      // SLO 6.4.1
+      {
+        id: 41,
+        slo: "SLO 6.4.1: Aerobes and Anaerobes Classification",
+        question: "Bacteria that strictly require free molecular oxygen for cellular respiration and growth are called:",
+        options: ["Obligate aerobes", "Obligate anaerobes", "Microaerophiles", "Facultative anaerobes"],
+        correct: 0,
+        explanation: "Obligate aerobes depend entirely on oxygen as the terminal electron acceptor in aerobic respiration.",
+        wrongExplanations: [
+          "Obligate aerobes is correct.",
+          "Obligate anaerobes are killed by oxygen.",
+          "Microaerophiles require low levels of oxygen.",
+          "Facultative anaerobes can survive with or without oxygen."
+        ]
+      },
+      {
+        id: 42,
+        slo: "SLO 6.4.1: Aerobes and Anaerobes Classification",
+        question: "Bacteria that are poisoned and killed by the presence of oxygen gas are classified as:",
+        options: ["Obligate aerobes", "Obligate anaerobes", "Facultative anaerobes", "Microaerophiles"],
+        correct: 1,
+        explanation: "Obligate anaerobes lack enzymes like superoxide dismutase and catalase, making reactive oxygen species lethal to them.",
+        wrongExplanations: [
+          "Obligate aerobes require oxygen.",
+          "Obligate anaerobes is correct.",
+          "Facultative anaerobes grow well in oxygen.",
+          "Microaerophiles require low oxygen concentrations."
+        ]
+      },
+      {
+        id: 43,
+        slo: "SLO 6.4.1: Aerobes and Anaerobes Classification",
+        question: "Organisms that grow best in the presence of oxygen but can switch to anaerobic respiration or fermentation when oxygen is absent are:",
+        options: ["Obligate anaerobes", "Facultative anaerobes", "Microaerophiles", "Strict aerobes"],
+        correct: 1,
+        explanation: "Facultative anaerobes preferentially perform aerobic respiration in oxygen but adapt to anaerobic pathways if oxygen is depleted.",
+        wrongExplanations: [
+          "Obligate anaerobes cannot survive in oxygen.",
+          "Facultative anaerobes is correct.",
+          "Microaerophiles require strictly low oxygen partial pressure.",
+          "Strict aerobes perish in anaerobic environments."
+        ]
+      },
+      {
+        id: 44,
+        slo: "SLO 6.4.1: Aerobes and Anaerobes Classification",
+        question: "[Real-Life Scenario] A person steps on a deep, rusty nail, driving bacteria deep into oxygen-poor muscle tissue. Clostridium tetani thrives in this deep wound environment, producing toxins. Based on its oxygen requirement, C. tetani is an:",
+        options: ["Obligate aerobe", "Obligate anaerobe", "Microaerophile", "Obligate autotroph"],
+        correct: 1,
+        explanation: "Clostridium tetani is an obligate anaerobe that thrives exclusively in anoxic deep tissue environments.",
+        wrongExplanations: [
+          "Obligate aerobes cannot grow in oxygen-poor deep puncture wounds.",
+          "Obligate anaerobe is correct.",
+          "Microaerophiles require small amounts of oxygen.",
+          "Autotrophs synthesize food from inorganic sources."
+        ]
+      },
+      {
+        id: 45,
+        slo: "SLO 6.4.1: Aerobes and Anaerobes Classification",
+        question: "Bacteria that require very low concentrations of oxygen (2% to 10%) for optimal growth are termed:",
+        options: ["Facultative anaerobes", "Microaerophiles", "Obligate aerobes", "Methanogens"],
+        correct: 1,
+        explanation: "Microaerophiles require oxygen at concentrations lower than atmospheric levels (~21%).",
+        wrongExplanations: [
+          "Facultative anaerobes grow in full atmospheric oxygen.",
+          "Microaerophiles is correct.",
+          "Obligate aerobes require normal atmospheric oxygen levels.",
+          "Methanogens are obligate anaerobes."
+        ]
+      },
+
+      // SLO 6.5.1
+      {
+        id: 46,
+        slo: "SLO 6.5.1: Locomotion in Bacteria (Chemotaxis and Magnetotaxis)",
+        question: "The directional movement of a bacterial cell toward an attractive chemical nutrient or away from a toxic chemical is termed:",
+        options: ["Phototaxis", "Chemotaxis", "Magnetotaxis", "Geotaxis"],
+        correct: 1,
+        explanation: "Chemotaxis is motile bacterial navigation guided by chemical gradients.",
+        wrongExplanations: [
+          "Phototaxis is movement in response to light.",
+          "Chemotaxis is correct.",
+          "Magnetotaxis is navigation along magnetic field lines.",
+          "Geotaxis is movement in response to gravity."
+        ]
+      },
+      {
+        id: 47,
+        slo: "SLO 6.5.1: Locomotion in Bacteria (Chemotaxis and Magnetotaxis)",
+        question: "When a bacterium swims directly toward a higher concentration of glucose, it is exhibiting:",
+        options: ["Negative chemotaxis", "Positive chemotaxis", "Magnetotaxis", "Random tumble movement"],
+        correct: 1,
+        explanation: "Movement toward a chemical attractant (like glucose) is positive chemotaxis.",
+        wrongExplanations: [
+          "Negative chemotaxis is movement away from repellents/toxins.",
+          "Positive chemotaxis is correct.",
+          "Magnetotaxis involves magnetic alignments.",
+          "Random tumbling changes direction without orienting toward attractants."
+        ]
+      },
+      {
+        id: 48,
+        slo: "SLO 6.5.1: Locomotion in Bacteria (Chemotaxis and Magnetotaxis)",
+        question: "[Real-Life Scenario] Sediment bacteria swimming in aquatic marsh mud align themselves along Earth's magnetic lines to navigate down into oxygen-poor sediments. What type of locomotion is this?",
+        options: ["Chemotaxis", "Magnetotaxis", "Phototaxis", "Thermotaxis"],
+        correct: 1,
+        explanation: "Magnetotaxis uses intracellular magnetic crystals to align cell movement with geomagnetic field lines.",
+        wrongExplanations: [
+          "Chemotaxis responds to chemical gradients.",
+          "Magnetotaxis is correct.",
+          "Phototaxis responds to light.",
+          "Thermotaxis responds to heat gradients."
+        ]
+      },
+      {
+        id: 49,
+        slo: "SLO 6.5.1: Locomotion in Bacteria (Chemotaxis and Magnetotaxis)",
+        question: "Bacterial cells performing magnetotaxis contain specialized intracellular membrane-bound chains of magnetic iron oxide crystals called:",
+        options: ["Mesosomes", "Magnetosomes", "Carboxysomes", "Heterocysts"],
+        correct: 1,
+        explanation: "Magnetosomes are membrane-enclosed inclusions of magnetite (Fe3O4) or greigite (Fe3S4) that act as a compass needle.",
+        wrongExplanations: [
+          "Mesosomes are respiratory plasma membrane invaginations.",
+          "Magnetosomes is correct.",
+          "Carboxysomes fix carbon dioxide in autotrophs.",
+          "Heterocysts fix nitrogen in cyanobacteria."
+        ]
+      },
+      {
+        id: 50,
+        slo: "SLO 6.5.1: Locomotion in Bacteria (Chemotaxis and Magnetotaxis)",
+        question: "Bacterial flagellar movement consists of alternating phases described as:",
+        options: ["Gliding and sliding", "Running and tumbling", "Crawling and flexing", "Contracting and extending"],
+        correct: 1,
+        explanation: "Flagellar rotation counter-clockwise produces smooth 'runs', while clockwise rotation causes 'tumbles' to reorient direction.",
+        wrongExplanations: [
+          "Gliding occurs without flagella in cyanobacteria and myxobacteria.",
+          "Running and tumbling is correct.",
+          "Crawling and flexing describe eukaryotic amoeboid/euglenoid motion.",
+          "Contracting describes muscle fibers or spasmonemes."
+        ]
+      },
+
+      // SLO 6.6.1
+      {
+        id: 51,
+        slo: "SLO 6.6.1: Phases of Bacterial Growth Curve",
+        question: "In a closed bacterial culture system, the initial period where bacteria adapt to their new environment, synthesize enzymes, and grow in size without dividing is the:",
+        options: ["Log phase", "Lag phase", "Stationary phase", "Decline phase"],
+        correct: 1,
+        explanation: "During the lag phase, bacteria adapt to new nutrient conditions, synthesize necessary metabolic machinery, but do not undergo cell division.",
+        wrongExplanations: [
+          "Log phase is the exponential cell division phase.",
+          "Lag phase is correct.",
+          "Stationary phase occurs when birth rate equals death rate.",
+          "Decline phase occurs when death rate exceeds birth rate."
+        ]
+      },
+      {
+        id: 52,
+        slo: "SLO 6.6.1: Phases of Bacterial Growth Curve",
+        question: "During which phase of bacterial growth does binary fission occur at a rapid, constant exponential rate?",
+        options: ["Lag phase", "Log (Exponential) phase", "Stationary phase", "Death phase"],
+        correct: 1,
+        explanation: "In the log (exponential) phase, bacterial population doubles at a constant minimum generation time.",
+        wrongExplanations: [
+          "Lag phase is the preparatory adaptation phase.",
+          "Log (Exponential) phase is correct.",
+          "Stationary phase shows plateaued population count.",
+          "Death phase shows declining living population count."
+        ]
+      },
+      {
+        id: 53,
+        slo: "SLO 6.6.1: Phases of Bacterial Growth Curve",
+        question: "[Real-Life Scenario] Fresh milk left on a kitchen counter at room temperature overnight spoils within hours due to explosive bacterial population growth. Which phase of the bacterial growth curve is occurring during this rapid growth?",
+        options: ["Lag phase", "Log (Exponential) phase", "Stationary phase", "Decline phase"],
+        correct: 1,
+        explanation: "Rapid exponential multiplication of bacteria causing spoilage represents the log (exponential) growth phase.",
+        wrongExplanations: [
+          "Lag phase features zero net population multiplication.",
+          "Log (Exponential) phase is correct.",
+          "Stationary phase occurs after nutrient depletion slows growth.",
+          "Decline phase occurs as bacteria die off."
+        ]
+      },
+      {
+        id: 54,
+        slo: "SLO 6.6.1: Phases of Bacterial Growth Curve",
+        question: "In the stationary phase of a bacterial growth curve, the rate of new cell division equals the rate of cell death primarily due to:",
+        options: ["Sudden temperature drops", "Nutrient exhaustion and accumulation of toxic metabolic waste", "Excess oxygen supply", "Formation of flagella"],
+        correct: 1,
+        explanation: "Depletion of essential nutrients and accumulation of toxic byproducts causes the living population to plateau as cell reproduction balances cell death.",
+        wrongExplanations: [
+          "Temperature drops are environmental changes, not intrinsic batch culture curve causes.",
+          "Nutrient exhaustion and toxic waste accumulation is correct.",
+          "Excess oxygen does not limit growth to cause a stationary plateau.",
+          "Flagella formation does not stop net population growth."
+        ]
+      },
+      {
+        id: 55,
+        slo: "SLO 6.6.1: Phases of Bacterial Growth Curve",
+        question: "What phase of the bacterial growth curve occurs when toxic metabolic wastes accumulate to high levels and cell death rate exceeds new cell division?",
+        options: ["Lag phase", "Stationary phase", "Death (Decline) phase", "Log phase"],
+        correct: 2,
+        explanation: "The death or decline phase occurs when living cell counts decrease exponentially due to hostile nutrient/toxic conditions.",
+        wrongExplanations: [
+          "Lag phase precedes division.",
+          "Stationary phase shows stable living numbers.",
+          "Death (Decline) phase is correct.",
+          "Log phase shows population expansion."
+        ]
+      },
+
+      // SLO 6.7.1
+      {
+        id: 56,
+        slo: "SLO 6.7.1: Modes of Reproduction in Bacteria",
+        question: "The primary asexual method of reproduction in bacteria, where a single parent cell divides into two equal daughter cells, is:",
+        options: ["Conjugation", "Binary fission", "Transduction", "Transformation"],
+        correct: 1,
+        explanation: "Binary fission is the direct transverse asexual splitting of one mother bacterial cell into two identical daughter cells.",
+        wrongExplanations: [
+          "Conjugation is horizontal gene transfer.",
+          "Binary fission is correct.",
+          "Transduction is viral-mediated DNA transfer.",
+          "Transformation is uptake of free extracellular DNA."
+        ]
+      },
+      {
+        id: 57,
+        slo: "SLO 6.7.1: Modes of Reproduction in Bacteria",
+        question: "Direct transfer of genetic material between two bacterial cells through a specialized cytoplasmic bridge called a sex pilus is known as:",
+        options: ["Conjugation", "Transformation", "Transduction", "Sporulation"],
+        correct: 0,
+        explanation: "Conjugation transfers plasmid DNA directly from donor (F+) to recipient (F-) bacteria via a sex pilus bridge.",
+        wrongExplanations: [
+          "Conjugation is correct.",
+          "Transformation does not involve direct cell-to-cell contact.",
+          "Transduction uses bacteriophages.",
+          "Sporulation is survival spore formation."
+        ]
+      },
+      {
+        id: 58,
+        slo: "SLO 6.7.1: Modes of Reproduction in Bacteria",
+        question: "[Real-Life Scenario] During hospital instrument prep, surgical tools are boiled in water at 100°C, but some bacterial species survive because they formed thick-walled protective structures. What are these heat-resistant structures?",
+        options: ["Plasmids", "Endospores", "Mesosomes", "Capsid shells"],
+        correct: 1,
+        explanation: "Bacterial endospores withstand boiling temperatures (100°C) due to dipicolinic acid and heavy protein coats, requiring autoclaving at 121°C for destruction.",
+        wrongExplanations: [
+          "Plasmids are DNA rings inside cells, not protective physical shells.",
+          "Endospores is correct.",
+          "Mesosomes are internal membrane folds.",
+          "Capsid shells are viral protein coats."
+        ]
+      },
+      {
+        id: 59,
+        slo: "SLO 6.7.1: Modes of Reproduction in Bacteria",
+        question: "Bacterial transformation involves:",
+        options: ["Transfer of DNA via a bacteriophage virus vector", "Direct uptake of free, naked DNA fragments from the surrounding environment", "Cell-to-cell contact via a sex pilus", "Equal splitting of the cytoplasm"],
+        correct: 1,
+        explanation: "Transformation occurs when competent bacterial cells absorb free extracellular DNA fragments from their external medium.",
+        wrongExplanations: [
+          "Viral vector DNA transfer is transduction.",
+          "Direct uptake of free naked DNA fragments is correct.",
+          "Sex pilus contact is conjugation.",
+          "Cytoplasmic splitting is binary fission."
+        ]
+      },
+      {
+        id: 60,
+        slo: "SLO 6.7.1: Modes of Reproduction in Bacteria",
+        question: "The process in which a bacteriophage virus accidentally transfers bacterial DNA from one host bacterium to another is termed:",
+        options: ["Transformation", "Conjugation", "Transduction", "Binary fission"],
+        correct: 2,
+        explanation: "Transduction is viral-mediated horizontal gene transfer where bacteriophages package bacterial host DNA and inject it into new recipients.",
+        wrongExplanations: [
+          "Transformation uses free naked DNA.",
+          "Conjugation uses pilus bridges.",
+          "Transduction is correct.",
+          "Binary fission is asexual cell division."
+        ]
+      },
+
+      // SLO 6.8.1
+      {
+        id: 61,
+        slo: "SLO 6.8.1: Role of Beneficial Bacteria",
+        question: "Which beneficial bacteria are commercially used in the dairy industry to ferment lactose sugar into lactic acid for souring milk and making yogurt?",
+        options: ["Streptomyces", "Lactobacillus", "Rhizobium", "Escherichia coli"],
+        correct: 1,
+        explanation: "Lactobacillus species convert milk sugar (lactose) into lactic acid, coagulating milk proteins to produce yogurt and cheese.",
+        wrongExplanations: [
+          "Streptomyces produce antibiotics.",
+          "Lactobacillus is correct.",
+          "Rhizobium fixes nitrogen in legume roots.",
+          "E. coli is a gut commensal and genetic research model."
+        ]
+      },
+      {
+        id: 62,
+        slo: "SLO 6.8.1: Role of Beneficial Bacteria",
+        question: "The important medical antibiotic streptomycin is naturally produced by soil bacteria belonging to the genus:",
+        options: ["Streptomyces", "Salmonella", "Clostridium", "Vibrio"],
+        correct: 0,
+        explanation: "Streptomyces griseus produces the aminoglycoside antibiotic streptomycin, used to treat bacterial infections.",
+        wrongExplanations: [
+          "Streptomyces is correct.",
+          "Salmonella is a pathogenic enteric bacterium.",
+          "Clostridium produces tetanus, botulism, or gangrene toxins.",
+          "Vibrio causes cholera."
+        ]
+      },
+      {
+        id: 63,
+        slo: "SLO 6.8.1: Role of Beneficial Bacteria",
+        question: "[Real-Life Scenario] A farmer rotates his wheat crop with clover legumes to naturally restore nitrogen nutrients to the soil without synthetic chemical fertilizers. Which root-dwelling bacteria perform this beneficial nitrogen fixation?",
+        options: ["Nitrosomonas", "Rhizobium", "Lactobacillus", "Azotobacter"],
+        correct: 1,
+        explanation: "Rhizobium species form symbiotic associations in leguminous root nodules to convert N2 into usable bio-available nitrogen.",
+        wrongExplanations: [
+          "Nitrosomonas oxidizes ammonia to nitrite in soil.",
+          "Rhizobium is correct.",
+          "Lactobacillus ferments milk sugar.",
+          "Azotobacter is a free-living, non-symbiotic nitrogen-fixing soil bacterium."
+        ]
+      },
+      {
+        id: 64,
+        slo: "SLO 6.8.1: Role of Beneficial Bacteria",
+        question: "In genetic engineering, human insulin is mass-produced by inserting the human insulin gene into which common intestinal bacterium?",
+        options: ["Bacillus anthracis", "Escherichia coli", "Streptococcus pneumoniae", "Clostridium tetani"],
+        correct: 1,
+        explanation: "Escherichia coli (E. coli) serves as the primary recombinant host bacterium to express synthetic human insulin (Humulin).",
+        wrongExplanations: [
+          "Bacillus anthracis causes anthrax.",
+          "Escherichia coli is correct.",
+          "Streptococcus pneumoniae causes bacterial pneumonia.",
+          "Clostridium tetani causes tetanus."
+        ]
+      },
+      {
+        id: 65,
+        slo: "SLO 6.8.1: Role of Beneficial Bacteria",
+        question: "The environmental process of using oil-degrading bacteria to clean up toxic marine oil spills is known as:",
+        options: ["Bioremediation", "Pasteurization", "Eutrophication", "Vaccination"],
+        correct: 0,
+        explanation: "Bioremediation is the use of biological organisms (such as hydrocarbonoclastic bacteria) to neutralize environmental pollutants.",
+        wrongExplanations: [
+          "Bioremediation is correct.",
+          "Pasteurization is heat sterilization of food liquids.",
+          "Eutrophication is nutrient enrichment causing algal blooms.",
+          "Vaccination is artificial immunization."
+        ]
+      },
+
+      // SLO 6.8.2
+      {
+        id: 66,
+        slo: "SLO 6.8.2: Role of Harmful Bacteria",
+        question: "Tuberculosis (TB), a chronic human respiratory disease characterized by coughing blood and lung lesions, is caused by:",
+        options: ["Mycobacterium tuberculosis", "Salmonella typhi", "Vibrio cholerae", "Corynebacterium diphtheriae"],
+        correct: 0,
+        explanation: "Mycobacterium tuberculosis is an acid-fast bacterium responsible for human pulmonary tuberculosis.",
+        wrongExplanations: [
+          "Mycobacterium tuberculosis is correct.",
+          "Salmonella typhi causes typhoid fever.",
+          "Vibrio cholerae causes cholera.",
+          "Corynebacterium diphtheriae causes diphtheria."
+        ]
+      },
+      {
+        id: 67,
+        slo: "SLO 6.8.2: Role of Harmful Bacteria",
+        question: "Which destructive bacterial disease affects citrus plant leaves and fruit, causing corky lesions?",
+        options: ["Late blight", "Citrus Canker", "Loose smut", "Tobacco mosaic"],
+        correct: 1,
+        explanation: "Citrus Canker, caused by Xanthomonas citri, induces raised corky lesions on leaves, stems, and citrus fruits.",
+        wrongExplanations: [
+          "Late blight is caused by the oomycete fungus Phytophthora infestans.",
+          "Citrus Canker is correct.",
+          "Loose smut is caused by Ustilago fungi.",
+          "Tobacco mosaic is caused by the TMV virus."
+        ]
+      },
+      {
+        id: 68,
+        slo: "SLO 6.8.2: Role of Harmful Bacteria",
+        question: "[Real-Life Scenario] A family eats improperly canned home-preserved food and develops severe muscle paralysis and breathing difficulty within 24 hours due to a potent neurotoxin. Which bacterium causes this severe food poisoning (botulism)?",
+        options: ["Salmonella enterica", "Clostridium botulinum", "Lactobacillus acidophilus", "Staphylococcus aureus"],
+        correct: 1,
+        explanation: "Clostridium botulinum produces botulinum neurotoxin in anaerobic canned foods, blocking acetylcholine release and causing flaccid paralysis.",
+        wrongExplanations: [
+          "Salmonella causes salmonellosis gastrointestinal fever.",
+          "Clostridium botulinum is correct.",
+          "Lactobacillus is a beneficial probiotic bacterium.",
+          "Staphylococcus aureus toxin causes acute vomiting and gut cramps."
+        ]
+      },
+      {
+        id: 69,
+        slo: "SLO 6.8.2: Role of Harmful Bacteria",
+        question: "Food spoilage characterized by the rotting of fresh meat and release of foul odors is caused by bacterial:",
+        options: ["Photosynthesis", "Protein putrefaction and decay", "Nitrogen fixation", "Conjugation"],
+        correct: 1,
+        explanation: "Putrefaction is the anaerobic bacterial breakdown of proteins into foul-smelling amines (like cadaverine and putrescine).",
+        wrongExplanations: [
+          "Photosynthesis builds organic sugars using light.",
+          "Protein putrefaction and decay is correct.",
+          "Nitrogen fixation converts atmospheric nitrogen into ammonia.",
+          "Conjugation is bacterial genetic transfer."
+        ]
+      },
+      {
+        id: 70,
+        slo: "SLO 6.8.2: Role of Harmful Bacteria",
+        question: "Severe watery diarrhea ('rice-water stools') leading to rapid dehydration in humans is caused by drinking water contaminated with:",
+        options: ["Vibrio cholerae", "Mycobacterium leprae", "Clostridium tetani", "Treponema pallidum"],
+        correct: 0,
+        explanation: "Vibrio cholerae secretes cholera toxin in the small intestine, causing massive loss of water and ions as rice-water stools.",
+        wrongExplanations: [
+          "Vibrio cholerae is correct.",
+          "Mycobacterium leprae causes leprosy.",
+          "Clostridium tetani causes tetanus.",
+          "Treponema pallidum causes syphilis."
+        ]
+      },
+
+      // SLO 6.9.1
+      {
+        id: 71,
+        slo: "SLO 6.9.1: Methods to Control Bacteria",
+        question: "Which method uses moist heat under pressure (121°C at 15 psi for 15 minutes) to destroy all living vegetative bacteria and heat-resistant endospores?",
+        options: ["Pasteurization", "Autoclaving", "Lyophilization", "Filtration"],
+        correct: 1,
+        explanation: "Autoclaving delivers steam under pressure to reach 121°C, achieving total physical sterilization including endospores.",
+        wrongExplanations: [
+          "Pasteurization reduces pathogens in food but does not destroy endospores.",
+          "Autoclaving is correct.",
+          "Lyophilization is freeze-drying for preservation.",
+          "Filtration physically screens cells out of heat-sensitive liquids."
+        ]
+      },
+      {
+        id: 72,
+        slo: "SLO 6.9.1: Methods to Control Bacteria",
+        question: "Pasteurization is a heat-treatment process specifically designed to:",
+        options: ["Kill all bacterial endospores in surgical equipment", "Reduce pathogenic bacteria in milk and beverages without destroying taste or nutrient quality", "Freeze bacterial cultures for 10 years", "Remove viral capsids from water"],
+        correct: 1,
+        explanation: "Pasteurization uses controlled heating (e.g. 72°C for 15 sec) to kill pathogens like Mycobacterium in milk while retaining flavor.",
+        wrongExplanations: [
+          "Killing all endospores in surgical gear requires autoclaving.",
+          "Reducing pathogens in milk/beverages while preserving taste is correct.",
+          "Freezing cultures is cryopreservation.",
+          "Removing viral capsids requires ultrafiltration or chemical disinfection."
+        ]
+      },
+      {
+        id: 73,
+        slo: "SLO 6.9.1: Methods to Control Bacteria",
+        question: "[Real-Life Scenario] A nurse wipes a patient's skin with 70% isopropyl alcohol before administering an injection. Chemical agents safe enough to apply to living human tissues to inhibit bacterial growth are called:",
+        options: ["Disinfectants", "Antiseptics", "Antibiotics", "Sterilants"],
+        correct: 1,
+        explanation: "Antiseptics are non-toxic antimicrobial chemicals applied safely to living skin or mucous membranes.",
+        wrongExplanations: [
+          "Disinfectants are harsh chemicals used on non-living objects.",
+          "Antiseptics is correct.",
+          "Antibiotics are internal therapeutic medications.",
+          "Sterilants destroy all microbial life on inanimate objects."
+        ]
+      },
+      {
+        id: 74,
+        slo: "SLO 6.9.1: Methods to Control Bacteria",
+        question: "Chemical agents applied strictly to non-living inanimate surfaces (such as laboratory benches or floors) to kill microbes are called:",
+        options: ["Antiseptics", "Disinfectants", "Vaccines", "Serums"],
+        correct: 1,
+        explanation: "Disinfectants (e.g. bleach, phenol) kill vegetative pathogens on non-living surfaces and are harmful to living human tissues.",
+        wrongExplanations: [
+          "Antiseptics are applied safely to living tissue.",
+          "Disinfectants is correct.",
+          "Vaccines stimulate protective antibodies.",
+          "Serums contain blood plasma proteins or antibodies."
+        ]
+      },
+      {
+        id: 75,
+        slo: "SLO 6.9.1: Methods to Control Bacteria",
+        question: "Which physical control method damages bacterial DNA by inducing the formation of dangerous thymine dimers?",
+        options: ["Autoclaving", "Ultraviolet (UV) radiation", "Pasteurization", "Salting"],
+        correct: 1,
+        explanation: "UV light (non-ionizing radiation ~260 nm) causes adjacent thymine bases in bacterial DNA to crosslink as thymine dimers, inhibiting replication.",
+        wrongExplanations: [
+          "Autoclaving denatures bacterial proteins using moist heat.",
+          "Ultraviolet (UV) radiation is correct.",
+          "Pasteurization denatures proteins using moderate heat.",
+          "Salting causes osmotic plasmolysis."
+        ]
+      },
+
+      // SLO 6.9.2
+      {
+        id: 76,
+        slo: "SLO 6.9.2: Immunization (Vaccination)",
+        question: "A vaccine protects an individual against future infectious diseases by:",
+        options: ["Directly killing bacteria like an antibiotic", "Stimulating the host immune system to produce memory cells and specific antibodies", "Digesting bacterial cell walls", "Providing permanent synthetic hormones"],
+        correct: 1,
+        explanation: "Vaccines expose the immune system to harmless antigens, establishing adaptive immunological memory (memory B and T cells).",
+        wrongExplanations: [
+          "Directly killing bacteria describes antibiotics.",
+          "Stimulating host immune memory and antibodies is correct.",
+          "Digesting cell walls is the function of lysozyme or beta-lactams.",
+          "Vaccines do not provide synthetic hormones."
+        ]
+      },
+      {
+        id: 77,
+        slo: "SLO 6.9.2: Immunization (Vaccination)",
+        question: "Vaccines prepared using live microorganisms that have been weakened so they cannot cause severe disease are called:",
+        options: ["Inactivated vaccines", "Live attenuated vaccines", "Toxoid vaccines", "Recombinant subunit vaccines"],
+        correct: 1,
+        explanation: "Live attenuated vaccines contain weakened live pathogens that replicate slightly to elicit strong immune responses without causing illness.",
+        wrongExplanations: [
+          "Inactivated vaccines contain killed pathogens.",
+          "Live attenuated vaccines is correct.",
+          "Toxoid vaccines use inactivated bacterial toxins.",
+          "Recombinant subunit vaccines use purified isolated protein fragments."
+        ]
+      },
+      {
+        id: 78,
+        slo: "SLO 6.9.2: Immunization (Vaccination)",
+        question: "[Real-Life Scenario] A newborn infant receives the BCG vaccine at birth in Pakistan. This vaccination confers active immunity specifically against which serious disease?",
+        options: ["Poliomyelitis", "Tuberculosis", "Hepatitis B", "Tetanus"],
+        correct: 1,
+        explanation: "BCG (Bacillus Calmette-Guérin) vaccine contains attenuated Mycobacterium bovis to protect newborns against tuberculosis.",
+        wrongExplanations: [
+          "Polio is prevented by OPV / IPV vaccines.",
+          "Tuberculosis is correct.",
+          "Hepatitis B is prevented by HepB subunit vaccine.",
+          "Tetanus is prevented by tetanus toxoid."
+        ]
+      },
+      {
+        id: 79,
+        slo: "SLO 6.9.2: Immunization (Vaccination)",
+        question: "What is the purpose of administering a 'booster dose' of a vaccine months or years after the initial dose?",
+        options: ["To neutralize antibiotic side effects", "To reactivate and increase memory cell populations for elevated antibody levels", "To destroy remaining live bacteria in the bloodstream", "To change the individual's blood group"],
+        correct: 1,
+        explanation: "Booster doses re-expose the immune system to antigens, expanding memory B cell pools and boosting protective antibody titers.",
+        wrongExplanations: [
+          "Boosters do not affect antibiotic activity.",
+          "Reactivating and increasing memory cell populations is correct.",
+          "Boosters stimulate active immune memory, not chemical destruction.",
+          "Blood groups are genetically fixed and cannot be changed by vaccines."
+        ]
+      },
+      {
+        id: 80,
+        slo: "SLO 6.9.2: Immunization (Vaccination)",
+        question: "When a high percentage of a population is vaccinated against an infectious disease, unimmunized individuals are indirectly protected. This public health phenomenon is called:",
+        options: ["Passive immunity", "Herd immunity", "Autoimmunity", "Innate immunity"],
+        correct: 1,
+        explanation: "Herd immunity occurs when high population immunization rates interrupt disease transmission chains, protecting vulnerable unvaccinated individuals.",
+        wrongExplanations: [
+          "Passive immunity is direct transfer of preformed antibodies.",
+          "Herd immunity is correct.",
+          "Autoimmunity is a pathological immune attack against self-tissues.",
+          "Innate immunity is non-specific constitutional defense."
+        ]
+      },
+
+      // SLO 6.9.3
+      {
+        id: 81,
+        slo: "SLO 6.9.3: Uses and Misuses of Antibiotics",
+        question: "Antibiotics like penicillin are effective against bacteria because they specifically inhibit:",
+        options: ["Eukaryotic mitochondrial ATP production", "Bacterial peptidoglycan cell wall synthesis", "Human cell membrane permeability", "Viral protein assembly"],
+        correct: 1,
+        explanation: "Penicillin inhibits transpeptidase enzymes required for cross-linking peptidoglycan, causing osmotic lysis of dividing bacteria.",
+        wrongExplanations: [
+          "Penicillin targets bacterial wall synthesis, not eukaryotic mitochondria.",
+          "Bacterial peptidoglycan cell wall synthesis is correct.",
+          "Penicillin does not target human cell membranes (which lack peptidoglycan).",
+          "Viruses lack peptidoglycan cell walls and are unaffected."
+        ]
+      },
+      {
+        id: 82,
+        slo: "SLO 6.9.3: Uses and Misuses of Antibiotics",
+        question: "What major global health crisis develops when patients misuse antibiotics by taking incomplete courses or taking antibiotics for viral infections?",
+        options: ["Development of antibiotic resistance in bacterial populations", "Total destruction of human red blood cells", "Eradication of all global viruses", "Permanent loss of active immunity"],
+        correct: 0,
+        explanation: "Misuse selects for resistant mutants, allowing superbugs carrying resistance plasmids to proliferate globally.",
+        wrongExplanations: [
+          "Development of antibiotic resistance is correct.",
+          "Antibiotics do not destroy all human red blood cells.",
+          "Antibiotics have zero efficacy against viral organisms.",
+          "Antibiotics do not eliminate host immunological memory."
+        ]
+      },
+      {
+        id: 83,
+        slo: "SLO 6.9.3: Uses and Misuses of Antibiotics",
+        question: "[Real-Life Scenario] A patient diagnosed with a bacterial urinary tract infection stops taking her 7-day antibiotic course on day 3 because her symptoms disappeared. Why is this action considered a misuse of antibiotics?",
+        options: ["It causes immediate viral infection", "Partially resistant bacteria survive, multiply, and spread resistant strains", "Antibiotics turn toxic after 3 days", "It prevents the body from making red blood cells"],
+        correct: 1,
+        explanation: "Stopping treatment early leaves partially resistant bacterial subpopulations alive to multiply and pass on resistance genes.",
+        wrongExplanations: [
+          "Stopping antibiotics does not directly cause viral infections.",
+          "Partially resistant bacteria survive, multiply, and spread resistance is correct.",
+          "Prescribed course durations are safe and non-toxic.",
+          "Antibiotics do not block red blood cell formation."
+        ]
+      },
+      {
+        id: 84,
+        slo: "SLO 6.9.3: Uses and Misuses of Antibiotics",
+        question: "An antibiotic that is effective against a wide variety of both Gram-positive and Gram-negative bacteria is classified as a:",
+        options: ["Narrow-spectrum antibiotic", "Broad-spectrum antibiotic", "Bacteriostatic stain", "Antiviral vaccine"],
+        correct: 1,
+        explanation: "Broad-spectrum antibiotics target conserved bacterial processes across both Gram-positive and Gram-negative taxa.",
+        wrongExplanations: [
+          "Narrow-spectrum antibiotics target specific restricted groups of bacteria.",
+          "Broad-spectrum antibiotic is correct.",
+          "Stains are dyes, not therapeutic antibiotics.",
+          "Vaccines prevent infections rather than acting as therapeutic antibiotics."
+        ]
+      },
+      {
+        id: 85,
+        slo: "SLO 6.9.3: Uses and Misuses of Antibiotics",
+        question: "Why is prescribing antibiotics for a common viral cold completely ineffective?",
+        options: ["Viruses destroy antibiotics using enzymes", "Viruses lack bacterial targets like peptidoglycan walls, 70S ribosomes, and metabolic pathways", "Antibiotics only work inside cold environments", "Cold viruses hide inside red blood cells"],
+        correct: 1,
+        explanation: "Viruses use host cell machinery and lack bacterial peptidoglycan walls, 70S ribosomes, or bacterial metabolic pathways.",
+        wrongExplanations: [
+          "Viruses do not produce antibiotic-inactivating enzymes.",
+          "Viruses lack bacterial target structures is correct.",
+          "Antibiotic activity depends on chemical structure, not temperature.",
+          "Cold viruses infect respiratory epithelial cells, not erythrocytes."
+        ]
+      },
+
+      // SLO 6.10.1
+      {
+        id: 86,
+        slo: "SLO 6.10.1: General Characteristics of Cyanobacteria",
+        question: "Cyanobacteria were historically known as 'blue-green algae' because they possess photosynthetic pigments including Chlorophyll a and the blue accessory pigment:",
+        options: ["Fucoxanthin", "Phycocyanin", "Carotene", "Xanthophyll"],
+        correct: 1,
+        explanation: "Phycocyanin is a blue phycobiliprotein accessory pigment characteristic of cyanobacteria.",
+        wrongExplanations: [
+          "Fucoxanthin is a brown pigment in brown algae and diatoms.",
+          "Phycocyanin is correct.",
+          "Carotene is an orange hydrocarbon pigment.",
+          "Xanthophyll is a yellow oxygenated carotenoid pigment."
+        ]
+      },
+      {
+        id: 87,
+        slo: "SLO 6.10.1: General Characteristics of Cyanobacteria",
+        question: "Unlike photosynthetic sulfur bacteria, cyanobacteria perform oxygenic photosynthesis by splitting which molecule to release oxygen gas?",
+        options: ["Hydrogen sulfide (H₂S)", "Water (H₂O)", "Carbon dioxide (CO₂)", "Methane (CH₄)"],
+        correct: 1,
+        explanation: "Cyanobacteria use Photosystem II to split water (H2O) molecules (photolysis), releasing molecular oxygen (O2).",
+        wrongExplanations: [
+          "H2S is used by purple/green sulfur bacteria.",
+          "Water (H2O) is correct.",
+          "CO2 is fixed into carbohydrates, not split to release oxygen.",
+          "CH4 is methane gas."
+        ]
+      },
+      {
+        id: 88,
+        slo: "SLO 6.10.1: General Characteristics of Cyanobacteria",
+        question: "[Real-Life Scenario] During hot summer months, a farm pond turns bright green and forms a thick scum on the surface due to agricultural fertilizer runoff. This excessive bloom of cyanobacteria is a consequence of:",
+        options: ["Eutrophication", "Desiccation", "Acid rain", "Thermal sterilization"],
+        correct: 0,
+        explanation: "Eutrophication occurs when excess nitrogen/phosphorus runoff fuels massive cyanobacterial and algal population explosions.",
+        wrongExplanations: [
+          "Eutrophication is correct.",
+          "Desiccation is extreme drying out.",
+          "Acid rain lowers pH and harms aquatic ecosystems.",
+          "Thermal sterilization kills microbes with high heat."
+        ]
+      },
+      {
+        id: 89,
+        slo: "SLO 6.10.1: General Characteristics of Cyanobacteria",
+        question: "What mechanism of movement is exhibited by certain filamentous cyanobacteria in the absence of flagella?",
+        options: ["Flagellar swimming", "Gliding motility", "Amoeboid pseudopodia crawling", "Ciliary beating"],
+        correct: 1,
+        explanation: "Cyanobacteria lack flagella; filamentous forms exhibit smooth gliding motility by secreting mucilage through cell wall pores.",
+        wrongExplanations: [
+          "Cyanobacteria completely lack flagella.",
+          "Gliding motility is correct.",
+          "Amoeboid crawling requires eukaryotic actin-based pseudopodia.",
+          "Ciliary beating requires eukaryotic 9+2 cilia."
+        ]
+      },
+      {
+        id: 90,
+        slo: "SLO 6.10.1: General Characteristics of Cyanobacteria",
+        question: "Cyanobacteria store excess photosynthetic carbohydrate food reserves in the form of:",
+        options: ["True plant starch", "Glycogen", "Cyanophycean starch", "Paramylon"],
+        correct: 2,
+        explanation: "Cyanobacteria store reserve carbohydrates as cyanophycean starch (a branched glucan structurally similar to glycogen).",
+        wrongExplanations: [
+          "True amylose plant starch is stored in eukaryotic plants.",
+          "Glycogen is stored in animals and fungi.",
+          "Cyanophycean starch is correct.",
+          "Paramylon is stored in euglenoids."
+        ]
+      },
+
+      // SLO 6.10.2
+      {
+        id: 91,
+        slo: "SLO 6.10.2: Habitat, Structure, Nutrition, and Reproduction in Nostoc",
+        question: "Nostoc exists as unbranched, bead-like filaments called trichomes enclosed within a gel coating known as a:",
+        options: ["Peptidoglycan wall", "Mucilaginous sheath", "Capsular capsid", "Lipid envelope"],
+        correct: 1,
+        explanation: "Filaments of Nostoc are embedded together in a firm, jelly-like mucilaginous sheath to form rounded globose colonies.",
+        wrongExplanations: [
+          "Peptidoglycan forms individual bacterial cell walls inside the sheath.",
+          "Mucilaginous sheath is correct.",
+          "Capsid is a viral protein coat.",
+          "Lipid envelope surrounds viral capsids or eukaryotic membranes."
+        ]
+      },
+      {
+        id: 92,
+        slo: "SLO 6.10.2: Habitat, Structure, Nutrition, and Reproduction in Nostoc",
+        question: "In Nostoc filaments, which enlarged, thick-walled specialized cells are dedicated to biological nitrogen fixation?",
+        options: ["Heterocysts", "Akinetes", "Hormogonia", "Mesosomes"],
+        correct: 0,
+        explanation: "Heterocysts are specialized, pale, thick-walled cells providing anaerobic conditions required for nitrogenase enzyme function.",
+        wrongExplanations: [
+          "Heterocysts is correct.",
+          "Akinetes are thick-walled resting survival spores.",
+          "Hormogonia are motile filament fragments.",
+          "Mesosomes are respiratory membrane folds."
+        ]
+      },
+      {
+        id: 93,
+        slo: "SLO 6.10.2: Habitat, Structure, Nutrition, and Reproduction in Nostoc",
+        question: "[Real-Life Scenario] After heavy monsoon rains, a student notices jelly-like olive-green balls growing on moist garden soil. Microscope analysis reveals unbranched filaments with enlarged, clear cells at intervals. What organism is this?",
+        options: ["Rhizobium colony", "Nostoc colony", "E. coli biofilm", "Plasmodium mass"],
+        correct: 1,
+        explanation: "Nostoc forms jelly-like globose terrestrial colonies containing filament chains with heterocysts.",
+        wrongExplanations: [
+          "Rhizobium forms nodules inside legume roots.",
+          "Nostoc colony is correct.",
+          "E. coli biofilms are microscopic bacterial slimes.",
+          "Plasmodium forms slime mold plasmodia, not filamentous algal chains with heterocysts."
+        ]
+      },
+      {
+        id: 94,
+        slo: "SLO 6.10.2: Habitat, Structure, Nutrition, and Reproduction in Nostoc",
+        question: "Under dry or unfavorable conditions, Nostoc cells enlarge, accumulate reserve food, develop thick walls, and convert into resistant survival cells called:",
+        options: ["Hormogonia", "Akinetes", "Heterocysts", "Endospores"],
+        correct: 1,
+        explanation: "Akinetes are thick-walled, non-motile resting spores enriched with cyanophycean starch that germinate when favorable conditions return.",
+        wrongExplanations: [
+          "Hormogonia are reproductive filament fragments.",
+          "Akinetes is correct.",
+          "Heterocysts perform nitrogen fixation.",
+          "Endospores are internal bacterial resting structures."
+        ]
+      },
+      {
+        id: 95,
+        slo: "SLO 6.10.2: Habitat, Structure, Nutrition, and Reproduction in Nostoc",
+        question: "Nostoc reproduces broad-scale asexually when its filaments break into short fragments at heterocyst junctions. These mobile fragments are called:",
+        options: ["Akinetes", "Hormogonia", "Zoospores", "Conidia"],
+        correct: 1,
+        explanation: "Hormogonia are short, motile filament fragments that break away at heterocysts and grow into new colonies via cell division.",
+        wrongExplanations: [
+          "Akinetes are dormant spores.",
+          "Hormogonia is correct.",
+          "Zoospores are flagellated algal/fungal spores.",
+          "Conidia are non-motile fungal asexual spores."
+        ]
+      },
+
+      // SLO 6.10.3
+      {
+        id: 96,
+        slo: "SLO 6.10.3: Role of Cyanobacteria in Nitrogen Fixation",
+        question: "The key enzyme responsible for converting atmospheric nitrogen gas (N₂) into usable ammonia (NH₃) in cyanobacteria is:",
+        options: ["DNA polymerase", "Nitrogenase", "Amylase", "Ribulose bisphosphate carboxylase"],
+        correct: 1,
+        explanation: "Nitrogenase catalyzes the ATP-dependent reduction of dinitrogen gas (N2) to ammonia (NH3).",
+        wrongExplanations: [
+          "DNA polymerase synthesizes DNA strands.",
+          "Nitrogenase is correct.",
+          "Amylase hydrolyzes starch into sugars.",
+          "RuBisCO fixes CO2 in the Calvin cycle."
+        ]
+      },
+      {
+        id: 97,
+        slo: "SLO 6.10.3: Role of Cyanobacteria in Nitrogen Fixation",
+        question: "Why are heterocysts in cyanobacteria provided with thick cell walls and lack photosystem II?",
+        options: ["To exclude oxygen, which permanently inactivates the nitrogenase enzyme", "To trap carbon dioxide for sugar production", "To store water reserves for dry seasons", "To reflect harmful sunlight away"],
+        correct: 0,
+        explanation: "Oxygen irreversibly degrades nitrogenase; heterocysts exclude O2 by producing thick walls and lacking oxygenic Photosystem II.",
+        wrongExplanations: [
+          "To exclude oxygen and protect nitrogenase is correct.",
+          "Heterocysts do not perform Calvin cycle carbon fixation.",
+          "Water storage is not the main physiological function of heterocysts.",
+          "Heterocysts absorb light for Photosystem I ATP generation."
+        ]
+      },
+      {
+        id: 98,
+        slo: "SLO 6.10.3: Role of Cyanobacteria in Nitrogen Fixation",
+        question: "[Real-Life Scenario] Asian rice farmers frequently grow the water fern Azolla alongside cyanobacterium Anabaena in flooded paddy fields. Why is this practice beneficial for rice production?",
+        options: ["Anabaena fixes atmospheric nitrogen, enriching soil fertility naturally", "Anabaena releases toxic chemicals that kill rice weeds", "Azolla absorbs salt from salty irrigation water", "Anabaena eats pest insects"],
+        correct: 0,
+        explanation: "Anabaena azollae lives symbiotically inside Azolla fern leaves, fixing atmospheric nitrogen to act as a biofertilizer for rice crops.",
+        wrongExplanations: [
+          "Anabaena fixes atmospheric nitrogen to enrich soil fertility naturally is correct.",
+          "Anabaena is not an herbidical chemical producer.",
+          "Azolla does not function as a desalinization agent.",
+          "Cyanobacteria are photosynthetic autotrophs, not insect predators."
+        ]
+      },
+      {
+        id: 99,
+        slo: "SLO 6.10.3: Role of Cyanobacteria in Nitrogen Fixation",
+        question: "Biological nitrogen fixation converts gaseous atmospheric N₂ directly into:",
+        options: ["Nitrates and Nitrites", "Ammonia (NH₃) / Ammonium ions (NH₄⁺)", "Urea", "Nucleic acid bases"],
+        correct: 1,
+        explanation: "Nitrogenase converts gaseous N2 directly into ammonia (NH3), which protonates to ammonium (NH4+) at physiological pH.",
+        wrongExplanations: [
+          "Nitrifying bacteria convert ammonia to nitrites and nitrates later.",
+          "Ammonia (NH3) / Ammonium ions (NH4+) is correct.",
+          "Urea is an animal nitrogenous waste product.",
+          "Nucleic bases are synthesized downstream from amino acids."
+        ]
+      },
+      {
+        id: 100,
+        slo: "SLO 6.10.3: Role of Cyanobacteria in Nitrogen Fixation",
+        question: "Besides free-living soil environments, nitrogen-fixing cyanobacteria form symbiotic associations with which group of plants inside specialized coralloid roots?",
+        options: ["Angiosperm roses", "Gymnosperm Cycads", "Mosses", "Ferns"],
+        correct: 1,
+        explanation: "Cycads (e.g. Cycas) form specialized dichotomously branched coralloid roots that house nitrogen-fixing Nostoc or Anabaena cyanobacteria.",
+        wrongExplanations: [
+          "Angiosperms associate mainly with Rhizobium or Frankia.",
+          "Gymnosperm Cycads is correct.",
+          "Mosses form bryophyte associations on thalli (e.g. Anthoceros).",
+          "Ferns associate via leaf cavities (e.g., Azolla)."
+        ]
+      }
+    ];
+
+    function App() {
+      // Quiz State
+      const [quizStarted, setQuizStarted] = useState(false);
+      const [quizMode, setQuizMode] = useState('practice'); // 'practice' or 'blind'
+      const [currentIdx, setCurrentIdx] = useState(0);
+      const [userAnswers, setUserAnswers] = useState({}); // { [qIdx]: selectedOptionIdx }
+      const [flaggedQuestions, setFlaggedQuestions] = useState({}); // { [qIdx]: true/false }
+      const [timeLeft, setTimeLeft] = useState(100 * 60); // 100 minutes timer = 6000 seconds
+      const [isSubmitted, setIsSubmitted] = useState(false);
+      const [showNavGrid, setShowNavGrid] = useState(false);
+
+      // Review Filter and Search States
+      const [reviewFilter, setReviewFilter] = useState('all'); // 'all', 'correct', 'wrong', 'skipped', 'flagged'
+      const [reviewSearch, setReviewSearch] = useState('');
+
+      // 100 Minute Timer Effect
+      useEffect(() => {
+        let timer = null;
+        if (quizStarted && !isSubmitted && timeLeft > 0) {
+          timer = setInterval(() => {
+            setTimeLeft(prev => {
+              if (prev <= 1) {
+                clearInterval(timer);
+                setIsSubmitted(true);
+                return 0;
+              }
+              return prev - 1;
+            });
+          }, 1000);
+        }
+        return () => clearInterval(timer);
+      }, [quizStarted, isSubmitted, timeLeft]);
+
+      // Keyboard Shortcuts Listener
+      useEffect(() => {
+        const handleKeyDown = (e) => {
+          if (!quizStarted || isSubmitted) return;
+          if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+
+          const key = e.key.toUpperCase();
+          if (['1', '2', '3', '4'].includes(key)) {
+            handleSelectOption(parseInt(key, 10) - 1);
+          } else if (['A', 'B', 'C', 'D'].includes(key)) {
+            const charCode = key.charCodeAt(0) - 65;
+            handleSelectOption(charCode);
+          } else if (e.key === 'ArrowRight') {
+            if (currentIdx < QUESTIONS.length - 1) setCurrentIdx(prev => prev + 1);
+          } else if (e.key === 'ArrowLeft') {
+            if (currentIdx > 0) setCurrentIdx(prev => prev - 1);
+          } else if (key === 'F') {
+            toggleFlagQuestion(currentIdx);
+          }
+        };
+
+        window.addEventListener('keydown', handleKeyDown);
+        return () => window.removeEventListener('keydown', handleKeyDown);
+      }, [quizStarted, isSubmitted, currentIdx, userAnswers]);
+
+      // Time formatting helper
+      const formatTime = (secs) => {
+        const hours = Math.floor(secs / 3600);
+        const mins = Math.floor((secs % 3600) / 60);
+        const s = secs % 60;
+        if (hours > 0) {
+          return `${hours}:${mins.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+        }
+        return `${mins.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+      };
+
+      // Handle locking of answer once selected
+      const handleSelectOption = (optionIdx) => {
+        if (userAnswers.hasOwnProperty(currentIdx) || isSubmitted) return;
+        setUserAnswers(prev => ({
+          ...prev,
+          [currentIdx]: optionIdx
+        }));
+      };
+
+      // Toggle Bookmark/Flag
+      const toggleFlagQuestion = (qIndex) => {
+        setFlaggedQuestions(prev => ({
+          ...prev,
+          [qIndex]: !prev[qIndex]
+        }));
+      };
+
+      // Scoring Calculations (+1.0 for correct, -0.25 for incorrect)
+      const scoreData = useMemo(() => {
+        let correctCount = 0;
+        let wrongCount = 0;
+        let unattemptedCount = 0;
+
+        QUESTIONS.forEach((q, idx) => {
+          if (!userAnswers.hasOwnProperty(idx)) {
+            unattemptedCount++;
+          } else if (userAnswers[idx] === q.correct) {
+            correctCount++;
+          } else {
+            wrongCount++;
+          }
+        });
+
+        const grossMarks = correctCount * 1.0;
+        const penalty = wrongCount * 0.25;
+        const netMarks = Math.max(0, grossMarks - penalty);
+        const maxMarks = QUESTIONS.length * 1.0;
+        const percentage = Number(((netMarks / maxMarks) * 100).toFixed(1));
+
+        return { correctCount, wrongCount, unattemptedCount, grossMarks, penalty, netMarks, maxMarks, percentage };
+      }, [userAnswers]);
+
+      // Weak Area Analysis per SLO
+      const sloAnalysis = useMemo(() => {
+        const stats = {};
+        QUESTIONS.forEach((q, idx) => {
+          const sloKey = q.slo;
+          if (!stats[sloKey]) {
+            stats[sloKey] = { total: 0, correct: 0, wrong: 0, unattempted: 0 };
+          }
+          stats[sloKey].total++;
+          if (!userAnswers.hasOwnProperty(idx)) {
+            stats[sloKey].unattempted++;
+          } else if (userAnswers[idx] === q.correct) {
+            stats[sloKey].correct++;
+          } else {
+            stats[sloKey].wrong++;
+          }
+        });
+        return stats;
+      }, [userAnswers]);
+
+      // Review questions filter logic
+      const filteredReviewQuestions = useMemo(() => {
+        return QUESTIONS.map((q, idx) => ({ ...q, qIdx: idx })).filter(q => {
+          const isUserAns = userAnswers.hasOwnProperty(q.qIdx);
+          const isCorrect = isUserAns && userAnswers[q.qIdx] === q.correct;
+          const isWrong = isUserAns && userAnswers[q.qIdx] !== q.correct;
+          const isSkipped = !isUserAns;
+          const isFlagged = !!flaggedQuestions[q.qIdx];
+
+          let matchesFilter = true;
+          if (reviewFilter === 'correct') matchesFilter = isCorrect;
+          if (reviewFilter === 'wrong') matchesFilter = isWrong;
+          if (reviewFilter === 'skipped') matchesFilter = isSkipped;
+          if (reviewFilter === 'flagged') matchesFilter = isFlagged;
+
+          let matchesSearch = true;
+          if (reviewSearch.trim() !== '') {
+            const term = reviewSearch.toLowerCase();
+            matchesSearch = q.question.toLowerCase().includes(term) ||
+                            q.slo.toLowerCase().includes(term) ||
+                            q.explanation.toLowerCase().includes(term);
+          }
+
+          return matchesFilter && matchesSearch;
+        });
+      }, [userAnswers, flaggedQuestions, reviewFilter, reviewSearch]);
+
+      const getMotivationalQuote = (pct) => {
+        if (pct >= 85) return { quote: "Exceptional Bacteriological & Prokaryotic Mastery! You possess comprehensive knowledge of kingdom Monera, cell structures, and bacterial metabolic diversity.", author: "Qashqarian Academy Academic Board" };
+        if (pct >= 70) return { quote: "Great Job! You have a solid grasp of Chapter 6 concepts. Review your specific weak SLOs to achieve 100% precision.", author: "Qashqarian Biology Faculty" };
+        if (pct >= 50) return { quote: "Good Effort! Go through the detailed explanations for incorrect answers carefully to master bacteriology.", author: "Department of Microbiology" };
+        return { quote: "Failure is simply the opportunity to begin again more intelligently. Re-read Chapter 6 notes and retake the test!", author: "Qashqarian Mentorship Cell" };
+      };
+
+      const currentQ = QUESTIONS[currentIdx];
+      const isAnswered = userAnswers.hasOwnProperty(currentIdx);
+      const selectedOption = userAnswers[currentIdx];
+      const isCurrentFlagged = !!flaggedQuestions[currentIdx];
+
+      if (!quizStarted) {
+        return (
+          <div className="min-h-screen flex items-center justify-center p-4 sm:p-6">
+            <div className="max-w-2xl w-full bg-white rounded-2xl shadow-xl border border-sky-100 overflow-hidden animate-fadeIn">
+              
+              {/* Top Header Banner */}
+              <div className="bg-gradient-to-r from-sky-800 via-sky-700 to-science-900 p-6 sm:p-8 text-white relative">
+                <div className="flex justify-between items-center mb-3">
+                  <span className="bg-sky-500/30 text-sky-100 text-xs font-bold px-3 py-1 rounded-full backdrop-blur-sm border border-sky-300/20 flex items-center gap-1.5">
+                    🏔️ Qashqarian Academy
+                  </span>
+                  <span className="text-xs font-bold bg-white/10 px-3 py-1 rounded-md border border-white/20">
+                    Class: XI
+                  </span>
+                </div>
+                <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
+                  Chapter 6: Prokaryotes (Kingdom Monera)
+                </h1>
+                <p className="text-sky-100 text-sm mt-1">
+                  SLO-Based Comprehensive Biology Assessment (100 MCQs)
+                </p>
+              </div>
+
+              {/* Start Setup Content */}
+              <div className="p-6 sm:p-8 space-y-6">
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                  <div className="bg-sky-50 rounded-xl p-3.5 border border-sky-100 flex items-center gap-3">
+                    <div className="p-2 bg-sky-600 text-white rounded-lg shrink-0">
+                      <Icon name="clock" className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <p className="text-[11px] text-slate-500 font-medium">Timer</p>
+                      <p className="text-xs sm:text-sm font-bold text-slate-800">100 Minutes</p>
+                    </div>
+                  </div>
+                  <div className="bg-sky-50 rounded-xl p-3.5 border border-sky-100 flex items-center gap-3">
+                    <div className="p-2 bg-sky-600 text-white rounded-lg shrink-0">
+                      <Icon name="award" className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <p className="text-[11px] text-slate-500 font-medium">Marking Scheme</p>
+                      <p className="text-xs sm:text-sm font-bold text-slate-800">+1.0 / -0.25</p>
+                    </div>
+                  </div>
+                  <div className="col-span-2 sm:col-span-1 bg-sky-50 rounded-xl p-3.5 border border-sky-100 flex items-center gap-3">
+                    <div className="p-2 bg-sky-600 text-white rounded-lg shrink-0">
+                      <Icon name="key" className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <p className="text-[11px] text-slate-500 font-medium">Shortcuts</p>
+                      <p className="text-xs sm:text-sm font-bold text-slate-800">Keys A-D, ← →</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Select Assessment Mode */}
+                <div>
+                  <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2.5">
+                    Select Mode
+                  </label>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <button
+                      type="button"
+                      onClick={() => setQuizMode('practice')}
+                      className={`p-4 rounded-xl text-left border-2 transition-all flex flex-col gap-1.5 ${
+                        quizMode === 'practice'
+                          ? 'border-sky-600 bg-sky-50/80 ring-2 ring-sky-500/20'
+                          : 'border-slate-200 hover:border-sky-300 bg-white'
+                      }`}
+                    >
+                      <div className="flex items-center justify-between">
+                        <span className="font-bold text-sm text-sky-900 flex items-center gap-1.5">
+                          <Icon name="zap" className="w-4 h-4 text-sky-600" />
+                          Practice Mode
+                        </span>
+                        {quizMode === 'practice' && <Icon name="check" className="w-4 h-4 text-sky-600" />}
+                      </div>
+                      <p className="text-xs text-slate-500 leading-relaxed">
+                        Instant right/wrong answer verification with rationale provided immediately after answering each MCQ.
+                      </p>
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => setQuizMode('blind')}
+                      className={`p-4 rounded-xl text-left border-2 transition-all flex flex-col gap-1.5 ${
+                        quizMode === 'blind'
+                          ? 'border-sky-600 bg-sky-50/80 ring-2 ring-sky-500/20'
+                          : 'border-slate-200 hover:border-sky-300 bg-white'
+                      }`}
+                    >
+                      <div className="flex items-center justify-between">
+                        <span className="font-bold text-sm text-sky-900 flex items-center gap-1.5">
+                          <Icon name="shield" className="w-4 h-4 text-sky-600" />
+                          Blind / Exam Mode
+                        </span>
+                        {quizMode === 'blind' && <Icon name="check" className="w-4 h-4 text-sky-600" />}
+                      </div>
+                      <p className="text-xs text-slate-500 leading-relaxed">
+                        Simulate real exam conditions. Correct answers, rationales, and marks revealed only upon test submission.
+                      </p>
+                    </button>
+                  </div>
+                </div>
+
+                {/* Rules & Negative Marking Notice */}
+                <div className="bg-amber-50/80 border border-amber-200 rounded-xl p-4 text-xs text-amber-900 space-y-1.5">
+                  <p className="font-bold text-amber-950 flex items-center gap-1.5">
+                    <Icon name="alert-triangle" className="w-4 h-4 text-amber-600" />
+                    Assessment Rules & Negative Marking:
+                  </p>
+                  <ul className="list-disc list-inside space-y-1 pl-1 text-amber-800">
+                    <li>Once selected, an option is locked permanently for that question.</li>
+                    <li>Incorrect answers incur a <strong>-0.25 mark negative penalty</strong>.</li>
+                    <li>Unattempted questions carry zero penalty.</li>
+                    <li>Use the <strong>Flag (Key F)</strong> button to bookmark items to review later.</li>
+                  </ul>
+                </div>
+
+                <button
+                  onClick={() => setQuizStarted(true)}
+                  className="w-full bg-sky-600 hover:bg-sky-700 text-white font-bold py-3.5 px-6 rounded-xl shadow-lg shadow-sky-600/25 transition-all flex items-center justify-center gap-2 group text-sm"
+                >
+                  <span>Start Chapter 6 Assessment (100 MCQs)</span>
+                  <Icon name="arrow-right" className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                </button>
+              </div>
+            </div>
+          </div>
+        );
+      }
+
+      if (isSubmitted) {
+        const quoteObj = getMotivationalQuote(scoreData.percentage);
+
+        return (
+          <div className="min-h-screen py-8 px-4 sm:px-6 flex justify-center">
+            <div className="max-w-4xl w-full bg-white rounded-2xl shadow-xl border border-sky-100 overflow-hidden animate-fadeIn space-y-6 pb-8">
+              
+              {/* Header Banner */}
+              <div className="bg-gradient-to-r from-sky-800 via-sky-700 to-science-900 p-6 sm:p-8 text-white relative">
+                <div className="flex justify-between items-center mb-2 no-print">
+                  <span className="text-xs font-bold bg-white/20 px-3 py-1 rounded-full flex items-center gap-1.5">
+                    🏔️ Qashqarian Academy
+                  </span>
+                  <span className="text-xs font-bold bg-white/10 px-3 py-1 rounded-md border border-white/20">
+                    Class: XI
+                  </span>
+                  <button 
+                    onClick={() => window.print()} 
+                    className="bg-white/10 hover:bg-white/20 text-white text-xs font-semibold px-3 py-1.5 rounded-lg border border-white/20 transition-all flex items-center gap-1.5"
+                  >
+                    <Icon name="printer" className="w-4 h-4" />
+                    Print Results
+                  </button>
+                </div>
+                <h1 className="text-2xl sm:text-3xl font-extrabold">
+                  Performance Evaluation Summary
+                </h1>
+                <p className="text-sky-100 text-xs sm:text-sm mt-1">
+                  Chapter 6: Prokaryotes (100 MCQs Assessment)
+                </p>
+              </div>
+
+              <div className="p-6 sm:p-8 space-y-8">
+                
+                {/* Motivational Quote Banner */}
+                <div className="bg-sky-50/80 border-l-4 border-sky-600 p-4 rounded-r-xl space-y-1">
+                  <p className="text-sm font-semibold text-sky-950 italic">
+                    "{quoteObj.quote}"
+                  </p>
+                  <p className="text-xs text-sky-700 font-bold">— {quoteObj.author}</p>
+                </div>
+
+                {/* Performance Metrics */}
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                  <div className="bg-sky-50 border border-sky-100 rounded-xl p-4 text-center">
+                    <p className="text-xs text-slate-500 font-semibold mb-1">Net Percentage</p>
+                    <p className="text-3xl font-black text-sky-600">{scoreData.percentage}%</p>
+                  </div>
+                  <div className="bg-emerald-50 border border-emerald-100 rounded-xl p-4 text-center">
+                    <p className="text-xs text-emerald-700 font-semibold mb-1">Correct Answers</p>
+                    <p className="text-3xl font-black text-emerald-600">{scoreData.correctCount}</p>
+                    <p className="text-[10px] text-emerald-600 font-medium">+{scoreData.grossMarks} Marks</p>
+                  </div>
+                  <div className="bg-rose-50 border border-rose-100 rounded-xl p-4 text-center">
+                    <p className="text-xs text-rose-700 font-semibold mb-1">Wrong Answers</p>
+                    <p className="text-3xl font-black text-rose-600">{scoreData.wrongCount}</p>
+                    <p className="text-[10px] text-rose-600 font-medium">-{scoreData.penalty} Penalty</p>
+                  </div>
+                  <div className="bg-amber-50 border border-amber-100 rounded-xl p-4 text-center">
+                    <p className="text-xs text-amber-700 font-semibold mb-1">Unattempted</p>
+                    <p className="text-3xl font-black text-amber-600">{scoreData.unattemptedCount}</p>
+                    <p className="text-[10px] text-amber-600 font-medium">0 Penalty</p>
+                  </div>
+                </div>
+
+                {/* Net Score Bar */}
+                <div className="bg-slate-900 text-white rounded-xl p-4 flex justify-between items-center text-sm">
+                  <span>Final Score (after -0.25 negative marking):</span>
+                  <span className="font-extrabold text-sky-400 text-base">
+                    {scoreData.netMarks} / {scoreData.maxMarks} Marks
+                  </span>
+                </div>
+
+                {/* Weak Area SLO Breakdown */}
+                <div className="space-y-3">
+                  <h3 className="text-base font-bold text-slate-800 flex items-center gap-2">
+                    <Icon name="bar-chart" className="w-5 h-5 text-sky-600" />
+                    SLO Performance & Weak Area Analysis
+                  </h3>
+
+                  <div className="space-y-3 max-h-80 overflow-y-auto pr-2 custom-scrollbar">
+                    {Object.entries(sloAnalysis).map(([slo, stats], idx) => {
+                      const sloPct = stats.total > 0 ? Math.round((stats.correct / stats.total) * 100) : 0;
+                      return (
+                        <div key={idx} className="bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs space-y-2">
+                          <div className="flex justify-between items-start gap-2">
+                            <span className="font-semibold text-slate-800">{slo}</span>
+                            <span className={`font-bold px-2 py-0.5 rounded text-[11px] ${
+                              sloPct >= 80 ? 'bg-emerald-100 text-emerald-800' :
+                              sloPct >= 50 ? 'bg-amber-100 text-amber-800' : 'bg-rose-100 text-rose-800'
+                            }`}>
+                              {sloPct}% Mastery ({stats.correct}/{stats.total})
+                            </span>
+                          </div>
+                          <div className="w-full bg-slate-200 h-2 rounded-full overflow-hidden">
+                            <div 
+                              className={`h-full transition-all duration-500 ${
+                                sloPct >= 80 ? 'bg-emerald-500' : sloPct >= 50 ? 'bg-amber-500' : 'bg-rose-500'
+                              }`}
+                              style={{ width: `${sloPct}%` }}
+                            />
+                          </div>
+                          <div className="flex gap-4 text-[11px] text-slate-500">
+                            <span>Correct: {stats.correct}</span>
+                            <span>Wrong: {stats.wrong}</span>
+                            <span>Skipped: {stats.unattempted}</span>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                {/* Question Review Section with Filter & Search */}
+                <div className="space-y-4 no-print">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-2">
+                    <h3 className="text-base font-bold text-slate-800 flex items-center gap-2">
+                      <Icon name="book-open" className="w-5 h-5 text-sky-600" />
+                      Detailed Explanations & Answer Analysis
+                    </h3>
+
+                    {/* Filter Pills */}
+                    <div className="flex flex-wrap gap-1.5 text-xs">
+                      {[
+                        { id: 'all', label: 'All' },
+                        { id: 'correct', label: 'Correct' },
+                        { id: 'wrong', label: 'Wrong' },
+                        { id: 'skipped', label: 'Skipped' },
+                        { id: 'flagged', label: 'Flagged' },
+                      ].map(tab => (
+                        <button
+                          key={tab.id}
+                          onClick={() => setReviewFilter(tab.id)}
+                          className={`px-3 py-1.5 rounded-lg font-semibold transition-all ${
+                            reviewFilter === tab.id
+                              ? 'bg-sky-600 text-white shadow-sm'
+                              : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                          }`}
+                        >
+                          {tab.label}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Search Bar */}
+                  <div className="relative">
+                    <input
+                      type="text"
+                      placeholder="Search question text, SLO, or explanation rationale..."
+                      value={reviewSearch}
+                      onChange={(e) => setReviewSearch(e.target.value)}
+                      className="w-full pl-9 pr-4 py-2.5 rounded-xl border border-slate-200 text-xs focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent bg-slate-50/50"
+                    />
+                    <div className="absolute left-3 top-3 text-slate-400">
+                      <Icon name="search" className="w-4 h-4" />
+                    </div>
+                  </div>
+
+                  {/* Question Cards */}
+                  <div className="space-y-4 max-h-[500px] overflow-y-auto pr-2 custom-scrollbar">
+                    {filteredReviewQuestions.length === 0 ? (
+                      <div className="p-8 text-center text-xs text-slate-500 bg-slate-50 rounded-xl border border-dashed border-slate-200">
+                        No questions match the current search or filter.
+                      </div>
+                    ) : (
+                      filteredReviewQuestions.map((q) => {
+                        const qIdx = q.qIdx;
+                        const userSel = userAnswers[qIdx];
+                        const isCorrect = userSel === q.correct;
+                        const isUnattempted = !userAnswers.hasOwnProperty(qIdx);
+                        const isFlagged = flaggedQuestions[qIdx];
+
+                        return (
+                          <div 
+                            key={q.id}
+                            className={`p-4 rounded-xl border text-xs space-y-2.5 transition-all ${
+                              isCorrect ? 'bg-emerald-50/50 border-emerald-200' :
+                              isUnattempted ? 'bg-amber-50/50 border-amber-200' : 'bg-rose-50/50 border-rose-200'
+                            }`}
+                          >
+                            <div className="flex justify-between items-start gap-2">
+                              <span className="font-bold text-slate-900 flex items-center gap-2">
+                                <span>Q{qIdx + 1}. {q.question}</span>
+                                {isFlagged && (
+                                  <span className="bg-amber-100 text-amber-800 text-[10px] px-2 py-0.5 rounded font-bold flex items-center gap-1">
+                                    <Icon name="flag" className="w-3 h-3 text-amber-600" /> Flagged
+                                  </span>
+                                )}
+                              </span>
+                              <span className={`px-2 py-0.5 rounded font-bold text-[10px] whitespace-nowrap shrink-0 ${
+                                isCorrect ? 'bg-emerald-600 text-white' :
+                                isUnattempted ? 'bg-amber-500 text-white' : 'bg-rose-600 text-white'
+                              }`}>
+                                {isCorrect ? 'CORRECT (+1.0)' : isUnattempted ? 'SKIPPED (0.0)' : 'WRONG (-0.25)'}
+                              </span>
+                            </div>
+
+                            <p className="text-[11px] text-slate-500 font-medium">{q.slo}</p>
+
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                              {q.options.map((opt, oIdx) => {
+                                const isOptCorrect = oIdx === q.correct;
+                                const isOptUserChoice = oIdx === userSel;
+
+                                return (
+                                  <div 
+                                    key={oIdx}
+                                    className={`p-2 rounded-lg border font-medium flex items-center justify-between ${
+                                      isOptCorrect ? 'bg-emerald-100 border-emerald-300 text-emerald-900 font-bold' :
+                                      isOptUserChoice ? 'bg-rose-100 border-rose-300 text-rose-900' : 'bg-white border-slate-200 text-slate-600'
+                                    }`}
+                                  >
+                                    <span>{String.fromCharCode(65 + oIdx)}. {opt}</span>
+                                    {isOptCorrect && <Icon name="check" className="w-3.5 h-3.5 text-emerald-700" />}
+                                    {isOptUserChoice && !isOptCorrect && <Icon name="x" className="w-3.5 h-3.5 text-rose-700" />}
+                                  </div>
+                                );
+                              })}
+                            </div>
+
+                            {/* Detailed Explanation */}
+                            <div className="bg-white/90 p-3 rounded-lg border border-slate-200 text-slate-700 leading-relaxed space-y-1.5">
+                              <p className="text-slate-800">
+                                <strong className="text-sky-900">Correct Answer Rationale: </strong> 
+                                {q.explanation}
+                              </p>
+
+                              {!isCorrect && !isUnattempted && q.wrongExplanations && (
+                                <div className="mt-2 pt-2 border-t border-slate-100 text-[11px] text-rose-900 bg-rose-50/60 p-2 rounded-md">
+                                  <strong>Why option {String.fromCharCode(65 + userSel)} is incorrect: </strong>
+                                  {q.wrongExplanations[userSel] || "This choice does not satisfy the scientific concept."}
+                                </div>
+                              )}
+                            </div>
+                          </div>
+                        );
+                      })
+                    )}
+                  </div>
+                </div>
+
+                {/* Restart Button */}
+                <button
+                  onClick={() => {
+                    setIsSubmitted(false);
+                    setQuizStarted(false);
+                    setCurrentIdx(0);
+                    setUserAnswers({});
+                    setFlaggedQuestions({});
+                    setTimeLeft(100 * 60);
+                  }}
+                  className="w-full bg-sky-600 hover:bg-sky-700 text-white font-bold py-3.5 px-6 rounded-xl shadow-lg shadow-sky-600/25 transition-all flex items-center justify-center gap-2 text-sm no-print"
+                >
+                  <Icon name="rotate-ccw" className="w-5 h-5" />
+                  <span>Restart Chapter 6 Assessment</span>
+                </button>
+
+              </div>
+            </div>
+          </div>
+        );
+      }
+
+      const flaggedCount = Object.values(flaggedQuestions).filter(Boolean).length;
+
+      return (
+        <div className="min-h-screen py-6 px-4 sm:px-6 flex flex-col items-center">
+          
+          {/* Top Header Navigation Card */}
+          <div className="max-w-3xl w-full bg-white rounded-2xl shadow-sm border border-sky-100 p-4 mb-4 space-y-3">
+            
+            {/* Academy Name & Class XI Badge */}
+            <div className="flex justify-between items-center text-xs sm:text-sm font-bold text-sky-900">
+              <span className="flex items-center gap-1.5 text-base sm:text-lg tracking-tight">
+                🏔️ Qashqarian Academy
+              </span>
+              
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={() => setShowNavGrid(!showNavGrid)}
+                  className="px-2.5 py-1 bg-sky-50 hover:bg-sky-100 text-sky-800 rounded-lg text-xs font-semibold flex items-center gap-1.5 border border-sky-200 transition-all"
+                >
+                  <Icon name="grid" className="w-3.5 h-3.5" />
+                  <span>Grid ({Object.keys(userAnswers).length}/{QUESTIONS.length})</span>
+                </button>
+
+                <span className="bg-sky-100 text-sky-800 px-2.5 py-1 rounded-lg font-bold text-xs">
+                  Class: XI
+                </span>
+              </div>
+            </div>
+
+            {/* Question Counter (Q 1 / 100) & 100 Min Timer */}
+            <div className="flex justify-between items-center text-xs font-semibold text-slate-600">
+              <div className="flex items-center gap-3">
+                <span className="text-sky-900 font-extrabold text-sm">Q {currentIdx + 1} / {QUESTIONS.length}</span>
+                {flaggedCount > 0 && (
+                  <span className="text-amber-700 bg-amber-50 border border-amber-200 px-2 py-0.5 rounded text-[11px] font-bold flex items-center gap-1">
+                    <Icon name="flag" className="w-3 h-3 text-amber-600" />
+                    {flaggedCount} Flagged
+                  </span>
+                )}
+              </div>
+
+              <div className={`flex items-center gap-1.5 px-2.5 py-1 rounded-lg font-mono font-bold ${
+                timeLeft < 600 ? 'bg-rose-100 text-rose-700 animate-pulse' : 'bg-sky-50 text-sky-800'
+              }`}>
+                <Icon name="clock" className="w-3.5 h-3.5" />
+                <span>{formatTime(timeLeft)}</span>
+              </div>
+            </div>
+
+            {/* Top Progress Bar */}
+            <div className="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+              <div 
+                className="bg-sky-600 h-full transition-all duration-300"
+                style={{ width: `${((currentIdx + 1) / QUESTIONS.length) * 100}%` }}
+              />
+            </div>
+          </div>
+
+          {/* Quick Navigator Grid Modal */}
+          {showNavGrid && (
+            <div className="max-w-3xl w-full bg-white rounded-2xl shadow-lg border border-sky-200 p-5 mb-4 animate-fadeIn space-y-3">
+              <div className="flex justify-between items-center text-xs font-bold text-slate-800 border-b pb-2">
+                <span>Question Quick Navigator Matrix (100 Questions)</span>
+                <button 
+                  onClick={() => setShowNavGrid(false)}
+                  className="text-slate-400 hover:text-slate-600"
+                >
+                  <Icon name="x" className="w-4 h-4" />
+                </button>
+              </div>
+
+              <div className="grid grid-cols-5 sm:grid-cols-10 gap-2 max-h-60 overflow-y-auto p-1 custom-scrollbar">
+                {QUESTIONS.map((_, idx) => {
+                  const isAns = userAnswers.hasOwnProperty(idx);
+                  const isCur = currentIdx === idx;
+                  const isFlg = !!flaggedQuestions[idx];
+
+                  let boxStyle = "bg-slate-100 text-slate-700 hover:bg-slate-200";
+                  if (isCur) boxStyle = "bg-sky-600 text-white font-bold ring-2 ring-sky-500/50";
+                  else if (isAns) boxStyle = "bg-emerald-100 text-emerald-900 font-semibold border border-emerald-300";
+
+                  return (
+                    <button
+                      key={idx}
+                      onClick={() => {
+                        setCurrentIdx(idx);
+                        setShowNavGrid(false);
+                      }}
+                      className={`h-8 rounded-lg text-xs transition-all relative flex items-center justify-center ${boxStyle}`}
+                    >
+                      {idx + 1}
+                      {isFlg && (
+                        <span className="absolute -top-1 -right-1 bg-amber-500 w-2.5 h-2.5 rounded-full border border-white" />
+                      )}
+                    </button>
+                  );
+                })}
+              </div>
+
+              <div className="flex gap-4 text-[10px] text-slate-500 pt-2 border-t justify-center">
+                <span className="flex items-center gap-1"><span className="w-2.5 h-2.5 rounded bg-emerald-300" /> Answered</span>
+                <span className="flex items-center gap-1"><span className="w-2.5 h-2.5 rounded bg-slate-200" /> Unanswered</span>
+                <span className="flex items-center gap-1"><span className="w-2.5 h-2.5 rounded bg-sky-600" /> Current</span>
+                <span className="flex items-center gap-1"><span className="w-2.5 h-2.5 rounded-full bg-amber-500" /> Flagged</span>
+              </div>
+            </div>
+          )}
+
+          {/* Centered Main Question Card */}
+          <div className="max-w-3xl w-full bg-white rounded-2xl shadow-lg border border-sky-100 p-6 sm:p-8 relative overflow-hidden flex flex-col min-h-[460px] justify-between">
+            
+            {/* Watermark in Center Background */}
+            <div className="watermark-bg">
+              <p className="text-5xl sm:text-6xl font-black text-sky-900 tracking-widest">
+                🏔️ QASHQARIAN ACADEMY
+              </p>
+            </div>
+
+            {/* Question Header & Options */}
+            <div className="relative z-10 space-y-5">
+              
+              {/* SLO Tag above Question */}
+              <div className="flex justify-between items-center gap-2">
+                <div className="inline-block bg-sky-50 border border-sky-200 text-sky-900 text-xs font-bold px-3 py-1 rounded-full">
+                  {currentQ.slo}
+                </div>
+
+                <button
+                  onClick={() => toggleFlagQuestion(currentIdx)}
+                  className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 ${
+                    isCurrentFlagged 
+                      ? 'bg-amber-100 text-amber-800 border border-amber-300' 
+                      : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                  }`}
+                  title="Bookmark for review (Key: F)"
+                >
+                  <Icon name="flag" className={`w-3.5 h-3.5 ${isCurrentFlagged ? 'text-amber-600 fill-amber-500' : ''}`} />
+                  <span>{isCurrentFlagged ? 'Flagged' : 'Flag'}</span>
+                </button>
+              </div>
+
+              {/* Question Text */}
+              <h2 className="text-base sm:text-lg font-bold text-slate-900 leading-snug">
+                Q{currentIdx + 1}. {currentQ.question}
+              </h2>
+
+              {/* Multiple Choice Options (A, B, C, D) */}
+              <div className="space-y-3 pt-2">
+                {currentQ.options.map((optionText, optIdx) => {
+                  const isSelected = selectedOption === optIdx;
+                  const isCorrect = currentQ.correct === optIdx;
+
+                  let btnStyle = "border-slate-200 hover:border-sky-300 hover:bg-sky-50/50 text-slate-800 bg-white";
+
+                  if (isAnswered) {
+                    if (quizMode === 'practice') {
+                      if (isCorrect) {
+                        btnStyle = "border-emerald-500 bg-emerald-50 text-emerald-950 font-semibold ring-2 ring-emerald-500/20";
+                      } else if (isSelected) {
+                        btnStyle = "border-rose-500 bg-rose-50 text-rose-950 font-semibold ring-2 ring-rose-500/20";
+                      } else {
+                        btnStyle = "border-slate-200 opacity-60 bg-white text-slate-500";
+                      }
+                    } else {
+                      // Blind Mode
+                      if (isSelected) {
+                        btnStyle = "border-sky-600 bg-sky-50 text-sky-950 font-semibold ring-2 ring-sky-500/20";
+                      } else {
+                        btnStyle = "border-slate-200 opacity-60 bg-white text-slate-500";
+                      }
+                    }
+                  }
+
+                  return (
+                    <button
+                      key={optIdx}
+                      disabled={isAnswered}
+                      onClick={() => handleSelectOption(optIdx)}
+                      className={`w-full p-3.5 sm:p-4 rounded-xl border-2 text-left text-xs sm:text-sm transition-all flex items-center justify-between gap-3 ${btnStyle}`}
+                    >
+                      <div className="flex items-center gap-3">
+                        <span className={`w-7 h-7 rounded-lg flex items-center justify-center font-bold text-xs shrink-0 ${
+                          isSelected ? 'bg-sky-600 text-white' : 'bg-slate-100 text-slate-700'
+                        }`}>
+                          {String.fromCharCode(65 + optIdx)}
+                        </span>
+                        <span>{optionText}</span>
+                      </div>
+
+                      {isAnswered && quizMode === 'practice' && (
+                        <div>
+                          {isCorrect && <Icon name="check" className="w-5 h-5 text-emerald-600" />}
+                          {isSelected && !isCorrect && <Icon name="x" className="w-5 h-5 text-rose-600" />}
+                        </div>
+                      )}
+                    </button>
+                  );
+                })}
+              </div>
+
+              {/* Practice Mode Explanation Box */}
+              {isAnswered && quizMode === 'practice' && (
+                <div className={`mt-4 p-4 rounded-xl text-xs leading-relaxed space-y-1.5 animate-fadeIn border ${
+                  selectedOption === currentQ.correct 
+                    ? 'bg-emerald-50/90 border-emerald-200 text-emerald-950' 
+                    : 'bg-rose-50/90 border-rose-200 text-rose-950'
+                }`}>
+                  <p className="font-bold flex items-center gap-1.5">
+                    <Icon name="info" className="w-4 h-4" />
+                    {selectedOption === currentQ.correct ? 'Correct Answer Rationale:' : 'Incorrect Answer Explanation:'}
+                  </p>
+                  <p className="text-slate-800">{currentQ.explanation}</p>
+                  
+                  {selectedOption !== currentQ.correct && currentQ.wrongExplanations && (
+                    <p className="text-rose-900 font-medium pt-1 border-t border-rose-200/60">
+                      <strong>Why option {String.fromCharCode(65 + selectedOption)} is wrong: </strong>
+                      {currentQ.wrongExplanations[selectedOption]}
+                    </p>
+                  )}
+                </div>
+              )}
+            </div>
+
+            {/* Bottom Nav Controls (Previous / Next / Submit) */}
+            <div className="relative z-10 pt-6 mt-6 border-t border-slate-100 flex justify-between items-center gap-4">
+              <button
+                disabled={currentIdx === 0}
+                onClick={() => setCurrentIdx(prev => prev - 1)}
+                className="px-4 py-2.5 rounded-xl border border-slate-200 text-slate-700 text-xs font-bold hover:bg-slate-50 disabled:opacity-40 disabled:cursor-not-allowed flex items-center gap-1.5"
+              >
+                <Icon name="arrow-left" className="w-4 h-4" />
+                Previous
+              </button>
+
+              <div className="flex gap-2">
+                {currentIdx < QUESTIONS.length - 1 ? (
+                  <button
+                    onClick={() => setCurrentIdx(prev => prev + 1)}
+                    className="px-5 py-2.5 rounded-xl bg-sky-600 hover:bg-sky-700 text-white text-xs font-bold shadow-md shadow-sky-600/20 transition-all flex items-center gap-1.5"
+                  >
+                    Next
+                    <Icon name="arrow-right" className="w-4 h-4" />
+                  </button>
+                ) : (
+                  <button
+                    onClick={() => setIsSubmitted(true)}
+                    className="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold shadow-md shadow-emerald-600/20 transition-all flex items-center gap-1.5"
+                  >
+                    Submit Test
+                    <Icon name="check" className="w-4 h-4" />
+                  </button>
+                )}
+              </div>
+            </div>
+
+          </div>
+        </div>
+      );
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<App />);
+  </script>
+</body>
+</html>

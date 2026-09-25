@@ -1,0 +1,1589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Class XI Biology Chapter 7 Mock Test - Qashqarian Academy</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+          },
+          colors: {
+            sky: {
+              50:'#F0F8F8', 100:'#DFF3F2', 200:'#BFE4E7', 300:'#8FCDD5',
+              400:'#4FA9B9', 500:'#1F869B', 600:'#056C82', 700:'#0A5263',
+              800:'#0B4352', 900:'#0B3340'
+            },
+            science: {
+              50:'#F0F8F8', 100:'#DFF3F2', 200:'#BFE4E7', 300:'#8FCDD5',
+              400:'#4FA9B9', 500:'#1F869B', 600:'#056C82', 700:'#0A5263',
+              800:'#0B4352', 900:'#0B3340'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- React 18 & ReactDOM -->
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+  <!-- Babel for JSX -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #f0f7ff;
+    }
+    .watermark-bg {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(-12deg);
+      pointer-events: none;
+      user-select: none;
+      z-index: 0;
+      opacity: 0.035;
+      text-align: center;
+      white-space: nowrap;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: #f1f5f9;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 4px;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fadeIn {
+      animation: fadeIn 0.25s ease-out forwards;
+    }
+    @media print {
+      .no-print { display: none !important; }
+      body { background: white; color: black; }
+    }
+  </style>
+</head>
+<body class="text-slate-800 antialiased selection:bg-sky-200 selection:text-sky-900 min-h-screen">
+  <header class="sticky top-0 z-50 bg-[#0B132B] border-b border-cyan-900/40 shadow-md">
+    <div class="max-w-5xl mx-auto px-4 py-2.5 flex items-center justify-between">
+      <a href="#" class="flex items-center gap-2">
+        <img src="../../../../images/brand/logo.png" alt="Qashqarian Academy" class="w-10 h-10 object-contain">
+        <div>
+          <div class="text-base md:text-lg font-extrabold text-white tracking-tight leading-none">Qashqarian</div>
+          <div class="text-[10px] md:text-xs text-[#FF9F1C] font-extrabold tracking-[0.2em] mt-1 leading-none">ACADEMY</div>
+        </div>
+      </a>
+      <a href="../../index.html" class="text-[11px] font-semibold text-slate-300 hover:text-white border border-white/20 rounded-lg px-2.5 py-1">
+        ← Biology Quizzes
+      </a>
+    </div>
+  </header>
+  
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const { useState, useEffect, useMemo } = React;
+
+    // SVG Icon Component
+    const Icon = ({ name, className = "w-5 h-5" }) => {
+      const props = {
+        className,
+        xmlns: "http://www.w3.org/2000/svg",
+        viewBox: "0 0 24 24",
+        fill: "none",
+        stroke: "currentColor",
+        strokeWidth: "2",
+        strokeLinecap: "round",
+        strokeLinejoin: "round"
+      };
+
+      switch (name) {
+        case "clock":
+          return <svg {...props}><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>;
+        case "award":
+          return <svg {...props}><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 22 12 17 17 22 15.79 13.88"/></svg>;
+        case "check":
+          return <svg {...props}><polyline points="20 6 9 17 4 12"/></svg>;
+        case "x":
+          return <svg {...props}><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>;
+        case "arrow-left":
+          return <svg {...props}><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>;
+        case "arrow-right":
+          return <svg {...props}><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>;
+        case "rotate-ccw":
+          return <svg {...props}><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>;
+        case "book-open":
+          return <svg {...props}><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>;
+        case "shield":
+          return <svg {...props}><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>;
+        case "zap":
+          return <svg {...props}><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>;
+        case "bar-chart":
+          return <svg {...props}><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg>;
+        case "info":
+          return <svg {...props}><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>;
+        case "alert-triangle":
+          return <svg {...props}><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>;
+        case "flag":
+          return <svg {...props}><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>;
+        case "grid":
+          return <svg {...props}><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>;
+        case "search":
+          return <svg {...props}><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>;
+        case "printer":
+          return <svg {...props}><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>;
+        case "key":
+          return <svg {...props}><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg>;
+        default:
+          return <svg {...props}><circle cx="12" cy="12" r="10"/></svg>;
+      }
+    };
+
+    const QUESTIONS = [
+      // SLO 7.2.1: Evolutionary Relationship Among Protists
+      {
+        id: 1,
+        slo: "SLO 7.2.1: Evolutionary Relationship Among Protists",
+        question: "Which evolutionary theory explains the origin of eukaryotic protists from ancestral prokaryotic cells through the engulfment of aerobic and photosynthetic bacteria?",
+        options: ["Spontaneous Generation Theory", "Natural Selection Theory", "Endosymbiotic Theory", "Gene Mutation Theory"],
+        correct: 2,
+        explanation: "Endosymbiotic Theory (proposed by Lynn Margulis) explains that mitochondria and chloroplasts originated when ancestral eukaryotic cells engulfed aerobic bacteria and photosynthetic cyanobacteria.",
+        wrongExplanations: [
+          "Spontaneous Generation suggests non-living matter generates life.",
+          "Natural Selection explains differential reproductive success, not organelle endosymbiosis.",
+          "Gene Mutation refers to DNA sequence alterations."
+        ]
+      },
+      {
+        id: 2,
+        slo: "SLO 7.2.1: Evolutionary Relationship Among Protists",
+        question: "Why are protists classified as a 'polyphyletic' group of organisms in modern taxonomy?",
+        options: ["They lack a single common evolutionary ancestor unique only to them", "They all possess identical chloroplast structures", "They are all obligate multicellular organisms", "They reproduce exclusively through sexual conjugation"],
+        correct: 0,
+        explanation: "Protists are polyphyletic because they do not share a single unique common ancestor exclusive to the kingdom; different lineages independently gave rise to plants, animals, and fungi.",
+        wrongExplanations: [
+          "Protists show diverse plastid origins through primary and secondary endosymbiosis.",
+          "Most protists are unicellular or simple colonial, not obligate multicellular.",
+          "Protists exhibit varied asexual and sexual reproduction modes."
+        ]
+      },
+      {
+        id: 3,
+        slo: "SLO 7.2.1: Evolutionary Relationship Among Protists",
+        question: "[Real-Life Scenario] A marine researcher discovers a photosynthetic protist whose chloroplast is surrounded by four outer membranes. This complex membrane structure is strong evidence of:",
+        options: ["Primary endosymbiosis", "Binary fission", "Spore germination", "Secondary endosymbiosis"],
+        correct: 3,
+        explanation: "Secondary endosymbiosis occurs when a heterotrophic eukaryote engulfs a photosynthetic eukaryote, yielding plastids enclosed by 3 or 4 membranes.",
+        wrongExplanations: [
+          "Primary endosymbiosis produces chloroplasts with only two surrounding membranes.",
+          "Binary fission is a cellular division mechanism.",
+          "Spore germination is a stage in spore-based reproduction."
+        ]
+      },
+      {
+        id: 4,
+        slo: "SLO 7.2.1: Evolutionary Relationship Among Protists",
+        question: "Which kingdom of life is considered the direct evolutionary ancestor of plants, animals, and fungi?",
+        options: ["Kingdom Monera", "Kingdom Protista", "Kingdom Fungi", "Kingdom Archaea"],
+        correct: 1,
+        explanation: "Kingdom Protista (Protoctista) serves as the ancestral eukaryotic trunk from which multicellular plants, animals, and fungi evolved.",
+        wrongExplanations: [
+          "Kingdom Monera contains prokaryotes.",
+          "Kingdom Fungi evolved from protistan ancestors.",
+          "Archaea are prokaryotic organisms."
+        ]
+      },
+      {
+        id: 5,
+        slo: "SLO 7.2.1: Evolutionary Relationship Among Protists",
+        question: "Primitive flagellated protists lacking mitochondria (such as Giardia) suggest that in early eukaryotic evolution:",
+        options: ["Flagella evolved before the endosymbiosis of aerobic bacteria", "Mitochondria were replaced by cell walls", "Photosynthesis occurred before cellular respiration", "Ribosomes were absent in early cells"],
+        correct: 0,
+        explanation: "Amitochondriate protists indicate that eukaryotic motility structures like flagella and cytoskeleton developed prior to the endosymbiotic acquisition of aerobic alpha-proteobacteria (mitochondria).",
+        wrongExplanations: [
+          "Cell walls did not replace mitochondria.",
+          "Cellular respiration evolved before oxygenic photosynthesis in primitive cells.",
+          "All cellular life requires ribosomes for protein synthesis."
+        ]
+      },
+
+      // SLO 7.3.1: Salient Features of Animal-like Protists (Protozoa)
+      {
+        id: 6,
+        slo: "SLO 7.3.1: Salient Features of Animal-like Protists (Protozoa)",
+        question: "Which characteristic is shared by all animal-like protists (protozoans)?",
+        options: ["Presence of cellulose cell walls", "Autotrophic nutrition via chlorophyll", "Formation of multicellular seeds", "Unicellular heterotrophic nature"],
+        correct: 3,
+        explanation: "Protozoans are defined as single-celled (unicellular) heterotrophs that ingest or absorb organic material.",
+        wrongExplanations: [
+          "Protozoans lack cell walls.",
+          "Protozoans are heterotrophs and lack chlorophyll.",
+          "Seed formation occurs only in vascular land plants."
+        ]
+      },
+      {
+        id: 7,
+        slo: "SLO 7.3.1: Salient Features of Animal-like Protists (Protozoa)",
+        question: "What is the primary function of the contractile vacuole in freshwater protozoa?",
+        options: ["Digestion of ingested food particles", "Pumping out excess water to prevent cell lysis (osmoregulation)", "Synthesis of ribosomal RNA", "Secretion of digestive enzymes"],
+        correct: 1,
+        explanation: "In hypotonic freshwater environments, water constantly enters protozoans by osmosis. Contractile vacuoles collect and actively pump out excess water to prevent osmotic lysis.",
+        wrongExplanations: [
+          "Food vacuoles carry out digestion.",
+          "Ribosomal RNA is synthesized inside the nucleolus.",
+          "Lysosomes store and release digestive enzymes."
+        ]
+      },
+      {
+        id: 8,
+        slo: "SLO 7.3.1: Salient Features of Animal-like Protists (Protozoa)",
+        question: "[Real-Life Scenario] A student places an Amoeba proteus into a container of distilled water. Under the microscope, she notices a clear vacuole expanding and contracting rapidly to expel liquid. Which organelle is actively maintaining osmotic balance?",
+        options: ["Food vacuole", "Nucleolus", "Contractile vacuole", "Lysosome"],
+        correct: 2,
+        explanation: "Distilled water represents a strongly hypotonic environment, causing rapid water influx that the contractile vacuole must continuously expel.",
+        wrongExplanations: [
+          "Food vacuoles digest engulfed food.",
+          "Nucleolus synthesizes ribosomal sub-units.",
+          "Lysosomes contain acid hydrolase enzymes."
+        ]
+      },
+      {
+        id: 9,
+        slo: "SLO 7.3.1: Salient Features of Animal-like Protists (Protozoa)",
+        question: "The process by which an amoeba engulfs solid food particles by extending pseudopodia around the prey is known as:",
+        options: ["Pinocytosis", "Phagocytosis", "Exocytosis", "Osmosis"],
+        correct: 1,
+        explanation: "Phagocytosis ('cell eating') is the endocytic mechanism where pseudopodia surround solid prey to form a food vacuole.",
+        wrongExplanations: [
+          "Pinocytosis is 'cell drinking' (intake of liquid droplets).",
+          "Exocytosis is the elimination of waste materials.",
+          "Osmosis is passive water movement across a membrane."
+        ]
+      },
+      {
+        id: 10,
+        slo: "SLO 7.3.1: Salient Features of Animal-like Protists (Protozoa)",
+        question: "In ciliates like Paramecium, cell shape is maintained by a flexible outer proteinaceous layer called the:",
+        options: ["Capsule", "Cell wall", "Mucilage sheath", "Pellicle"],
+        correct: 3,
+        explanation: "The pellicle is a flexible membrane lining that provides definite shape while allowing body movement in ciliates.",
+        wrongExplanations: [
+          "Capsules are protective bacterial outer coats.",
+          "Protozoans lack rigid cellulose cell walls.",
+          "Mucilage sheaths are gelatinous layers on cyanobacteria."
+        ]
+      },
+
+      // SLO 7.3.2: Classify Animal-like Protists Based on Locomotory Organelles
+      {
+        id: 11,
+        slo: "SLO 7.3.2: Classify Animal-like Protists Based on Locomotory Organelles",
+        question: "Protozoans that move and capture prey using temporary cytoplasmic extensions called pseudopodia belong to:",
+        options: ["Ciliates", "Amoeboids (Sarcodines)", "Zooflagellates", "Sporozoans"],
+        correct: 1,
+        explanation: "Amoeboids (Sarcodina) use pseudopodia ('false feet') for both cytoplasmic streaming locomotion and engulfing prey.",
+        wrongExplanations: [
+          "Ciliates move via cilia.",
+          "Zooflagellates move via flagella.",
+          "Sporozoans lack specialized locomotory structures in adult stages."
+        ]
+      },
+      {
+        id: 12,
+        slo: "SLO 7.3.2: Classify Animal-like Protists Based on Locomotory Organelles",
+        question: "[Real-Life Scenario] A drop of pond water examined under a microscope shows a slipper-shaped cell swimming rapidly using hundreds of synchronized, short hair-like projections. This organism is classified as a:",
+        options: ["Zooflagellate", "Amoeboid", "Ciliate", "Sporozoan"],
+        correct: 2,
+        explanation: "Paramecium is a slipper-shaped ciliate (Ciliophora) covered with rows of rhythmic cilia used for locomotion.",
+        wrongExplanations: [
+          "Zooflagellates move with long whip-like flagella.",
+          "Amoeboids move via pseudopodia.",
+          "Sporozoans are non-motile parasites."
+        ]
+      },
+      {
+        id: 13,
+        slo: "SLO 7.3.2: Classify Animal-like Protists Based on Locomotory Organelles",
+        question: "Which group of protozoans is completely non-motile in their adult stage and reproduces by forming spores?",
+        options: ["Sporozoans (Apicomplexans)", "Rhizopods", "Ciliophora", "Mastigophora"],
+        correct: 0,
+        explanation: "Sporozoans (Apicomplexa), including Plasmodium, are obligate parasites lacking locomotory organelles in adults.",
+        wrongExplanations: [
+          "Rhizopods (amoebas) move via pseudopodia.",
+          "Ciliophora move via cilia.",
+          "Mastigophora (flagellates) move via flagella."
+        ]
+      },
+      {
+        id: 14,
+        slo: "SLO 7.3.2: Classify Animal-like Protists Based on Locomotory Organelles",
+        question: "Trypanosoma, the parasite that causes African sleeping sickness, propels itself through human blood using a whip-like tail structure. It is classified as a:",
+        options: ["Ciliate", "Amoeba", "Sporozoan", "Zooflagellate"],
+        correct: 3,
+        explanation: "Trypanosoma is a flagellated protozoan (Zooflagellate / Mastigophora) moving by a flagellum connected to an undulating membrane.",
+        wrongExplanations: [
+          "Ciliates use short cilia.",
+          "Amoebas move via pseudopodia.",
+          "Sporozoans lack flagella in adult parasitic forms."
+        ]
+      },
+      {
+        id: 15,
+        slo: "SLO 7.3.2: Classify Animal-like Protists Based on Locomotory Organelles",
+        question: "What structural feature distinguishes Paramecium from Amoeba regarding food ingestion?",
+        options: ["Paramecium ingests food at a fixed cellular mouth (cytostome)", "Paramecium absorbs nutrients across its membrane without vacuoles", "Amoeba uses cilia to create water currents", "Amoeba lacks lysosomes"],
+        correct: 0,
+        explanation: "Paramecium possesses a fixed cellular mouth (cytostome) and oral groove, whereas Amoeba ingests food at any point on its membrane using pseudopodia.",
+        wrongExplanations: [
+          "Paramecium forms food vacuoles at the cytopharynx.",
+          "Amoeba uses pseudopodia, not cilia.",
+          "Amoeba relies on lysosomes for food vacuole digestion."
+        ]
+      },
+
+      // SLO 7.3.3: Pathogenic Protozoans and Diseases Caused by Them
+      {
+        id: 16,
+        slo: "SLO 7.3.3: Pathogenic Protozoans and Diseases Caused by Them",
+        question: "Which pathogenic protozoan is transmitted to humans through the bite of an infected female Anopheles mosquito?",
+        options: ["Entamoeba histolytica", "Trypanosoma brucei", "Plasmodium", "Giardia lamblia"],
+        correct: 2,
+        explanation: "Plasmodium species (cause of malaria) are transmitted into human blood through the bite of female Anopheles mosquitoes.",
+        wrongExplanations: [
+          "Entamoeba histolytica is transmitted via contaminated food/water.",
+          "Trypanosoma brucei is transmitted by tsetse flies.",
+          "Giardia lamblia is transmitted via fecal-contaminated water."
+        ]
+      },
+      {
+        id: 17,
+        slo: "SLO 7.3.3: Pathogenic Protozoans and Diseases Caused by Them",
+        question: "[Real-Life Scenario] A patient visits a health clinic complaining of bloody diarrhea and abdominal cramps after drinking unboiled water. Stool tests reveal motile amoebic cells digesting red blood cells. The causative organism is:",
+        options: ["Plasmodium vivax", "Entamoeba histolytica", "Trypanosoma gambiense", "Giardia lamblia"],
+        correct: 1,
+        explanation: "Entamoeba histolytica causes amoebic dysentery, resulting in intestinal ulcers, bloody stools, and erythrophagocytosis.",
+        wrongExplanations: [
+          "Plasmodium vivax causes malaria.",
+          "Trypanosoma gambiense causes African sleeping sickness.",
+          "Giardia lamblia causes greasy non-bloody diarrhea."
+        ]
+      },
+      {
+        id: 18,
+        slo: "SLO 7.3.3: Pathogenic Protozoans and Diseases Caused by Them",
+        question: "[Real-Life Scenario] A hiker drinks untreated water from a mountain stream. Two weeks later, he suffers from severe watery diarrhea, bloating, and dehydration caused by a flagellated protozoan. Which disease has he contracted?",
+        options: ["Malaria", "Amoebiasis", "African Sleeping Sickness", "Giardiasis"],
+        correct: 3,
+        explanation: "Giardia lamblia is a flagellated intestinal parasite causing giardiasis through ingestion of cysts in contaminated water.",
+        wrongExplanations: [
+          "Malaria is vector-borne via mosquitoes.",
+          "Amoebiasis causes bloody stools from E. histolytica.",
+          "African sleeping sickness is transmitted by tsetse flies."
+        ]
+      },
+      {
+        id: 19,
+        slo: "SLO 7.3.3: Pathogenic Protozoans and Diseases Caused by Them",
+        question: "African sleeping sickness is a severe neurological disease transmitted to humans by the bite of which vector?",
+        options: ["Female Anopheles mosquito", "Tsetse fly", "Sandfly", "Housefly"],
+        correct: 1,
+        explanation: "Trypanosoma brucei, causing African sleeping sickness, is transmitted through the bite of infected tsetse flies (Glossina species).",
+        wrongExplanations: [
+          "Female Anopheles mosquitoes transmit malaria.",
+          "Sandflies transmit Leishmania.",
+          "Houseflies are mechanical disease vectors, not hosts for Trypanosoma."
+        ]
+      },
+      {
+        id: 20,
+        slo: "SLO 7.3.3: Pathogenic Protozoans and Diseases Caused by Them",
+        question: "Leishmaniasis (skin sores or 'Kalazar') is transmitted to humans through the bite of infected:",
+        options: ["Sandflies", "Tsetse flies", "Bed bugs", "Mosquitoes"],
+        correct: 0,
+        explanation: "Leishmania flagellates are transmitted to humans by blood-feeding female sandflies (Phlebotomus).",
+        wrongExplanations: [
+          "Tsetse flies transmit Trypanosoma brucei.",
+          "Bed bugs do not transmit Leishmania.",
+          "Mosquitoes transmit malaria, filariasis, and arboviruses."
+        ]
+      },
+
+      // SLO 7.4.1: Salient Features of Plant-like Protists (Algae)
+      {
+        id: 21,
+        slo: "SLO 7.4.1: Salient Features of Plant-like Protists (Algae)",
+        question: "Plant-like protists (algae) differ from true land plants because algae:",
+        options: ["Lack chlorophyll a", "Lack multicellular sex organs protected by sterile jacket cells", "Perform chemosynthesis instead of photosynthesis", "Have cell walls made purely of chitin"],
+        correct: 1,
+        explanation: "Unlike true land plants (embryophytes), algae lack protective multicellular sterile jacket cells surrounding their reproductive organs.",
+        wrongExplanations: [
+          "All photosynthetic algae contain Chlorophyll a.",
+          "Algae perform oxygenic photosynthesis.",
+          "Algal walls contain cellulose, agar, or silica (chitin is in fungi)."
+        ]
+      },
+      {
+        id: 22,
+        slo: "SLO 7.4.1: Salient Features of Plant-like Protists (Algae)",
+        question: "All photosynthetic algae possess which primary photosynthetic pigment?",
+        options: ["Chlorophyll b", "Chlorophyll c", "Chlorophyll a", "Fucoxanthin"],
+        correct: 2,
+        explanation: "Chlorophyll a is the essential primary photosynthetic pigment present in all oxygenic photosynthetic organisms, including all algal groups.",
+        wrongExplanations: [
+          "Chlorophyll b is absent in brown and red algae.",
+          "Chlorophyll c is present only in brown algae and diatoms.",
+          "Fucoxanthin is an accessory pigment in brown algae and diatoms."
+        ]
+      },
+      {
+        id: 23,
+        slo: "SLO 7.4.1: Salient Features of Plant-like Protists (Algae)",
+        question: "Proteinaceous bodies found inside algal chloroplasts that serve as centers for starch synthesis and storage are called:",
+        options: ["Pyrenoids", "Centrosomes", "Heterocysts", "Magnetosomes"],
+        correct: 0,
+        explanation: "Pyrenoids are micro-compartments in algal chloroplasts rich in RuBisCO that facilitate carbon fixation and starch deposition.",
+        wrongExplanations: [
+          "Centrosomes organize spindle fibers in animal cells.",
+          "Heterocysts fix nitrogen in cyanobacteria.",
+          "Magnetosomes orient magnetotactic bacteria."
+        ]
+      },
+      {
+        id: 24,
+        slo: "SLO 7.4.1: Salient Features of Plant-like Protists (Algae)",
+        question: "[Real-Life Scenario] Coastal waters turn reddish-brown during a warm summer week due to a rapid population explosion of dinoflagellates releasing toxins. This ecological event is known as a:",
+        options: ["Green bloom", "Red tide", "Eutrophic wave", "Coral bleaching"],
+        correct: 1,
+        explanation: "Red tides (harmful algal blooms) occur when dinoflagellates multiply rapidly, turning water reddish-brown and releasing potent neurotoxins.",
+        wrongExplanations: [
+          "Green blooms are caused by green algae or cyanobacteria.",
+          "Eutrophic wave is not a standard biological term.",
+          "Coral bleaching is the expulsion of zooxanthellae due to heat stress."
+        ]
+      },
+      {
+        id: 25,
+        slo: "SLO 7.4.1: Salient Features of Plant-like Protists (Algae)",
+        question: "What type of life cycle is exhibited by many multicellular algae where haploid gamete-producing generations alternate with diploid spore-producing generations?",
+        options: ["Binary fission", "Conjugation only", "Budding", "Alternation of generations"],
+        correct: 3,
+        explanation: "Alternation of generations describes a life cycle alternating between a haploid gametophyte (n) and a diploid sporophyte (2n).",
+        wrongExplanations: [
+          "Binary fission is unicellular asexual division.",
+          "Conjugation is direct genetic transfer.",
+          "Budding is an asexual outgrowth process."
+        ]
+      },
+
+      // SLO 7.4.2: Classify Photosynthetic Protists
+      {
+        id: 26,
+        slo: "SLO 7.4.2: Classify Photosynthetic Protists",
+        question: "Euglenoids (Euglena) are unique plant-like protists because in the absence of sunlight, they can switch to:",
+        options: ["Autotrophic photosynthesis", "Anaerobic fermentation", "Heterotrophic nutrition by absorbing organic matter", "Nitrogen fixation"],
+        correct: 2,
+        explanation: "Euglenoids are mixotrophic; they perform photosynthesis in light but switch to heterotrophic saprotrophic absorption in darkness.",
+        wrongExplanations: [
+          "Photosynthesis requires light photons.",
+          "Euglena undergo aerobic respiration when oxygen is present.",
+          "Nitrogen fixation is performed by specialized prokaryotes."
+        ]
+      },
+      {
+        id: 27,
+        slo: "SLO 7.4.2: Classify Photosynthetic Protists",
+        question: "[Real-Life Scenario] An industrial company extracts fine abrasive material from marine fossil deposits to manufacture toothpaste and metal polishes. This material consists of the glass-like silica cell walls of:",
+        options: ["Dinoflagellates", "Diatoms", "Green algae", "Slime molds"],
+        correct: 1,
+        explanation: "Diatomaceous earth consists of fossilized silica (SiO2) frustules of diatoms, widely used as fine abrasives and filtration media.",
+        wrongExplanations: [
+          "Dinoflagellates have cellulose armor plates.",
+          "Green algae cell walls consist of cellulose.",
+          "Slime molds lack silica walls."
+        ]
+      },
+      {
+        id: 28,
+        slo: "SLO 7.4.2: Classify Photosynthetic Protists",
+        question: "Photosynthetic protists with two flagella situated in perpendicular grooves of cellulose armor plates belong to:",
+        options: ["Diatoms (Bacillariophyta)", "Euglenoids (Euglenophyta)", "Dinoflagellates (Pyrrophyta)", "Red algae (Rhodophyta)"],
+        correct: 2,
+        explanation: "Dinoflagellates have two flagella lying in perpendicular longitudinal and transverse grooves surrounded by cellulose plates.",
+        wrongExplanations: [
+          "Diatoms have glass frustules and lack flagella in vegetative stages.",
+          "Euglenoids have a proteinaceous pellicle.",
+          "Red algae lack flagellated stages completely."
+        ]
+      },
+      {
+        id: 29,
+        slo: "SLO 7.4.2: Classify Photosynthetic Protists",
+        question: "Diatoms are major primary producers in aquatic ecosystems, storing their excess food reserve in the form of:",
+        options: ["True plant starch", "Glycogen", "Cellulose granules", "Oils and chrysolaminarin"],
+        correct: 3,
+        explanation: "Diatoms store excess photosynthesate as oil droplets (lipids) and the carbohydrate chrysolaminarin.",
+        wrongExplanations: [
+          "True plant starch is stored by green algae and plants.",
+          "Glycogen is stored by animals and fungi.",
+          "Cellulose is a cell wall structural polymer."
+        ]
+      },
+      {
+        id: 30,
+        slo: "SLO 7.4.2: Classify Photosynthetic Protists",
+        question: "Which group of green algae is considered the closest living relative of higher land plants?",
+        options: ["Dinoflagellates", "Euglenoids", "Charophytes (e.g., Chara)", "Diatoms"],
+        correct: 2,
+        explanation: "Charophytes share structural and biochemical homology with land plants, including phragmoplast cell division and plasmodesmata.",
+        wrongExplanations: [
+          "Dinoflagellates are alveolates.",
+          "Euglenoids are excavates.",
+          "Diatoms are stramenopiles."
+        ]
+      },
+
+      // SLO 7.4.3: Differentiate Among Brown, Red, and Green Algae
+      {
+        id: 31,
+        slo: "SLO 7.4.3: Differentiate Among Brown, Red, and Green Algae",
+        question: "Brown algae (Phaeophyta), such as giant kelps, owe their characteristic brown color to the accessory pigment:",
+        options: ["Phycocyanin", "Phycoerythrin", "Fucoxanthin", "Carotene"],
+        correct: 2,
+        explanation: "Fucoxanthin is a brown xanthophyll carotenoid that masks chlorophyll pigments in Phaeophyta.",
+        wrongExplanations: [
+          "Phycocyanin is a blue phycobilin.",
+          "Phycoerythrin is a red pigment in red algae.",
+          "Carotene is an orange pigment present broadly across groups."
+        ]
+      },
+      {
+        id: 32,
+        slo: "SLO 7.4.3: Differentiate Among Brown, Red, and Green Algae",
+        question: "Red algae (Rhodophyta) can survive in deep ocean waters where red light cannot penetrate because their accessory pigment absorbs blue and green light. Name this pigment:",
+        options: ["Fucoxanthin", "Phycoerythrin", "Chlorophyll b", "Lutein"],
+        correct: 1,
+        explanation: "Phycoerythrin absorbs blue and green light (which penetrates deepest into seawater), enabling red algae to live in deeper marine habitats.",
+        wrongExplanations: [
+          "Fucoxanthin is found in brown algae and diatoms.",
+          "Chlorophyll b is absent in red algae.",
+          "Lutein is a yellow carotenoid."
+        ]
+      },
+      {
+        id: 33,
+        slo: "SLO 7.4.3: Differentiate Among Brown, Red, and Green Algae",
+        question: "[Real-Life Scenario] A microbiologist prepares solid culture media plates in a laboratory using a gelatinous substance called agar-agar. Which group of algae is the commercial source of agar?",
+        options: ["Green algae", "Brown algae", "Euglenoids", "Red algae"],
+        correct: 3,
+        explanation: "Agar-agar is a mucilaginous polysaccharide extracted from cell walls of red algae (Rhodophyta) like Gelidium and Gracilaria.",
+        wrongExplanations: [
+          "Green algae cell walls contain cellulose.",
+          "Brown algae yield alginates.",
+          "Euglenoids lack cell walls."
+        ]
+      },
+      {
+        id: 34,
+        slo: "SLO 7.4.3: Differentiate Among Brown, Red, and Green Algae",
+        question: "Green algae (Chlorophyta) share which pair of photosynthetic pigments with higher land plants?",
+        options: ["Chlorophyll a and Chlorophyll b", "Chlorophyll a and Chlorophyll c", "Chlorophyll b and Fucoxanthin", "Chlorophyll a and Phycoerythrin"],
+        correct: 0,
+        explanation: "Green algae (Chlorophyta) and embryophytes (land plants) both contain Chlorophyll a and Chlorophyll b.",
+        wrongExplanations: [
+          "Chlorophyll c is found in brown algae and diatoms.",
+          "Fucoxanthin is in brown algae.",
+          "Phycoerythrin is in red algae."
+        ]
+      },
+      {
+        id: 35,
+        slo: "SLO 7.4.3: Differentiate Among Brown, Red, and Green Algae",
+        question: "The reserve food stored in red algae is structurally similar to glycogen and amylopectin, and is known as:",
+        options: ["Laminarin", "Floridean starch", "Mannitol", "Chrysolaminarin"],
+        correct: 1,
+        explanation: "Red algae store Floridean starch outside their chloroplasts as a branched carbohydrate storage polymer.",
+        wrongExplanations: [
+          "Laminarin is stored by brown algae.",
+          "Mannitol is a sugar alcohol stored by brown algae.",
+          "Chrysolaminarin is stored by diatoms."
+        ]
+      },
+
+      // SLO 7.5.1: Compare Features of Myxomycota and Oomycota
+      {
+        id: 36,
+        slo: "SLO 7.5.1: Compare Features of Myxomycota and Oomycota",
+        question: "The vegetative body of a plasmodial slime mold (Myxomycota) consists of a naked, multinucleate mass of protoplasm called a:",
+        options: ["Mycelium", "Plasmodium", "Pseudopodium", "Sporangium"],
+        correct: 1,
+        explanation: "A plasmodium is the wall-less, multinucleate, creeping feeding mass characteristic of plasmodial slime molds.",
+        wrongExplanations: [
+          "Mycelium is a network of true fungal hyphae.",
+          "Pseudopodium is a temporary locomotion extension.",
+          "Sporangium is a spore-producing reproductive capsule."
+        ]
+      },
+      {
+        id: 37,
+        slo: "SLO 7.5.1: Compare Features of Myxomycota and Oomycota",
+        question: "Water molds (Oomycota) differ fundamentally from true fungi because the cell walls of Oomycota are composed of:",
+        options: ["Chitin", "Peptidoglycan", "Silica", "Cellulose"],
+        correct: 3,
+        explanation: "Oomycota have cell walls made of cellulose and glucans, unlike true fungi whose cell walls consist of chitin.",
+        wrongExplanations: [
+          "Chitin is found in true fungi and arthropod exoskeletons.",
+          "Peptidoglycan forms bacterial cell walls.",
+          "Silica forms diatom frustules."
+        ]
+      },
+      {
+        id: 38,
+        slo: "SLO 7.5.1: Compare Features of Myxomycota and Oomycota",
+        question: "[Real-Life Scenario] A forest ecology student finds a bright yellow, slimy mass creeping across decaying fallen logs in a damp forest, engulfing bacteria and organic debris without any cell walls. This organism is a:",
+        options: ["Water mold (Oomycota)", "Plasmodial slime mold (Myxomycota)", "Green alga (Chlorophyta)", "True mushroom (Basidiomycota)"],
+        correct: 1,
+        explanation: "Plasmodial slime molds form naked, slimy, brightly colored multinucleate plasmodia that engulf organic debris by phagocytosis.",
+        wrongExplanations: [
+          "Water molds possess cell walls and feed by absorption.",
+          "Green algae are photosynthetic organisms with cellulose walls.",
+          "Mushrooms have chitinous cell walls and hyphal filaments."
+        ]
+      },
+      {
+        id: 39,
+        slo: "SLO 7.5.1: Compare Features of Myxomycota and Oomycota",
+        question: "Oomycota produce motile asexual spores equipped with two flagella (one tinsel, one whiplash), known as:",
+        options: ["Zoospores", "Aplanospores", "Basidiospores", "Ascospores"],
+        correct: 0,
+        explanation: "Biflagellated motile spores produced by Oomycetes are called zoospores.",
+        wrongExplanations: [
+          "Aplanospores are non-motile asexual spores.",
+          "Basidiospores are sexual spores of Basidiomycota.",
+          "Ascospores are sexual spores of Ascomycota."
+        ]
+      },
+      {
+        id: 40,
+        slo: "SLO 7.5.1: Compare Features of Myxomycota and Oomycota",
+        question: "Under harsh, dry environmental conditions, a plasmodial slime mold stops moving and forms a hard, resistant dormant structure called a:",
+        options: ["Heterocyst", "Sclerotium", "Frustule", "Pellicle"],
+        correct: 1,
+        explanation: "A sclerotium is a hardened, dormant, multi-celled structure formed by slime molds to survive desiccation.",
+        wrongExplanations: [
+          "Heterocysts fix nitrogen in cyanobacteria.",
+          "Frustules are silica shells of diatoms.",
+          "Pellicles are flexible protein layers in ciliates."
+        ]
+      },
+
+      // SLO 7.5.2: Importance of Phytophthora infestans
+      {
+        id: 41,
+        slo: "SLO 7.5.2: Importance of Phytophthora infestans",
+        question: "Phytophthora infestans, an economically devastating plant pathogen belonging to Oomycota, causes which agricultural disease?",
+        options: ["Citrus Canker", "Loose Smut of Wheat", "Late Blight of Potato", "Tobacco Mosaic Disease"],
+        correct: 2,
+        explanation: "Phytophthora infestans is the oomycete water mold responsible for late blight of potato and tomato.",
+        wrongExplanations: [
+          "Citrus Canker is caused by Xanthomonas citri bacteria.",
+          "Loose Smut of Wheat is caused by Ustilago tritici fungus.",
+          "Tobacco Mosaic Disease is caused by TMV virus."
+        ]
+      },
+      {
+        id: 42,
+        slo: "SLO 7.5.2: Importance of Phytophthora infestans",
+        question: "[Real-Life Scenario] Between 1845 and 1847, a crop failure led to widespread starvation and forced emigration of over one million people in Ireland. The Great Irish Potato Famine was caused by the destruction of potato crops by:",
+        options: ["Puccinia graminis", "Phytophthora infestans", "Ustilago tritici", "Albugo candida"],
+        correct: 1,
+        explanation: "The Great Irish Potato Famine was caused by Phytophthora infestans destroying the Irish potato crop in the 1840s.",
+        wrongExplanations: [
+          "Puccinia graminis causes wheat stem rust.",
+          "Ustilago tritici causes loose smut of wheat.",
+          "Albugo candida causes white rust of crucifers."
+        ]
+      },
+      {
+        id: 43,
+        slo: "SLO 7.5.2: Importance of Phytophthora infestans",
+        question: "What are the primary symptoms observed on potato crops infected with Phytophthora infestans?",
+        options: ["Dark water-soaked leaf lesions turning black with rotted tubers", "Bright orange powdery rust spots on upper leaves", "Yellow mosaic patches on fruits", "Excessive root gall formation"],
+        correct: 0,
+        explanation: "Late blight symptoms present as dark water-soaked leaf spots turning black and necrotic, followed by rapid decay of potato tubers.",
+        wrongExplanations: [
+          "Orange powdery spots indicate rust fungi.",
+          "Yellow mosaic patterns are caused by plant viruses.",
+          "Root galls are induced by nematodes or Agrobacterium."
+        ]
+      },
+      {
+        id: 44,
+        slo: "SLO 7.5.2: Importance of Phytophthora infestans",
+        question: "How are the infectious spores of Phytophthora infestans primarily dispersed across potato fields during rainy seasons?",
+        options: ["Airborne seeds", "Pollinating honeybees", "Soil earthworms", "Wind splashes and rain carrying zoospores"],
+        correct: 3,
+        explanation: "Phytophthora infestans sporangia and flagellated zoospores spread rapidly via wind-driven rain and water splashes.",
+        wrongExplanations: [
+          "Oomycetes produce microscopic spores, not seeds.",
+          "Honeybees are flower pollinators and do not spread late blight.",
+          "Earthworms do not act as primary dispersal vectors for foliar late blight."
+        ]
+      },
+      {
+        id: 45,
+        slo: "SLO 7.5.2: Importance of Phytophthora infestans",
+        question: "Which strategy is most effective in preventing Phytophthora infestans outbreaks in potato farming today?",
+        options: ["Applying nitrogen fertilizers exclusively", "Planting certified disease-resistant varieties and applying preventative copper fungicides", "Increasing overhead flood irrigation", "Growing potatoes in completely dry soil without water"],
+        correct: 1,
+        explanation: "Preventing late blight requires resistant cultivars, crop management, and protective copper or systemic fungicides.",
+        wrongExplanations: [
+          "Nitrogen fertilizers do not prevent oomycete infections.",
+          "Overhead flood irrigation increases humidity and aids zoospore swimming.",
+          "Potatoes cannot survive without water."
+        ]
+      }
+    ];
+
+    function App() {
+      // Quiz State
+      const [quizStarted, setQuizStarted] = useState(false);
+      const [quizMode, setQuizMode] = useState('practice'); // 'practice' or 'blind'
+      const [currentIdx, setCurrentIdx] = useState(0);
+      const [userAnswers, setUserAnswers] = useState({}); // { [qIdx]: selectedOptionIdx }
+      const [flaggedQuestions, setFlaggedQuestions] = useState({}); // { [qIdx]: true/false }
+      const [timeLeft, setTimeLeft] = useState(45 * 60); // 45 minutes timer = 2700 seconds
+      const [isSubmitted, setIsSubmitted] = useState(false);
+      const [showNavGrid, setShowNavGrid] = useState(false);
+
+      // Review Filter and Search States
+      const [reviewFilter, setReviewFilter] = useState('all'); // 'all', 'correct', 'wrong', 'skipped', 'flagged'
+      const [reviewSearch, setReviewSearch] = useState('');
+
+      // 45 Minute Timer Effect
+      useEffect(() => {
+        let timer = null;
+        if (quizStarted && !isSubmitted && timeLeft > 0) {
+          timer = setInterval(() => {
+            setTimeLeft(prev => {
+              if (prev <= 1) {
+                clearInterval(timer);
+                setIsSubmitted(true);
+                return 0;
+              }
+              return prev - 1;
+            });
+          }, 1000);
+        }
+        return () => clearInterval(timer);
+      }, [quizStarted, isSubmitted, timeLeft]);
+
+      // Keyboard Shortcuts Listener
+      useEffect(() => {
+        const handleKeyDown = (e) => {
+          if (!quizStarted || isSubmitted) return;
+          if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+
+          const key = e.key.toUpperCase();
+          if (['1', '2', '3', '4'].includes(key)) {
+            handleSelectOption(parseInt(key, 10) - 1);
+          } else if (['A', 'B', 'C', 'D'].includes(key)) {
+            const charCode = key.charCodeAt(0) - 65;
+            handleSelectOption(charCode);
+          } else if (e.key === 'ArrowRight') {
+            if (currentIdx < QUESTIONS.length - 1) setCurrentIdx(prev => prev + 1);
+          } else if (e.key === 'ArrowLeft') {
+            if (currentIdx > 0) setCurrentIdx(prev => prev - 1);
+          } else if (key === 'F') {
+            toggleFlagQuestion(currentIdx);
+          }
+        };
+
+        window.addEventListener('keydown', handleKeyDown);
+        return () => window.removeEventListener('keydown', handleKeyDown);
+      }, [quizStarted, isSubmitted, currentIdx, userAnswers]);
+
+      // Time formatting helper
+      const formatTime = (secs) => {
+        const mins = Math.floor(secs / 60);
+        const s = secs % 60;
+        return `${mins.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+      };
+
+      // Handle locking of answer once selected
+      const handleSelectOption = (optionIdx) => {
+        if (userAnswers.hasOwnProperty(currentIdx) || isSubmitted) return;
+        setUserAnswers(prev => ({
+          ...prev,
+          [currentIdx]: optionIdx
+        }));
+      };
+
+      // Toggle Bookmark/Flag
+      const toggleFlagQuestion = (qIndex) => {
+        setFlaggedQuestions(prev => ({
+          ...prev,
+          [qIndex]: !prev[qIndex]
+        }));
+      };
+
+      // Scoring Calculations (+1.0 for correct, -0.25 for incorrect)
+      const scoreData = useMemo(() => {
+        let correctCount = 0;
+        let wrongCount = 0;
+        let unattemptedCount = 0;
+
+        QUESTIONS.forEach((q, idx) => {
+          if (!userAnswers.hasOwnProperty(idx)) {
+            unattemptedCount++;
+          } else if (userAnswers[idx] === q.correct) {
+            correctCount++;
+          } else {
+            wrongCount++;
+          }
+        });
+
+        const grossMarks = correctCount * 1.0;
+        const penalty = wrongCount * 0.25;
+        const netMarks = Math.max(0, grossMarks - penalty);
+        const maxMarks = QUESTIONS.length * 1.0;
+        const percentage = Number(((netMarks / maxMarks) * 100).toFixed(1));
+
+        return { correctCount, wrongCount, unattemptedCount, grossMarks, penalty, netMarks, maxMarks, percentage };
+      }, [userAnswers]);
+
+      // Weak Area Analysis per SLO
+      const sloAnalysis = useMemo(() => {
+        const stats = {};
+        QUESTIONS.forEach((q, idx) => {
+          const sloKey = q.slo;
+          if (!stats[sloKey]) {
+            stats[sloKey] = { total: 0, correct: 0, wrong: 0, unattempted: 0 };
+          }
+          stats[sloKey].total++;
+          if (!userAnswers.hasOwnProperty(idx)) {
+            stats[sloKey].unattempted++;
+          } else if (userAnswers[idx] === q.correct) {
+            stats[sloKey].correct++;
+          } else {
+            stats[sloKey].wrong++;
+          }
+        });
+        return stats;
+      }, [userAnswers]);
+
+      // Review questions filter logic
+      const filteredReviewQuestions = useMemo(() => {
+        return QUESTIONS.map((q, idx) => ({ ...q, qIdx: idx })).filter(q => {
+          const isUserAns = userAnswers.hasOwnProperty(q.qIdx);
+          const isCorrect = isUserAns && userAnswers[q.qIdx] === q.correct;
+          const isWrong = isUserAns && userAnswers[q.qIdx] !== q.correct;
+          const isSkipped = !isUserAns;
+          const isFlagged = !!flaggedQuestions[q.qIdx];
+
+          let matchesFilter = true;
+          if (reviewFilter === 'correct') matchesFilter = isCorrect;
+          if (reviewFilter === 'wrong') matchesFilter = isWrong;
+          if (reviewFilter === 'skipped') matchesFilter = isSkipped;
+          if (reviewFilter === 'flagged') matchesFilter = isFlagged;
+
+          let matchesSearch = true;
+          if (reviewSearch.trim() !== '') {
+            const term = reviewSearch.toLowerCase();
+            matchesSearch = q.question.toLowerCase().includes(term) ||
+                            q.slo.toLowerCase().includes(term) ||
+                            q.explanation.toLowerCase().includes(term);
+          }
+
+          return matchesFilter && matchesSearch;
+        });
+      }, [userAnswers, flaggedQuestions, reviewFilter, reviewSearch]);
+
+      const getMotivationalQuote = (pct) => {
+        if (pct >= 85) return { quote: "Outstanding Biological Mastery! You have demonstrated exceptional knowledge of Kingdom Protista.", author: "Qashqarian Academic Board" };
+        if (pct >= 70) return { quote: "Great Performance! You hold a strong command over Protist taxonomy and features.", author: "Qashqarian Biology Faculty" };
+        if (pct >= 50) return { quote: "Good Effort! Review your missed questions carefully to consolidate your concepts.", author: "Department of Protistology" };
+        return { quote: "Keep pushing! Revise Chapter 7 SLOs and retake the test to master the concepts.", author: "Qashqarian Mentorship Cell" };
+      };
+
+      const currentQ = QUESTIONS[currentIdx];
+      const isAnswered = userAnswers.hasOwnProperty(currentIdx);
+      const selectedOption = userAnswers[currentIdx];
+      const isCurrentFlagged = !!flaggedQuestions[currentIdx];
+
+      if (!quizStarted) {
+        return (
+          <div className="min-h-screen flex items-center justify-center p-4 sm:p-6">
+            <div className="max-w-2xl w-full bg-white rounded-2xl shadow-xl border border-sky-100 overflow-hidden animate-fadeIn">
+              
+              {/* Top Header Banner */}
+              <div className="bg-gradient-to-r from-sky-800 via-sky-700 to-science-900 p-6 sm:p-8 text-white relative">
+                <div className="flex justify-between items-center mb-3">
+                  <span className="bg-sky-500/30 text-sky-100 text-xs font-bold px-3 py-1 rounded-full backdrop-blur-sm border border-sky-300/20 flex items-center gap-1.5">
+                    🏔️ Qashqarian Academy
+                  </span>
+                  <span className="text-xs font-bold bg-white/10 px-3 py-1 rounded-md border border-white/20">
+                    Class: XI
+                  </span>
+                </div>
+                <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
+                  Chapter 7: Kingdom Protista (Protoctista)
+                </h1>
+                <p className="text-sky-100 text-sm mt-1">
+                  SLO-Based Biology Assessment (45 MCQs)
+                </p>
+              </div>
+
+              {/* Start Setup Content */}
+              <div className="p-6 sm:p-8 space-y-6">
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                  <div className="bg-sky-50 rounded-xl p-3.5 border border-sky-100 flex items-center gap-3">
+                    <div className="p-2 bg-sky-600 text-white rounded-lg shrink-0">
+                      <Icon name="clock" className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <p className="text-[11px] text-slate-500 font-medium">Timer</p>
+                      <p className="text-xs sm:text-sm font-bold text-slate-800">45 Minutes</p>
+                    </div>
+                  </div>
+                  <div className="bg-sky-50 rounded-xl p-3.5 border border-sky-100 flex items-center gap-3">
+                    <div className="p-2 bg-sky-600 text-white rounded-lg shrink-0">
+                      <Icon name="award" className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <p className="text-[11px] text-slate-500 font-medium">Marking Scheme</p>
+                      <p className="text-xs sm:text-sm font-bold text-slate-800">+1.0 / -0.25</p>
+                    </div>
+                  </div>
+                  <div className="col-span-2 sm:col-span-1 bg-sky-50 rounded-xl p-3.5 border border-sky-100 flex items-center gap-3">
+                    <div className="p-2 bg-sky-600 text-white rounded-lg shrink-0">
+                      <Icon name="key" className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <p className="text-[11px] text-slate-500 font-medium">Shortcuts</p>
+                      <p className="text-xs sm:text-sm font-bold text-slate-800">Keys A-D, ← →</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Select Assessment Mode */}
+                <div>
+                  <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2.5">
+                    Select Mode
+                  </label>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <button
+                      type="button"
+                      onClick={() => setQuizMode('practice')}
+                      className={`p-4 rounded-xl text-left border-2 transition-all flex flex-col gap-1.5 ${
+                        quizMode === 'practice'
+                          ? 'border-sky-600 bg-sky-50/80 ring-2 ring-sky-500/20'
+                          : 'border-slate-200 hover:border-sky-300 bg-white'
+                      }`}
+                    >
+                      <div className="flex items-center justify-between">
+                        <span className="font-bold text-sm text-sky-900 flex items-center gap-1.5">
+                          <Icon name="zap" className="w-4 h-4 text-sky-600" />
+                          Practice Mode
+                        </span>
+                        {quizMode === 'practice' && <Icon name="check" className="w-4 h-4 text-sky-600" />}
+                      </div>
+                      <p className="text-xs text-slate-500 leading-relaxed">
+                        Instant answer feedback and detailed rationale shown after every question.
+                      </p>
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => setQuizMode('blind')}
+                      className={`p-4 rounded-xl text-left border-2 transition-all flex flex-col gap-1.5 ${
+                        quizMode === 'blind'
+                          ? 'border-sky-600 bg-sky-50/80 ring-2 ring-sky-500/20'
+                          : 'border-slate-200 hover:border-sky-300 bg-white'
+                      }`}
+                    >
+                      <div className="flex items-center justify-between">
+                        <span className="font-bold text-sm text-sky-900 flex items-center gap-1.5">
+                          <Icon name="shield" className="w-4 h-4 text-sky-600" />
+                          Exam Mode
+                        </span>
+                        {quizMode === 'blind' && <Icon name="check" className="w-4 h-4 text-sky-600" />}
+                      </div>
+                      <p className="text-xs text-slate-500 leading-relaxed">
+                        Simulate actual exam conditions. Answers and explanations are revealed after submission.
+                      </p>
+                    </button>
+                  </div>
+                </div>
+
+                {/* Rules Notice */}
+                <div className="bg-amber-50/80 border border-amber-200 rounded-xl p-4 text-xs text-amber-900 space-y-1.5">
+                  <p className="font-bold text-amber-950 flex items-center gap-1.5">
+                    <Icon name="alert-triangle" className="w-4 h-4 text-amber-600" />
+                    Instructions & Scoring:
+                  </p>
+                  <ul className="list-disc list-inside space-y-1 pl-1 text-amber-800">
+                    <li>Once an answer is chosen, it is locked.</li>
+                    <li>Incorrect answers carry a <strong>-0.25 mark penalty</strong>.</li>
+                    <li>Unattempted questions are not penalized.</li>
+                    <li>Press <strong>Key F</strong> to flag questions for later review.</li>
+                  </ul>
+                </div>
+
+                <button
+                  onClick={() => setQuizStarted(true)}
+                  className="w-full bg-sky-600 hover:bg-sky-700 text-white font-bold py-3.5 px-6 rounded-xl shadow-lg shadow-sky-600/25 transition-all flex items-center justify-center gap-2 group text-sm"
+                >
+                  <span>Start Assessment (45 MCQs)</span>
+                  <Icon name="arrow-right" className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                </button>
+              </div>
+            </div>
+          </div>
+        );
+      }
+
+      if (isSubmitted) {
+        const quoteObj = getMotivationalQuote(scoreData.percentage);
+
+        return (
+          <div className="min-h-screen py-8 px-4 sm:px-6 flex justify-center">
+            <div className="max-w-4xl w-full bg-white rounded-2xl shadow-xl border border-sky-100 overflow-hidden animate-fadeIn space-y-6 pb-8">
+              
+              {/* Header Banner */}
+              <div className="bg-gradient-to-r from-sky-800 via-sky-700 to-science-900 p-6 sm:p-8 text-white relative">
+                <div className="flex justify-between items-center mb-2 no-print">
+                  <span className="text-xs font-bold bg-white/20 px-3 py-1 rounded-full flex items-center gap-1.5">
+                    🏔️ Qashqarian Academy
+                  </span>
+                  <span className="text-xs font-bold bg-white/10 px-3 py-1 rounded-md border border-white/20">
+                    Class: XI
+                  </span>
+                  <button 
+                    onClick={() => window.print()} 
+                    className="bg-white/10 hover:bg-white/20 text-white text-xs font-semibold px-3 py-1.5 rounded-lg border border-white/20 transition-all flex items-center gap-1.5"
+                  >
+                    <Icon name="printer" className="w-4 h-4" />
+                    Print Results
+                  </button>
+                </div>
+                <h1 className="text-2xl sm:text-3xl font-extrabold">
+                  Performance Evaluation Summary
+                </h1>
+                <p className="text-sky-100 text-xs sm:text-sm mt-1">
+                  Chapter 7: Kingdom Protista (45 MCQs)
+                </p>
+              </div>
+
+              <div className="p-6 sm:p-8 space-y-8">
+                
+                {/* Motivational Quote Banner */}
+                <div className="bg-sky-50/80 border-l-4 border-sky-600 p-4 rounded-r-xl space-y-1">
+                  <p className="text-sm font-semibold text-sky-950 italic">
+                    "{quoteObj.quote}"
+                  </p>
+                  <p className="text-xs text-sky-700 font-bold">— {quoteObj.author}</p>
+                </div>
+
+                {/* Performance Metrics */}
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                  <div className="bg-sky-50 border border-sky-100 rounded-xl p-4 text-center">
+                    <p className="text-xs text-slate-500 font-semibold mb-1">Net Percentage</p>
+                    <p className="text-3xl font-black text-sky-600">{scoreData.percentage}%</p>
+                  </div>
+                  <div className="bg-emerald-50 border border-emerald-100 rounded-xl p-4 text-center">
+                    <p className="text-xs text-emerald-700 font-semibold mb-1">Correct Answers</p>
+                    <p className="text-3xl font-black text-emerald-600">{scoreData.correctCount}</p>
+                    <p className="text-[10px] text-emerald-600 font-medium">+{scoreData.grossMarks} Marks</p>
+                  </div>
+                  <div className="bg-rose-50 border border-rose-100 rounded-xl p-4 text-center">
+                    <p className="text-xs text-rose-700 font-semibold mb-1">Wrong Answers</p>
+                    <p className="text-3xl font-black text-rose-600">{scoreData.wrongCount}</p>
+                    <p className="text-[10px] text-rose-600 font-medium">-{scoreData.penalty} Penalty</p>
+                  </div>
+                  <div className="bg-amber-50 border border-amber-100 rounded-xl p-4 text-center">
+                    <p className="text-xs text-amber-700 font-semibold mb-1">Unattempted</p>
+                    <p className="text-3xl font-black text-amber-600">{scoreData.unattemptedCount}</p>
+                    <p className="text-[10px] text-amber-600 font-medium">0 Penalty</p>
+                  </div>
+                </div>
+
+                {/* Net Score Bar */}
+                <div className="bg-slate-900 text-white rounded-xl p-4 flex justify-between items-center text-sm">
+                  <span>Final Score (after -0.25 penalty):</span>
+                  <span className="font-extrabold text-sky-400 text-base">
+                    {scoreData.netMarks} / {scoreData.maxMarks} Marks
+                  </span>
+                </div>
+
+                {/* Weak Area SLO Breakdown */}
+                <div className="space-y-3">
+                  <h3 className="text-base font-bold text-slate-800 flex items-center gap-2">
+                    <Icon name="bar-chart" className="w-5 h-5 text-sky-600" />
+                    SLO Performance & Mastery Breakdown
+                  </h3>
+
+                  <div className="space-y-3 max-h-80 overflow-y-auto pr-2 custom-scrollbar">
+                    {Object.entries(sloAnalysis).map(([slo, stats], idx) => {
+                      const sloPct = stats.total > 0 ? Math.round((stats.correct / stats.total) * 100) : 0;
+                      return (
+                        <div key={idx} className="bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs space-y-2">
+                          <div className="flex justify-between items-start gap-2">
+                            <span className="font-semibold text-slate-800">{slo}</span>
+                            <span className={`font-bold px-2 py-0.5 rounded text-[11px] ${
+                              sloPct >= 80 ? 'bg-emerald-100 text-emerald-800' :
+                              sloPct >= 50 ? 'bg-amber-100 text-amber-800' : 'bg-rose-100 text-rose-800'
+                            }`}>
+                              {sloPct}% Mastery
+                            </span>
+                          </div>
+                          <div className="w-full bg-slate-200 h-2 rounded-full overflow-hidden">
+                            <div 
+                              className={`h-full transition-all duration-500 ${
+                                sloPct >= 80 ? 'bg-emerald-500' : sloPct >= 50 ? 'bg-amber-500' : 'bg-rose-500'
+                              }`}
+                              style={{ width: `${sloPct}%` }}
+                            />
+                          </div>
+                          <div className="flex gap-4 text-[11px] text-slate-500">
+                            <span>Correct: {stats.correct}</span>
+                            <span>Wrong: {stats.wrong}</span>
+                            <span>Skipped: {stats.unattempted}</span>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                {/* Question Review Section with Filter & Search */}
+                <div className="space-y-4 no-print">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-2">
+                    <h3 className="text-base font-bold text-slate-800 flex items-center gap-2">
+                      <Icon name="book-open" className="w-5 h-5 text-sky-600" />
+                      Detailed Explanations & Rationale Review
+                    </h3>
+
+                    {/* Filter Pills */}
+                    <div className="flex flex-wrap gap-1.5 text-xs">
+                      {[
+                        { id: 'all', label: 'All' },
+                        { id: 'correct', label: 'Correct' },
+                        { id: 'wrong', label: 'Wrong' },
+                        { id: 'skipped', label: 'Skipped' },
+                        { id: 'flagged', label: 'Flagged' },
+                      ].map(tab => (
+                        <button
+                          key={tab.id}
+                          onClick={() => setReviewFilter(tab.id)}
+                          className={`px-3 py-1.5 rounded-lg font-semibold transition-all ${
+                            reviewFilter === tab.id
+                              ? 'bg-sky-600 text-white shadow-sm'
+                              : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                          }`}
+                        >
+                          {tab.label}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Search Bar */}
+                  <div className="relative">
+                    <input
+                      type="text"
+                      placeholder="Search question, SLO, or explanation..."
+                      value={reviewSearch}
+                      onChange={(e) => setReviewSearch(e.target.value)}
+                      className="w-full pl-9 pr-4 py-2.5 rounded-xl border border-slate-200 text-xs focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent bg-slate-50/50"
+                    />
+                    <div className="absolute left-3 top-3 text-slate-400">
+                      <Icon name="search" className="w-4 h-4" />
+                    </div>
+                  </div>
+
+                  {/* Question Cards */}
+                  <div className="space-y-4 max-h-[500px] overflow-y-auto pr-2 custom-scrollbar">
+                    {filteredReviewQuestions.length === 0 ? (
+                      <div className="p-8 text-center text-xs text-slate-500 bg-slate-50 rounded-xl border border-dashed border-slate-200">
+                        No questions match the selected filter.
+                      </div>
+                    ) : (
+                      filteredReviewQuestions.map((q) => {
+                        const qIdx = q.qIdx;
+                        const userSel = userAnswers[qIdx];
+                        const isCorrect = userSel === q.correct;
+                        const isUnattempted = !userAnswers.hasOwnProperty(qIdx);
+                        const isFlagged = flaggedQuestions[qIdx];
+
+                        return (
+                          <div 
+                            key={q.id}
+                            className={`p-4 rounded-xl border text-xs space-y-2.5 transition-all ${
+                              isCorrect ? 'bg-emerald-50/50 border-emerald-200' :
+                              isUnattempted ? 'bg-amber-50/50 border-amber-200' : 'bg-rose-50/50 border-rose-200'
+                            }`}
+                          >
+                            <div className="flex justify-between items-start gap-2">
+                              <span className="font-bold text-slate-900 flex items-center gap-2">
+                                <span>Q{qIdx + 1}. {q.question}</span>
+                                {isFlagged && (
+                                  <span className="bg-amber-100 text-amber-800 text-[10px] px-2 py-0.5 rounded font-bold flex items-center gap-1">
+                                    <Icon name="flag" className="w-3 h-3 text-amber-600" /> Flagged
+                                  </span>
+                                )}
+                              </span>
+                              <span className={`px-2 py-0.5 rounded font-bold text-[10px] whitespace-nowrap shrink-0 ${
+                                isCorrect ? 'bg-emerald-600 text-white' :
+                                isUnattempted ? 'bg-amber-500 text-white' : 'bg-rose-600 text-white'
+                              }`}>
+                                {isCorrect ? 'CORRECT (+1.0)' : isUnattempted ? 'SKIPPED (0.0)' : 'WRONG (-0.25)'}
+                              </span>
+                            </div>
+
+                            <p className="text-[11px] text-slate-500 font-medium">{q.slo}</p>
+
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                              {q.options.map((opt, oIdx) => {
+                                const isOptCorrect = oIdx === q.correct;
+                                const isOptUserChoice = oIdx === userSel;
+
+                                return (
+                                  <div 
+                                    key={oIdx}
+                                    className={`p-2 rounded-lg border font-medium flex items-center justify-between ${
+                                      isOptCorrect ? 'bg-emerald-100 border-emerald-300 text-emerald-900 font-bold' :
+                                      isOptUserChoice ? 'bg-rose-100 border-rose-300 text-rose-900' : 'bg-white border-slate-200 text-slate-600'
+                                    }`}
+                                  >
+                                    <span>{String.fromCharCode(65 + oIdx)}. {opt}</span>
+                                    {isOptCorrect && <Icon name="check" className="w-3.5 h-3.5 text-emerald-700" />}
+                                    {isOptUserChoice && !isOptCorrect && <Icon name="x" className="w-3.5 h-3.5 text-rose-700" />}
+                                  </div>
+                                );
+                              })}
+                            </div>
+
+                            {/* Detailed Explanation */}
+                            <div className="bg-white/90 p-3 rounded-lg border border-slate-200 text-slate-700 leading-relaxed space-y-1.5">
+                              <p className="text-slate-800">
+                                <strong className="text-sky-900">Correct Answer Rationale: </strong> 
+                                {q.explanation}
+                              </p>
+
+                              {!isCorrect && !isUnattempted && q.wrongExplanations && (
+                                <div className="mt-2 pt-2 border-t border-slate-100 text-[11px] text-rose-900 bg-rose-50/60 p-2 rounded-md">
+                                  <strong>Why option {String.fromCharCode(65 + userSel)} is incorrect: </strong>
+                                  {q.wrongExplanations[userSel] || "This choice does not satisfy the scientific concept."}
+                                </div>
+                              )}
+                            </div>
+                          </div>
+                        );
+                      })
+                    )}
+                  </div>
+                </div>
+
+                {/* Restart Button */}
+                <button
+                  onClick={() => {
+                    setIsSubmitted(false);
+                    setQuizStarted(false);
+                    setCurrentIdx(0);
+                    setUserAnswers({});
+                    setFlaggedQuestions({});
+                    setTimeLeft(45 * 60);
+                  }}
+                  className="w-full bg-sky-600 hover:bg-sky-700 text-white font-bold py-3.5 px-6 rounded-xl shadow-lg shadow-sky-600/25 transition-all flex items-center justify-center gap-2 text-sm no-print"
+                >
+                  <Icon name="rotate-ccw" className="w-5 h-5" />
+                  <span>Restart Assessment</span>
+                </button>
+
+              </div>
+            </div>
+          </div>
+        );
+      }
+
+      const flaggedCount = Object.values(flaggedQuestions).filter(Boolean).length;
+
+      return (
+        <div className="min-h-screen py-6 px-4 sm:px-6 flex flex-col items-center">
+          
+          {/* Top Header Navigation Card */}
+          <div className="max-w-3xl w-full bg-white rounded-2xl shadow-sm border border-sky-100 p-4 mb-4 space-y-3">
+            
+            <div className="flex justify-between items-center text-xs sm:text-sm font-bold text-sky-900">
+              <span className="flex items-center gap-1.5 text-base sm:text-lg tracking-tight">
+                🏔️ Qashqarian Academy
+              </span>
+              
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={() => setShowNavGrid(!showNavGrid)}
+                  className="px-2.5 py-1 bg-sky-50 hover:bg-sky-100 text-sky-800 rounded-lg text-xs font-semibold flex items-center gap-1.5 border border-sky-200 transition-all"
+                >
+                  <Icon name="grid" className="w-3.5 h-3.5" />
+                  <span>Grid ({Object.keys(userAnswers).length}/{QUESTIONS.length})</span>
+                </button>
+
+                <span className="bg-sky-100 text-sky-800 px-2.5 py-1 rounded-lg font-bold text-xs">
+                  Class: XI
+                </span>
+              </div>
+            </div>
+
+            {/* Question Counter & 45 Min Timer */}
+            <div className="flex justify-between items-center text-xs font-semibold text-slate-600">
+              <div className="flex items-center gap-3">
+                <span className="text-sky-900 font-extrabold text-sm">Q {currentIdx + 1} / {QUESTIONS.length}</span>
+                {flaggedCount > 0 && (
+                  <span className="text-amber-700 bg-amber-50 border border-amber-200 px-2 py-0.5 rounded text-[11px] font-bold flex items-center gap-1">
+                    <Icon name="flag" className="w-3 h-3 text-amber-600" />
+                    {flaggedCount} Flagged
+                  </span>
+                )}
+              </div>
+
+              <div className={`flex items-center gap-1.5 px-2.5 py-1 rounded-lg font-mono font-bold ${
+                timeLeft < 300 ? 'bg-rose-100 text-rose-700 animate-pulse' : 'bg-sky-50 text-sky-800'
+              }`}>
+                <Icon name="clock" className="w-3.5 h-3.5" />
+                <span>{formatTime(timeLeft)}</span>
+              </div>
+            </div>
+
+            {/* Progress Bar */}
+            <div className="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+              <div 
+                className="bg-sky-600 h-full transition-all duration-300"
+                style={{ width: `${((currentIdx + 1) / QUESTIONS.length) * 100}%` }}
+              />
+            </div>
+          </div>
+
+          {/* Grid Navigator Overlay */}
+          {showNavGrid && (
+            <div className="max-w-3xl w-full bg-white rounded-2xl shadow-lg border border-sky-200 p-5 mb-4 animate-fadeIn space-y-3">
+              <div className="flex justify-between items-center text-xs font-bold text-slate-800 border-b pb-2">
+                <span>Question Quick Navigator Matrix</span>
+                <button 
+                  onClick={() => setShowNavGrid(false)}
+                  className="text-slate-400 hover:text-slate-600"
+                >
+                  <Icon name="x" className="w-4 h-4" />
+                </button>
+              </div>
+
+              <div className="grid grid-cols-5 sm:grid-cols-9 gap-2 max-h-52 overflow-y-auto p-1 custom-scrollbar">
+                {QUESTIONS.map((_, idx) => {
+                  const isAns = userAnswers.hasOwnProperty(idx);
+                  const isCur = currentIdx === idx;
+                  const isFlg = !!flaggedQuestions[idx];
+
+                  let boxStyle = "bg-slate-100 text-slate-700 hover:bg-slate-200";
+                  if (isCur) boxStyle = "bg-sky-600 text-white font-bold ring-2 ring-sky-500/50";
+                  else if (isAns) boxStyle = "bg-emerald-100 text-emerald-900 font-semibold border border-emerald-300";
+
+                  return (
+                    <button
+                      key={idx}
+                      onClick={() => {
+                        setCurrentIdx(idx);
+                        setShowNavGrid(false);
+                      }}
+                      className={`h-8 rounded-lg text-xs transition-all relative flex items-center justify-center ${boxStyle}`}
+                    >
+                      {idx + 1}
+                      {isFlg && (
+                        <span className="absolute -top-1 -right-1 bg-amber-500 w-2.5 h-2.5 rounded-full border border-white" />
+                      )}
+                    </button>
+                  );
+                })}
+              </div>
+
+              <div className="flex gap-4 text-[10px] text-slate-500 pt-2 border-t justify-center">
+                <span className="flex items-center gap-1"><span className="w-2.5 h-2.5 rounded bg-emerald-300" /> Answered</span>
+                <span className="flex items-center gap-1"><span className="w-2.5 h-2.5 rounded bg-slate-200" /> Unanswered</span>
+                <span className="flex items-center gap-1"><span className="w-2.5 h-2.5 rounded bg-sky-600" /> Current</span>
+                <span className="flex items-center gap-1"><span className="w-2.5 h-2.5 rounded-full bg-amber-500" /> Flagged</span>
+              </div>
+            </div>
+          )}
+
+          {/* Main Question Card */}
+          <div className="max-w-3xl w-full bg-white rounded-2xl shadow-lg border border-sky-100 p-6 sm:p-8 relative overflow-hidden flex flex-col min-h-[460px] justify-between">
+            
+            {/* Watermark Background */}
+            <div className="watermark-bg">
+              <p className="text-5xl sm:text-6xl font-black text-sky-900 tracking-widest">
+                🏔️ QASHQARIAN ACADEMY
+              </p>
+            </div>
+
+            {/* Question Header & Options */}
+            <div className="relative z-10 space-y-5">
+              
+              <div className="flex justify-between items-center gap-2">
+                <div className="inline-block bg-sky-50 border border-sky-200 text-sky-900 text-xs font-bold px-3 py-1 rounded-full">
+                  {currentQ.slo}
+                </div>
+
+                <button
+                  onClick={() => toggleFlagQuestion(currentIdx)}
+                  className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 ${
+                    isCurrentFlagged 
+                      ? 'bg-amber-100 text-amber-800 border border-amber-300' 
+                      : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                  }`}
+                  title="Bookmark for review (Key: F)"
+                >
+                  <Icon name="flag" className={`w-3.5 h-3.5 ${isCurrentFlagged ? 'text-amber-600 fill-amber-500' : ''}`} />
+                  <span>{isCurrentFlagged ? 'Flagged' : 'Flag'}</span>
+                </button>
+              </div>
+
+              <h2 className="text-base sm:text-lg font-bold text-slate-900 leading-snug">
+                Q{currentIdx + 1}. {currentQ.question}
+              </h2>
+
+              {/* Options */}
+              <div className="space-y-3 pt-2">
+                {currentQ.options.map((optionText, optIdx) => {
+                  const isSelected = selectedOption === optIdx;
+                  const isCorrect = currentQ.correct === optIdx;
+
+                  let btnStyle = "border-slate-200 hover:border-sky-300 hover:bg-sky-50/50 text-slate-800 bg-white";
+
+                  if (isAnswered) {
+                    if (quizMode === 'practice') {
+                      if (isCorrect) {
+                        btnStyle = "border-emerald-500 bg-emerald-50 text-emerald-950 font-semibold ring-2 ring-emerald-500/20";
+                      } else if (isSelected) {
+                        btnStyle = "border-rose-500 bg-rose-50 text-rose-950 font-semibold ring-2 ring-rose-500/20";
+                      } else {
+                        btnStyle = "border-slate-200 opacity-60 bg-white text-slate-500";
+                      }
+                    } else {
+                      if (isSelected) {
+                        btnStyle = "border-sky-600 bg-sky-50 text-sky-950 font-semibold ring-2 ring-sky-500/20";
+                      } else {
+                        btnStyle = "border-slate-200 opacity-60 bg-white text-slate-500";
+                      }
+                    }
+                  }
+
+                  return (
+                    <button
+                      key={optIdx}
+                      disabled={isAnswered}
+                      onClick={() => handleSelectOption(optIdx)}
+                      className={`w-full p-3.5 sm:p-4 rounded-xl border-2 text-left text-xs sm:text-sm transition-all flex items-center justify-between gap-3 ${btnStyle}`}
+                    >
+                      <div className="flex items-center gap-3">
+                        <span className={`w-7 h-7 rounded-lg flex items-center justify-center font-bold text-xs shrink-0 ${
+                          isSelected ? 'bg-sky-600 text-white' : 'bg-slate-100 text-slate-700'
+                        }`}>
+                          {String.fromCharCode(65 + optIdx)}
+                        </span>
+                        <span>{optionText}</span>
+                      </div>
+
+                      {isAnswered && quizMode === 'practice' && (
+                        <div>
+                          {isCorrect && <Icon name="check" className="w-5 h-5 text-emerald-600" />}
+                          {isSelected && !isCorrect && <Icon name="x" className="w-5 h-5 text-rose-600" />}
+                        </div>
+                      )}
+                    </button>
+                  );
+                })}
+              </div>
+
+              {/* Practice Explanation Box */}
+              {isAnswered && quizMode === 'practice' && (
+                <div className={`mt-4 p-4 rounded-xl text-xs leading-relaxed space-y-1.5 animate-fadeIn border ${
+                  selectedOption === currentQ.correct 
+                    ? 'bg-emerald-50/90 border-emerald-200 text-emerald-950' 
+                    : 'bg-rose-50/90 border-rose-200 text-rose-950'
+                }`}>
+                  <p className="font-bold flex items-center gap-1.5">
+                    <Icon name="info" className="w-4 h-4" />
+                    {selectedOption === currentQ.correct ? 'Correct Answer Rationale:' : 'Incorrect Answer Explanation:'}
+                  </p>
+                  <p className="text-slate-800">{currentQ.explanation}</p>
+                  
+                  {selectedOption !== currentQ.correct && currentQ.wrongExplanations && (
+                    <p className="text-rose-900 font-medium pt-1 border-t border-rose-200/60">
+                      <strong>Why option {String.fromCharCode(65 + selectedOption)} is wrong: </strong>
+                      {currentQ.wrongExplanations[selectedOption]}
+                    </p>
+                  )}
+                </div>
+              )}
+            </div>
+
+            {/* Bottom Navigation */}
+            <div className="relative z-10 pt-6 mt-6 border-t border-slate-100 flex justify-between items-center gap-4">
+              <button
+                disabled={currentIdx === 0}
+                onClick={() => setCurrentIdx(prev => prev - 1)}
+                className="px-4 py-2.5 rounded-xl border border-slate-200 text-slate-700 text-xs font-bold hover:bg-slate-50 disabled:opacity-40 disabled:cursor-not-allowed flex items-center gap-1.5"
+              >
+                <Icon name="arrow-left" className="w-4 h-4" />
+                Previous
+              </button>
+
+              <div className="flex gap-2">
+                {currentIdx < QUESTIONS.length - 1 ? (
+                  <button
+                    onClick={() => setCurrentIdx(prev => prev + 1)}
+                    className="px-5 py-2.5 rounded-xl bg-sky-600 hover:bg-sky-700 text-white text-xs font-bold shadow-md shadow-sky-600/20 transition-all flex items-center gap-1.5"
+                  >
+                    Next
+                    <Icon name="arrow-right" className="w-4 h-4" />
+                  </button>
+                ) : (
+                  <button
+                    onClick={() => setIsSubmitted(true)}
+                    className="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold shadow-md shadow-emerald-600/20 transition-all flex items-center gap-1.5"
+                  >
+                    Submit Test
+                    <Icon name="check" className="w-4 h-4" />
+                  </button>
+                )}
+              </div>
+            </div>
+
+          </div>
+        </div>
+      );
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<App />);
+  </script>
+</body>
+</html>

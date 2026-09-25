@@ -1,0 +1,1435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Class XI Biology Chapter 2 Part 2 Mock Test - Qashqarian Academy</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+          },
+          colors: {
+            sky: {
+              50:'#F0F8F8', 100:'#DFF3F2', 200:'#BFE4E7', 300:'#8FCDD5',
+              400:'#4FA9B9', 500:'#1F869B', 600:'#056C82', 700:'#0A5263',
+              800:'#0B4352', 900:'#0B3340'
+            },
+            science: {
+              50:'#F0F8F8', 100:'#DFF3F2', 200:'#BFE4E7', 300:'#8FCDD5',
+              400:'#4FA9B9', 500:'#1F869B', 600:'#056C82', 700:'#0A5263',
+              800:'#0B4352', 900:'#0B3340'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- React 18 & ReactDOM -->
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+  <!-- Babel for JSX -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #f0f7ff;
+    }
+    .watermark-bg {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(-12deg);
+      pointer-events: none;
+      user-select: none;
+      z-index: 0;
+      opacity: 0.04;
+      text-align: center;
+      white-space: nowrap;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: #f1f5f9;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body class="text-slate-800 antialiased selection:bg-sky-200 selection:text-sky-900 min-h-screen">
+<header class="sticky top-0 z-50 bg-[#0B132B] border-b border-cyan-900/40 shadow-md">
+    <div class="max-w-5xl mx-auto px-4 py-2.5 flex items-center justify-between">
+      <a href="../../../../index.html" class="flex items-center gap-2">
+        <img src="../../../../images/brand/logo.png" alt="Qashqarian Academy" class="w-10 h-10 object-contain">
+        <div>
+          <div class="text-base md:text-lg font-extrabold text-white tracking-tight leading-none">Qashqarian</div>
+          <div class="text-[10px] md:text-xs text-[#FF9F1C] font-extrabold tracking-[0.2em] mt-1 leading-none">ACADEMY</div>
+        </div>
+      </a>
+      <a href="../../index.html" class="text-[11px] font-semibold text-slate-300 hover:text-white border border-white/20 rounded-lg px-2.5 py-1">
+        ← Biology Quizzes
+      </a>
+    </div>
+  </header>
+  <div id="root"></div>
+
+
+  <script type="text/babel">
+    const { useState, useEffect, useMemo } = React;
+
+    // Pure React SVG Icon Component
+    const Icon = ({ name, className = "w-5 h-5" }) => {
+      const props = {
+        className,
+        xmlns: "http://www.w3.org/2000/svg",
+        viewBox: "0 0 24 24",
+        fill: "none",
+        stroke: "currentColor",
+        strokeWidth: "2",
+        strokeLinecap: "round",
+        strokeLinejoin: "round"
+      };
+
+      switch (name) {
+        case "clock":
+          return <svg {...props}><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>;
+        case "award":
+          return <svg {...props}><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 22 12 17 17 22 15.79 13.88"/></svg>;
+        case "check":
+          return <svg {...props}><polyline points="20 6 9 17 4 12"/></svg>;
+        case "x":
+          return <svg {...props}><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>;
+        case "arrow-left":
+          return <svg {...props}><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>;
+        case "arrow-right":
+          return <svg {...props}><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>;
+        case "rotate-ccw":
+          return <svg {...props}><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>;
+        case "book-open":
+          return <svg {...props}><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>;
+        case "shield":
+          return <svg {...props}><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>;
+        case "zap":
+          return <svg {...props}><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>;
+        case "bar-chart":
+          return <svg {...props}><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg>;
+        case "info":
+          return <svg {...props}><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>;
+        case "alert-triangle":
+          return <svg {...props}><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>;
+        default:
+          return <svg {...props}><circle cx="12" cy="12" r="10"/></svg>;
+      }
+    };
+
+    // Full Question Bank for Chapter 2 Part 2: Lipids & Proteins (84 MCQs across 14 SLOs)
+    const QUESTIONS = [
+      // SLO 1: SLO 2.5.1 Define lipids
+      {
+        id: 1,
+        slo: "SLO 2.5.1: Define lipids",
+        question: "Which physical property defines all lipids as a group?",
+        options: ["High solubility in polar solvents", "Insolubility in non-polar liquids", "Insolubility in water", "Ability to form long polymers"],
+        correct: 2,
+        explanation: "Lipids are a chemically diverse group of hydrophobic organic molecules defined primarily by their insolubility in water (a polar solvent) and solubility in non-polar organic solvents."
+      },
+      {
+        id: 2,
+        slo: "SLO 2.5.1: Define lipids",
+        question: "Compared to carbohydrates, lipids contain a much lower proportion of which element?",
+        options: ["Carbon", "Oxygen", "Hydrogen", "Nitrogen"],
+        correct: 1,
+        explanation: "Lipids contain a significantly lower ratio of oxygen to carbon/hydrogen compared to carbohydrates (where C:H:O is 1:2:1), contributing to their highly reduced and energy-rich state."
+      },
+      {
+        id: 3,
+        slo: "SLO 2.5.1: Define lipids",
+        question: "Non-polar lipid molecules consist mostly of long chains of:",
+        options: ["Amino acids", "Hydrocarbons", "Monosaccharides", "Phosphates"],
+        correct: 1,
+        explanation: "Non-polar lipids are composed largely of hydrocarbon chains (C-H bonds), which share electrons equally and lack polar dipoles."
+      },
+      {
+        id: 4,
+        slo: "SLO 2.5.1: Define lipids",
+        question: "Why do lipids yield more energy per gram than carbohydrates during oxidation?",
+        options: ["They contain more C–H bonds", "They dissolve faster in water", "They contain more oxygen atoms", "They have higher molecular weight"],
+        correct: 0,
+        explanation: "Lipids possess a higher proportion of energy-rich C-H covalent bonds. Complete oxidation of C-H bonds yields more than double the energy (~9 kcal/g) compared to hydrated carbohydrates (~4 kcal/g)."
+      },
+      {
+        id: 5,
+        slo: "SLO 2.5.1: Define lipids",
+        question: "Oil separates from water when mixed because water molecules:",
+        options: ["Form hydrogen bonds with oil", "Exclude non-polar oil molecules", "Break down the oil backbones", "Neutralize lipid electrical charges"],
+        correct: 1,
+        explanation: "Hydrophobic exclusion occurs because water molecules form energetically favorable hydrogen-bonded networks with each other, forcing non-polar oil molecules to coalesce separately."
+      },
+      {
+        id: 6,
+        slo: "SLO 2.5.1: Define lipids",
+        question: "Lipids differ from proteins and carbohydrates because lipids:",
+        options: ["Are completely inorganic", "Lack repeating monomer units", "Contain no covalent bonds", "Do not exist in cell membranes"],
+        correct: 1,
+        explanation: "Unlike proteins (amino acid polymers), nucleic acids (nucleotide polymers), and carbohydrates (monosaccharide polymers), lipids are non-polymeric molecules built without repeating monomer subunits."
+      },
+
+      // SLO 2: SLO 2.5.2 Describe properties of acylglycerols, phospholipids, terpenoids and waxes
+      {
+        id: 7,
+        slo: "SLO 2.5.2: Describe properties of acylglycerols, phospholipids, terpenoids and waxes",
+        question: "Which group of lipids forms the structural basis of cell membranes?",
+        options: ["Acylglycerols", "Phospholipids", "Terpenoids", "Waxes"],
+        correct: 1,
+        explanation: "Phospholipids form the essential lipid bilayer matrix of all biological membranes due to their amphipathic nature."
+      },
+      {
+        id: 8,
+        slo: "SLO 2.5.2: Describe properties of acylglycerols, phospholipids, terpenoids and waxes",
+        question: "Plant leaves are covered by a water-repellent protective layer made of:",
+        options: ["Phospholipids", "Waxes", "Terpenoids", "Acylglycerols"],
+        correct: 1,
+        explanation: "Waxes form hydrophobic protective cuticles on leaves, stems, and fruits, preventing excessive water loss via evaporation."
+      },
+      {
+        id: 9,
+        slo: "SLO 2.5.2: Describe properties of acylglycerols, phospholipids, terpenoids and waxes",
+        question: "Terpenoids are lipid compounds constructed from repeating units of:",
+        options: ["Glycerol", "Fatty acids", "Isoprene", "Cholesterol"],
+        correct: 2,
+        explanation: "Terpenoids (terpenes) are synthesized from 5-carbon isoprene units (C5H8) linked in various head-to-tail structural configurations."
+      },
+      {
+        id: 10,
+        slo: "SLO 2.5.2: Describe properties of acylglycerols, phospholipids, terpenoids and waxes",
+        question: "Why are unsaturated vegetable oils liquid at room temperature?",
+        options: ["Double bonds introduce kinks in fatty acids", "They lack glycerol in their structures", "They contain high amounts of phosphate", "Single bonds allow tight chain packing"],
+        correct: 0,
+        explanation: "Cis double bonds in unsaturated fatty acid chains create rigid bends ('kinks') that prevent tight packing of molecules, keeping the lipid liquid at room temperature."
+      },
+      {
+        id: 11,
+        slo: "SLO 2.5.2: Describe properties of acylglycerols, phospholipids, terpenoids and waxes",
+        question: "Phospholipids spontaneously form a bilayer in water because they are:",
+        options: ["Completely non-polar throughout", "Amphipathic with polar and non-polar parts", "Fully soluble in aqueous cytosol", "Highly acidic organic compounds"],
+        correct: 1,
+        explanation: "Phospholipids are amphipathic: they possess a hydrophilic polar phosphate head and two hydrophobic non-polar fatty acid tails, driving spontaneous bilayer assembly in aqueous solution."
+      },
+      {
+        id: 12,
+        slo: "SLO 2.5.2: Describe properties of acylglycerols, phospholipids, terpenoids and waxes",
+        question: "Chemically, waxes consist of long-chain fatty acids esterified to:",
+        options: ["Glycerol molecules", "Long-chain alcohols", "Isoprene subunits", "Phosphate groups"],
+        correct: 1,
+        explanation: "Waxes are esters formed by the condensation of a long-chain fatty acid with a high molecular weight long-chain monohydric alcohol."
+      },
+
+      // SLO 3: SLO 2.5.3 Illustrate molecular structure of acylglycerol, phospholipid and terpene
+      {
+        id: 13,
+        slo: "SLO 2.5.3: Illustrate molecular structure of acylglycerol, phospholipid and terpene",
+        question: "A triglyceride is formed by combining one glycerol molecule with:",
+        options: ["One fatty acid", "Two fatty acids", "Three fatty acids", "Four fatty acids"],
+        correct: 2,
+        explanation: "A triglyceride (triacylglycerol) is composed of one 3-carbon glycerol backbone covalently attached to three fatty acid molecules."
+      },
+      {
+        id: 14,
+        slo: "SLO 2.5.3: Illustrate molecular structure of acylglycerol, phospholipid and terpene",
+        question: "What type of covalent bond connects fatty acids to glycerol in fats?",
+        options: ["Peptide bond", "Ester bond", "Glycosidic bond", "Hydrogen bond"],
+        correct: 1,
+        explanation: "An ester bond (-COO-) links each hydroxyl group (-OH) of glycerol to the carboxyl group (-COOH) of a fatty acid."
+      },
+      {
+        id: 15,
+        slo: "SLO 2.5.3: Illustrate molecular structure of acylglycerol, phospholipid and terpene",
+        question: "How many carbon atoms are in a single basic isoprene unit?",
+        options: ["Three", "Four", "Five", "Six"],
+        correct: 2,
+        explanation: "An isoprene unit is a 5-carbon branched hydrocarbon with the molecular formula C5H8 (2-methyl-1,3-butadiene)."
+      },
+      {
+        id: 16,
+        slo: "SLO 2.5.3: Illustrate molecular structure of acylglycerol, phospholipid and terpene",
+        question: "In a phospholipid, what replaces one fatty acid of a triglyceride?",
+        options: ["A steroid ring", "A phosphate group", "An isoprene unit", "An amino acid"],
+        correct: 1,
+        explanation: "In phospholipids, the third hydroxyl position of glycerol is esterified to a charged phosphate group (often attached to an organic head group like choline) instead of a fatty acid."
+      },
+      {
+        id: 17,
+        slo: "SLO 2.5.3: Illustrate molecular structure of acylglycerol, phospholipid and terpene",
+        question: "What structural feature makes a fatty acid tail unsaturated?",
+        options: ["Carbon-carbon double bonds", "Extra hydrogen atoms", "Attached phosphate ions", "Nitrogen atoms in backbone"],
+        correct: 0,
+        explanation: "Unsaturated fatty acids contain one or more C=C double bonds in their hydrocarbon chain, reducing the number of bound hydrogen atoms."
+      },
+      {
+        id: 18,
+        slo: "SLO 2.5.3: Illustrate molecular structure of acylglycerol, phospholipid and terpene",
+        question: "Which formula represents the basic building block of terpenes?",
+        options: ["C6H12O6", "C5H8", "C3H8O3", "CH4"],
+        correct: 1,
+        explanation: "The chemical formula C5H8 represents the basic 5-carbon isoprene monomer that forms terpenes through polymerization."
+      },
+
+      // SLO 4: SLO 2.5.4 Describe roles of steroids and prostaglandins
+      {
+        id: 19,
+        slo: "SLO 2.5.4: Describe roles of steroids and prostaglandins",
+        question: "Which steroid provides structural stability to animal cell membranes?",
+        options: ["Cortisol", "Cholesterol", "Prostaglandin", "Aldosterone"],
+        correct: 1,
+        explanation: "Cholesterol inserts between phospholipid molecules in animal cell membranes, acting as a temperature buffer to stabilize membrane fluidity."
+      },
+      {
+        id: 20,
+        slo: "SLO 2.5.4: Describe roles of steroids and prostaglandins",
+        question: "Prostaglandins are local chemical messengers derived from:",
+        options: ["Arachidonic acid", "Glucose rings", "Glycerol backbones", "Amino acid chains"],
+        correct: 0,
+        explanation: "Prostaglandins are eicosanoids synthesized enzymatically from the 20-carbon polyunsaturated fatty acid known as arachidonic acid."
+      },
+      {
+        id: 21,
+        slo: "SLO 2.5.4: Describe roles of steroids and prostaglandins",
+        question: "Aspirin reduces inflammation and pain by inhibiting the synthesis of:",
+        options: ["Cholesterol", "Prostaglandins", "Phospholipids", "Terpenes"],
+        correct: 1,
+        explanation: "Aspirin inhibits the cyclooxygenase (COX) enzymes responsible for converting arachidonic acid into pro-inflammatory prostaglandins."
+      },
+      {
+        id: 22,
+        slo: "SLO 2.5.4: Describe roles of steroids and prostaglandins",
+        question: "How does cholesterol affect cell membrane fluidity at high temperatures?",
+        options: ["It increases fluidity rapidly", "It restricts excess lipid movement", "It dissolves membrane proteins", "It freezes membrane completely"],
+        correct: 1,
+        explanation: "At warm temperatures, cholesterol's rigid steroid ring structure hinders excessive phospholipid movement, preventing the membrane from becoming overly fluid."
+      },
+      {
+        id: 23,
+        slo: "SLO 2.5.4: Describe roles of steroids and prostaglandins",
+        question: "What structural feature uniquely identifies a steroid molecule?",
+        options: ["Three fatty acid chains", "Four fused carbon rings", "Repeating isoprene units", "Polar phosphate head"],
+        correct: 1,
+        explanation: "All steroids feature a core structure of four fused carbon rings (cyclopentanoperhydrophenanthrene framework: three 6-carbon rings + one 5-carbon ring)."
+      },
+      {
+        id: 24,
+        slo: "SLO 2.5.4: Describe roles of steroids and prostaglandins",
+        question: "Prostaglandins are called local hormones because they:",
+        options: ["Travel long distances in blood", "Act near their site of synthesis", "Are stored inside plant vacuoles", "Function as permanent enzymes"],
+        correct: 1,
+        explanation: "Prostaglandins act locally (autocrine or paracrine signaling) near the tissue where they are generated rather than circulating in blood to distant targets."
+      },
+
+      // SLO 5: SLO 2.6.1 Define proteins and amino acids
+      {
+        id: 25,
+        slo: "SLO 2.6.1: Define proteins and amino acids",
+        question: "What are the monomeric building blocks of all biological proteins?",
+        options: ["Monosaccharides", "Fatty acids", "Amino acids", "Nucleotides"],
+        correct: 2,
+        explanation: "Amino acids are the universal monomeric building blocks that polymerize to form polypeptides and functional proteins."
+      },
+      {
+        id: 26,
+        slo: "SLO 2.6.1: Define proteins and amino acids",
+        question: "How many standard amino acids are used by cells to build proteins?",
+        options: ["10", "20", "30", "64"],
+        correct: 1,
+        explanation: "Cells encode 20 standard amino acids specified by the genetic code to synthesize all cellular proteins."
+      },
+      {
+        id: 27,
+        slo: "SLO 2.6.1: Define proteins and amino acids",
+        question: "Which element is universally present in proteins but absent in pure fats?",
+        options: ["Carbon", "Hydrogen", "Oxygen", "Nitrogen"],
+        correct: 3,
+        explanation: "Nitrogen is present in the amino group (-NH2) of every amino acid, making it a hallmark element of proteins absent in pure carbohydrates and fats."
+      },
+      {
+        id: 28,
+        slo: "SLO 2.6.1: Define proteins and amino acids",
+        question: "Cells construct thousands of unique proteins from 20 amino acids by varying:",
+        options: ["Their amino acid sequence", "The type of peptide bond", "The central carbon structure", "The glycerol backbone length"],
+        correct: 0,
+        explanation: "Varying the specific sequence, length, and combination of amino acids allows cells to build an almost infinite diversity of protein structures and functions."
+      },
+      {
+        id: 29,
+        slo: "SLO 2.6.1: Define proteins and amino acids",
+        question: "What primary biological role do enzymes perform in living organisms?",
+        options: ["Storing genetic code", "Catalyzing chemical reactions", "Forming lipid membranes", "Providing energy storage"],
+        correct: 1,
+        explanation: "Enzymes are specialized biological catalyst proteins that accelerate metabolic biochemical reactions by lowering activation energy."
+      },
+      {
+        id: 30,
+        slo: "SLO 2.6.1: Define proteins and amino acids",
+        question: "What occurs first when a protein undergoes complete denaturation?",
+        options: ["Cleavage of peptide bonds", "Loss of 3D conformation", "Conversion into lipids", "Gain of extra amino acids"],
+        correct: 1,
+        explanation: "Denaturation causes the loss of higher-order (secondary, tertiary, quaternary) 3D folded structures without breaking the primary covalent peptide backbone."
+      },
+
+      // SLO 6: SLO 2.6.2 Illustrate structure of amino acids
+      {
+        id: 31,
+        slo: "SLO 2.6.2: Illustrate structure of amino acids",
+        question: "Which group attached to the central carbon differs among amino acids?",
+        options: ["Amino group", "Carboxyl group", "Hydrogen atom", "Variable R-group"],
+        correct: 3,
+        explanation: "The variable side chain (R-group) determines the unique chemical identity, polarity, charge, and size of each amino acid."
+      },
+      {
+        id: 32,
+        slo: "SLO 2.6.2: Illustrate structure of amino acids",
+        question: "Which amino acid is the simplest, having a hydrogen atom as its R-group?",
+        options: ["Alanine", "Glycine", "Valine", "Lysine"],
+        correct: 1,
+        explanation: "Glycine is the smallest and simplest amino acid; its variable R-group is a single hydrogen atom."
+      },
+      {
+        id: 33,
+        slo: "SLO 2.6.2: Illustrate structure of amino acids",
+        question: "Every standard amino acid contains an amino group and a:",
+        options: ["Phosphate group", "Carboxyl group", "Methyl group", "Hydroxyl group"],
+        correct: 1,
+        explanation: "Every alpha-amino acid consists of a central alpha carbon bound to an amino group (-NH2), a carboxyl group (-COOH), a hydrogen atom (-H), and an R-group."
+      },
+      {
+        id: 34,
+        slo: "SLO 2.6.2: Illustrate structure of amino acids",
+        question: "Why is glycine optically inactive (non-chiral) unlike other amino acids?",
+        options: ["It lacks a central carbon", "Its R-group is a hydrogen", "It contains no amino group", "It forms ring structures"],
+        correct: 1,
+        explanation: "Because glycine's R-group is a hydrogen atom, its central carbon is bonded to two identical hydrogen atoms, making it achiral (optically inactive)."
+      },
+      {
+        id: 35,
+        slo: "SLO 2.6.2: Illustrate structure of amino acids",
+        question: "Disulfide bridges that stabilize protein folding are formed by:",
+        options: ["Glycine", "Cysteine", "Alanine", "Serine"],
+        correct: 1,
+        explanation: "Cysteine contains a sulfhydryl (-SH) group in its side chain. Oxidation of two cysteine residues forms a covalent disulfide bond (-S-S-)."
+      },
+      {
+        id: 36,
+        slo: "SLO 2.6.2: Illustrate structure of amino acids",
+        question: "At physiological pH (~7.4), the amino group of an amino acid carries a:",
+        options: ["Net negative charge", "Net positive charge", "Neutral zero charge", "Variable double charge"],
+        correct: 1,
+        explanation: "At neutral pH (~7.4), the amino group accepts a proton to become positively charged (-NH3+), while the carboxyl group donates a proton to become negatively charged (-COO-)."
+      },
+
+      // SLO 7: SLO 2.6.3 Illustrate synthesis and breakage of peptide linkage
+      {
+        id: 37,
+        slo: "SLO 2.6.3: Illustrate synthesis and breakage of peptide linkage",
+        question: "What covalent bond links two adjacent amino acids in a protein?",
+        options: ["Glycosidic bond", "Peptide bond", "Ester bond", "Ionic bond"],
+        correct: 1,
+        explanation: "A peptide bond is a covalent amide link formed between the carboxyl carbon of one amino acid and the amino nitrogen of another."
+      },
+      {
+        id: 38,
+        slo: "SLO 2.6.3: Illustrate synthesis and breakage of peptide linkage",
+        question: "Breaking a peptide bond down into individual amino acids requires:",
+        options: ["Condensation", "Hydrolysis", "Oxidation", "Reduction"],
+        correct: 1,
+        explanation: "Hydrolysis splits peptide bonds by adding a molecule of water across the bond (H+ added to N-terminus side, OH- to C-terminus side)."
+      },
+      {
+        id: 39,
+        slo: "SLO 2.6.3: Illustrate synthesis and breakage of peptide linkage",
+        question: "Synthesis of a single peptide bond releases one molecule of:",
+        options: ["Carbon dioxide", "Ammonia", "Water", "Oxygen"],
+        correct: 2,
+        explanation: "Peptide bond formation occurs via a condensation (dehydration) reaction that eliminates one water molecule (H2O) per bond."
+      },
+      {
+        id: 40,
+        slo: "SLO 2.6.3: Illustrate synthesis and breakage of peptide linkage",
+        question: "A peptide bond forms between which two specific groups?",
+        options: ["Carboxyl group and amino group", "Two variable R-groups", "Two amino groups", "Central carbon and hydrogen"],
+        correct: 0,
+        explanation: "The peptide bond connects the alpha-carboxyl group (-COOH) of one amino acid residue to the alpha-amino group (-NH2) of the next."
+      },
+      {
+        id: 41,
+        slo: "SLO 2.6.3: Illustrate synthesis and breakage of peptide linkage",
+        question: "Linking four amino acids in a linear chain forms how many peptide bonds?",
+        options: ["Two", "Three", "Four", "Five"],
+        correct: 1,
+        explanation: "A linear chain of n amino acid monomers contains (n - 1) peptide bonds. For 4 amino acids: 4 - 1 = 3 peptide bonds."
+      },
+      {
+        id: 42,
+        slo: "SLO 2.6.3: Illustrate synthesis and breakage of peptide linkage",
+        question: "Which stomach enzyme breaks down dietary proteins by hydrolyzing peptide bonds?",
+        options: ["Amylase", "Lipase", "Pepsin", "Maltase"],
+        correct: 2,
+        explanation: "Pepsin is a gastric endopeptidase enzyme that breaks down protein polymers into smaller peptide fragments by hydrolyzing peptide bonds in acidic gastric juice."
+      },
+
+      // SLO 8: SLO 2.6.4 Differentiate essential/non-essential, acidic/basic, polar/non-polar amino acids
+      {
+        id: 43,
+        slo: "SLO 2.6.4: Differentiate essential, acidic, basic, polar amino acids",
+        question: "What defines an essential amino acid for human nutrition?",
+        options: ["Made by human liver", "Required from the diet", "Contains no nitrogen", "Found only in plants"],
+        correct: 1,
+        explanation: "Essential amino acids cannot be synthesized de novo by human biochemical pathways in adequate amounts and must be consumed in food."
+      },
+      {
+        id: 44,
+        slo: "SLO 2.6.4: Differentiate essential, acidic, basic, polar amino acids",
+        question: "An acidic amino acid contains an extra carboxyl group in its:",
+        options: ["Central backbone", "Variable R-group", "Amino group end", "Peptide linkage"],
+        correct: 1,
+        explanation: "Acidic amino acids (like aspartic acid and glutamic acid) feature a second carboxyl group (-COOH) in their side chain R-group."
+      },
+      {
+        id: 45,
+        slo: "SLO 2.6.4: Differentiate essential, acidic, basic, polar amino acids",
+        question: "Where do non-polar amino acids locate in a cytoplasmic globular protein?",
+        options: ["On the outer surface", "Inside the internal core", "Bound to surrounding water", "At the N-terminus only"],
+        correct: 1,
+        explanation: "During folding in an aqueous environment, hydrophobic non-polar side chains cluster together inside the interior core away from water."
+      },
+      {
+        id: 46,
+        slo: "SLO 2.6.4: Differentiate essential, acidic, basic, polar amino acids",
+        question: "Basic amino acids carry a positive charge at neutral pH because they:",
+        options: ["Contain extra carboxyl groups", "Accept protons in side chains", "Lack an alpha-carbon atom", "Form covalent ester linkages"],
+        correct: 1,
+        explanation: "Basic amino acids (lysine, arginine, histidine) contain nitrogen-containing functional groups in their R-chains that accept protons (H+), acquiring a net positive charge."
+      },
+      {
+        id: 47,
+        slo: "SLO 2.6.4: Differentiate essential, acidic, basic, polar amino acids",
+        question: "Serine is classified as a polar uncharged amino acid because its R-group has a:",
+        options: ["Hydrocarbon ring", "Hydroxyl group", "Positive charge", "Negative charge"],
+        correct: 1,
+        explanation: "Serine features a polar hydroxyl group (-CH2OH) in its side chain, allowing it to form hydrogen bonds with water without carrying a net charge."
+      },
+      {
+        id: 48,
+        slo: "SLO 2.6.4: Differentiate essential, acidic, basic, polar amino acids",
+        question: "Replacing a surface leucine (non-polar) with aspartate (acidic) increases a protein's:",
+        options: ["Water solubility", "Heat resistance", "Lipid affinity", "Peptide length"],
+        correct: 0,
+        explanation: "Introducing a charged acidic residue (aspartate) on the protein surface enhances attractive electrostatic and hydrogen-bonding interactions with polar water molecules."
+      },
+
+      // SLO 9: SLO 2.6.5 Explain amphoteric property of amino acids
+      {
+        id: 49,
+        slo: "SLO 2.6.5: Explain amphoteric property of amino acids",
+        question: "An amphoteric molecule is one that can act as both an:",
+        options: ["Enzyme and substrate", "Acid and base", "Organic and inorganic compound", "Oxidizing and reducing agent"],
+        correct: 1,
+        explanation: "Amphoteric compounds possess functional groups that can donate protons (act as an acid) or accept protons (act as a base)."
+      },
+      {
+        id: 50,
+        slo: "SLO 2.6.5: Explain amphoteric property of amino acids",
+        question: "An amino acid carrying both positive and negative charges simultaneously is a:",
+        options: ["Cation", "Anion", "Zwitterion", "Isomer"],
+        correct: 2,
+        explanation: "A zwitterion ('dipolar ion') is a dipolar molecule with separate negatively (-COO-) and positively (-NH3+) charged functional groups, yielding a net charge of zero."
+      },
+      {
+        id: 51,
+        slo: "SLO 2.6.5: Explain amphoteric property of amino acids",
+        question: "Which functional group on an amino acid acts as a proton donor (acid)?",
+        options: ["Amino group", "Carboxyl group", "Methyl group", "Sulfhydryl group"],
+        correct: 1,
+        explanation: "The carboxyl group (-COOH) donates a hydrogen ion (H+) to become negatively charged (-COO-), functioning as an acid."
+      },
+      {
+        id: 52,
+        slo: "SLO 2.6.5: Explain amphoteric property of amino acids",
+        question: "In a strongly acidic solution (low pH), an amino acid zwitterion becomes:",
+        options: ["Negatively charged", "Positively charged", "Electrically neutral", "Completely insoluble"],
+        correct: 1,
+        explanation: "At low pH (excess H+), the ionized carboxyl group (-COO-) accepts a proton to become neutral (-COOH), leaving the amino group (-NH3+) positively charged."
+      },
+      {
+        id: 53,
+        slo: "SLO 2.6.5: Explain amphoteric property of amino acids",
+        question: "Blood proteins like albumin help buffer blood pH because their amino acids can:",
+        options: ["Accept or donate protons", "Dissolve cellular lipids", "Synthesize hemoglobin", "Bind oxygen gas"],
+        correct: 0,
+        explanation: "Because of their amphoteric amino acid residues, plasma proteins act as biological buffers by absorbing excess H+ when pH drops or releasing H+ when pH rises."
+      },
+      {
+        id: 54,
+        slo: "SLO 2.6.5: Explain amphoteric property of amino acids",
+        question: "The pH at which an amino acid carries a net charge of zero is called its:",
+        options: ["Isoelectric point", "Saturation point", "Denaturation point", "Neutrality constant"],
+        correct: 0,
+        explanation: "The isoelectric point (pI) is the specific pH value at which a molecule carries no net electrical charge in a zwitterionic state."
+      },
+
+      // SLO 10: SLO 2.6.6 Differentiate between dipeptides and polypeptides
+      {
+        id: 55,
+        slo: "SLO 2.6.6: Differentiate between dipeptides and polypeptides",
+        question: "How many amino acids are linked together in a dipeptide?",
+        options: ["One", "Two", "Three", "Ten"],
+        correct: 1,
+        explanation: "A dipeptide consists of exactly two amino acids joined together by a single peptide bond."
+      },
+      {
+        id: 56,
+        slo: "SLO 2.6.6: Differentiate between dipeptides and polypeptides",
+        question: "A long chain of many amino acids linked by peptide bonds is called a:",
+        options: ["Dipeptide", "Polypeptide", "Monosaccharide", "Triglyceride"],
+        correct: 1,
+        explanation: "A polypeptide is a continuous, unbranched polymer consisting of a large number of amino acid residues joined by peptide bonds."
+      },
+      {
+        id: 57,
+        slo: "SLO 2.6.6: Differentiate between dipeptides and polypeptides",
+        question: "Complete enzymatic hydrolysis of a polypeptide chain yields free:",
+        options: ["Fatty acids", "Glucose units", "Amino acids", "Glycerol molecules"],
+        correct: 2,
+        explanation: "Hydrolyzing all peptide bonds in a polypeptide restores the individual free amino acid monomers."
+      },
+      {
+        id: 58,
+        slo: "SLO 2.6.6: Differentiate between dipeptides and polypeptides",
+        question: "A single unbranched linear polypeptide chain of 100 amino acids has:",
+        options: ["100 N-termini", "1 N-terminus and 1 C-terminus", "50 N-termini and 50 C-termini", "No free ends"],
+        correct: 1,
+        explanation: "Any linear unbranched peptide chain has exactly one free amino end (N-terminus) and one free carboxyl end (C-terminus)."
+      },
+      {
+        id: 59,
+        slo: "SLO 2.6.6: Differentiate between dipeptides and polypeptides",
+        question: "A dipeptide cannot function as an enzyme primarily because it:",
+        options: ["Contains no peptide bonds", "Lacks complex 3D folding", "Is completely insoluble in water", "Contains only non-polar groups"],
+        correct: 1,
+        explanation: "Enzymatic catalytic activity requires complex 3D tertiary/quaternary folding to form specific catalytic active sites, which a short dipeptide cannot adopt."
+      },
+      {
+        id: 60,
+        slo: "SLO 2.6.6: Differentiate between dipeptides and polypeptides",
+        question: "How many water molecules are consumed to completely hydrolyze a pentapeptide?",
+        options: ["Three", "Four", "Five", "Six"],
+        correct: 1,
+        explanation: "A pentapeptide contains 5 amino acids linked by 4 peptide bonds. Complete cleavage of 4 peptide bonds consumes 4 water molecules."
+      },
+
+      // SLO 11: SLO 2.6.7 Differentiate levels of organisation of proteins
+      {
+        id: 61,
+        slo: "SLO 2.6.7: Differentiate levels of organisation of proteins",
+        question: "The linear sequence of amino acids in a polypeptide chain is its:",
+        options: ["Primary structure", "Secondary structure", "Tertiary structure", "Quaternary structure"],
+        correct: 0,
+        explanation: "The primary structure is the specific linear sequence of amino acids held together by covalent peptide bonds."
+      },
+      {
+        id: 62,
+        slo: "SLO 2.6.7: Differentiate levels of organisation of proteins",
+        question: "Which bond stabilizes alpha-helices and beta-pleated sheets?",
+        options: ["Peptide bond", "Hydrogen bond", "Ester bond", "Disulfide bridge"],
+        correct: 1,
+        explanation: "Secondary structures (alpha-helices and beta-sheets) are stabilized by hydrogen bonding along the polypeptide backbone between C=O and N-H groups."
+      },
+      {
+        id: 63,
+        slo: "SLO 2.6.7: Differentiate levels of organisation of proteins",
+        question: "What structural level is formed when two or more polypeptide chains assemble?",
+        options: ["Primary structure", "Secondary structure", "Tertiary structure", "Quaternary structure"],
+        correct: 3,
+        explanation: "Quaternary structure describes the arrangement and association of multiple individual polypeptide subunits into a multi-subunit protein complex."
+      },
+      {
+        id: 64,
+        slo: "SLO 2.6.7: Differentiate levels of organisation of proteins",
+        question: "The overall 3D folding of a single polypeptide chain is driven by interactions between:",
+        options: ["Peptide backbone atoms", "Variable R-groups", "Nitrogen atoms only", "Surrounding lipids"],
+        correct: 1,
+        explanation: "Tertiary structure is the full 3D conformation of a single polypeptide chain held by interactions among side-chain R-groups (hydrophobic interactions, ionic bonds, hydrogen bonds, disulfide bridges)."
+      },
+      {
+        id: 65,
+        slo: "SLO 2.6.7: Differentiate levels of organisation of proteins",
+        question: "Hemoglobin consists of four separate polypeptide subunits. This exhibits:",
+        options: ["Primary structure", "Secondary structure", "Tertiary structure", "Quaternary structure"],
+        correct: 3,
+        explanation: "Hemoglobin is a tetramer composed of two alpha-globin and two beta-globin polypeptide chains, exhibiting quaternary organization."
+      },
+      {
+        id: 66,
+        slo: "SLO 2.6.7: Differentiate levels of organisation of proteins",
+        question: "Which structural level remains intact when a protein is denatured by mild heat?",
+        options: ["Primary structure", "Secondary structure", "Tertiary structure", "Quaternary structure"],
+        correct: 0,
+        explanation: "Denaturation disrupts weaker non-covalent bonds (secondary, tertiary, quaternary) but leaves strong covalent peptide bonds of the primary structure intact."
+      },
+
+      // SLO 12: SLO 2.6.8 Define fibrous and globular proteins
+      {
+        id: 67,
+        slo: "SLO 2.6.8: Define fibrous and globular proteins",
+        question: "Which type of protein is insoluble in water and provides structural support?",
+        options: ["Globular protein", "Fibrous protein", "Regulatory protein", "Conjugated protein"],
+        correct: 1,
+        explanation: "Fibrous proteins consist of long, parallel polypeptide sheets or chains that are water-insoluble and perform mechanical structural roles."
+      },
+      {
+        id: 68,
+        slo: "SLO 2.6.8: Define fibrous and globular proteins",
+        question: "Globular proteins are soluble in water because their outer surface exposes:",
+        options: ["Non-polar groups", "Polar groups", "Hydrophobic fats", "Waxy coatings"],
+        correct: 1,
+        explanation: "Globular proteins fold into spherical shapes with hydrophilic polar/charged amino acid side chains on their outer surface facing cytosol."
+      },
+      {
+        id: 69,
+        slo: "SLO 2.6.8: Define fibrous and globular proteins",
+        question: "Collagen and keratin are classic examples of:",
+        options: ["Globular proteins", "Fibrous proteins", "Enzymatic proteins", "Transport proteins"],
+        correct: 1,
+        explanation: "Collagen (connective tissues) and keratin (hair/nails) are fibrous structural proteins that provide high tensile strength."
+      },
+      {
+        id: 70,
+        slo: "SLO 2.6.8: Define fibrous and globular proteins",
+        question: "Why are enzymes made of globular proteins instead of fibrous proteins?",
+        options: ["Globular proteins form active sites", "Fibrous proteins are water-soluble", "Globular proteins lack amino acids", "Fibrous proteins contain no hydrogen bonds"],
+        correct: 0,
+        explanation: "Spherical 3D globular folding creates precise pocket-like active sites necessary for specific substrate binding and enzymatic catalysis."
+      },
+      {
+        id: 71,
+        slo: "SLO 2.6.8: Define fibrous and globular proteins",
+        question: "Which pair correctly matches a protein with its major biological location?",
+        options: ["Collagen — Tendons and cartilage", "Hemoglobin — Hair and nails", "Keratin — Blood plasma", "Insulin — Bone matrix"],
+        correct: 0,
+        explanation: "Collagen is the main structural protein of animal connective tissues, abundant in tendons, cartilage, skin, and bones."
+      },
+      {
+        id: 72,
+        slo: "SLO 2.6.8: Define fibrous and globular proteins",
+        question: "Fibrous proteins differ from globular proteins because fibrous proteins:",
+        options: ["Are spherical in shape", "Perform dynamic metabolic roles", "Form elongated insoluble sheets or fibers", "Dissolve easily in cytoplasm"],
+        correct: 2,
+        explanation: "Fibrous proteins form long, extended repetitive fiber-like structures designed for toughness and physical stability, whereas globular proteins are compact and spherical."
+      },
+
+      // SLO 13: SLO 2.6.9 Exemplify significance of sequence of amino acids via sickle cell anaemia
+      {
+        id: 73,
+        slo: "SLO 2.6.9: Sequence significance in sickle cell anaemia",
+        question: "Sickle cell anaemia results from a mutation in the gene for which protein chain?",
+        options: ["Alpha-globin", "Beta-globin", "Collagen", "Myosin"],
+        correct: 1,
+        explanation: "Sickle cell disease is caused by a point mutation in the HBB gene that encodes the beta-globin polypeptide chain of hemoglobin."
+      },
+      {
+        id: 74,
+        slo: "SLO 2.6.9: Sequence significance in sickle cell anaemia",
+        question: "In sickle cell hemoglobin, which normal amino acid is replaced at position 6?",
+        options: ["Valine", "Glutamic acid", "Glycine", "Lysine"],
+        correct: 1,
+        explanation: "In normal hemoglobin (HbA), position 6 of the beta-chain contains hydrophilic glutamic acid."
+      },
+      {
+        id: 75,
+        slo: "SLO 2.6.9: Sequence significance in sickle cell anaemia",
+        question: "Which amino acid replaces glutamic acid in sickle cell hemoglobin?",
+        options: ["Alanine", "Valine", "Serine", "Aspartate"],
+        correct: 1,
+        explanation: "In sickle cell hemoglobin (HbS), the polar glutamic acid residue at position 6 is substituted by non-polar valine."
+      },
+      {
+        id: 76,
+        slo: "SLO 2.6.9: Sequence significance in sickle cell anaemia",
+        question: "Why does replacing glutamic acid with valine cause hemoglobin molecules to clump?",
+        options: ["Valine is non-polar and hydrophobic", "Valine carries a strong negative charge", "Glutamic acid dissolves the cell membrane", "Valine breaks all peptide linkages"],
+        correct: 0,
+        explanation: "Valine is non-polar and hydrophobic. On the protein surface, it creates a sticky hydrophobic patch that causes deoxygenated HbS molecules to polymerize into fibers."
+      },
+      {
+        id: 77,
+        slo: "SLO 2.6.9: Sequence significance in sickle cell anaemia",
+        question: "What shape do red blood cells adopt under low oxygen in sickle cell disease?",
+        options: ["Biconcave disc", "Crescent shape", "Perfect sphere", "Flat square"],
+        correct: 1,
+        explanation: "The intracellular aggregation of HbS polymers distorts flexible biconcave erythrocytes into rigid, sickle- or crescent-shaped cells."
+      },
+      {
+        id: 78,
+        slo: "SLO 2.6.9: Sequence significance in sickle cell anaemia",
+        question: "Sickle cell anaemia demonstrates that changing a single amino acid in a sequence can:",
+        options: ["Leave protein function unchanged", "Alter 3D shape and function", "Convert proteins into lipids", "Stop DNA replication entirely"],
+        correct: 1,
+        explanation: "Sickle cell disease demonstrates that substituting even 1 out of 146 amino acids can dramatically alter protein tertiary structure and cause severe disease."
+      },
+
+      // SLO 14: SLO 2.6.10 List functions of proteins in the body
+      {
+        id: 79,
+        slo: "SLO 2.6.10: List functions of proteins in the body",
+        question: "Which protective proteins neutralize pathogens in the bloodstream?",
+        options: ["Hormones", "Antibodies", "Enzymes", "Structural fibers"],
+        correct: 1,
+        explanation: "Antibodies (immunoglobulins) are immune defense proteins synthesized by B-lymphocytes to bind and neutralize foreign antigen pathogens."
+      },
+      {
+        id: 80,
+        slo: "SLO 2.6.10: List functions of proteins in the body",
+        question: "Actin and myosin are contractile proteins directly involved in:",
+        options: ["Oxygen transport", "Muscle contraction", "Blood clotting", "Lipid digestion"],
+        correct: 1,
+        explanation: "Actin and myosin are contractile myofilaments inside muscle fibers that slide past one another to generate mechanical force and muscle contraction."
+      },
+      {
+        id: 81,
+        slo: "SLO 2.6.10: List functions of proteins in the body",
+        question: "Which protein hormone regulates blood glucose levels in humans?",
+        options: ["Insulin", "Hemoglobin", "Keratin", "Fibrinogen"],
+        correct: 0,
+        explanation: "Insulin is a pancreatic peptide hormone that lowers blood glucose levels by promoting cellular glucose uptake and glycogen synthesis."
+      },
+      {
+        id: 82,
+        slo: "SLO 2.6.10: List functions of proteins in the body",
+        question: "Which plasma protein plays a direct role in forming blood clots?",
+        options: ["Albumin", "Fibrinogen", "Myoglobin", "Collagen"],
+        correct: 1,
+        explanation: "Fibrinogen is a soluble plasma glycoprotein that thrombin converts into insoluble fibrin threads during blood coagulation."
+      },
+      {
+        id: 83,
+        slo: "SLO 2.6.10: List functions of proteins in the body",
+        question: "What primary function does hemoglobin perform in red blood cells?",
+        options: ["Catalyzing glucose breakdown", "Transporting oxygen gas", "Storing muscle iron", "Forming skin barriers"],
+        correct: 1,
+        explanation: "Hemoglobin is an iron-containing metalloprotein inside erythrocytes that reversibly binds oxygen gas in lungs and transports it to body tissues."
+      },
+      {
+        id: 84,
+        slo: "SLO 2.6.10: List functions of proteins in the body",
+        question: "During prolonged starvation, how does the body utilize proteins for energy?",
+        options: ["Converts them into glucose intermediates", "Stores them as adipose tissue", "Excretes them without usage", "Turns them into structural chitin"],
+        correct: 0,
+        explanation: "During prolonged starvation, cellular proteins undergo proteolysis into amino acids, which are deaminated and converted via gluconeogenesis into metabolic fuel intermediates."
+      }
+    ];
+
+    function App() {
+      // Quiz State Management
+      const [quizStarted, setQuizStarted] = useState(false);
+      const [quizMode, setQuizMode] = useState('practice'); // 'practice' or 'blind'
+      const [currentIdx, setCurrentIdx] = useState(0);
+      const [userAnswers, setUserAnswers] = useState({}); // { [qIdx]: selectedOptionIdx }
+      const [timeLeft, setTimeLeft] = useState(84 * 60); // 84 minutes = 5040 seconds
+      const [isSubmitted, setIsSubmitted] = useState(false);
+
+      // Timer Effect
+      useEffect(() => {
+        let timer = null;
+        if (quizStarted && !isSubmitted && timeLeft > 0) {
+          timer = setInterval(() => {
+            setTimeLeft(prev => {
+              if (prev <= 1) {
+                clearInterval(timer);
+                setIsSubmitted(true);
+                return 0;
+              }
+              return prev - 1;
+            });
+          }, 1000);
+        }
+        return () => clearInterval(timer);
+      }, [quizStarted, isSubmitted, timeLeft]);
+
+      // Format time string MM:SS or HH:MM:SS
+      const formatTime = (secs) => {
+        const hrs = Math.floor(secs / 3600);
+        const mins = Math.floor((secs % 3600) / 60);
+        const s = secs % 60;
+        if (hrs > 0) {
+          return `${hrs}:${mins.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+        }
+        return `${mins.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+      };
+
+      // Select Option & Lock Answer
+      const handleSelectOption = (optionIdx) => {
+        if (userAnswers.hasOwnProperty(currentIdx) || isSubmitted) return; // Answer locked
+        setUserAnswers(prev => ({
+          ...prev,
+          [currentIdx]: optionIdx
+        }));
+      };
+
+      // Scoring Calculations
+      const scoreData = useMemo(() => {
+        let correctCount = 0;
+        let wrongCount = 0;
+        let unattemptedCount = 0;
+
+        QUESTIONS.forEach((q, idx) => {
+          if (!userAnswers.hasOwnProperty(idx)) {
+            unattemptedCount++;
+          } else if (userAnswers[idx] === q.correct) {
+            correctCount++;
+          } else {
+            wrongCount++;
+          }
+        });
+
+        const grossMarks = correctCount * 1.0;
+        const penalty = wrongCount * 0.25;
+        const netMarks = Math.max(0, grossMarks - penalty);
+        const maxMarks = QUESTIONS.length * 1.0;
+        const percentage = Number(((netMarks / maxMarks) * 100).toFixed(1));
+
+        return { correctCount, wrongCount, unattemptedCount, grossMarks, penalty, netMarks, maxMarks, percentage };
+      }, [userAnswers]);
+
+      // SLO Weak Area Analysis
+      const sloAnalysis = useMemo(() => {
+        const stats = {};
+        QUESTIONS.forEach((q, idx) => {
+          const sloKey = q.slo;
+          if (!stats[sloKey]) {
+            stats[sloKey] = { total: 0, correct: 0, wrong: 0, unattempted: 0 };
+          }
+          stats[sloKey].total++;
+          if (!userAnswers.hasOwnProperty(idx)) {
+            stats[sloKey].unattempted++;
+          } else if (userAnswers[idx] === q.correct) {
+            stats[sloKey].correct++;
+          } else {
+            stats[sloKey].wrong++;
+          }
+        });
+        return stats;
+      }, [userAnswers]);
+
+      // Motivational Quotes based on percentage score
+      const getMotivationalQuote = (pct) => {
+        if (pct >= 85) return { quote: "Outstanding Mastery! Your understanding of lipids, proteins, and biological molecules is exceptional.", author: "Qashqarian Academy Academic Council" };
+        if (pct >= 70) return { quote: "Great Effort! Fine-tune your specific weak SLO topics to achieve complete perfection.", author: "Qashqarian Academy Faculty" };
+        if (pct >= 50) return { quote: "Solid Foundation! Carefully analyze the explanations for your incorrect answers to strengthen core concepts.", author: "Department of Biology" };
+        return { quote: "Every mistake is a stepping stone toward deep understanding. Review your weak areas carefully and try again!", author: "Qashqarian Mentorship Team" };
+      };
+
+      const currentQ = QUESTIONS[currentIdx];
+      const isAnswered = userAnswers.hasOwnProperty(currentIdx);
+      const selectedOption = userAnswers[currentIdx];
+
+      // START SCREEN
+      if (!quizStarted) {
+        return (
+          <div className="min-h-screen flex items-center justify-center p-4 sm:p-6">
+            <div className="max-w-2xl w-full bg-white rounded-2xl shadow-xl border border-sky-100 overflow-hidden animate-fadeIn">
+              {/* Header Banner */}
+              <div className="bg-gradient-to-r from-sky-700 via-sky-600 to-science-800 p-6 sm:p-8 text-white relative">
+                <div className="flex justify-between items-center mb-3">
+                  <span className="bg-sky-500/30 text-sky-100 text-xs font-bold px-3 py-1 rounded-full backdrop-blur-sm border border-sky-300/20 flex items-center gap-1">
+                    🏔️ Qashqarian Academy
+                  </span>
+                  <span className="text-xs font-semibold bg-white/10 px-2.5 py-1 rounded-md border border-white/20">
+                    Class: XI
+                  </span>
+                </div>
+                <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
+                  Chapter 2: Biological Molecules
+                </h1>
+                <p className="text-sky-100 text-sm mt-1">
+                  Part-2: Lipids & Proteins Mock Test (84 MCQs)
+                </p>
+              </div>
+
+              {/* Instructions Content */}
+              <div className="p-6 sm:p-8 space-y-6">
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="bg-sky-50 rounded-xl p-4 border border-sky-100 flex items-center gap-3">
+                    <div className="p-2.5 bg-sky-600 text-white rounded-lg">
+                      <Icon name="clock" className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <p className="text-xs text-slate-500 font-medium">Time Limit</p>
+                      <p className="text-sm font-bold text-slate-800">84 Minutes</p>
+                    </div>
+                  </div>
+                  <div className="bg-sky-50 rounded-xl p-4 border border-sky-100 flex items-center gap-3">
+                    <div className="p-2.5 bg-sky-600 text-white rounded-lg">
+                      <Icon name="award" className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <p className="text-xs text-slate-500 font-medium">Marking Scheme</p>
+                      <p className="text-sm font-bold text-slate-800">+1.0 / -0.25</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Mode Selector */}
+                <div>
+                  <label className="block text-sm font-bold text-slate-700 mb-3">
+                    Select Assessment Mode:
+                  </label>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <button
+                      type="button"
+                      onClick={() => setQuizMode('practice')}
+                      className={`p-4 rounded-xl text-left border-2 transition-all flex flex-col gap-1.5 ${
+                        quizMode === 'practice'
+                          ? 'border-sky-600 bg-sky-50/80 ring-2 ring-sky-500/20'
+                          : 'border-slate-200 hover:border-sky-300 bg-white'
+                      }`}
+                    >
+                      <div className="flex items-center justify-between">
+                        <span className="font-bold text-sm text-sky-900 flex items-center gap-1.5">
+                          <Icon name="zap" className="w-4 h-4 text-sky-600" />
+                          Practice Mode
+                        </span>
+                        {quizMode === 'practice' && <Icon name="check" className="w-4 h-4 text-sky-600" />}
+                      </div>
+                      <p className="text-xs text-slate-500 leading-relaxed">
+                        Instant right/wrong verification with detailed explanation immediately upon option lock.
+                      </p>
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => setQuizMode('blind')}
+                      className={`p-4 rounded-xl text-left border-2 transition-all flex flex-col gap-1.5 ${
+                        quizMode === 'blind'
+                          ? 'border-sky-600 bg-sky-50/80 ring-2 ring-sky-500/20'
+                          : 'border-slate-200 hover:border-sky-300 bg-white'
+                      }`}
+                    >
+                      <div className="flex items-center justify-between">
+                        <span className="font-bold text-sm text-sky-900 flex items-center gap-1.5">
+                          <Icon name="shield" className="w-4 h-4 text-sky-600" />
+                          Blind / Exam Mode
+                        </span>
+                        {quizMode === 'blind' && <Icon name="check" className="w-4 h-4 text-sky-600" />}
+                      </div>
+                      <p className="text-xs text-slate-500 leading-relaxed">
+                        Simulate exam environment. Score breakdown and explanations are revealed after final submission.
+                      </p>
+                    </button>
+                  </div>
+                </div>
+
+                {/* Important Rules List */}
+                <div className="bg-amber-50/80 border border-amber-200 rounded-xl p-4 text-xs text-amber-900 space-y-1.5">
+                  <p className="font-bold text-amber-950 flex items-center gap-1.5">
+                    <Icon name="alert-triangle" className="w-4 h-4 text-amber-600" />
+                    Negative Marking Notice & Rules:
+                  </p>
+                  <ul className="list-disc list-inside space-y-1 pl-1 text-amber-800">
+                    <li>Once selected, an option is permanently locked for that question.</li>
+                    <li>Incorrect answers incur a <strong>-0.25 mark penalty</strong>.</li>
+                    <li>Unattempted questions carry 0 penalty.</li>
+                  </ul>
+                </div>
+
+                <button
+                  onClick={() => setQuizStarted(true)}
+                  className="w-full bg-sky-600 hover:bg-sky-700 text-white font-bold py-3.5 px-6 rounded-xl shadow-lg shadow-sky-600/25 transition-all flex items-center justify-center gap-2 group"
+                >
+                  <span>Start Mock Test</span>
+                  <Icon name="arrow-right" className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                </button>
+              </div>
+            </div>
+          </div>
+        );
+      }
+
+      // FINAL RESULTS SCREEN
+      if (isSubmitted) {
+        const quoteObj = getMotivationalQuote(scoreData.percentage);
+
+        return (
+          <div className="min-h-screen py-8 px-4 sm:px-6 flex justify-center">
+            <div className="max-w-4xl w-full bg-white rounded-2xl shadow-xl border border-sky-100 overflow-hidden animate-fadeIn space-y-6">
+              
+              {/* Header Banner */}
+              <div className="bg-gradient-to-r from-sky-700 via-sky-600 to-science-800 p-6 sm:p-8 text-white relative">
+                <div className="flex justify-between items-center mb-2">
+                  <span className="text-xs font-bold bg-white/20 px-3 py-1 rounded-full flex items-center gap-1">
+                    🏔️ Qashqarian Academy
+                  </span>
+                  <span className="text-xs font-semibold bg-white/10 px-2.5 py-1 rounded-md">
+                    Class: XI
+                  </span>
+                </div>
+                <h1 className="text-2xl sm:text-3xl font-extrabold">
+                  Performance Evaluation Summary
+                </h1>
+                <p className="text-sky-100 text-xs sm:text-sm mt-1">
+                  Chapter 2: Biological Molecules (Part-2) Mock Test Results
+                </p>
+              </div>
+
+              <div className="p-6 sm:p-8 space-y-8">
+                
+                {/* Motivational Quote Box */}
+                <div className="bg-sky-50/80 border-l-4 border-sky-600 p-4 rounded-r-xl space-y-1">
+                  <p className="text-sm font-semibold text-sky-950 italic">
+                    "{quoteObj.quote}"
+                  </p>
+                  <p className="text-xs text-sky-700 font-bold">— {quoteObj.author}</p>
+                </div>
+
+                {/* Score Summary Metrics */}
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                  <div className="bg-sky-50 border border-sky-100 rounded-xl p-4 text-center">
+                    <p className="text-xs text-slate-500 font-semibold mb-1">Net Percentage</p>
+                    <p className="text-3xl font-black text-sky-600">{scoreData.percentage}%</p>
+                  </div>
+                  <div className="bg-emerald-50 border border-emerald-100 rounded-xl p-4 text-center">
+                    <p className="text-xs text-emerald-700 font-semibold mb-1">Correct Answers</p>
+                    <p className="text-3xl font-black text-emerald-600">{scoreData.correctCount}</p>
+                    <p className="text-[10px] text-emerald-600 font-medium">+{scoreData.grossMarks} Marks</p>
+                  </div>
+                  <div className="bg-rose-50 border border-rose-100 rounded-xl p-4 text-center">
+                    <p className="text-xs text-rose-700 font-semibold mb-1">Wrong Answers</p>
+                    <p className="text-3xl font-black text-rose-600">{scoreData.wrongCount}</p>
+                    <p className="text-[10px] text-rose-600 font-medium">-{scoreData.penalty} Penalty</p>
+                  </div>
+                  <div className="bg-amber-50 border border-amber-100 rounded-xl p-4 text-center">
+                    <p className="text-xs text-amber-700 font-semibold mb-1">Unattempted</p>
+                    <p className="text-3xl font-black text-amber-600">{scoreData.unattemptedCount}</p>
+                    <p className="text-[10px] text-amber-600 font-medium">0 Penalty</p>
+                  </div>
+                </div>
+
+                {/* Net Score Summary Bar */}
+                <div className="bg-slate-900 text-white rounded-xl p-4 flex justify-between items-center text-sm">
+                  <span>Final Net Score (After Penalty):</span>
+                  <span className="font-extrabold text-sky-400 text-base">
+                    {scoreData.netMarks} / {scoreData.maxMarks} Marks
+                  </span>
+                </div>
+
+                {/* Weak Area SLO Breakdown */}
+                <div className="space-y-3">
+                  <h3 className="text-base font-bold text-slate-800 flex items-center gap-2">
+                    <Icon name="bar-chart" className="w-5 h-5 text-sky-600" />
+                    SLO Performance & Weak Area Analysis
+                  </h3>
+
+                  <div className="space-y-3 max-h-80 overflow-y-auto pr-2 custom-scrollbar">
+                    {Object.entries(sloAnalysis).map(([slo, stats], idx) => {
+                      const sloPct = stats.total > 0 ? Math.round((stats.correct / stats.total) * 100) : 0;
+                      return (
+                        <div key={idx} className="bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs space-y-2">
+                          <div className="flex justify-between items-start gap-2">
+                            <span className="font-semibold text-slate-800">{slo}</span>
+                            <span className={`font-bold px-2 py-0.5 rounded text-[11px] ${
+                              sloPct >= 80 ? 'bg-emerald-100 text-emerald-800' :
+                              sloPct >= 50 ? 'bg-amber-100 text-amber-800' : 'bg-rose-100 text-rose-800'
+                            }`}>
+                              {sloPct}% Mastered
+                            </span>
+                          </div>
+                          <div className="w-full bg-slate-200 h-2 rounded-full overflow-hidden">
+                            <div 
+                              className={`h-full transition-all duration-500 ${
+                                sloPct >= 80 ? 'bg-emerald-500' : sloPct >= 50 ? 'bg-amber-500' : 'bg-rose-500'
+                              }`}
+                              style={{ width: `${sloPct}%` }}
+                            />
+                          </div>
+                          <div className="flex gap-4 text-[11px] text-slate-500">
+                            <span>Correct: {stats.correct}</span>
+                            <span>Wrong: {stats.wrong}</span>
+                            <span>Skipped: {stats.unattempted}</span>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                {/* Detailed Analysis of Wrong/Skipped MCQs */}
+                <div className="space-y-4">
+                  <h3 className="text-base font-bold text-slate-800 flex items-center gap-2">
+                    <Icon name="book-open" className="w-5 h-5 text-sky-600" />
+                    Detailed Answer Rationales & Explanations
+                  </h3>
+
+                  <div className="space-y-4 max-h-96 overflow-y-auto pr-2 custom-scrollbar">
+                    {QUESTIONS.map((q, qIdx) => {
+                      const userSel = userAnswers[qIdx];
+                      const isCorrect = userSel === q.correct;
+                      const isUnattempted = !userAnswers.hasOwnProperty(qIdx);
+
+                      return (
+                        <div 
+                          key={q.id}
+                          className={`p-4 rounded-xl border text-xs space-y-2.5 ${
+                            isCorrect ? 'bg-emerald-50/50 border-emerald-200' :
+                            isUnattempted ? 'bg-amber-50/50 border-amber-200' : 'bg-rose-50/50 border-rose-200'
+                          }`}
+                        >
+                          <div className="flex justify-between items-start gap-2">
+                            <span className="font-bold text-slate-900">
+                              Q{qIdx + 1}. {q.question}
+                            </span>
+                            <span className={`px-2 py-0.5 rounded font-bold text-[10px] whitespace-nowrap ${
+                              isCorrect ? 'bg-emerald-600 text-white' :
+                              isUnattempted ? 'bg-amber-500 text-white' : 'bg-rose-600 text-white'
+                            }`}>
+                              {isCorrect ? 'CORRECT (+1.0)' : isUnattempted ? 'SKIPPED (0.0)' : 'WRONG (-0.25)'}
+                            </span>
+                          </div>
+
+                          <p className="text-[11px] text-slate-500 font-medium">{q.slo}</p>
+
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                            {q.options.map((opt, oIdx) => {
+                              const isOptCorrect = oIdx === q.correct;
+                              const isOptUserChoice = oIdx === userSel;
+
+                              return (
+                                <div 
+                                  key={oIdx}
+                                  className={`p-2 rounded-lg border font-medium flex items-center justify-between ${
+                                    isOptCorrect ? 'bg-emerald-100 border-emerald-300 text-emerald-900 font-bold' :
+                                    isOptUserChoice ? 'bg-rose-100 border-rose-300 text-rose-900' : 'bg-white border-slate-200 text-slate-600'
+                                  }`}
+                                >
+                                  <span>{String.fromCharCode(65 + oIdx)}. {opt}</span>
+                                  {isOptCorrect && <Icon name="check" className="w-3.5 h-3.5 text-emerald-700" />}
+                                  {isOptUserChoice && !isOptCorrect && <Icon name="x" className="w-3.5 h-3.5 text-rose-700" />}
+                                </div>
+                              );
+                            })}
+                          </div>
+
+                          <div className="bg-white/80 p-2.5 rounded-lg border border-slate-200 text-slate-700 leading-relaxed">
+                            <span className="font-bold text-sky-900">Explanation: </span>
+                            {q.explanation}
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                {/* Restart Button */}
+                <button
+                  onClick={() => {
+                    setIsSubmitted(false);
+                    setQuizStarted(false);
+                    setCurrentIdx(0);
+                    setUserAnswers({});
+                    setTimeLeft(84 * 60);
+                  }}
+                  className="w-full bg-sky-600 hover:bg-sky-700 text-white font-bold py-3.5 px-6 rounded-xl shadow-lg shadow-sky-600/25 transition-all flex items-center justify-center gap-2"
+                >
+                  <Icon name="rotate-ccw" className="w-5 h-5" />
+                  <span>Restart Assessment</span>
+                </button>
+
+              </div>
+            </div>
+          </div>
+        );
+      }
+
+      // ACTIVE QUIZ SCREEN
+      return (
+        <div className="min-h-screen py-6 px-4 sm:px-6 flex flex-col items-center">
+          
+          {/* Top Navigation Header Card */}
+          <div className="max-w-3xl w-full bg-white rounded-2xl shadow-sm border border-sky-100 p-4 mb-4 space-y-3">
+            
+            {/* Header Title & Class Name */}
+            <div className="flex justify-between items-center text-xs sm:text-sm font-bold text-sky-900">
+              <span className="flex items-center gap-1.5">
+                <span className="text-base">🏔️</span> Qashqarian Academy
+              </span>
+              <span className="bg-sky-100 text-sky-800 px-2.5 py-0.5 rounded-md font-semibold text-xs">
+                Class: XI
+              </span>
+            </div>
+
+            {/* Question Counter & Timer */}
+            <div className="flex justify-between items-center text-xs font-semibold text-slate-600">
+              <span>Q {currentIdx + 1} / {QUESTIONS.length}</span>
+              <div className={`flex items-center gap-1.5 px-2.5 py-1 rounded-lg font-mono font-bold ${
+                timeLeft < 300 ? 'bg-rose-100 text-rose-700 animate-pulse' : 'bg-sky-50 text-sky-800'
+              }`}>
+                <Icon name="clock" className="w-3.5 h-3.5" />
+                <span>{formatTime(timeLeft)}</span>
+              </div>
+            </div>
+
+            {/* Top Visual Progress Bar */}
+            <div className="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+              <div 
+                className="bg-sky-600 h-full transition-all duration-300"
+                style={{ width: `${((currentIdx + 1) / QUESTIONS.length) * 100}%` }}
+              />
+            </div>
+          </div>
+
+          {/* Centered Main Question Card */}
+          <div className="max-w-3xl w-full bg-white rounded-2xl shadow-lg border border-sky-100 p-6 sm:p-8 relative overflow-hidden flex flex-col min-h-[460px] justify-between">
+            
+            {/* Watermark Logo in Center */}
+            <div className="watermark-bg">
+              <p className="text-5xl sm:text-6xl font-black text-sky-900 tracking-widest">
+                🏔️ QASHQARIAN ACADEMY
+              </p>
+            </div>
+
+            {/* Question Header & Options */}
+            <div className="relative z-10 space-y-5">
+              
+              {/* Relative SLO Tag */}
+              <div className="inline-block bg-sky-50 border border-sky-200 text-sky-900 text-xs font-semibold px-3 py-1 rounded-full">
+                {currentQ.slo}
+              </div>
+
+              {/* Question Text */}
+              <h2 className="text-base sm:text-lg font-bold text-slate-900 leading-snug">
+                Q{currentIdx + 1}. {currentQ.question}
+              </h2>
+
+              {/* MCQ Options A, B, C, D */}
+              <div className="space-y-3 pt-2">
+                {currentQ.options.map((optionText, optIdx) => {
+                  const isSelected = selectedOption === optIdx;
+                  const isCorrect = currentQ.correct === optIdx;
+
+                  let btnStyle = "border-slate-200 hover:border-sky-300 hover:bg-sky-50/50 text-slate-800 bg-white";
+
+                  if (isAnswered) {
+                    if (quizMode === 'practice') {
+                      if (isCorrect) {
+                        btnStyle = "border-emerald-500 bg-emerald-50 text-emerald-950 font-semibold ring-2 ring-emerald-500/20";
+                      } else if (isSelected) {
+                        btnStyle = "border-rose-500 bg-rose-50 text-rose-950 font-semibold ring-2 ring-rose-500/20";
+                      } else {
+                        btnStyle = "border-slate-200 opacity-60 bg-white text-slate-500";
+                      }
+                    } else {
+                      // Blind Mode: highlight locked choice with neutral style
+                      if (isSelected) {
+                        btnStyle = "border-sky-600 bg-sky-50 text-sky-950 font-semibold ring-2 ring-sky-500/20";
+                      } else {
+                        btnStyle = "border-slate-200 opacity-60 bg-white text-slate-500";
+                      }
+                    }
+                  }
+
+                  return (
+                    <button
+                      key={optIdx}
+                      disabled={isAnswered}
+                      onClick={() => handleSelectOption(optIdx)}
+                      className={`w-full p-3.5 sm:p-4 rounded-xl border-2 text-left text-xs sm:text-sm transition-all flex items-center justify-between gap-3 ${btnStyle}`}
+                    >
+                      <div className="flex items-center gap-3">
+                        <span className={`w-7 h-7 rounded-lg flex items-center justify-center font-bold text-xs shrink-0 ${
+                          isSelected ? 'bg-sky-600 text-white' : 'bg-slate-100 text-slate-700'
+                        }`}>
+                          {String.fromCharCode(65 + optIdx)}
+                        </span>
+                        <span>{optionText}</span>
+                      </div>
+
+                      {/* Immediate Feedback Icons for Practice Mode */}
+                      {isAnswered && quizMode === 'practice' && (
+                        <div>
+                          {isCorrect && <Icon name="check" className="w-5 h-5 text-emerald-600" />}
+                          {isSelected && !isCorrect && <Icon name="x" className="w-5 h-5 text-rose-600" />}
+                        </div>
+                      )}
+                    </button>
+                  );
+                })}
+              </div>
+
+              {/* Instant Practice Mode Explanation Box */}
+              {isAnswered && quizMode === 'practice' && (
+                <div className={`mt-4 p-4 rounded-xl text-xs leading-relaxed space-y-1 animate-fadeIn border ${
+                  selectedOption === currentQ.correct 
+                    ? 'bg-emerald-50/90 border-emerald-200 text-emerald-950' 
+                    : 'bg-rose-50/90 border-rose-200 text-rose-950'
+                }`}>
+                  <p className="font-bold flex items-center gap-1.5">
+                    <Icon name="info" className="w-4 h-4" />
+                    {selectedOption === currentQ.correct ? 'Correct! Rationale:' : 'Incorrect Answer Explanation:'}
+                  </p>
+                  <p className="text-slate-800">{currentQ.explanation}</p>
+                </div>
+              )}
+            </div>
+
+            {/* Bottom Controls: Previous / Next Buttons */}
+            <div className="relative z-10 pt-6 mt-6 border-t border-slate-100 flex justify-between items-center gap-4">
+              <button
+                disabled={currentIdx === 0}
+                onClick={() => setCurrentIdx(prev => prev - 1)}
+                className="px-4 py-2.5 rounded-xl border border-slate-200 text-slate-700 text-xs font-bold hover:bg-slate-50 disabled:opacity-40 disabled:cursor-not-allowed flex items-center gap-1.5"
+              >
+                <Icon name="arrow-left" className="w-4 h-4" />
+                Previous
+              </button>
+
+              <div className="flex gap-2">
+                {currentIdx < QUESTIONS.length - 1 ? (
+                  <button
+                    onClick={() => setCurrentIdx(prev => prev + 1)}
+                    className="px-5 py-2.5 rounded-xl bg-sky-600 hover:bg-sky-700 text-white text-xs font-bold shadow-md shadow-sky-600/20 transition-all flex items-center gap-1.5"
+                  >
+                    Next
+                    <Icon name="arrow-right" className="w-4 h-4" />
+                  </button>
+                ) : (
+                  <button
+                    onClick={() => setIsSubmitted(true)}
+                    className="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold shadow-md shadow-emerald-600/20 transition-all flex items-center gap-1.5"
+                  >
+                    Submit Test
+                    <Icon name="check" className="w-4 h-4" />
+                  </button>
+                )}
+              </div>
+            </div>
+
+          </div>
+        </div>
+      );
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<App />);
+  </script>
+</body>
+</html>

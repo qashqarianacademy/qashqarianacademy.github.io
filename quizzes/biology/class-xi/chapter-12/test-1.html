@@ -1,0 +1,2277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Class XI Biology Chapter 12 Mock Test - Qashqarian Academy</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+          },
+          colors: {
+            sky: {
+              50:'#F0F8F8', 100:'#DFF3F2', 200:'#BFE4E7', 300:'#8FCDD5',
+              400:'#4FA9B9', 500:'#1F869B', 600:'#056C82', 700:'#0A5263',
+              800:'#0B4352', 900:'#0B3340'
+            },
+            science: {
+              50:'#F0F8F8', 100:'#DFF3F2', 200:'#BFE4E7', 300:'#8FCDD5',
+              400:'#4FA9B9', 500:'#1F869B', 600:'#056C82', 700:'#0A5263',
+              800:'#0B4352', 900:'#0B3340'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- React 18 & ReactDOM -->
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+  <!-- Babel for JSX -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #f0f7ff;
+    }
+    .watermark-bg {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(-12deg);
+      pointer-events: none;
+      user-select: none;
+      z-index: 0;
+      opacity: 0.035;
+      text-align: center;
+      white-space: nowrap;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: #f1f5f9;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 4px;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fadeIn {
+      animation: fadeIn 0.25s ease-out forwards;
+    }
+    @media print {
+      .no-print { display: none !important; }
+      body { background: white; color: black; }
+    }
+  </style>
+</head>
+<body class="text-slate-800 antialiased selection:bg-sky-200 selection:text-sky-900 min-h-screen">
+  <header class="sticky top-0 z-50 bg-[#0B132B] border-b border-cyan-900/40 shadow-md">
+    <div class="max-w-5xl mx-auto px-4 py-2.5 flex items-center justify-between">
+      <a href="../../../../index.html" class="flex items-center gap-2">
+        <img src="../../../../images/brand/logo.png" alt="Qashqarian Academy" class="w-10 h-10 object-contain">
+        <div>
+          <div class="text-base md:text-lg font-extrabold text-white tracking-tight leading-none">Qashqarian</div>
+          <div class="text-[10px] md:text-xs text-[#FF9F1C] font-extrabold tracking-[0.2em] mt-1 leading-none">ACADEMY</div>
+        </div>
+      </a>
+      <a href="../../index.html" class="text-[11px] font-semibold text-slate-300 hover:text-white border border-white/20 rounded-lg px-2.5 py-1">
+        ← Biology Quizzes
+      </a>
+    </div>
+  </header>
+  
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const { useState, useEffect, useMemo } = React;
+
+    // SVG Icon Component
+    const Icon = ({ name, className = "w-5 h-5" }) => {
+      const props = {
+        className,
+        xmlns: "http://www.w3.org/2000/svg",
+        viewBox: "0 0 24 24",
+        fill: "none",
+        stroke: "currentColor",
+        strokeWidth: "2",
+        strokeLinecap: "round",
+        strokeLinejoin: "round"
+      };
+
+      switch (name) {
+        case "clock":
+          return <svg {...props}><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>;
+        case "award":
+          return <svg {...props}><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 22 12 17 17 22 15.79 13.88"/></svg>;
+        case "check":
+          return <svg {...props}><polyline points="20 6 9 17 4 12"/></svg>;
+        case "x":
+          return <svg {...props}><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>;
+        case "arrow-left":
+          return <svg {...props}><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>;
+        case "arrow-right":
+          return <svg {...props}><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>;
+        case "rotate-ccw":
+          return <svg {...props}><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>;
+        case "book-open":
+          return <svg {...props}><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>;
+        case "shield":
+          return <svg {...props}><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>;
+        case "zap":
+          return <svg {...props}><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>;
+        case "bar-chart":
+          return <svg {...props}><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg>;
+        case "info":
+          return <svg {...props}><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>;
+        case "alert-triangle":
+          return <svg {...props}><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>;
+        case "flag":
+          return <svg {...props}><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>;
+        case "grid":
+          return <svg {...props}><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>;
+        case "search":
+          return <svg {...props}><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>;
+        case "printer":
+          return <svg {...props}><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>;
+        case "key":
+          return <svg {...props}><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg>;
+        default:
+          return <svg {...props}><circle cx="12" cy="12" r="10"/></svg>;
+      }
+    };
+
+    const QUESTIONS = [
+      // SLO 12.1.1: Definition of Nutrition
+      {
+        id: 1,
+        slo: "SLO 12.1.1: Definition of Nutrition",
+        question: "What is nutrition?",
+        options: [
+          "Synthesis of DNA molecules inside host cells",
+          "Process of acquiring and utilizing nutrients for life processes",
+          "Excretion of metabolic waste products through kidneys",
+          "Physical movement of organisms towards light stimuli"
+        ],
+        correct: 1,
+        explanation: "Nutrition is defined as the sum total of processes by which an organism ingests, absorbs, transports, and utilizes food substances needed for growth, maintenance, and energy production.",
+        wrongExplanations: [
+          "DNA synthesis is replication/genetics, not nutrition.",
+          "Correct answer is B.",
+          "Excretion is the removal of metabolic wastes, not the acquisition and utilization of nutrients.",
+          "Movement towards light is phototaxis, not nutrition."
+        ]
+      },
+      {
+        id: 2,
+        slo: "SLO 12.1.1: Definition of Nutrition",
+        question: "Which statement best describes the primary function of nutrients in living organisms?",
+        options: [
+          "Providing energy and structural raw materials for growth and repair",
+          "Storing genetic code within the cell nuclear membrane",
+          "Functioning exclusively as toxic excretory products",
+          "Accelerating physical movement without participating in metabolism"
+        ],
+        correct: 0,
+        explanation: "Nutrients supply organisms with chemical energy (e.g. ATP generation) and essential building blocks for synthesized tissues during growth and maintenance.",
+        wrongExplanations: [
+          "Correct answer is A.",
+          "Storing genetic information is the function of nucleic acids (DNA/RNA).",
+          "Excretory products are cellular wastes, whereas nutrients are useful biomolecules.",
+          "Nutrients directly fuel metabolic chemical reactions."
+        ]
+      },
+      {
+        id: 3,
+        slo: "SLO 12.1.1: Definition of Nutrition",
+        question: "(Scenario 1) A farmer notices crop yield decreasing due to a lack of essential mineral elements in the soil. Which biological term describes the overall process of acquiring and using these inorganic substances for plant growth?",
+        options: ["Transpiration", "Respiration", "Nutrition", "Circulation"],
+        correct: 2,
+        explanation: "In mineral nutrition, plants acquire essential inorganic ions (like nitrates, phosphates, potassium) from soil for metabolic pathways.",
+        wrongExplanations: [
+          "Transpiration is the loss of water vapor from aerial plant parts.",
+          "Respiration is cellular oxidative release of energy.",
+          "Correct answer is C.",
+          "Circulation refers to fluid transport in vascular tissues."
+        ]
+      },
+      {
+        id: 4,
+        slo: "SLO 12.1.1: Definition of Nutrition",
+        question: "Nutrients that an organism cannot synthesize on its own and must obtain from external dietary sources are classified as:",
+        options: ["Non-essential metabolites", "Organic waste products", "Inorganic catalysts", "Essential nutrients"],
+        correct: 3,
+        explanation: "Essential nutrients are compounds that the body cannot synthesize endogenously in sufficient quantities and must be supplied through diet.",
+        wrongExplanations: [
+          "Non-essential metabolites can be synthesized internally by metabolic pathways.",
+          "Waste products are harmful metabolic byproducts excreted from the body.",
+          "Inorganic catalysts accelerate reactions but do not define dietary requirement categories.",
+          "Correct answer is D."
+        ]
+      },
+      {
+        id: 5,
+        slo: "SLO 12.1.1: Definition of Nutrition",
+        question: "Which category of nutrients serves as the primary and most immediate source of cellular energy during metabolism?",
+        options: ["Carbohydrates", "Vitamins", "Minerals", "Nucleic acids"],
+        correct: 0,
+        explanation: "Carbohydrates (specifically glucose) serve as the central substrate for glycolysis and cellular respiration, providing fast energy.",
+        wrongExplanations: [
+          "Correct answer is A.",
+          "Vitamins act as organic coenzymes/cofactors rather than primary yielders of energy.",
+          "Minerals are inorganic elements serving structural or regulatory roles.",
+          "Nucleic acids store and transmit genetic information."
+        ]
+      },
+
+      // SLO 12.1.2: Autotrophic vs Heterotrophic Nutrition in Plants
+      {
+        id: 6,
+        slo: "SLO 12.1.2: Autotrophic vs Heterotrophic Nutrition in Plants",
+        question: "Autotrophic nutrition in green plants is characterized by:",
+        options: [
+          "Ingestion of preformed organic matter from other living organisms",
+          "Extracellular breakdown of dead leaf litter by fungal hyphae",
+          "Synthesis of organic food from simple inorganic raw materials",
+          "Direct absorption of digested monomers across host membranes"
+        ],
+        correct: 2,
+        explanation: "Autotrophs manufacture complex organic molecules (e.g. glucose) using light energy and simple inorganic compounds like CO₂ and H₂O.",
+        wrongExplanations: [
+          "Ingestive heterotrophic nutrition is characteristic of animals (holozoic).",
+          "Extracellular saprophytic decay is typical of fungi.",
+          "Correct answer is C.",
+          "Direct absorption across host membranes defines parasitic heterotrophy."
+        ]
+      },
+      {
+        id: 7,
+        slo: "SLO 12.1.2: Autotrophic vs Heterotrophic Nutrition in Plants",
+        question: "(Scenario 2) Cuscuta (dodder) lacks chlorophyll, has no true roots, and coils around host plant stems to extract nutrients. What mode of nutrition is this plant demonstrating?",
+        options: ["Autotrophic nutrition", "Heterotrophic nutrition", "Chemosynthetic nutrition", "Holozoic nutrition"],
+        correct: 1,
+        explanation: "Cuscuta is a parasitic non-photosynthetic plant that relies entirely on a host organism for organic and inorganic nutrients (heterotrophic mode).",
+        wrongExplanations: [
+          "Autotrophic organisms manufacture their own organic food via chlorophyll.",
+          "Correct answer is B.",
+          "Chemosynthetic organisms utilize chemical oxidation of inorganic molecules.",
+          "Holozoic nutrition involves ingestion of solid food particles (typical of animals)."
+        ]
+      },
+      {
+        id: 8,
+        slo: "SLO 12.1.2: Autotrophic vs Heterotrophic Nutrition in Plants",
+        question: "What is the fundamental difference between autotrophic and heterotrophic plants?",
+        options: [
+          "Autotrophic plants lack structural cell walls",
+          "Heterotrophic plants reproduce only by asexual spores",
+          "Heterotrophic plants store excess energy as glycogen",
+          "Autotrophic plants possess photosynthetic pigments like chlorophyll"
+        ],
+        correct: 3,
+        explanation: "Autotrophic plants possess photosynthetic machinery including chlorophyll pigments to trap solar energy, whereas heterotrophic plants lack working photosynthetic apparatus.",
+        wrongExplanations: [
+          "All plant cells possess cellulose-rich cell walls regardless of nutritional mode.",
+          "Reproductive methods vary and are independent of autotrophic status.",
+          "Plants generally store starch, not glycogen (which is typical of animals and fungi).",
+          "Correct answer is D."
+        ]
+      },
+      {
+        id: 9,
+        slo: "SLO 12.1.2: Autotrophic vs Heterotrophic Nutrition in Plants",
+        question: "Green plants utilize solar light energy to combine which two inorganic compounds during autotrophic nutrition?",
+        options: ["Carbon dioxide and water", "Glucose and oxygen", "Methane and nitrogen", "Ammonia and hydrogen"],
+        correct: 0,
+        explanation: "Photosynthesis combines CO₂ and H₂O in the presence of sunlight and chlorophyll to produce carbohydrates (C₆H₁₂O₆) and release O₂.",
+        wrongExplanations: [
+          "Correct answer is A.",
+          "Glucose and oxygen are products of photosynthesis, not inorganic starting raw materials.",
+          "Methane and nitrogen are not raw substrates for plant oxygenic photosynthesis.",
+          "Ammonia and hydrogen are not the primary inorganic compounds combined during photosynthesis."
+        ]
+      },
+      {
+        id: 10,
+        slo: "SLO 12.1.2: Autotrophic vs Heterotrophic Nutrition in Plants",
+        question: "Which plant is fully heterotrophic and depends completely on host plants for food?",
+        options: ["Maize (Zea mays)", "Sunflower (Helianthus annuus)", "Broomrape (Orobanche)", "Mustard plant (Brassica campestris)"],
+        correct: 2,
+        explanation: "Broomrape (Orobanche) is a total root parasite (holoparasite) lacking chlorophyll and dependent completely on host vascular systems.",
+        wrongExplanations: [
+          "Maize is a fully autotrophic green crop plant.",
+          "Sunflower is an autotrophic flowering plant.",
+          "Correct answer is C.",
+          "Mustard is an autotrophic photosynthesizing plant."
+        ]
+      },
+
+      // SLO 12.1.3: Deficiency of Nitrogen, Phosphorus, Potassium, and Magnesium
+      {
+        id: 11,
+        slo: "SLO 12.1.3: Deficiency of Mineral Nutrients",
+        question: "(Scenario 3) An agricultural technician examines tomato plants displaying severe yellowing (chlorosis) specifically between leaf veins on older lower leaves, while younger leaves stay green. Which mineral deficiency is most likely responsible?",
+        options: ["Iron deficiency", "Calcium deficiency", "Boron deficiency", "Magnesium deficiency"],
+        correct: 3,
+        explanation: "Magnesium is a mobile nutrient and a core constituent of chlorophyll. When deficient, it is translocated from older leaves to younger leaves, causing interveinal chlorosis in older leaves first.",
+        wrongExplanations: [
+          "Iron is immobile; its deficiency shows chlorosis in young leaves first.",
+          "Calcium deficiency causes apical meristem tip necrosis.",
+          "Boron deficiency affects growing root/shoot tips.",
+          "Correct answer is D."
+        ]
+      },
+      {
+        id: 12,
+        slo: "SLO 12.1.3: Deficiency of Mineral Nutrients",
+        question: "Plant growth becomes severely stunted, accompanied by general pale green or yellow leaves, when soil lacks adequate amounts of:",
+        options: ["Nitrogen", "Copper", "Chlorine", "Zinc"],
+        correct: 0,
+        explanation: "Nitrogen is essential for amino acids, proteins, nucleic acids, and chlorophyll. Deficiency causes overall chlorosis and severe growth stunting.",
+        wrongExplanations: [
+          "Correct answer is A.",
+          "Copper deficiency causes wilting and dieback of young shoot tips.",
+          "Chlorine is a micronutrient involved in photosynthetic water splitting.",
+          "Zinc deficiency causes rosette leaf clusters ('little leaf' disease)."
+        ]
+      },
+      {
+        id: 13,
+        slo: "SLO 12.1.3: Deficiency of Mineral Nutrients",
+        question: "(Scenario 4) A potted garden plant displays poor root development and dark green leaves with purplish discoloration along their undersides. Which mineral element is missing from the soil?",
+        options: ["Potassium", "Phosphorus", "Magnesium", "Sulfur"],
+        correct: 1,
+        explanation: "Phosphorus deficiency leads to poor root system development, stunted growth, and purple anthocyanin pigmentation on leaf undersides.",
+        wrongExplanations: [
+          "Potassium deficiency causes marginal leaf scorch/necrosis.",
+          "Correct answer is B.",
+          "Magnesium deficiency manifests as interveinal chlorosis.",
+          "Sulfur deficiency shows uniform yellowing similar to nitrogen, but primarily on younger leaves."
+        ]
+      },
+      {
+        id: 14,
+        slo: "SLO 12.1.3: Deficiency of Mineral Nutrients",
+        question: "Premature browning and death (necrosis) along leaf margins, combined with weak stems, typically indicates a deficiency of:",
+        options: ["Nitrogen", "Phosphorus", "Potassium", "Iron"],
+        correct: 2,
+        explanation: "Potassium regulates stomatal movement and osmotic balance; its deficiency causes marginal leaf burning/scorching (necrosis) and weak, lodging-prone stems.",
+        wrongExplanations: [
+          "Nitrogen deficiency results in general yellowing/chlorosis.",
+          "Phosphorus deficiency causes purplish foliage and underdeveloped roots.",
+          "Correct answer is C.",
+          "Iron deficiency exhibits interveinal chlorosis on young leaves."
+        ]
+      },
+      {
+        id: 15,
+        slo: "SLO 12.1.3: Deficiency of Mineral Nutrients",
+        question: "Magnesium is an indispensable mineral nutrient for autotrophic plants because it forms the central structural atom of:",
+        options: ["Chlorophyll", "Hemoglobin", "Cytochrome", "Ferredoxin"],
+        correct: 0,
+        explanation: "A single magnesium atom (Mg²⁺) occupies the center of the porphyrin ring of each chlorophyll molecule, essential for absorbing light energy.",
+        wrongExplanations: [
+          "Correct answer is A.",
+          "Hemoglobin contains an iron atom at its heme center (found in animal blood).",
+          "Cytochromes contain iron atoms in heme complexes.",
+          "Ferredoxin is an iron-sulfur protein."
+        ]
+      },
+
+      // SLO 12.1.4: Modes of Heterotrophic Nutrition in Plants
+      {
+        id: 16,
+        slo: "SLO 12.1.4: Modes of Heterotrophic Nutrition in Plants",
+        question: "Non-green flowering plants like Monotropa (Indian pipe) obtain nutrients from decaying leaf litter through associated fungal hyphae. This mode of plant nutrition is termed:",
+        options: ["Parasitic nutrition", "Saprophytic nutrition", "Symbiotic nutrition", "Autotrophic nutrition"],
+        correct: 1,
+        explanation: "Saprophytic/Mycoheterotrophic plants absorb organic nutrients derived from dead decaying matter via mycorrhizal fungal intermediaries.",
+        wrongExplanations: [
+          "Parasitic nutrition involves taking nutrients directly from a living host.",
+          "Correct answer is B.",
+          "Symbiotic mutualism involves reciprocal benefits, whereas mycoheterotrophs act as saprophytic exploiters.",
+          "Autotrophic plants synthesize food independently using sunlight."
+        ]
+      },
+      {
+        id: 17,
+        slo: "SLO 12.1.4: Modes of Heterotrophic Nutrition in Plants",
+        question: "(Scenario 5) Pitcher plants (Nepenthes) grow in nitrogen-deficient bog soils. How do these plants primarily satisfy their nitrogen requirement?",
+        options: [
+          "Absorbing atmospheric nitrogen gas directly through leaf stomata",
+          "Forming parasitic root haustoria with neighboring tree roots",
+          "Absorbing nitrate compounds from decaying rock surfaces",
+          "Trapping and digesting small insects"
+        ],
+        correct: 3,
+        explanation: "Pitcher plants trap insects in modified pitcher leaves and digest them with secreted enzymes to extract nitrogenous compounds.",
+        wrongExplanations: [
+          "Plants cannot fix inert atmospheric gaseous nitrogen (N₂) directly.",
+          "Nepenthes plants are carnivorous, not root parasites.",
+          "Bogs are highly acidic and nitrogen-poor, lacking mineral nitrate rocks.",
+          "Correct answer is D."
+        ]
+      },
+      {
+        id: 18,
+        slo: "SLO 12.1.4: Modes of Heterotrophic Nutrition in Plants",
+        question: "Parasitic plants like dodder penetrate the vascular tissues of host plants using specialized root-like absorbing structures called:",
+        options: ["Haustoria", "Rhizoids", "Tendrils", "Mycorrhizae"],
+        correct: 0,
+        explanation: "Haustoria are specialized peg-like roots produced by parasitic plants that penetrate host xylem and phloem to absorb water and solutes.",
+        wrongExplanations: [
+          "Correct answer is A.",
+          "Rhizoids are root-like anchoring structures in mosses and gametophytes.",
+          "Tendrils are climbing thigmotropic structures.",
+          "Mycorrhizae are symbiotic plant root-fungal associations."
+        ]
+      },
+      {
+        id: 19,
+        slo: "SLO 12.1.4: Modes of Heterotrophic Nutrition in Plants",
+        question: "(Scenario 6) Legumes host Rhizobium bacteria in root nodules. Bacteria fix atmospheric nitrogen into usable nitrates while receiving carbohydrates from the plant. Which nutritional mode is represented?",
+        options: ["Saprophytic nutrition", "Insectivorous nutrition", "Symbiotic nutrition", "Parasitic nutrition"],
+        correct: 2,
+        explanation: "Root nodule association between legumes and Rhizobium is a mutualistic symbiotic relationship where both organisms benefit.",
+        wrongExplanations: [
+          "Saprophytic nutrition depends on dead non-living matter.",
+          "Insectivorous nutrition involves trapping live animal prey.",
+          "Correct answer is C.",
+          "Parasitic nutrition harms the host organism."
+        ]
+      },
+      {
+        id: 20,
+        slo: "SLO 12.1.4: Modes of Heterotrophic Nutrition in Plants",
+        question: "Insectivorous plants trap and digest small invertebrates primarily to supplement their intake of which element?",
+        options: ["Carbon", "Hydrogen", "Oxygen", "Nitrogen"],
+        correct: 3,
+        explanation: "Insectivorous plants are autotrophic for carbon fixations via photosynthesis, but trap insects to obtain nitrogen (and phosphorus) in nutrient-poor acidic soil habitats.",
+        wrongExplanations: [
+          "Carbon is acquired through photosynthetic CO₂ assimilation.",
+          "Hydrogen is obtained from water absorbed by roots.",
+          "Oxygen is absorbed from water and ambient atmosphere.",
+          "Correct answer is D."
+        ]
+      },
+
+      // SLO 12.2.1: Forms of Heterotrophic Nutrition in Animals
+      {
+        id: 21,
+        slo: "SLO 12.2.1: Forms of Heterotrophic Nutrition in Animals",
+        question: "Which sequence correctly shows the five sequential steps of holozoic nutrition in animals?",
+        options: [
+          "Ingestion → Digestion → Absorption → Assimilation → Egestion",
+          "Digestion → Ingestion → Absorption → Egestion → Assimilation",
+          "Absorption → Ingestion → Assimilation → Digestion → Egestion",
+          "Ingestion → Assimilation → Digestion → Egestion → Absorption"
+        ],
+        correct: 0,
+        explanation: "Holozoic nutrition proceeds in strict chronological order: Ingestion (taking in food) → Digestion (breakdown) → Absorption (uptake into blood) → Assimilation (cell utilization) → Egestion (waste elimination).",
+        wrongExplanations: [
+          "Correct answer is A.",
+          "Digestion cannot occur before food is ingested.",
+          "Absorption occurs only after complex macromolecules are digested.",
+          "Assimilation occurs after simple nutrients are absorbed into bloodstream."
+        ]
+      },
+      {
+        id: 22,
+        slo: "SLO 12.2.1: Forms of Heterotrophic Nutrition in Animals",
+        question: "(Scenario 7) A pet dog ingests solid food, digests it inside its gastrointestinal tract, absorbs simple nutrients into blood, and egests insoluble waste. Which form of heterotrophic nutrition is this?",
+        options: ["Saprotrophic nutrition", "Parasitic nutrition", "Holozoic nutrition", "Symbiotic nutrition"],
+        correct: 2,
+        explanation: "Holozoic nutrition involves intake of complex organic food through a mouth, internal digestion, absorption, and egestion.",
+        wrongExplanations: [
+          "Saprotrophic nutrition relies on external enzymatic digestion of dead matter.",
+          "Parasitic organisms feed on living host tissues directly.",
+          "Correct answer is C.",
+          "Symbiotic nutrition involves mutual biological dependence between species."
+        ]
+      },
+      {
+        id: 23,
+        slo: "SLO 12.2.1: Forms of Heterotrophic Nutrition in Animals",
+        question: "An organism that lives on the external body surface of a host and feeds on its tissue fluids is classified as an:",
+        options: ["Endoparasite", "Ectoparasite", "Saprotroph", "Autotroph"],
+        correct: 1,
+        explanation: "Ectoparasites (e.g. ticks, lice, fleas) live on the exterior outer body surface of their hosts to extract blood or fluid nutrients.",
+        wrongExplanations: [
+          "Endoparasites live inside the internal organs or body cavities of a host.",
+          "Correct answer is B.",
+          "Saprotrophs feed on dead decaying organic substrates.",
+          "Autotrophs generate organic food independently."
+        ]
+      },
+      {
+        id: 24,
+        slo: "SLO 12.2.1: Forms of Heterotrophic Nutrition in Animals",
+        question: "Organisms that secrete digestive enzymes directly onto non-living organic matter and absorb the digested soluble compounds are called:",
+        options: ["Holozoic feeders", "Endoparasites", "Herbivores", "Saprotrophs"],
+        correct: 3,
+        explanation: "Saprotrophs (e.g., fungi, decomposer bacteria) perform extracellular digestion by secreting enzymes onto dead matter and absorbing soluble nutrients.",
+        wrongExplanations: [
+          "Holozoic feeders ingest solid organic matter internally.",
+          "Endoparasites live inside living tissues.",
+          "Herbivores feed on living plant tissue.",
+          "Correct answer is D."
+        ]
+      },
+      {
+        id: 25,
+        slo: "SLO 12.2.1: Forms of Heterotrophic Nutrition in Animals",
+        question: "(Scenario 8) A medical lab identifies Ascaris lumbricoides living inside the human small intestine lumen, absorbing digested nutrients directly. How is this parasite classified?",
+        options: ["Endoparasitic nutrition", "Ectoparasitic nutrition", "Saprotrophic nutrition", "Autotrophic nutrition"],
+        correct: 0,
+        explanation: "Ascaris lumbricoides lives inside the internal intestinal lumen of its host, making it an endoparasite executing endoparasitic nutrition.",
+        wrongExplanations: [
+          "Correct answer is A.",
+          "Ectoparasites inhabit external outer body surfaces.",
+          "Saprotrophs feed on non-living dead organic debris.",
+          "Autotrophs perform independent photosynthesis or chemosynthesis."
+        ]
+      },
+
+      // SLO 12.2.2: Classification of Holozoic Heterotrophs
+      {
+        id: 26,
+        slo: "SLO 12.2.2: Classification of Holozoic Heterotrophs",
+        question: "Herbivorous mammals generally possess a longer digestive tract than carnivores because:",
+        options: [
+          "Plant proteins require higher stomach acidity to break down completely",
+          "Animal flesh contains toxic compounds that demand immediate removal",
+          "Plant tissue containing cellulose is tough and difficult to digest",
+          "Herbivores ingest significantly smaller quantities of food overall"
+        ],
+        correct: 2,
+        explanation: "Cellulose walls in plant cells are structurally resilient and difficult to digest, requiring extended gut length and cecal/rumen fermenting chambers for microbial degradation.",
+        wrongExplanations: [
+          "Plant tissue is low in protein compared to meat, and animal meat requires strong gastric acid.",
+          "Animal flesh is easily digested nutrient-dense meat, requiring shorter gut transit.",
+          "Correct answer is C.",
+          "Herbivores actually consume very large quantities of plant mass due to lower caloric density."
+        ]
+      },
+      {
+        id: 27,
+        slo: "SLO 12.2.2: Classification of Holozoic Heterotrophs",
+        question: "Which tooth type is long, pointed, and prominent in carnivorous mammals for capturing and tearing prey?",
+        options: ["Incisors", "Canines", "Premolars", "Molars"],
+        correct: 1,
+        explanation: "Canine teeth are elongated, pointed, and adapted for piercing, tearing, and holding live prey in carnivores.",
+        wrongExplanations: [
+          "Incisors are flat and chisel-shaped for biting and cutting.",
+          "Correct answer is B.",
+          "Premolars are designed for shearing and grinding food.",
+          "Molars are broad flat teeth specialized for crushing and grinding."
+        ]
+      },
+      {
+        id: 28,
+        slo: "SLO 12.2.2: Classification of Holozoic Heterotrophs",
+        question: "(Scenario 9) A paleontologist uncovers a fossil mammal skull featuring broad, flat molars with ridged surfaces and absent upper canines. What was the most likely diet of this animal?",
+        options: ["Carnivore", "Omnivore", "Fluid feeder", "Herbivore"],
+        correct: 3,
+        explanation: "Broad ridged molars combined with absent or reduced upper canines (diastema) are anatomical specializations for grinding tough plant material in herbivores.",
+        wrongExplanations: [
+          "Carnivores feature large pointed canines and sharp carnassial teeth.",
+          "Omnivores possess sharp front teeth and intermediate molars for mixed diets.",
+          "Fluid feeders possess specialized tubular sucking beak or mouthparts.",
+          "Correct answer is D."
+        ]
+      },
+      {
+        id: 29,
+        slo: "SLO 12.2.2: Classification of Holozoic Heterotrophs",
+        question: "Animals that regularly include both plant material and animal tissue in their standard diet are classified as:",
+        options: ["Omnivores", "Herbivores", "Carnivores", "Detritivores"],
+        correct: 0,
+        explanation: "Omnivores (e.g., humans, bears, pigs) consume and digest both plant matter and animal flesh.",
+        wrongExplanations: [
+          "Correct answer is A.",
+          "Herbivores feed exclusively on vegetation.",
+          "Carnivores feed exclusively on animal prey.",
+          "Detritivores feed on dead decaying particulate detritus."
+        ]
+      },
+      {
+        id: 30,
+        slo: "SLO 12.2.2: Classification of Holozoic Heterotrophs",
+        question: "Ruminants like cows can digest cellulose because their specialized stomach harbors symbiotic:",
+        options: ["Viruses", "Microorganisms (bacteria and ciliates)", "Fungi spores", "Red blood cells"],
+        correct: 1,
+        explanation: "Ruminants lack native cellulase enzymes; they rely on symbiotic anaerobic microorganisms (bacteria, protozoans, ciliates) in the rumen to ferment cellulose.",
+        wrongExplanations: [
+          "Viruses do not produce digestive enzymes for cellulose degradation.",
+          "Correct answer is B.",
+          "Fungi spores are not the primary active cellulolytic symbiotic fermenters in the rumen.",
+          "Red blood cells are vascular respiratory cells, not digestive symbiotes."
+        ]
+      },
+
+      // SLO 12.2.3: Types of Heterotrophic Nutrition Based on Food Particle Size
+      {
+        id: 31,
+        slo: "SLO 12.2.3: Feeding Mechanisms Based on Particle Size",
+        question: "Feeding on microscopic organisms or minute organic debris suspended in water or soil is termed:",
+        options: ["Macrophagous feeding", "Fluid feeding", "Microphagous feeding", "Parasitic feeding"],
+        correct: 2,
+        explanation: "Microphagous feeding involves ingesting small microscopic food particles or organisms relative to the body size of the feeder.",
+        wrongExplanations: [
+          "Macrophagous feeding involves ingesting large food items or whole animals.",
+          "Fluid feeding involves sucking nutrient-rich liquids.",
+          "Correct answer is C.",
+          "Parasitic feeding involves taking nutrients from a host organism."
+        ]
+      },
+      {
+        id: 32,
+        slo: "SLO 12.2.3: Feeding Mechanisms Based on Particle Size",
+        question: "(Scenario 10) A female mosquito uses specialized piercing-sucking mouthparts to obtain blood from host mammals. Which feeding category does it belong to?",
+        options: ["Fluid feeding", "Macrophagous feeding", "Filter feeding", "Microphagous feeding"],
+        correct: 0,
+        explanation: "Female mosquitoes are fluid feeders that extract liquid blood meals through specialized proboscis mouthparts.",
+        wrongExplanations: [
+          "Correct answer is A.",
+          "Macrophagous feeders swallow large solid chunks of food.",
+          "Filter feeders strain particles from water bodies.",
+          "Microphagous feeders ingest solid microscopic particles."
+        ]
+      },
+      {
+        id: 33,
+        slo: "SLO 12.2.3: Feeding Mechanisms Based on Particle Size",
+        question: "(Scenario 11) A blue whale swims with an open mouth through ocean water, straining vast quantities of small crustaceans using baleen plates. Which feeding mechanism is utilized?",
+        options: ["Fluid feeding", "Macrophagous feeding", "Saprotrophic feeding", "Filter feeding"],
+        correct: 3,
+        explanation: "Filter feeding (a form of microphagous feeding) involves straining suspended small organisms (krill, plankton) from water currents using specialized sieving structures.",
+        wrongExplanations: [
+          "Fluid feeding involves sucking pure liquid nutrients without sieving solid organisms.",
+          "Macrophagous feeding involves capturing individual large prey items.",
+          "Saprotrophic feeding involves external enzymatic decay.",
+          "Correct answer is D."
+        ]
+      },
+      {
+        id: 34,
+        slo: "SLO 12.2.3: Feeding Mechanisms Based on Particle Size",
+        question: "Macrophagous feeders are animals that:",
+        options: [
+          "Strain microscopic plankton from liquid media",
+          "Ingest large food pieces or whole organisms",
+          "Suck liquid plant sap using haustoria",
+          "Absorb dissolved monomers across body walls"
+        ],
+        correct: 1,
+        explanation: "Macrophagous animals ingest food in large masses, chunks, or whole prey items relative to their own body size.",
+        wrongExplanations: [
+          "Straining microscopic plankton defines filter/microphagous feeding.",
+          "Correct answer is B.",
+          "Sucking liquid sap defines fluid feeding.",
+          "Absorbing dissolved monomers across body walls is saprotrophic or osmotrophic."
+        ]
+      },
+      {
+        id: 35,
+        slo: "SLO 12.2.3: Feeding Mechanisms Based on Particle Size",
+        question: "Which organism feeds as a microphagous feeder?",
+        options: ["Lion", "Snake", "Paramecium", "Hummingbird"],
+        correct: 2,
+        explanation: "Paramecium uses cilia to sweep microscopic bacteria and organic particles into its oral groove (microphagous cilia feeder).",
+        wrongExplanations: [
+          "Lions are macrophagous carnivores.",
+          "Snakes are macrophagous predators swallowing whole prey.",
+          "Correct answer is C.",
+          "Hummingbirds are fluid feeders consuming flower nectar."
+        ]
+      },
+
+      // SLO 12.2.4: Intercellular vs Intracellular Digestion
+      {
+        id: 36,
+        slo: "SLO 12.2.4: Intercellular vs Intracellular Digestion",
+        question: "Intracellular digestion refers to the enzymatic breakdown of food molecules:",
+        options: [
+          "Inside food vacuoles within individual cell cytoplasm",
+          "Inside a specialized digestive cavity or gut lumen",
+          "Outside the body of the host organism completely",
+          "Between adjacent cell walls of vascular plant tissues"
+        ],
+        correct: 0,
+        explanation: "Intracellular digestion occurs when cell membrane engulfs food (phagocytosis), forming a food vacuole that fuses with lysosomes inside cytoplasm.",
+        wrongExplanations: [
+          "Correct answer is A.",
+          "Breakdown in a gut cavity lumen is extracellular (intercellular) digestion.",
+          "Breakdown outside the host organism is external saprotrophic digestion.",
+          "Digestion between cell walls is not an animal cellular digestion process."
+        ]
+      },
+      {
+        id: 37,
+        slo: "SLO 12.2.4: Intercellular vs Intracellular Digestion",
+        question: "Extracellular (intercellular) digestion takes place when digestive enzymes are secreted into:",
+        options: [
+          "Inside nuclear matrix of unicellular organisms",
+          "Inside lysosomes surrounding a phagosome",
+          "Within mitochondria during cellular respiration",
+          "Within an internal gut lumen or cavity outside cells"
+        ],
+        correct: 3,
+        explanation: "Extracellular digestion occurs when digestive cells line a body cavity/lumen and secrete hydrolytic enzymes into that space to break down food outside individual cells.",
+        wrongExplanations: [
+          "Nuclear matrix contains genomic DNA, not digestive cavities.",
+          "Lysosome-phagosome fusion is intracellular digestion.",
+          "Mitochondria carry out ATP synthesis, not food digestion.",
+          "Correct answer is D."
+        ]
+      },
+      {
+        id: 38,
+        slo: "SLO 12.2.4: Intercellular vs Intracellular Digestion",
+        question: "(Scenario 12) Under a microscope, an Amoeba surrounds a smaller cell using pseudopodia, enclosing it within a vacuole where hydrolytic enzymes digest it. Which form of digestion is shown?",
+        options: ["Extracellular digestion", "Intracellular digestion", "Saprotrophic digestion", "Intercellular digestion"],
+        correct: 1,
+        explanation: "Amoeba engulfs food via phagocytosis into a food vacuole, breaking it down internally via intracellular digestion.",
+        wrongExplanations: [
+          "Extracellular digestion occurs outside the cytoplasm in a cavity.",
+          "Correct answer is B.",
+          "Saprotrophic digestion relies on external enzymatic decay of dead matter.",
+          "Intercellular digestion is synonymous with extracellular cavity digestion."
+        ]
+      },
+      {
+        id: 39,
+        slo: "SLO 12.2.4: Intercellular vs Intracellular Digestion",
+        question: "What major evolutionary advantage does extracellular digestion provide over intracellular digestion?",
+        options: [
+          "Eliminates the need for hydrolytic enzymes",
+          "Prevents generation of metabolic waste products",
+          "Allows consumption of food items larger than individual cells",
+          "Enables cells to synthesize glucose without light"
+        ],
+        correct: 2,
+        explanation: "Extracellular digestion enables animals to ingest, break down, and process large organisms or bulk food items larger than individual cells.",
+        wrongExplanations: [
+          "Extracellular digestion still requires hydrolytic digestive enzymes.",
+          "Metabolic wastes are produced regardless of digestion site.",
+          "Correct answer is C.",
+          "Glucose synthesis without light is chemosynthesis, unrelated to animal digestion."
+        ]
+      },
+      {
+        id: 40,
+        slo: "SLO 12.2.4: Intercellular vs Intracellular Digestion",
+        question: "Which animal utilizes both extracellular and intracellular digestion during its normal feeding process?",
+        options: ["Amoeba", "Tapeworm", "Human", "Hydra"],
+        correct: 3,
+        explanation: "Hydra initiates extracellular digestion in its gastrovascular cavity, then endodermal cells phagocytose partially digested particles to complete intracellular digestion.",
+        wrongExplanations: [
+          "Amoeba utilizes intracellular digestion exclusively.",
+          "Tapeworms lack a mouth/gut and absorb simple nutrients directly across body walls.",
+          "Humans utilize extracellular digestion exclusively within the gut lumen.",
+          "Correct answer is D."
+        ]
+      },
+
+      // SLO 12.3.1: Nutrition in Amoeba, Hydra, Planaria, and Cockroach
+      {
+        id: 41,
+        slo: "SLO 12.3.1: Nutrition in Simple Invertebrates",
+        question: "In Amoeba, food particles are engulfed through the formation of temporary cytoplasmic extensions called:",
+        options: ["Pseudopodia", "Cilia", "Flagella", "Tentacles"],
+        correct: 0,
+        explanation: "Amoeba extends pseudopodia ('false feet') around food items to enclose them in a phagocytic food vacuole.",
+        wrongExplanations: [
+          "Correct answer is A.",
+          "Cilia are short hair-like organelles found in Paramecium.",
+          "Flagella are long whip-like organelles found in Euglena.",
+          "Tentacles are multicellular appendages found in Hydra."
+        ]
+      },
+      {
+        id: 42,
+        slo: "SLO 12.3.1: Nutrition in Simple Invertebrates",
+        question: "(Scenario 13) A Hydra captures a small water flea by immobilizing it with microscopic stinging capsules on its tentacles. What are these specialized capsules called?",
+        options: ["Choanocytes", "Flame cells", "Nematocysts", "Parapodia"],
+        correct: 2,
+        explanation: "Nematocysts (stinging organelles within cnidocytes) inject toxins into prey to paralyze and capture them.",
+        wrongExplanations: [
+          "Choanocytes are flagellated collar cells in sponges.",
+          "Flame cells are excretory units in flatworms.",
+          "Correct answer is C.",
+          "Parapodia are locomotor structures in annelid polychaetes."
+        ]
+      },
+      {
+        id: 43,
+        slo: "SLO 12.3.1: Nutrition in Simple Invertebrates",
+        question: "In Planaria, food is ingested through an eversible muscular structure located on the ventral surface called the:",
+        options: ["Mandible", "Muscular pharynx", "Crop", "Proventriculus"],
+        correct: 1,
+        explanation: "Planaria extends a tubular, eversible muscular pharynx out of its ventral mouth opening to suck in food fluids and tissue particles.",
+        wrongExplanations: [
+          "Mandibles are hard chewing mouthparts in arthropods.",
+          "Correct answer is B.",
+          "Crop is a food storage pouch in birds and insects.",
+          "Proventriculus is a grinding gizzard structure in birds/insects."
+        ]
+      },
+      {
+        id: 44,
+        slo: "SLO 12.3.1: Nutrition in Simple Invertebrates",
+        question: "(Scenario 14) Dissection of a cockroach reveals a hard, muscular organ containing internal chitinous teeth used for mechanical grinding of food. What is this organ?",
+        options: ["Crop", "Hepatic caeca", "Esophagus", "Gizzard (proventriculus)"],
+        correct: 3,
+        explanation: "The gizzard (proventriculus) in cockroaches possesses thick muscular walls and six chitinous teeth to crush and pulverize solid food.",
+        wrongExplanations: [
+          "The crop is a thin-walled sac used solely for temporary food storage.",
+          "Hepatic caeca are digestive diverticula that secrete enzymes.",
+          "Esophagus is a simple muscular conducting tube.",
+          "Correct answer is D."
+        ]
+      },
+      {
+        id: 45,
+        slo: "SLO 12.3.1: Nutrition in Simple Invertebrates",
+        question: "What is the primary function of the crop in the digestive canal of a cockroach?",
+        options: [
+          "Temporary storage of food",
+          "Fine mechanical grinding of food",
+          "Complete absorption of water",
+          "Direct secretion of bile juice"
+        ],
+        correct: 0,
+        explanation: "The crop in a cockroach is a large, distensible organ used for the temporary storage of ingested food before it passes into the gizzard.",
+        wrongExplanations: [
+          "Correct answer is A.",
+          "Mechanical grinding is performed by the gizzard (proventriculus).",
+          "Water absorption occurs primarily in the rectum.",
+          "Cockroaches do not possess a liver or secrete bile."
+        ]
+      },
+
+      // SLO 12.3.2: Complete vs Incomplete Alimentary Canal
+      {
+        id: 46,
+        slo: "SLO 12.3.2: Complete vs Incomplete Alimentary Canal",
+        question: "An incomplete alimentary canal is defined as a digestive tract that features:",
+        options: [
+          "Two separate openings: mouth and anus",
+          "No internal cavities or digestive structures",
+          "A single opening functioning for ingestion and egestion",
+          "Multiple stomach chambers connected to teeth"
+        ],
+        correct: 2,
+        explanation: "An incomplete digestive system (sac-like gut) has only one opening (mouth) through which food enters and undigested waste is expelled.",
+        wrongExplanations: [
+          "Two separate openings define a complete alimentary canal.",
+          "Sac-like guts possess gastrovascular cavities.",
+          "Correct answer is C.",
+          "Multiple stomach chambers describe specialized ruminant complete guts."
+        ]
+      },
+      {
+        id: 47,
+        slo: "SLO 12.3.2: Complete vs Incomplete Alimentary Canal",
+        question: "A complete alimentary canal provides which functional advantage?",
+        options: [
+          "Mixing ingested food directly with undigested waste",
+          "One-way movement allowing specialized functional regions",
+          "Inability to feed continuously until waste is ejected",
+          "Total absence of digestive enzymes"
+        ],
+        correct: 1,
+        explanation: "A complete alimentary canal (tube-within-a-tube gut with mouth and anus) allows one-way flow of food, enabling sequential regional specialization for processing.",
+        wrongExplanations: [
+          "Mixing food with waste occurs in incomplete single-opening cavities.",
+          "Correct answer is B.",
+          "Incomplete guts require organisms to pause feeding to eject waste.",
+          "Complete guts synthesize and utilize highly specialized digestive enzymes."
+        ]
+      },
+      {
+        id: 48,
+        slo: "SLO 12.3.2: Complete vs Incomplete Alimentary Canal",
+        question: "(Scenario 15) A flatworm takes in food through its ventral pharynx into a branched cavity and expels undigested waste out through the same opening. What type of gut is this?",
+        options: ["Incomplete alimentary canal", "Complete alimentary canal", "Vascular circulatory canal", "Coelomic tube"],
+        correct: 0,
+        explanation: "Because flatworms like Planaria use a single body opening for both food ingestion and waste egestion, they possess an incomplete digestive gut.",
+        wrongExplanations: [
+          "Correct answer is A.",
+          "Complete guts possess separate mouth and anal openings.",
+          "Flatworms lack a vascular circulatory system.",
+          "Flatworms are acoelomate and lack a coelomic body tube."
+        ]
+      },
+      {
+        id: 49,
+        slo: "SLO 12.3.2: Complete vs Incomplete Alimentary Canal",
+        question: "Which organism possesses a complete digestive system with both a mouth and an anus?",
+        options: ["Hydra", "Planaria", "Jellyfish", "Cockroach"],
+        correct: 3,
+        explanation: "Cockroaches (arthropods) have a tubular complete alimentary canal extending from mouth to anus.",
+        wrongExplanations: [
+          "Hydra has an incomplete gastrovascular cavity.",
+          "Planaria has an incomplete branched gut.",
+          "Jellyfish have an incomplete sac-like gastrovascular cavity.",
+          "Correct answer is D."
+        ]
+      },
+      {
+        id: 50,
+        slo: "SLO 12.3.2: Complete vs Incomplete Alimentary Canal",
+        question: "In animals with an incomplete digestive system, digestion and waste elimination take place inside a single central chamber called the:",
+        options: ["Coelom", "Pseudocoelom", "Gastrovascular cavity", "Hemocoel"],
+        correct: 2,
+        explanation: "The gastrovascular cavity functions simultaneously in digestion, nutrient distribution, and waste expulsion in simple organisms like cnidarians and platyhelminthes.",
+        wrongExplanations: [
+          "Coelom is a secondary fluid-filled body cavity lined by mesoderm.",
+          "Pseudocoelom is a persistent blastocoel cavity between mesoderm and endoderm.",
+          "Correct answer is C.",
+          "Hemocoel is an open circulatory blood cavity in arthropods."
+        ]
+      },
+
+      // SLO 12.4.1: Function and Structure of Human Digestive Organs
+      {
+        id: 51,
+        slo: "SLO 12.4.1: Human Digestive Organs",
+        question: "(Scenario 16) A person experiences acid reflux (heartburn) when stomach contents flow upward into the esophagus. Which muscular ring normally prevents this backflow?",
+        options: ["Pyloric sphincter", "Lower esophageal (cardiac) sphincter", "Ileocecal sphincter", "External anal sphincter"],
+        correct: 1,
+        explanation: "The lower esophageal (cardiac) sphincter controls the junction between esophagus and stomach, contracting to prevent acidic gastric juice backflow.",
+        wrongExplanations: [
+          "Pyloric sphincter regulates passage between stomach and duodenum.",
+          "Correct answer is B.",
+          "Ileocecal sphincter controls flow from ileum into cecum.",
+          "External anal sphincter regulates voluntary defecation at the rectum exit."
+        ]
+      },
+      {
+        id: 52,
+        slo: "SLO 12.4.1: Human Digestive Organs",
+        question: "Bile is synthesized by the liver and stored in the gallbladder. What is its primary physiological role?",
+        options: [
+          "Chemically digesting proteins into amino acids",
+          "Converting starch into maltose in stomach",
+          "Neutralizing pancreatic enzymes in oral cavity",
+          "Emulsifying large fat droplets into tiny globules"
+        ],
+        correct: 3,
+        explanation: "Bile salts emulsify large lipid droplets into micro-droplets (micelles), expanding the surface area for pancreatic lipase activity.",
+        wrongExplanations: [
+          "Bile contains no digestive enzymes; proteins are digested by proteases.",
+          "Starch digestion is carried out by amylase enzymes.",
+          "Bile enters the duodenum, not the oral cavity.",
+          "Correct answer is D."
+        ]
+      },
+      {
+        id: 53,
+        slo: "SLO 12.4.1: Human Digestive Organs",
+        question: "Microscopic finger-like folds (villi) in the human small intestine serve primarily to:",
+        options: [
+          "Increasing surface area for nutrient absorption",
+          "Storing undigested fiber temporarily",
+          "Secreting hydrochloric acid continuously",
+          "Churning mechanical chyme into solid bolus"
+        ],
+        correct: 0,
+        explanation: "Intestinal villi and microvilli vastly expand the internal absorptive surface area of the small intestine to maximize nutrient uptake into blood and lymph.",
+        wrongExplanations: [
+          "Correct answer is A.",
+          "Undigested fiber passes to the large intestine/colon.",
+          "Hydrochloric acid is secreted by parietal cells in the stomach.",
+          "Mechanical churning of chyme occurs in the stomach."
+        ]
+      },
+      {
+        id: 54,
+        slo: "SLO 12.4.1: Human Digestive Organs",
+        question: "Which enzyme in human saliva begins the chemical digestion of cooked starch inside the mouth?",
+        options: ["Pepsin", "Trypsin", "Salivary amylase (ptyalin)", "Lipase"],
+        correct: 2,
+        explanation: "Salivary amylase (ptyalin) is secreted by salivary glands and hydrolyzes starch into maltose and dextrins in the oral cavity.",
+        wrongExplanations: [
+          "Pepsin digests proteins in the acidic stomach environment.",
+          "Trypsin breaks down proteins in the alkaline duodenum.",
+          "Correct answer is C.",
+          "Lipase hydrolyzes dietary lipids."
+        ]
+      },
+      {
+        id: 55,
+        slo: "SLO 12.4.1: Human Digestive Organs",
+        question: "Which accessory digestive gland secretes a fluid containing sodium bicarbonate, trypsinogen, amylase, and lipase into the duodenum?",
+        options: ["Liver", "Pancreas", "Spleen", "Gallbladder"],
+        correct: 1,
+        explanation: "The pancreas secretes alkaline pancreatic juice containing sodium bicarbonate and key enzymes (trypsinogen, lipase, amylase, nuclease) into the duodenum.",
+        wrongExplanations: [
+          "Liver synthesizes bile salts, not digestive enzymes.",
+          "Correct answer is B.",
+          "Spleen is a lymphatic filter organ, not a digestive gland.",
+          "Gallbladder stores and concentrates bile."
+        ]
+      },
+
+      // SLO 12.4.2: Digestion of Carbohydrates, Proteins, and Lipids in Humans
+      {
+        id: 56,
+        slo: "SLO 12.4.2: Digestion of Biomolecules in Humans",
+        question: "In the human digestive system, chemical breakdown of dietary proteins begins inside the:",
+        options: ["Oral cavity", "Esophagus", "Duodenum", "Stomach"],
+        correct: 3,
+        explanation: "Protein digestion initiates in the stomach through the action of pepsin in the presence of hydrochloric acid (HCl).",
+        wrongExplanations: [
+          "Oral cavity digests carbohydrates via salivary amylase.",
+          "Esophagus serves solely as a muscular transport tube.",
+          "Duodenum continues protein digestion, but initiation occurs in stomach.",
+          "Correct answer is D."
+        ]
+      },
+      {
+        id: 57,
+        slo: "SLO 12.4.2: Digestion of Biomolecules in Humans",
+        question: "(Scenario 17) A person takes a high dose of antacid medication, raising gastric fluid pH to 7.0. Which enzyme's action in the stomach will be severely reduced?",
+        options: ["Pepsin", "Salivary amylase", "Pancreatic lipase", "Maltase"],
+        correct: 0,
+        explanation: "Pepsinogen requires an acidic pH (~1.5–2.0) for conversion to active pepsin and optimal protein cleavage. Neutralizing gastric pH inactivates pepsin.",
+        wrongExplanations: [
+          "Correct answer is A.",
+          "Salivary amylase works optimally at neutral pH (~6.8).",
+          "Pancreatic lipase acts in the alkaline duodenum (pH ~8.0).",
+          "Maltase acts on brush border intestinal membranes at neutral/alkaline pH."
+        ]
+      },
+      {
+        id: 58,
+        slo: "SLO 12.4.2: Digestion of Biomolecules in Humans",
+        question: "Pancreatic lipase hydrolyzes fat molecules into which final absorbable end products?",
+        options: ["Monosaccharides and water", "Polypeptides and amino acids", "Fatty acids and glycerol", "Nucleotides and phosphates"],
+        correct: 2,
+        explanation: "Lipase cleaves triglyceride ester bonds, yielding free fatty acids, monoglycerides, and glycerol.",
+        wrongExplanations: [
+          "Monosaccharides are products of carbohydrate digestion.",
+          "Amino acids are products of protein digestion.",
+          "Correct answer is C.",
+          "Nucleotides are products of nucleic acid digestion by nucleases."
+        ]
+      },
+      {
+        id: 59,
+        slo: "SLO 12.4.2: Digestion of Biomolecules in Humans",
+        question: "Which enzyme secreted in pancreatic juice breaks down polypeptides into smaller peptides in the small intestine?",
+        options: ["Pepsin", "Trypsin", "Ptyalin", "Gastrin"],
+        correct: 1,
+        explanation: "Trypsin (activated from trypsinogen by enteropeptidase) cleaves polypeptides into oligopeptides in the alkaline duodenal environment.",
+        wrongExplanations: [
+          "Pepsin is a stomach enzyme.",
+          "Correct answer is B.",
+          "Ptyalin (salivary amylase) digests starch.",
+          "Gastrin is a peptide hormone regulating stomach acid secretion."
+        ]
+      },
+      {
+        id: 60,
+        slo: "SLO 12.4.2: Digestion of Biomolecules in Humans",
+        question: "The final chemical breakdown and maximum absorption of glucose and amino acids occurs across the wall of the:",
+        options: ["Stomach", "Colon", "Esophagus", "Jejunum and Ileum"],
+        correct: 3,
+        explanation: "The jejunum and ileum contain extensive brush border enzymes and villous vascular networks where nutrient digestion is completed and absorbed.",
+        wrongExplanations: [
+          "Stomach absorbs water, alcohol, and simple lipids, but not bulk amino acids or glucose.",
+          "Colon absorbs excess water and electrolytes.",
+          "Esophagus lacks absorptive mucosa.",
+          "Correct answer is D."
+        ]
+      },
+
+      // SLO 12.4.3: Dental Diseases
+      {
+        id: 61,
+        slo: "SLO 12.4.3: Dental Diseases",
+        question: "Dental caries (tooth decay) is defined as the progressive breakdown of enamel and dentin caused by:",
+        options: [
+          "Fungal infection of soft palate",
+          "Physical wear from drinking cold liquids",
+          "Bacterial acid destruction of enamel and dentin",
+          "Deficiency of dietary vitamin C only"
+        ],
+        correct: 2,
+        explanation: "Dental caries is caused by organic acids produced by oral bacteria (e.g. Streptococcus mutans) fermenting dietary sugars, which demineralize enamel and dentin.",
+        wrongExplanations: [
+          "Fungal infections cause thrush, not dental caries.",
+          "Cold liquids do not cause bacterial acid demineralization of enamel.",
+          "Correct answer is C.",
+          "Vitamin C deficiency causes scurvy and bleeding gums, not direct caries."
+        ]
+      },
+      {
+        id: 62,
+        slo: "SLO 12.4.3: Dental Diseases",
+        question: "(Scenario 18) A patient visits a dentist complaining of swollen, red gums that bleed during brushing, but X-rays show no loss of supporting jaw bone. What condition is present?",
+        options: ["Gingivitis", "Dental caries", "Periodontitis", "Pulpitis"],
+        correct: 0,
+        explanation: "Gingivitis is an early, reversible inflammation of the superficial gingiva (gums) without destruction of alveolar bone or periodontal ligament.",
+        wrongExplanations: [
+          "Correct answer is A.",
+          "Dental caries is structural cavity destruction of enamel/dentin.",
+          "Periodontitis involves irreversible loss of supporting alveolar bone.",
+          "Pulpitis is painful inflammation of the inner vascular dental pulp."
+        ]
+      },
+      {
+        id: 63,
+        slo: "SLO 12.4.3: Dental Diseases",
+        question: "Severe gum infection that destroys the periodontal membrane and supporting alveolar bone, leading to loose teeth, is called:",
+        options: ["Gingivitis", "Dental caries", "Pulpitis", "Periodontitis"],
+        correct: 3,
+        explanation: "Periodontitis is an advanced inflammatory dental disease where chronic bacterial plaque destroys periodontal fibers and supporting alveolar bone.",
+        wrongExplanations: [
+          "Gingivitis is limited to superficial gum inflammation without bone loss.",
+          "Dental caries affects tooth tissue crowns/roots.",
+          "Pulpitis affects internal tooth nerve tissue.",
+          "Correct answer is D."
+        ]
+      },
+      {
+        id: 64,
+        slo: "SLO 12.4.3: Dental Diseases",
+        question: "Dental plaque is a soft, sticky film that continuously forms on teeth, consisting mainly of:",
+        options: [
+          "Pure calcium phosphate crystals",
+          "Bacteria, salivary proteins, and food debris",
+          "Dried stomach acid residue",
+          "Epithelial cells from pharynx"
+        ],
+        correct: 1,
+        explanation: "Dental plaque is a biological biofilm composed of oral bacterial colonies embedded in a matrix of salivary glycoproteins and food debris.",
+        wrongExplanations: [
+          "Calcified mineral crystals form calculus (tartar), not soft plaque.",
+          "Correct answer is B.",
+          "Stomach acid causes chemical erosion, not dental plaque formation.",
+          "Epithelial cells are minor components compared to bacterial biofilm mass."
+        ]
+      },
+      {
+        id: 65,
+        slo: "SLO 12.4.3: Dental Diseases",
+        question: "Hardened, calcified dental plaque that bonds firmly to enamel and can only be removed professionally is called:",
+        options: ["Dental caries", "Enamel cuticle", "Calculus (tartar)", "Mucous film"],
+        correct: 2,
+        explanation: "Calculus (tartar) is mineralized plaque formed when calcium and phosphate ions in saliva precipitate within unremoved biofilm.",
+        wrongExplanations: [
+          "Dental caries refers to cavity destruction of enamel.",
+          "Enamel cuticle is a microscopic protective surface layer.",
+          "Correct answer is C.",
+          "Mucous film is soft and easily brushed away."
+        ]
+      },
+
+      // SLO 12.4.4: Causes and Preventive Measures of Dental Diseases
+      {
+        id: 66,
+        slo: "SLO 12.4.4: Causes and Prevention of Dental Diseases",
+        question: "Mouth bacteria produce enamel-destroying acids primarily by fermenting dietary:",
+        options: ["Sugars and carbohydrates", "Proteins and amino acids", "Fats and oils", "Mineral salts"],
+        correct: 0,
+        explanation: "Acidogenic bacteria like Streptococcus mutans metabolize fermentable carbohydrates (sucrose, glucose) into lactic acid, dropping pH and eroding enamel.",
+        wrongExplanations: [
+          "Correct answer is A.",
+          "Bacterial protein breakdown produces alkaline end-products (ammonia), not enamel-corroding acids.",
+          "Fats are not fermented into corrosive organic acids by mouth bacteria.",
+          "Mineral salts are inorganic and non-fermentable."
+        ]
+      },
+      {
+        id: 67,
+        slo: "SLO 12.4.4: Causes and Prevention of Dental Diseases",
+        question: "(Scenario 19) A dental hygienist applies fluoride varnish to a teenager's teeth. How does fluoride help prevent tooth decay?",
+        options: [
+          "Killing all beneficial digestive bacteria in saliva",
+          "Permanently stopping salivary gland secretion",
+          "Replacing lost dentin with synthetic bone",
+          "Strengthening enamel by forming acid-resistant fluorapatite"
+        ],
+        correct: 3,
+        explanation: "Fluoride ions incorporate into hydroxyapatite enamel crystals to form fluorapatite, which is significantly more resistant to bacterial acid dissolution.",
+        wrongExplanations: [
+          "Fluoride varnish does not sterilize normal oral flora.",
+          "Salivary flow is essential for oral hygiene and buffering.",
+          "Fluoride does not synthesize artificial bone tissue.",
+          "Correct answer is D."
+        ]
+      },
+      {
+        id: 68,
+        slo: "SLO 12.4.4: Causes and Prevention of Dental Diseases",
+        question: "Which daily oral care practice is necessary for removing bacterial plaque from tight spaces between adjacent teeth?",
+        options: ["Rinsing with warm water", "Dental flossing", "Chewing gum", "Drinking fluoridated tea"],
+        correct: 1,
+        explanation: "Dental flossing cleans interdental spaces where toothbrush bristles cannot reach, removing trapped plaque and food debris.",
+        wrongExplanations: [
+          "Water rinsing cannot mechanically disrupt sticky bacterial biofilms.",
+          "Correct answer is B.",
+          "Chewing gum cleans occlusal surfaces but cannot clear tight interdental gaps.",
+          "Drinking tea does not mechanically remove interdental biofilm."
+        ]
+      },
+      {
+        id: 69,
+        slo: "SLO 12.4.4: Causes and Prevention of Dental Diseases",
+        question: "Limiting frequent consumption of sugary snacks and carbonated drinks prevents dental caries by:",
+        options: [
+          "Increasing jaw bone density",
+          "Preventing salivary gland swelling",
+          "Limiting acid production by oral bacteria",
+          "Reducing intestinal lipid absorption"
+        ],
+        correct: 2,
+        explanation: "Reducing substrate availability (sugars) restricts bacterial acid fermentation frequency, reducing enamel demineralization windows.",
+        wrongExplanations: [
+          "Sugars do not directly affect jaw bone density.",
+          "Sugar consumption does not cause salivary gland inflammation.",
+          "Correct answer is C.",
+          "Lipid absorption in intestines is unrelated to dental caries."
+        ]
+      },
+      {
+        id: 70,
+        slo: "SLO 12.4.4: Causes and Prevention of Dental Diseases",
+        question: "Professional dental scaling is performed by a dentist primarily to remove:",
+        options: [
+          "Calcified tartar deposits below and above the gumline",
+          "Soft food particles after eating",
+          "Enamel stains caused by water",
+          "Infected tonsils near the pharynx"
+        ],
+        correct: 0,
+        explanation: "Dental scaling uses specialized hand or ultrasonic instruments to remove calcified calculus (tartar) that cannot be brushed away at home.",
+        wrongExplanations: [
+          "Correct answer is A.",
+          "Soft food particles are easily removed by home brushing and flossing.",
+          "Scaling targets calcified plaque biofilms, not intrinsic water stains.",
+          "Tonsillectomy is a surgical throat procedure."
+        ]
+      },
+
+      // SLO 12.4.5: Disorders of the Gastrointestinal Tract
+      {
+        id: 71,
+        slo: "SLO 12.4.5: Disorders of the Gastrointestinal Tract",
+        question: "(Scenario 20) A young adult severely restricts food intake due to an intense fear of gaining weight and a distorted self-body image, becoming severely underweight. Which disorder is this?",
+        options: ["Bulimia nervosa", "Dyspepsia", "Anorexia nervosa", "Piles"],
+        correct: 2,
+        explanation: "Anorexia nervosa is a psychiatric eating disorder characterized by extreme self-starvation, intense fear of weight gain, and body dysmorphia.",
+        wrongExplanations: [
+          "Bulimia nervosa involves binge eating followed by purging.",
+          "Dyspepsia is indigestion or stomach discomfort.",
+          "Correct answer is C.",
+          "Piles (hemorrhoids) is a vascular rectal vein condition."
+        ]
+      },
+      {
+        id: 72,
+        slo: "SLO 12.4.5: Disorders of the Gastrointestinal Tract",
+        question: "A key clinical difference between simple diarrhoea and dysentery is that dysentery involves:",
+        options: [
+          "Infrequent hard stool passage",
+          "Stool containing blood and mucus accompanied by intestinal inflammation",
+          "Excessive gas accumulation in the stomach",
+          "Acid reflux into the upper esophagus"
+        ],
+        correct: 1,
+        explanation: "Dysentery is an inflammatory intestinal infection (often Entamoeba or Shigella) causing bloody, mucus-containing diarrhea and severe abdominal cramps.",
+        wrongExplanations: [
+          "Infrequent hard stool passage defines constipation.",
+          "Correct answer is B.",
+          "Excessive gas accumulation is flatulence/bloating.",
+          "Acid reflux is gastroesophageal reflux disease (GERD)."
+        ]
+      },
+      {
+        id: 73,
+        slo: "SLO 12.4.5: Disorders of the Gastrointestinal Tract",
+        question: "Peptic ulcers are open lesions in the mucosal lining of the stomach or duodenum commonly linked to infection by:",
+        options: ["Escherichia coli", "Entamoeba histolytica", "Streptococcus pneumoniae", "Helicobacter pylori"],
+        correct: 3,
+        explanation: "Helicobacter pylori infection colonizes the protective stomach mucus layer, triggering chronic inflammation that leads to peptic ulceration.",
+        wrongExplanations: [
+          "E. coli commonly causes foodborne enteritis or urinary tract infections.",
+          "Entamoeba histolytica causes amoebic dysentery.",
+          "Streptococcus pneumoniae causes bacterial pneumonia.",
+          "Correct answer is D."
+        ]
+      },
+      {
+        id: 74,
+        slo: "SLO 12.4.5: Disorders of the Gastrointestinal Tract",
+        question: "An eating disorder characterized by repeated cycles of uncontrolled binge eating followed by self-induced vomiting or purgative abuse is:",
+        options: ["Bulimia nervosa", "Anorexia nervosa", "Food poisoning", "Dyspepsia"],
+        correct: 0,
+        explanation: "Bulimia nervosa features recurrent episodes of uncontrolled overeating (bingeing) followed by compensatory purging actions (vomiting, laxative abuse).",
+        wrongExplanations: [
+          "Correct answer is A.",
+          "Anorexia nervosa involves primary food restriction and self-starvation.",
+          "Food poisoning is an acute microbial toxin ingestion condition.",
+          "Dyspepsia refers to impaired digestion/heartburn."
+        ]
+      },
+      {
+        id: 75,
+        slo: "SLO 12.4.5: Disorders of the Gastrointestinal Tract",
+        question: "Piles (hemorrhoids) is a painful vascular condition characterized by dilated, inflamed veins situated in the:",
+        options: ["Esophagus and cardiac sphincter", "Rectum and anal canal", "Stomach and pylorus", "Duodenum and gall bladder"],
+        correct: 1,
+        explanation: "Piles (hemorrhoids) are swollen, inflamed vascular venous plexuses located in the submucosa of the lower rectum and anal canal.",
+        wrongExplanations: [
+          "Esophageal varices occur in the esophagus, not piles.",
+          "Correct answer is B.",
+          "Stomach veins do not form hemorrhoid piles.",
+          "Duodeno-biliary structures are unrelated to hemorrhoids."
+        ]
+      },
+
+      // SLO 12.4.6: Causes and Preventive Measures of GIT Disorders
+      {
+        id: 76,
+        slo: "SLO 12.4.6: Prevention of GIT Disorders",
+        question: "Which habit is most effective in preventing chronic constipation?",
+        options: [
+          "Eliminating all fresh fruits and vegetables",
+          "Increasing consumption of saturated animal fats",
+          "Increasing dietary fiber and daily fluid intake",
+          "Avoiding all whole-grain food products"
+        ],
+        correct: 2,
+        explanation: "Dietary fiber adds bulk and retains water in feces, stimulating bowel peristalsis and preventing chronic constipation.",
+        wrongExplanations: [
+          "Eliminating fruits/vegetables reduces fiber and worsens constipation.",
+          "Saturated fats do not add dietary bulk or assist gut motility.",
+          "Correct answer is C.",
+          "Avoiding whole grains eliminates essential insoluble fiber."
+        ]
+      },
+      {
+        id: 77,
+        slo: "SLO 12.4.6: Prevention of GIT Disorders",
+        question: "Food poisoning caused by bacterial contamination like Salmonella in raw poultry or eggs is best prevented by:",
+        options: [
+          "Storing cooked food at warm room temperature",
+          "Washing raw meat with plain tap water before freezing",
+          "Reheating food multiple times over low heat",
+          "Thorough cooking and proper hygiene during food handling"
+        ],
+        correct: 3,
+        explanation: "Thorough cooking destroys heat-sensitive pathogens like Salmonella, while proper hygiene prevents cross-contamination.",
+        wrongExplanations: [
+          "Warm room temperatures encourage bacterial proliferation.",
+          "Washing raw meat splashes bacteria across kitchen surfaces.",
+          "Repeated low-temperature heating may enter bacterial danger zones.",
+          "Correct answer is D."
+        ]
+      },
+      {
+        id: 78,
+        slo: "SLO 12.4.6: Prevention of GIT Disorders",
+        question: "Which action helps reduce the risk of developing peptic ulcers?",
+        options: [
+          "Avoiding overuse of non-steroidal anti-inflammatory drugs (NSAIDs)",
+          "Consuming large amounts of spicy chili peppers",
+          "Skipping meals regularly to rest stomach",
+          "Drinking carbonated beverages with every meal"
+        ],
+        correct: 0,
+        explanation: "Chronic overuse of NSAIDs (e.g. aspirin, ibuprofen) inhibits protective gastric prostaglandin synthesis, increasing peptic ulcer risk.",
+        wrongExplanations: [
+          "Correct answer is A.",
+          "Spicy foods irritate existing ulcers, not prevent them.",
+          "Skipping meals leaves stomach mucosa exposed to unbuffered gastric acid.",
+          "Carbonated beverages increase stomach distension and gastric secretion."
+        ]
+      },
+      {
+        id: 79,
+        slo: "SLO 12.4.6: Prevention of GIT Disorders",
+        question: "Community outbreaks of infectious diarrhoea and dysentery are most effectively reduced by:",
+        options: [
+          "Increasing intake of iron supplements",
+          "Boiling drinking water and improving sewage sanitation",
+          "Spraying chemical insecticides in living rooms",
+          "Avoiding exercise during summer months"
+        ],
+        correct: 1,
+        explanation: "Waterborne enteric pathogens are transmitted via the fecal-oral route; clean boiled water and proper sewage sanitation eliminate transmission vectors.",
+        wrongExplanations: [
+          "Iron supplements do not prevent bacterial/amoebic water infections.",
+          "Correct answer is B.",
+          "Insecticides target flying insects, not waterborne fecal bacteria.",
+          "Avoiding exercise has no effect on enteric microbial transmission."
+        ]
+      },
+      {
+        id: 80,
+        slo: "SLO 12.4.6: Prevention of GIT Disorders",
+        question: "To prevent recurring indigestion (dyspepsia), individuals are recommended to:",
+        options: [
+          "Eat large heavy meals right before sleeping",
+          "Lying down flat immediately after finishing meals",
+          "Eat smaller meals slowly and avoid excessively fatty foods",
+          "Drinking large quantities of vinegar before meals"
+        ],
+        correct: 2,
+        explanation: "Consuming moderate, well-chewed meals low in excess fats reduces gastric strain and prevents delayed gastric emptying and indigestion.",
+        wrongExplanations: [
+          "Large bedtime meals worsen acid reflux and delayed digestion.",
+          "Lying down after eating promotes heartburn and acid reflux.",
+          "Correct answer is C.",
+          "Drinking vinegar increases gastric acidity and worsens mucosal discomfort."
+        ]
+      }
+    ];
+
+    function App() {
+      // Quiz State
+      const [quizStarted, setQuizStarted] = useState(false);
+      const [quizMode, setQuizMode] = useState('practice'); // 'practice' or 'blind'
+      const [currentIdx, setCurrentIdx] = useState(0);
+      const [userAnswers, setUserAnswers] = useState({}); // { [qIdx]: selectedOptionIdx }
+      const [flaggedQuestions, setFlaggedQuestions] = useState({}); // { [qIdx]: true/false }
+      const [timeLeft, setTimeLeft] = useState(80 * 60); // 80 minutes timer = 4800 seconds
+      const [isSubmitted, setIsSubmitted] = useState(false);
+      const [showNavGrid, setShowNavGrid] = useState(false);
+
+      // Review Filter and Search States
+      const [reviewFilter, setReviewFilter] = useState('all'); // 'all', 'correct', 'wrong', 'skipped', 'flagged'
+      const [reviewSearch, setReviewSearch] = useState('');
+
+      // 80 Minute Timer Effect
+      useEffect(() => {
+        let timer = null;
+        if (quizStarted && !isSubmitted && timeLeft > 0) {
+          timer = setInterval(() => {
+            setTimeLeft(prev => {
+              if (prev <= 1) {
+                clearInterval(timer);
+                setIsSubmitted(true);
+                return 0;
+              }
+              return prev - 1;
+            });
+          }, 1000);
+        }
+        return () => clearInterval(timer);
+      }, [quizStarted, isSubmitted, timeLeft]);
+
+      // Keyboard Shortcuts Listener
+      useEffect(() => {
+        const handleKeyDown = (e) => {
+          if (!quizStarted || isSubmitted) return;
+          if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+
+          const key = e.key.toUpperCase();
+          if (['1', '2', '3', '4'].includes(key)) {
+            handleSelectOption(parseInt(key, 10) - 1);
+          } else if (['A', 'B', 'C', 'D'].includes(key)) {
+            const charCode = key.charCodeAt(0) - 65;
+            handleSelectOption(charCode);
+          } else if (e.key === 'ArrowRight') {
+            if (currentIdx < QUESTIONS.length - 1) setCurrentIdx(prev => prev + 1);
+          } else if (e.key === 'ArrowLeft') {
+            if (currentIdx > 0) setCurrentIdx(prev => prev - 1);
+          } else if (key === 'F') {
+            toggleFlagQuestion(currentIdx);
+          }
+        };
+
+        window.addEventListener('keydown', handleKeyDown);
+        return () => window.removeEventListener('keydown', handleKeyDown);
+      }, [quizStarted, isSubmitted, currentIdx, userAnswers]);
+
+      // Time formatting helper
+      const formatTime = (secs) => {
+        const mins = Math.floor(secs / 60);
+        const s = secs % 60;
+        return `${mins.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+      };
+
+      // Handle locking of answer once selected
+      const handleSelectOption = (optionIdx) => {
+        if (userAnswers.hasOwnProperty(currentIdx) || isSubmitted) return;
+        setUserAnswers(prev => ({
+          ...prev,
+          [currentIdx]: optionIdx
+        }));
+      };
+
+      // Toggle Bookmark/Flag
+      const toggleFlagQuestion = (qIndex) => {
+        setFlaggedQuestions(prev => ({
+          ...prev,
+          [qIndex]: !prev[qIndex]
+        }));
+      };
+
+      // Scoring Calculations (+1.0 for correct, -0.25 for incorrect)
+      const scoreData = useMemo(() => {
+        let correctCount = 0;
+        let wrongCount = 0;
+        let unattemptedCount = 0;
+
+        QUESTIONS.forEach((q, idx) => {
+          if (!userAnswers.hasOwnProperty(idx)) {
+            unattemptedCount++;
+          } else if (userAnswers[idx] === q.correct) {
+            correctCount++;
+          } else {
+            wrongCount++;
+          }
+        });
+
+        const grossMarks = correctCount * 1.0;
+        const penalty = wrongCount * 0.25;
+        const netMarks = Math.max(0, grossMarks - penalty);
+        const maxMarks = QUESTIONS.length * 1.0;
+        const percentage = Number(((netMarks / maxMarks) * 100).toFixed(1));
+
+        return { correctCount, wrongCount, unattemptedCount, grossMarks, penalty, netMarks, maxMarks, percentage };
+      }, [userAnswers]);
+
+      // Weak Area Analysis per SLO
+      const sloAnalysis = useMemo(() => {
+        const stats = {};
+        QUESTIONS.forEach((q, idx) => {
+          const sloKey = q.slo;
+          if (!stats[sloKey]) {
+            stats[sloKey] = { total: 0, correct: 0, wrong: 0, unattempted: 0 };
+          }
+          stats[sloKey].total++;
+          if (!userAnswers.hasOwnProperty(idx)) {
+            stats[sloKey].unattempted++;
+          } else if (userAnswers[idx] === q.correct) {
+            stats[sloKey].correct++;
+          } else {
+            stats[sloKey].wrong++;
+          }
+        });
+        return stats;
+      }, [userAnswers]);
+
+      // Review questions filter logic
+      const filteredReviewQuestions = useMemo(() => {
+        return QUESTIONS.map((q, idx) => ({ ...q, qIdx: idx })).filter(q => {
+          const isUserAns = userAnswers.hasOwnProperty(q.qIdx);
+          const isCorrect = isUserAns && userAnswers[q.qIdx] === q.correct;
+          const isWrong = isUserAns && userAnswers[q.qIdx] !== q.correct;
+          const isSkipped = !isUserAns;
+          const isFlagged = !!flaggedQuestions[q.qIdx];
+
+          let matchesFilter = true;
+          if (reviewFilter === 'correct') matchesFilter = isCorrect;
+          if (reviewFilter === 'wrong') matchesFilter = isWrong;
+          if (reviewFilter === 'skipped') matchesFilter = isSkipped;
+          if (reviewFilter === 'flagged') matchesFilter = isFlagged;
+
+          let matchesSearch = true;
+          if (reviewSearch.trim() !== '') {
+            const term = reviewSearch.toLowerCase();
+            matchesSearch = q.question.toLowerCase().includes(term) ||
+                            q.slo.toLowerCase().includes(term) ||
+                            q.explanation.toLowerCase().includes(term);
+          }
+
+          return matchesFilter && matchesSearch;
+        });
+      }, [userAnswers, flaggedQuestions, reviewFilter, reviewSearch]);
+
+      const getMotivationalQuote = (pct) => {
+        if (pct >= 85) return { quote: "Outstanding Mastery! You possess an exceptional depth of knowledge in plant and human nutritional biology.", author: "Qashqarian Academy Academic Board" };
+        if (pct >= 70) return { quote: "Great Performance! You have a solid command of Chapter 12 concepts. Review specific missed SLOs for perfection.", author: "Qashqarian Biology Faculty" };
+        if (pct >= 50) return { quote: "Good Effort! Review the detailed rationales for your missed items to strengthen your grasp on nutritional physiology.", author: "Department of Biological Sciences" };
+        return { quote: "Persistence is key! Re-read Chapter 12 SLO notes thoroughly and retake the test to master these biological concepts.", author: "Qashqarian Mentorship Cell" };
+      };
+
+      const currentQ = QUESTIONS[currentIdx];
+      const isAnswered = userAnswers.hasOwnProperty(currentIdx);
+      const selectedOption = userAnswers[currentIdx];
+      const isCurrentFlagged = !!flaggedQuestions[currentIdx];
+
+      if (!quizStarted) {
+        return (
+          <div className="min-h-screen flex items-center justify-center p-4 sm:p-6">
+            <div className="max-w-2xl w-full bg-white rounded-2xl shadow-xl border border-sky-100 overflow-hidden animate-fadeIn">
+              
+              {/* Top Header Banner */}
+              <div className="bg-gradient-to-r from-sky-800 via-sky-700 to-science-900 p-6 sm:p-8 text-white relative">
+                <div className="flex justify-between items-center mb-3">
+                  <span className="bg-sky-500/30 text-sky-100 text-xs font-bold px-3 py-1 rounded-full backdrop-blur-sm border border-sky-300/20 flex items-center gap-1.5">
+                    🏔️ Qashqarian Academy
+                  </span>
+                  <span className="text-xs font-bold bg-white/10 px-3 py-1 rounded-md border border-white/20">
+                    Class: XI
+                  </span>
+                </div>
+                <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
+                  Chapter 12: Nutrition
+                </h1>
+                <p className="text-sky-100 text-sm mt-1">
+                  SLO-Based Multiple Choice Questions Assessment (80 MCQs)
+                </p>
+              </div>
+
+              {/* Start Setup Content */}
+              <div className="p-6 sm:p-8 space-y-6">
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                  <div className="bg-sky-50 rounded-xl p-3.5 border border-sky-100 flex items-center gap-3">
+                    <div className="p-2 bg-sky-600 text-white rounded-lg shrink-0">
+                      <Icon name="clock" className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <p className="text-[11px] text-slate-500 font-medium">Timer</p>
+                      <p className="text-xs sm:text-sm font-bold text-slate-800">80 Minutes</p>
+                    </div>
+                  </div>
+                  <div className="bg-sky-50 rounded-xl p-3.5 border border-sky-100 flex items-center gap-3">
+                    <div className="p-2 bg-sky-600 text-white rounded-lg shrink-0">
+                      <Icon name="award" className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <p className="text-[11px] text-slate-500 font-medium">Marking Scheme</p>
+                      <p className="text-xs sm:text-sm font-bold text-slate-800">+1.0 / -0.25</p>
+                    </div>
+                  </div>
+                  <div className="col-span-2 sm:col-span-1 bg-sky-50 rounded-xl p-3.5 border border-sky-100 flex items-center gap-3">
+                    <div className="p-2 bg-sky-600 text-white rounded-lg shrink-0">
+                      <Icon name="key" className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <p className="text-[11px] text-slate-500 font-medium">Shortcuts</p>
+                      <p className="text-xs sm:text-sm font-bold text-slate-800">Keys A-D, ← →</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Select Assessment Mode */}
+                <div>
+                  <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2.5">
+                    Select Mode
+                  </label>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <button
+                      type="button"
+                      onClick={() => setQuizMode('practice')}
+                      className={`p-4 rounded-xl text-left border-2 transition-all flex flex-col gap-1.5 ${
+                        quizMode === 'practice'
+                          ? 'border-sky-600 bg-sky-50/80 ring-2 ring-sky-500/20'
+                          : 'border-slate-200 hover:border-sky-300 bg-white'
+                      }`}
+                    >
+                      <div className="flex items-center justify-between">
+                        <span className="font-bold text-sm text-sky-900 flex items-center gap-1.5">
+                          <Icon name="zap" className="w-4 h-4 text-sky-600" />
+                          Practice Mode
+                        </span>
+                        {quizMode === 'practice' && <Icon name="check" className="w-4 h-4 text-sky-600" />}
+                      </div>
+                      <p className="text-xs text-slate-500 leading-relaxed">
+                        Instant right/wrong verification with comprehensive rationale provided immediately after answering each MCQ.
+                      </p>
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => setQuizMode('blind')}
+                      className={`p-4 rounded-xl text-left border-2 transition-all flex flex-col gap-1.5 ${
+                        quizMode === 'blind'
+                          ? 'border-sky-600 bg-sky-50/80 ring-2 ring-sky-500/20'
+                          : 'border-slate-200 hover:border-sky-300 bg-white'
+                      }`}
+                    >
+                      <div className="flex items-center justify-between">
+                        <span className="font-bold text-sm text-sky-900 flex items-center gap-1.5">
+                          <Icon name="shield" className="w-4 h-4 text-sky-600" />
+                          Blind / Exam Mode
+                        </span>
+                        {quizMode === 'blind' && <Icon name="check" className="w-4 h-4 text-sky-600" />}
+                      </div>
+                      <p className="text-xs text-slate-500 leading-relaxed">
+                        Simulate real exam conditions. Correct answers, rationales, and marks revealed only upon test submission.
+                      </p>
+                    </button>
+                  </div>
+                </div>
+
+                {/* Rules & Negative Marking Notice */}
+                <div className="bg-amber-50/80 border border-amber-200 rounded-xl p-4 text-xs text-amber-900 space-y-1.5">
+                  <p className="font-bold text-amber-950 flex items-center gap-1.5">
+                    <Icon name="alert-triangle" className="w-4 h-4 text-amber-600" />
+                    Assessment Rules & Negative Marking:
+                  </p>
+                  <ul className="list-disc list-inside space-y-1 pl-1 text-amber-800">
+                    <li>Once selected, an option is locked permanently for that question.</li>
+                    <li>Incorrect answers incur a <strong>-0.25 mark negative penalty</strong>.</li>
+                    <li>Unattempted questions carry zero penalty.</li>
+                    <li>Use the <strong>Flag (Key F)</strong> button to bookmark items to review later.</li>
+                  </ul>
+                </div>
+
+                <button
+                  onClick={() => setQuizStarted(true)}
+                  className="w-full bg-sky-600 hover:bg-sky-700 text-white font-bold py-3.5 px-6 rounded-xl shadow-lg shadow-sky-600/25 transition-all flex items-center justify-center gap-2 group text-sm"
+                >
+                  <span>Start Chapter 12 Assessment (80 MCQs)</span>
+                  <Icon name="arrow-right" className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                </button>
+              </div>
+            </div>
+          </div>
+        );
+      }
+
+      if (isSubmitted) {
+        const quoteObj = getMotivationalQuote(scoreData.percentage);
+
+        return (
+          <div className="min-h-screen py-8 px-4 sm:px-6 flex justify-center">
+            <div className="max-w-4xl w-full bg-white rounded-2xl shadow-xl border border-sky-100 overflow-hidden animate-fadeIn space-y-6 pb-8">
+              
+              {/* Header Banner */}
+              <div className="bg-gradient-to-r from-sky-800 via-sky-700 to-science-900 p-6 sm:p-8 text-white relative">
+                <div className="flex justify-between items-center mb-2 no-print">
+                  <span className="text-xs font-bold bg-white/20 px-3 py-1 rounded-full flex items-center gap-1.5">
+                    🏔️ Qashqarian Academy
+                  </span>
+                  <span className="text-xs font-bold bg-white/10 px-3 py-1 rounded-md border border-white/20">
+                    Class: XI
+                  </span>
+                  <button 
+                    onClick={() => window.print()} 
+                    className="bg-white/10 hover:bg-white/20 text-white text-xs font-semibold px-3 py-1.5 rounded-lg border border-white/20 transition-all flex items-center gap-1.5"
+                  >
+                    <Icon name="printer" className="w-4 h-4" />
+                    Print Results
+                  </button>
+                </div>
+                <h1 className="text-2xl sm:text-3xl font-extrabold">
+                  Performance Evaluation Summary
+                </h1>
+                <p className="text-sky-100 text-xs sm:text-sm mt-1">
+                  Chapter 12: Nutrition (80 MCQs) Mock Assessment
+                </p>
+              </div>
+
+              <div className="p-6 sm:p-8 space-y-8">
+                
+                {/* Motivational Quote Banner */}
+                <div className="bg-sky-50/80 border-l-4 border-sky-600 p-4 rounded-r-xl space-y-1">
+                  <p className="text-sm font-semibold text-sky-950 italic">
+                    "{quoteObj.quote}"
+                  </p>
+                  <p className="text-xs text-sky-700 font-bold">— {quoteObj.author}</p>
+                </div>
+
+                {/* Performance Metrics */}
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                  <div className="bg-sky-50 border border-sky-100 rounded-xl p-4 text-center">
+                    <p className="text-xs text-slate-500 font-semibold mb-1">Net Percentage</p>
+                    <p className="text-3xl font-black text-sky-600">{scoreData.percentage}%</p>
+                  </div>
+                  <div className="bg-emerald-50 border border-emerald-100 rounded-xl p-4 text-center">
+                    <p className="text-xs text-emerald-700 font-semibold mb-1">Correct Answers</p>
+                    <p className="text-3xl font-black text-emerald-600">{scoreData.correctCount}</p>
+                    <p className="text-[10px] text-emerald-600 font-medium">+{scoreData.grossMarks} Marks</p>
+                  </div>
+                  <div className="bg-rose-50 border border-rose-100 rounded-xl p-4 text-center">
+                    <p className="text-xs text-rose-700 font-semibold mb-1">Wrong Answers</p>
+                    <p className="text-3xl font-black text-rose-600">{scoreData.wrongCount}</p>
+                    <p className="text-[10px] text-rose-600 font-medium">-{scoreData.penalty} Penalty</p>
+                  </div>
+                  <div className="bg-amber-50 border border-amber-100 rounded-xl p-4 text-center">
+                    <p className="text-xs text-amber-700 font-semibold mb-1">Unattempted</p>
+                    <p className="text-3xl font-black text-amber-600">{scoreData.unattemptedCount}</p>
+                    <p className="text-[10px] text-amber-600 font-medium">0 Penalty</p>
+                  </div>
+                </div>
+
+                {/* Net Score Bar */}
+                <div className="bg-slate-900 text-white rounded-xl p-4 flex justify-between items-center text-sm">
+                  <span>Final Score (after -0.25 negative marking):</span>
+                  <span className="font-extrabold text-sky-400 text-base">
+                    {scoreData.netMarks} / {scoreData.maxMarks} Marks
+                  </span>
+                </div>
+
+                {/* Weak Area SLO Breakdown */}
+                <div className="space-y-3">
+                  <h3 className="text-base font-bold text-slate-800 flex items-center gap-2">
+                    <Icon name="bar-chart" className="w-5 h-5 text-sky-600" />
+                    SLO Performance & Weak Area Analysis
+                  </h3>
+
+                  <div className="space-y-3 max-h-80 overflow-y-auto pr-2 custom-scrollbar">
+                    {Object.entries(sloAnalysis).map(([slo, stats], idx) => {
+                      const sloPct = stats.total > 0 ? Math.round((stats.correct / stats.total) * 100) : 0;
+                      return (
+                        <div key={idx} className="bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs space-y-2">
+                          <div className="flex justify-between items-start gap-2">
+                            <span className="font-semibold text-slate-800">{slo}</span>
+                            <span className={`font-bold px-2 py-0.5 rounded text-[11px] ${
+                              sloPct >= 80 ? 'bg-emerald-100 text-emerald-800' :
+                              sloPct >= 50 ? 'bg-amber-100 text-amber-800' : 'bg-rose-100 text-rose-800'
+                            }`}>
+                              {sloPct}% Mastery
+                            </span>
+                          </div>
+                          <div className="w-full bg-slate-200 h-2 rounded-full overflow-hidden">
+                            <div 
+                              className={`h-full transition-all duration-500 ${
+                                sloPct >= 80 ? 'bg-emerald-500' : sloPct >= 50 ? 'bg-amber-500' : 'bg-rose-500'
+                              }`}
+                              style={{ width: `${sloPct}%` }}
+                            />
+                          </div>
+                          <div className="flex gap-4 text-[11px] text-slate-500">
+                            <span>Correct: {stats.correct}</span>
+                            <span>Wrong: {stats.wrong}</span>
+                            <span>Skipped: {stats.unattempted}</span>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                {/* Question Review Section with Filter & Search */}
+                <div className="space-y-4 no-print">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-2">
+                    <h3 className="text-base font-bold text-slate-800 flex items-center gap-2">
+                      <Icon name="book-open" className="w-5 h-5 text-sky-600" />
+                      Detailed Explanations & Answer Analysis
+                    </h3>
+
+                    {/* Filter Pills */}
+                    <div className="flex flex-wrap gap-1.5 text-xs">
+                      {[
+                        { id: 'all', label: 'All' },
+                        { id: 'correct', label: 'Correct' },
+                        { id: 'wrong', label: 'Wrong' },
+                        { id: 'skipped', label: 'Skipped' },
+                        { id: 'flagged', label: 'Flagged' },
+                      ].map(tab => (
+                        <button
+                          key={tab.id}
+                          onClick={() => setReviewFilter(tab.id)}
+                          className={`px-3 py-1.5 rounded-lg font-semibold transition-all ${
+                            reviewFilter === tab.id
+                              ? 'bg-sky-600 text-white shadow-sm'
+                              : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                          }`}
+                        >
+                          {tab.label}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Search Bar */}
+                  <div className="relative">
+                    <input
+                      type="text"
+                      placeholder="Search question text, SLO, or explanation rationale..."
+                      value={reviewSearch}
+                      onChange={(e) => setReviewSearch(e.target.value)}
+                      className="w-full pl-9 pr-4 py-2.5 rounded-xl border border-slate-200 text-xs focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent bg-slate-50/50"
+                    />
+                    <div className="absolute left-3 top-3 text-slate-400">
+                      <Icon name="search" className="w-4 h-4" />
+                    </div>
+                  </div>
+
+                  {/* Question Cards */}
+                  <div className="space-y-4 max-h-[500px] overflow-y-auto pr-2 custom-scrollbar">
+                    {filteredReviewQuestions.length === 0 ? (
+                      <div className="p-8 text-center text-xs text-slate-500 bg-slate-50 rounded-xl border border-dashed border-slate-200">
+                        No questions match the current search or filter.
+                      </div>
+                    ) : (
+                      filteredReviewQuestions.map((q) => {
+                        const qIdx = q.qIdx;
+                        const userSel = userAnswers[qIdx];
+                        const isCorrect = userSel === q.correct;
+                        const isUnattempted = !userAnswers.hasOwnProperty(qIdx);
+                        const isFlagged = flaggedQuestions[qIdx];
+
+                        return (
+                          <div 
+                            key={q.id}
+                            className={`p-4 rounded-xl border text-xs space-y-2.5 transition-all ${
+                              isCorrect ? 'bg-emerald-50/50 border-emerald-200' :
+                              isUnattempted ? 'bg-amber-50/50 border-amber-200' : 'bg-rose-50/50 border-rose-200'
+                            }`}
+                          >
+                            <div className="flex justify-between items-start gap-2">
+                              <span className="font-bold text-slate-900 flex items-center gap-2">
+                                <span>Q{qIdx + 1}. {q.question}</span>
+                                {isFlagged && (
+                                  <span className="bg-amber-100 text-amber-800 text-[10px] px-2 py-0.5 rounded font-bold flex items-center gap-1">
+                                    <Icon name="flag" className="w-3 h-3 text-amber-600" /> Flagged
+                                  </span>
+                                )}
+                              </span>
+                              <span className={`px-2 py-0.5 rounded font-bold text-[10px] whitespace-nowrap shrink-0 ${
+                                isCorrect ? 'bg-emerald-600 text-white' :
+                                isUnattempted ? 'bg-amber-500 text-white' : 'bg-rose-600 text-white'
+                              }`}>
+                                {isCorrect ? 'CORRECT (+1.0)' : isUnattempted ? 'SKIPPED (0.0)' : 'WRONG (-0.25)'}
+                              </span>
+                            </div>
+
+                            <p className="text-[11px] text-slate-500 font-medium">{q.slo}</p>
+
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                              {q.options.map((opt, oIdx) => {
+                                const isOptCorrect = oIdx === q.correct;
+                                const isOptUserChoice = oIdx === userSel;
+
+                                return (
+                                  <div 
+                                    key={oIdx}
+                                    className={`p-2 rounded-lg border font-medium flex items-center justify-between ${
+                                      isOptCorrect ? 'bg-emerald-100 border-emerald-300 text-emerald-900 font-bold' :
+                                      isOptUserChoice ? 'bg-rose-100 border-rose-300 text-rose-900' : 'bg-white border-slate-200 text-slate-600'
+                                    }`}
+                                  >
+                                    <span>{String.fromCharCode(65 + oIdx)}. {opt}</span>
+                                    {isOptCorrect && <Icon name="check" className="w-3.5 h-3.5 text-emerald-700" />}
+                                    {isOptUserChoice && !isOptCorrect && <Icon name="x" className="w-3.5 h-3.5 text-rose-700" />}
+                                  </div>
+                                );
+                              })}
+                            </div>
+
+                            {/* Detailed Explanation */}
+                            <div className="bg-white/90 p-3 rounded-lg border border-slate-200 text-slate-700 leading-relaxed space-y-1.5">
+                              <p className="text-slate-800">
+                                <strong className="text-sky-900">Correct Answer Rationale: </strong> 
+                                {q.explanation}
+                              </p>
+
+                              {!isCorrect && !isUnattempted && q.wrongExplanations && (
+                                <div className="mt-2 pt-2 border-t border-slate-100 text-[11px] text-rose-900 bg-rose-50/60 p-2 rounded-md">
+                                  <strong>Why option {String.fromCharCode(65 + userSel)} is incorrect: </strong>
+                                  {q.wrongExplanations[userSel] || "This choice does not satisfy the scientific concept."}
+                                </div>
+                              )}
+                            </div>
+                          </div>
+                        );
+                      })
+                    )}
+                  </div>
+                </div>
+
+                {/* Restart Button */}
+                <button
+                  onClick={() => {
+                    setIsSubmitted(false);
+                    setQuizStarted(false);
+                    setCurrentIdx(0);
+                    setUserAnswers({});
+                    setFlaggedQuestions({});
+                    setTimeLeft(80 * 60);
+                  }}
+                  className="w-full bg-sky-600 hover:bg-sky-700 text-white font-bold py-3.5 px-6 rounded-xl shadow-lg shadow-sky-600/25 transition-all flex items-center justify-center gap-2 text-sm no-print"
+                >
+                  <Icon name="rotate-ccw" className="w-5 h-5" />
+                  <span>Restart Chapter 12 Assessment</span>
+                </button>
+
+              </div>
+            </div>
+          </div>
+        );
+      }
+
+      const flaggedCount = Object.values(flaggedQuestions).filter(Boolean).length;
+
+      return (
+        <div className="min-h-screen py-6 px-4 sm:px-6 flex flex-col items-center">
+          
+          {/* Top Header Navigation Card */}
+          <div className="max-w-3xl w-full bg-white rounded-2xl shadow-sm border border-sky-100 p-4 mb-4 space-y-3">
+            
+            {/* Academy Name & Class XI Badge */}
+            <div className="flex justify-between items-center text-xs sm:text-sm font-bold text-sky-900">
+              <span className="flex items-center gap-1.5 text-base sm:text-lg tracking-tight">
+                🏔️ Qashqarian Academy
+              </span>
+              
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={() => setShowNavGrid(!showNavGrid)}
+                  className="px-2.5 py-1 bg-sky-50 hover:bg-sky-100 text-sky-800 rounded-lg text-xs font-semibold flex items-center gap-1.5 border border-sky-200 transition-all"
+                >
+                  <Icon name="grid" className="w-3.5 h-3.5" />
+                  <span>Grid ({Object.keys(userAnswers).length}/{QUESTIONS.length})</span>
+                </button>
+
+                <span className="bg-sky-100 text-sky-800 px-2.5 py-1 rounded-lg font-bold text-xs">
+                  Class: XI
+                </span>
+              </div>
+            </div>
+
+            {/* Question Counter (Q 1 / 80) & 80 Min Timer */}
+            <div className="flex justify-between items-center text-xs font-semibold text-slate-600">
+              <div className="flex items-center gap-3">
+                <span className="text-sky-900 font-extrabold text-sm">Q {currentIdx + 1} / {QUESTIONS.length}</span>
+                {flaggedCount > 0 && (
+                  <span className="text-amber-700 bg-amber-50 border border-amber-200 px-2 py-0.5 rounded text-[11px] font-bold flex items-center gap-1">
+                    <Icon name="flag" className="w-3 h-3 text-amber-600" />
+                    {flaggedCount} Flagged
+                  </span>
+                )}
+              </div>
+
+              <div className={`flex items-center gap-1.5 px-2.5 py-1 rounded-lg font-mono font-bold ${
+                timeLeft < 600 ? 'bg-rose-100 text-rose-700 animate-pulse' : 'bg-sky-50 text-sky-800'
+              }`}>
+                <Icon name="clock" className="w-3.5 h-3.5" />
+                <span>{formatTime(timeLeft)}</span>
+              </div>
+            </div>
+
+            {/* Top Progress Bar */}
+            <div className="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+              <div 
+                className="bg-sky-600 h-full transition-all duration-300"
+                style={{ width: `${((currentIdx + 1) / QUESTIONS.length) * 100}%` }}
+              />
+            </div>
+          </div>
+
+          {/* Quick Navigator Grid Modal */}
+          {showNavGrid && (
+            <div className="max-w-3xl w-full bg-white rounded-2xl shadow-lg border border-sky-200 p-5 mb-4 animate-fadeIn space-y-3">
+              <div className="flex justify-between items-center text-xs font-bold text-slate-800 border-b pb-2">
+                <span>Question Quick Navigator Matrix (80 Items)</span>
+                <button 
+                  onClick={() => setShowNavGrid(false)}
+                  className="text-slate-400 hover:text-slate-600"
+                >
+                  <Icon name="x" className="w-4 h-4" />
+                </button>
+              </div>
+
+              <div className="grid grid-cols-5 sm:grid-cols-10 gap-2 max-h-52 overflow-y-auto p-1 custom-scrollbar">
+                {QUESTIONS.map((_, idx) => {
+                  const isAns = userAnswers.hasOwnProperty(idx);
+                  const isCur = currentIdx === idx;
+                  const isFlg = !!flaggedQuestions[idx];
+
+                  let boxStyle = "bg-slate-100 text-slate-700 hover:bg-slate-200";
+                  if (isCur) boxStyle = "bg-sky-600 text-white font-bold ring-2 ring-sky-500/50";
+                  else if (isAns) boxStyle = "bg-emerald-100 text-emerald-900 font-semibold border border-emerald-300";
+
+                  return (
+                    <button
+                      key={idx}
+                      onClick={() => {
+                        setCurrentIdx(idx);
+                        setShowNavGrid(false);
+                      }}
+                      className={`h-8 rounded-lg text-xs transition-all relative flex items-center justify-center ${boxStyle}`}
+                    >
+                      {idx + 1}
+                      {isFlg && (
+                        <span className="absolute -top-1 -right-1 bg-amber-500 w-2.5 h-2.5 rounded-full border border-white" />
+                      )}
+                    </button>
+                  );
+                })}
+              </div>
+
+              <div className="flex gap-4 text-[10px] text-slate-500 pt-2 border-t justify-center">
+                <span className="flex items-center gap-1"><span className="w-2.5 h-2.5 rounded bg-emerald-300" /> Answered</span>
+                <span className="flex items-center gap-1"><span className="w-2.5 h-2.5 rounded bg-slate-200" /> Unanswered</span>
+                <span className="flex items-center gap-1"><span className="w-2.5 h-2.5 rounded bg-sky-600" /> Current</span>
+                <span className="flex items-center gap-1"><span className="w-2.5 h-2.5 rounded-full bg-amber-500" /> Flagged</span>
+              </div>
+            </div>
+          )}
+
+          {/* Centered Main Question Card */}
+          <div className="max-w-3xl w-full bg-white rounded-2xl shadow-lg border border-sky-100 p-6 sm:p-8 relative overflow-hidden flex flex-col min-h-[460px] justify-between">
+            
+            {/* Watermark in Center Background */}
+            <div className="watermark-bg">
+              <p className="text-5xl sm:text-6xl font-black text-sky-900 tracking-widest">
+                🏔️ QASHQARIAN ACADEMY
+              </p>
+            </div>
+
+            {/* Question Header & Options */}
+            <div className="relative z-10 space-y-5">
+              
+              {/* SLO Tag above Question */}
+              <div className="flex justify-between items-center gap-2">
+                <div className="inline-block bg-sky-50 border border-sky-200 text-sky-900 text-xs font-bold px-3 py-1 rounded-full">
+                  {currentQ.slo}
+                </div>
+
+                <button
+                  onClick={() => toggleFlagQuestion(currentIdx)}
+                  className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 ${
+                    isCurrentFlagged 
+                      ? 'bg-amber-100 text-amber-800 border border-amber-300' 
+                      : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                  }`}
+                  title="Bookmark for review (Key: F)"
+                >
+                  <Icon name="flag" className={`w-3.5 h-3.5 ${isCurrentFlagged ? 'text-amber-600 fill-amber-500' : ''}`} />
+                  <span>{isCurrentFlagged ? 'Flagged' : 'Flag'}</span>
+                </button>
+              </div>
+
+              {/* Question Text */}
+              <h2 className="text-base sm:text-lg font-bold text-slate-900 leading-snug">
+                Q{currentIdx + 1}. {currentQ.question}
+              </h2>
+
+              {/* Multiple Choice Options (A, B, C, D) */}
+              <div className="space-y-3 pt-2">
+                {currentQ.options.map((optionText, optIdx) => {
+                  const isSelected = selectedOption === optIdx;
+                  const isCorrect = currentQ.correct === optIdx;
+
+                  let btnStyle = "border-slate-200 hover:border-sky-300 hover:bg-sky-50/50 text-slate-800 bg-white";
+
+                  if (isAnswered) {
+                    if (quizMode === 'practice') {
+                      if (isCorrect) {
+                        btnStyle = "border-emerald-500 bg-emerald-50 text-emerald-950 font-semibold ring-2 ring-emerald-500/20";
+                      } else if (isSelected) {
+                        btnStyle = "border-rose-500 bg-rose-50 text-rose-950 font-semibold ring-2 ring-rose-500/20";
+                      } else {
+                        btnStyle = "border-slate-200 opacity-60 bg-white text-slate-500";
+                      }
+                    } else {
+                      // Blind Mode
+                      if (isSelected) {
+                        btnStyle = "border-sky-600 bg-sky-50 text-sky-950 font-semibold ring-2 ring-sky-500/20";
+                      } else {
+                        btnStyle = "border-slate-200 opacity-60 bg-white text-slate-500";
+                      }
+                    }
+                  }
+
+                  return (
+                    <button
+                      key={optIdx}
+                      disabled={isAnswered}
+                      onClick={() => handleSelectOption(optIdx)}
+                      className={`w-full p-3.5 sm:p-4 rounded-xl border-2 text-left text-xs sm:text-sm transition-all flex items-center justify-between gap-3 ${btnStyle}`}
+                    >
+                      <div className="flex items-center gap-3">
+                        <span className={`w-7 h-7 rounded-lg flex items-center justify-center font-bold text-xs shrink-0 ${
+                          isSelected ? 'bg-sky-600 text-white' : 'bg-slate-100 text-slate-700'
+                        }`}>
+                          {String.fromCharCode(65 + optIdx)}
+                        </span>
+                        <span>{optionText}</span>
+                      </div>
+
+                      {isAnswered && quizMode === 'practice' && (
+                        <div>
+                          {isCorrect && <Icon name="check" className="w-5 h-5 text-emerald-600" />}
+                          {isSelected && !isCorrect && <Icon name="x" className="w-5 h-5 text-rose-600" />}
+                        </div>
+                      )}
+                    </button>
+                  );
+                })}
+              </div>
+
+              {/* Practice Mode Explanation Box */}
+              {isAnswered && quizMode === 'practice' && (
+                <div className={`mt-4 p-4 rounded-xl text-xs leading-relaxed space-y-1.5 animate-fadeIn border ${
+                  selectedOption === currentQ.correct 
+                    ? 'bg-emerald-50/90 border-emerald-200 text-emerald-950' 
+                    : 'bg-rose-50/90 border-rose-200 text-rose-950'
+                }`}>
+                  <p className="font-bold flex items-center gap-1.5">
+                    <Icon name="info" className="w-4 h-4" />
+                    {selectedOption === currentQ.correct ? 'Correct Answer Rationale:' : 'Incorrect Answer Explanation:'}
+                  </p>
+                  <p className="text-slate-800">{currentQ.explanation}</p>
+                  
+                  {selectedOption !== currentQ.correct && currentQ.wrongExplanations && (
+                    <p className="text-rose-900 font-medium pt-1 border-t border-rose-200/60">
+                      <strong>Why option {String.fromCharCode(65 + selectedOption)} is wrong: </strong>
+                      {currentQ.wrongExplanations[selectedOption]}
+                    </p>
+                  )}
+                </div>
+              )}
+            </div>
+
+            {/* Bottom Nav Controls (Previous / Next / Submit) */}
+            <div className="relative z-10 pt-6 mt-6 border-t border-slate-100 flex justify-between items-center gap-4">
+              <button
+                disabled={currentIdx === 0}
+                onClick={() => setCurrentIdx(prev => prev - 1)}
+                className="px-4 py-2.5 rounded-xl border border-slate-200 text-slate-700 text-xs font-bold hover:bg-slate-50 disabled:opacity-40 disabled:cursor-not-allowed flex items-center gap-1.5"
+              >
+                <Icon name="arrow-left" className="w-4 h-4" />
+                Previous
+              </button>
+
+              <div className="flex gap-2">
+                {currentIdx < QUESTIONS.length - 1 ? (
+                  <button
+                    onClick={() => setCurrentIdx(prev => prev + 1)}
+                    className="px-5 py-2.5 rounded-xl bg-sky-600 hover:bg-sky-700 text-white text-xs font-bold shadow-md shadow-sky-600/20 transition-all flex items-center gap-1.5"
+                  >
+                    Next
+                    <Icon name="arrow-right" className="w-4 h-4" />
+                  </button>
+                ) : (
+                  <button
+                    onClick={() => setIsSubmitted(true)}
+                    className="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold shadow-md shadow-emerald-600/20 transition-all flex items-center gap-1.5"
+                  >
+                    Submit Test
+                    <Icon name="check" className="w-4 h-4" />
+                  </button>
+                )}
+              </div>
+            </div>
+
+          </div>
+        </div>
+      );
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<App />);
+  </script>
+</body>
+</html>

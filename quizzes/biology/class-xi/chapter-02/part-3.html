@@ -1,0 +1,1118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Class XI Biology Chapter 2 Part 3 Mock Test - Qashqarian Academy</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+          },
+          colors: {
+            sky: {
+              50:'#F0F8F8', 100:'#DFF3F2', 200:'#BFE4E7', 300:'#8FCDD5',
+              400:'#4FA9B9', 500:'#1F869B', 600:'#056C82', 700:'#0A5263',
+              800:'#0B4352', 900:'#0B3340'
+            },
+            science: {
+              50:'#F0F8F8', 100:'#DFF3F2', 200:'#BFE4E7', 300:'#8FCDD5',
+              400:'#4FA9B9', 500:'#1F869B', 600:'#056C82', 700:'#0A5263',
+              800:'#0B4352', 900:'#0B3340'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- React 18 & ReactDOM -->
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+  <!-- Babel for JSX -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #f0f7ff;
+    }
+    .watermark-bg {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(-12deg);
+      pointer-events: none;
+      user-select: none;
+      z-index: 0;
+      opacity: 0.04;
+      text-align: center;
+      white-space: nowrap;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: #f1f5f9;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 4px;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fadeIn {
+      animation: fadeIn 0.3s ease-out forwards;
+    }
+  </style>
+</head>
+<body class="text-slate-800 antialiased selection:bg-sky-200 selection:text-sky-900 min-h-screen">
+<header class="sticky top-0 z-50 bg-[#0B132B] border-b border-cyan-900/40 shadow-md">
+    <div class="max-w-5xl mx-auto px-4 py-2.5 flex items-center justify-between">
+      <a href="../../../../index.html" class="flex items-center gap-2">
+        <img src="../../../../images/brand/logo.png" alt="Qashqarian Academy" class="w-10 h-10 object-contain">
+        <div>
+          <div class="text-base md:text-lg font-extrabold text-white tracking-tight leading-none">Qashqarian</div>
+          <div class="text-[10px] md:text-xs text-[#FF9F1C] font-extrabold tracking-[0.2em] mt-1 leading-none">ACADEMY</div>
+        </div>
+      </a>
+      <a href="../../index.html" class="text-[11px] font-semibold text-slate-300 hover:text-white border border-white/20 rounded-lg px-2.5 py-1">
+        ← Biology Quizzes
+      </a>
+    </div>
+  </header>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const { useState, useEffect, useMemo } = React;
+
+    // Pure React SVG Icon Component
+    const Icon = ({ name, className = "w-5 h-5" }) => {
+      const props = {
+        className,
+        xmlns: "http://www.w3.org/2000/svg",
+        viewBox: "0 0 24 24",
+        fill: "none",
+        stroke: "currentColor",
+        strokeWidth: "2",
+        strokeLinecap: "round",
+        strokeLinejoin: "round"
+      };
+
+      switch (name) {
+        case "clock":
+          return <svg {...props}><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>;
+        case "award":
+          return <svg {...props}><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 22 12 17 17 22 15.79 13.88"/></svg>;
+        case "check":
+          return <svg {...props}><polyline points="20 6 9 17 4 12"/></svg>;
+        case "x":
+          return <svg {...props}><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>;
+        case "arrow-left":
+          return <svg {...props}><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>;
+        case "arrow-right":
+          return <svg {...props}><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>;
+        case "rotate-ccw":
+          return <svg {...props}><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>;
+        case "book-open":
+          return <svg {...props}><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>;
+        case "shield":
+          return <svg {...props}><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>;
+        case "zap":
+          return <svg {...props}><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>;
+        case "bar-chart":
+          return <svg {...props}><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg>;
+        case "info":
+          return <svg {...props}><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>;
+        case "alert-triangle":
+          return <svg {...props}><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>;
+        default:
+          return <svg {...props}><circle cx="12" cy="12" r="10"/></svg>;
+      }
+    };
+
+    const QUESTIONS = [
+      // SLO 2.7.1: Define Nucleic Acid
+      {
+        id: 1,
+        slo: "SLO 2.7.1: Define Nucleic Acid",
+        question: "What is the primary function of nucleic acids in living cells?",
+        options: ["Storing cellular energy", "Storing genetic information", "Building cell membranes", "Catalyzing lipid synthesis"],
+        correct: 1,
+        explanation: "Nucleic acids (DNA and RNA) serve as the primary genetic material, storing, encoding, and transmitting hereditary information necessary for cellular function and protein synthesis."
+      },
+      {
+        id: 2,
+        slo: "SLO 2.7.1: Define Nucleic Acid",
+        question: "Which set of chemical elements is present in all nucleic acid molecules?",
+        options: ["C, H, O, N, P", "C, H, O, N, S", "C, H, O, P, Fe", "C, H, N, S, Mg"],
+        correct: 0,
+        explanation: "All nucleic acids consist of Carbon (C), Hydrogen (H), Oxygen (O), Nitrogen (N in the nitrogenous bases), and Phosphorus (P in the phosphate backbone)."
+      },
+      {
+        id: 3,
+        slo: "SLO 2.7.1: Define Nucleic Acid",
+        question: "Nucleic acids are biological polymers made up of repeating subunits called:",
+        options: ["Amino acids", "Nucleotides", "Fatty acids", "Monosaccharides"],
+        correct: 1,
+        explanation: "Nucleotides are the monomeric building blocks that polymerize to form nucleic acid macromolecules (polynucleotides)."
+      },
+      {
+        id: 4,
+        slo: "SLO 2.7.1: Define Nucleic Acid",
+        question: "What type of covalent bond links adjacent nucleotides together in a nucleic acid strand?",
+        options: ["Peptide bond", "Ester bond", "Phosphodiester bond", "Glycosidic bond"],
+        correct: 2,
+        explanation: "Adjacent nucleotides are linked by phosphodiester bonds, which connect the 3'-hydroxyl group of one pentose sugar to the 5'-phosphate group of the next."
+      },
+      {
+        id: 5,
+        slo: "SLO 2.7.1: Define Nucleic Acid",
+        question: "A forensic investigator collects a sample at a crime scene to identify a suspect. Which biomolecule is analyzed because its sequence is unique to each individual?",
+        options: ["Glycogen", "DNA", "Phospholipid", "Hemoglobin"],
+        correct: 1,
+        explanation: "DNA contains unique nucleotide sequence variations specific to every individual (except identical twins), making it ideal for forensic identification."
+      },
+
+      // SLO 2.7.2: Differentiate Between Nucleotide and Nucleoside
+      {
+        id: 6,
+        slo: "SLO 2.7.2: Differentiate Between Nucleotide and Nucleoside",
+        question: "A nucleoside is composed of which two chemical components?",
+        options: ["Pentose sugar and nitrogenous base", "Pentose sugar and phosphate group", "Nitrogenous base and phosphate group", "Hexose sugar and nitrogenous base"],
+        correct: 0,
+        explanation: "A nucleoside consists solely of a pentose sugar (ribose or deoxyribose) covalently bonded to a nitrogenous base, lacking a phosphate group."
+      },
+      {
+        id: 7,
+        slo: "SLO 2.7.2: Differentiate Between Nucleotide and Nucleoside",
+        question: "Adding a phosphate group to a nucleoside converts it directly into a:",
+        options: ["Polysaccharide", "Nucleotide", "Polypeptide", "Dipeptide"],
+        correct: 1,
+        explanation: "A nucleotide is formed when one or more phosphate groups are esterified to the pentose sugar of a nucleoside."
+      },
+      {
+        id: 8,
+        slo: "SLO 2.7.2: Differentiate Between Nucleotide and Nucleoside",
+        question: "Which bond connects the nitrogenous base to the pentose sugar in a nucleoside?",
+        options: ["Phosphodiester bond", "N-glycosidic bond", "Hydrogen bond", "Peptide bond"],
+        correct: 1,
+        explanation: "An N-glycosidic bond connects C-1' of the pentose sugar to the nitrogen atom (N-1 of pyrimidines or N-9 of purines) of the nitrogenous base."
+      },
+      {
+        id: 9,
+        slo: "SLO 2.7.2: Differentiate Between Nucleotide and Nucleoside",
+        question: "Which of the following molecules is classified as a nucleoside?",
+        options: ["Adenosine monophosphate", "Adenosine", "Deoxyadenylic acid", "Guanosine triphosphate"],
+        correct: 1,
+        explanation: "Adenosine is a nucleoside (adenine + ribose). The other options contain phosphate groups and are classified as nucleotides."
+      },
+      {
+        id: 10,
+        slo: "SLO 2.7.2: Differentiate Between Nucleotide and Nucleoside",
+        question: "Certain antiviral medicines are given as inactive nucleosides. Inside human cells, enzymes must add which group to make them active nucleotides that block viral DNA synthesis?",
+        options: ["Methyl group", "Phosphate group", "Hydroxyl group", "Amino group"],
+        correct: 1,
+        explanation: "Intracellular kinase enzymes phosphorylate nucleoside antiviral drugs into active nucleotide triphosphates, enabling them to inhibit viral replication enzymes."
+      },
+
+      // SLO 2.7.3: Illustrate Structure of Deoxyribonucleic Acid (DNA)
+      {
+        id: 11,
+        slo: "SLO 2.7.3: Illustrate Structure of DNA",
+        question: "According to the Watson-Crick model, the structure of a DNA molecule is a:",
+        options: ["Single linear strand", "Double-stranded helix", "Branched polymer network", "Circular single sheet"],
+        correct: 1,
+        explanation: "Watson and Crick established that native DNA consists of two antiparallel polynucleotide chains wound around a common axis in a double helix."
+      },
+      {
+        id: 12,
+        slo: "SLO 2.7.3: Illustrate Structure of DNA",
+        question: "How many hydrogen bonds form between Adenine and Thymine in a DNA strand?",
+        options: ["One hydrogen bond", "Two hydrogen bonds", "Three hydrogen bonds", "Four hydrogen bonds"],
+        correct: 1,
+        explanation: "Adenine pairs with Thymine via two hydrogen bonds (A=T), whereas Guanine pairs with Cytosine via three hydrogen bonds (G≡C)."
+      },
+      {
+        id: 13,
+        slo: "SLO 2.7.3: Illustrate Structure of DNA",
+        question: "The two strands of a DNA double helix run parallel to each other in:",
+        options: ["The same direction", "Opposite directions", "Perpendicular lines", "Random directions"],
+        correct: 1,
+        explanation: "The two strands are antiparallel: one strand runs in the 5' to 3' direction while the complementary strand runs in the 3' to 5' direction."
+      },
+      {
+        id: 14,
+        slo: "SLO 2.7.3: Illustrate Structure of DNA",
+        question: "How does deoxyribose sugar in DNA differ structurally from ribose sugar in RNA?",
+        options: ["Lacks an oxygen atom at carbon-2", "Has an extra carbon atom at carbon-5", "Contains a nitrogen ring at carbon-1", "Lacks a hydroxyl group at carbon-3"],
+        correct: 0,
+        explanation: "Deoxyribose lacks an oxygen atom at the C-2' position, featuring a -H group instead of the -OH group found in ribose."
+      },
+      {
+        id: 15,
+        slo: "SLO 2.7.3: Illustrate Structure of DNA",
+        question: "If a sample of double-stranded DNA contains 30% Cytosine, what percentage of Guanine will it contain?",
+        options: ["20%", "30%", "40%", "70%"],
+        correct: 1,
+        explanation: "According to Chargaff's rules, in double-stranded DNA %Cytosine = %Guanine. Therefore, if Cytosine is 30%, Guanine is also 30%."
+      },
+
+      // SLO 2.7.4: Classify Nucleotides on Sugar and Nitrogen Bases
+      {
+        id: 16,
+        slo: "SLO 2.7.4: Classify Nucleotides on Sugar and Nitrogen Bases",
+        question: "Which pair of nitrogenous bases belongs to the pyrimidine family?",
+        options: ["Adenine and Guanine", "Cytosine and Thymine", "Adenine and Thymine", "Guanine and Uracil"],
+        correct: 1,
+        explanation: "Pyrimidines are single-ring nitrogenous bases, which include Cytosine (C), Thymine (T), and Uracil (U). Adenine and Guanine are double-ring purines."
+      },
+      {
+        id: 17,
+        slo: "SLO 2.7.4: Classify Nucleotides on Sugar and Nitrogen Bases",
+        question: "Which nitrogenous base is found only in RNA and replaces Thymine?",
+        options: ["Adenine", "Cytosine", "Uracil", "Guanine"],
+        correct: 2,
+        explanation: "Uracil (U) is unique to RNA and replaces Thymine (T) to form complementary base pairs with Adenine."
+      },
+      {
+        id: 18,
+        slo: "SLO 2.7.4: Classify Nucleotides on Sugar and Nitrogen Bases",
+        question: "Purine bases differ structurally from pyrimidine bases because purines have:",
+        options: ["A single carbon-nitrogen ring", "Two fused carbon-nitrogen rings", "Three open hydrocarbon chains", "No nitrogen atoms in their rings"],
+        correct: 1,
+        explanation: "Purines (Adenine and Guanine) feature a bicyclic structure with two fused carbon-nitrogen rings, whereas pyrimidines have a single ring."
+      },
+      {
+        id: 19,
+        slo: "SLO 2.7.4: Classify Nucleotides on Sugar and Nitrogen Bases",
+        question: "Which sugar molecule is present in the nucleotides that form RNA?",
+        options: ["Glucose", "Deoxyribose", "Ribose", "Fructose"],
+        correct: 2,
+        explanation: "RNA contains ribose sugar, which possesses a hydroxyl group (-OH) at the 2'-carbon position."
+      },
+      {
+        id: 20,
+        slo: "SLO 2.7.4: Classify Nucleotides on Sugar and Nitrogen Bases",
+        question: "A laboratory tests an unknown sample from an infectious virus and finds it contains ribose sugar and Uracil base. What type of virus is this?",
+        options: ["DNA virus", "RNA virus", "Bacterial virus", "Protein virus"],
+        correct: 1,
+        explanation: "The presence of ribose sugar and Uracil base is characteristic of RNA, identifying the sample as an RNA virus."
+      },
+
+      // SLO 2.7.5: Differentiate Mononucleotide (ATP) and Dinucleotide (NAD)
+      {
+        id: 21,
+        slo: "SLO 2.7.5: Differentiate Mononucleotide & Dinucleotide",
+        question: "Adenosine Triphosphate (ATP) is classified structurally as a:",
+        options: ["Mononucleotide", "Dinucleotide", "Polynucleotide", "Oligonucleotide"],
+        correct: 0,
+        explanation: "ATP consists of a single nucleoside (adenosine) linked to three phosphate groups, making it a modified mononucleotide."
+      },
+      {
+        id: 22,
+        slo: "SLO 2.7.5: Differentiate Mononucleotide & Dinucleotide",
+        question: "Nicotinamide Adenine Dinucleotide (NAD) consists of two nucleotides joined together by their:",
+        options: ["Nitrogenous bases", "Phosphate groups", "Pentose sugars", "Carbon side chains"],
+        correct: 1,
+        explanation: "NAD is a dinucleotide composed of two nucleotide subunits (nicotinamide mononucleotide and AMP) joined through a pyrophosphate bond."
+      },
+      {
+        id: 23,
+        slo: "SLO 2.7.5: Differentiate Mononucleotide & Dinucleotide",
+        question: "What is the primary physiological role of ATP in living cells?",
+        options: ["Direct oxygen transport", "Universal energy currency", "Structural support of bone", "Digestion of lipids"],
+        correct: 1,
+        explanation: "ATP acts as the universal cellular energy currency, driving metabolic work by transferring phosphate groups."
+      },
+      {
+        id: 24,
+        slo: "SLO 2.7.5: Differentiate Mononucleotide & Dinucleotide",
+        question: "What is the main functional role of NAD in cellular metabolic pathways?",
+        options: ["Storing genetic code", "Carrying electrons in oxidation", "Forming cellular membranes", "Pumping sodium ions"],
+        correct: 1,
+        explanation: "NAD+ serves as a vital coenzyme and electron carrier in redox reactions (such as glycolysis and Krebs cycle)."
+      },
+      {
+        id: 25,
+        slo: "SLO 2.7.5: Differentiate Mononucleotide & Dinucleotide",
+        question: "During a 100-meter sprint, muscle cells quickly break high-energy bonds in ATP to contract instantly. What molecule is produced when ATP loses one phosphate group?",
+        options: ["Adenosine diphosphate (ADP)", "Adenosine monophosphate (AMP)", "Nicotinamide adenine dinucleotide (NAD)", "Cyclic adenosine monophosphate (cAMP)"],
+        correct: 0,
+        explanation: "Hydrolysis of ATP removes the terminal phosphate group to release energy, producing Adenosine Diphosphate (ADP) and inorganic phosphate."
+      },
+
+      // SLO 2.7.6: Define Genetic Code
+      {
+        id: 26,
+        slo: "SLO 2.7.6: Define Genetic Code",
+        question: "A genetic code represents a sequence of how many nitrogenous bases that code for one amino acid?",
+        options: ["One base", "Two bases", "Three bases", "Four bases"],
+        correct: 2,
+        explanation: "The genetic code is a triplet code; a sequence of three consecutive nitrogenous bases specifies one amino acid."
+      },
+      {
+        id: 27,
+        slo: "SLO 2.7.6: Define Genetic Code",
+        question: "A sequence of three bases on an mRNA molecule that specifies an amino acid is called a:",
+        options: ["Anticodon", "Codon", "Cistron", "Intron"],
+        correct: 1,
+        explanation: "A codon is a triplet base sequence on mRNA that encodes a specific amino acid or translation stop signal."
+      },
+      {
+        id: 28,
+        slo: "SLO 2.7.6: Define Genetic Code",
+        question: "Which triplet codon serves as the universal start signal for protein synthesis?",
+        options: ["UAA", "AUG", "UGA", "UAG"],
+        correct: 1,
+        explanation: "AUG is the universal start codon that initiates translation and codes for the amino acid methionine."
+      },
+      {
+        id: 29,
+        slo: "SLO 2.7.6: Define Genetic Code",
+        question: "The genetic code is described as universal because it is:",
+        options: ["Found only in humans", "The same in almost all organisms", "Changing continuously in cells", "Different in plants and animals"],
+        correct: 1,
+        explanation: "The genetic code is almost completely universal, meaning that specific codons code for the same amino acids across virtually all living organisms."
+      },
+      {
+        id: 30,
+        slo: "SLO 2.7.6: Define Genetic Code",
+        question: "How many total possible triplet codons exist in the genetic code dictionary?",
+        options: ["20", "32", "64", "128"],
+        correct: 2,
+        explanation: "With 4 bases arranged in combinations of 3 (4^3), there are 64 total triplet codons (61 coding for amino acids + 3 stop codons)."
+      },
+
+      // SLO 2.7.7: Differentiate Among Types of RNA
+      {
+        id: 31,
+        slo: "SLO 2.7.7: Differentiate Among Types of RNA",
+        question: "Which type of RNA carries genetic instructions from nuclear DNA to the cytoplasm?",
+        options: ["Messenger RNA (mRNA)", "Transfer RNA (tRNA)", "Ribosomal RNA (rRNA)", "Small nuclear RNA (snRNA)"],
+        correct: 0,
+        explanation: "Messenger RNA (mRNA) copies genetic instructions from DNA during transcription and transports them to ribosomes for translation."
+      },
+      {
+        id: 32,
+        slo: "SLO 2.7.7: Differentiate Among Types of RNA",
+        question: "What is the main role of transfer RNA (tRNA) during protein synthesis?",
+        options: ["Copying the DNA strand", "Transporting amino acids to ribosomes", "Forming structural ribosome subunits", "Splicing non-coding introns"],
+        correct: 1,
+        explanation: "tRNA transfers specific amino acids to the ribosome, matching its anticodon with the corresponding mRNA codon."
+      },
+      {
+        id: 33,
+        slo: "SLO 2.7.7: Differentiate Among Types of RNA",
+        question: "Which type of RNA combines with proteins to build the physical structure of a ribosome?",
+        options: ["Messenger RNA (mRNA)", "Transfer RNA (tRNA)", "Ribosomal RNA (rRNA)", "Micro RNA (miRNA)"],
+        correct: 2,
+        explanation: "Ribosomal RNA (rRNA) combines with proteins to construct the structural and catalytic framework of ribosomes."
+      },
+      {
+        id: 34,
+        slo: "SLO 2.7.7: Differentiate Among Types of RNA",
+        question: "The specific sequence of three bases on a tRNA molecule that pairs with an mRNA codon is called an:",
+        options: ["Promoter", "Anticodon", "Operator", "Exon"],
+        correct: 1,
+        explanation: "The anticodon is a three-base sequence on tRNA that forms complementary base pairs with an mRNA codon."
+      },
+      {
+        id: 35,
+        slo: "SLO 2.7.7: Differentiate Among Types of RNA",
+        question: "An antibiotic drug treats bacterial infections by binding to bacterial ribosomal RNA (rRNA) to stop protein production. Which organelle in the bacteria is directly shut down by this drug?",
+        options: ["Mitochondrion", "Ribosome", "Endoplasmic reticulum", "Golgi apparatus"],
+        correct: 1,
+        explanation: "rRNA is the structural and catalytic core of ribosomes; targeting rRNA shuts down protein synthesis at the bacterial ribosome."
+      },
+
+      // SLO 2.8.1: Define Conjugated Molecules
+      {
+        id: 36,
+        slo: "SLO 2.8.1: Define Conjugated Molecules",
+        question: "What is a conjugated molecule in biological systems?",
+        options: ["A simple single monosaccharide", "A molecule formed by joining two different biomolecules", "A pure chain of identical amino acids", "An inorganic salt dissolved in water"],
+        correct: 1,
+        explanation: "Conjugated molecules are formed by the structural combination of two chemically distinct classes of biological molecules (e.g., protein + lipid)."
+      },
+      {
+        id: 37,
+        slo: "SLO 2.8.1: Define Conjugated Molecules",
+        question: "Combining a carbohydrate with a protein molecule forms a conjugated molecule named:",
+        options: ["Lipoprotein", "Glycoprotein", "Phospholipid", "Nucleoprotein"],
+        correct: 1,
+        explanation: "A glycoprotein is a conjugated molecule composed of carbohydrate chains covalently attached to a protein backbone."
+      },
+      {
+        id: 38,
+        slo: "SLO 2.8.1: Define Conjugated Molecules",
+        question: "Combining a lipid with a phosphate group forms a conjugated lipid termed a:",
+        options: ["Glycolipid", "Phospholipid", "Lipoprotein", "Nucleoprotein"],
+        correct: 1,
+        explanation: "Phospholipids are conjugated lipids comprising glycerol/sphingosine esterified to fatty acids and a phosphate group."
+      },
+      {
+        id: 39,
+        slo: "SLO 2.8.1: Define Conjugated Molecules",
+        question: "Why are conjugated molecules biologically important to living organisms?",
+        options: ["They perform complex structural and functional roles", "They are completely insoluble in all cell fluids", "They replace DNA as genetic material in cells", "They break down all digestive enzymes in stomach"],
+        correct: 0,
+        explanation: "Conjugated molecules integrate different chemical properties to execute specialized cellular functions such as cell recognition, transport, and structural integrity."
+      },
+      {
+        id: 40,
+        slo: "SLO 2.8.1: Define Conjugated Molecules",
+        question: "Red blood cells have specific conjugated molecules on their cell surface that determine human ABO blood types. What type of conjugated molecules are these surface antigens?",
+        options: ["Nucleoproteins", "Glycoproteins and glycolipids", "Pure triglycerides", "Lipoproteins and steroids"],
+        correct: 1,
+        explanation: "ABO blood group antigens are carbohydrate chains attached to membrane proteins (glycoproteins) and lipids (glycolipids)."
+      },
+
+      // SLO 2.8.2: Describe Functions of Conjugated Molecules
+      {
+        id: 41,
+        slo: "SLO 2.8.2: Functions of Conjugated Molecules",
+        question: "Which conjugated molecules function primarily as cellular receptors and recognition markers on cell membranes?",
+        options: ["Glycoproteins", "Lipoproteins", "Nucleoproteins", "Chromoproteins"],
+        correct: 0,
+        explanation: "Glycoproteins project from the outer cell membrane surface, acting as specific recognition sites, cellular markers, and signaling receptors."
+      },
+      {
+        id: 42,
+        slo: "SLO 2.8.2: Functions of Conjugated Molecules",
+        question: "What is the main physiological role of lipoproteins in the human bloodstream?",
+        options: ["Synthesizing digestive enzymes", "Transporting lipids through aqueous blood plasma", "Carrying oxygen gas to body tissues", "Storing genetic information inside nucleus"],
+        correct: 1,
+        explanation: "Lipoproteins package non-polar lipids (cholesterol, triglycerides) inside a soluble protein shell to transport them through water-based blood plasma."
+      },
+      {
+        id: 43,
+        slo: "SLO 2.8.2: Functions of Conjugated Molecules",
+        question: "Chromatin in eukaryotic cell nuclei consists of DNA bound to histone proteins. This complex is a:",
+        options: ["Glycolipid", "Lipoprotein", "Nucleoprotein", "Glycoprotein"],
+        correct: 2,
+        explanation: "Nucleoproteins are complexes formed by nucleic acids conjugated with proteins, such as DNA packaged with histones in chromatin."
+      },
+      {
+        id: 44,
+        slo: "SLO 2.8.2: Functions of Conjugated Molecules",
+        question: "Glycolipids are components of the plasma membrane formed by joining carbohydrates to:",
+        options: ["Amino acids", "Lipids", "Nucleic acids", "Mineral salts"],
+        correct: 1,
+        explanation: "Glycolipids consist of short carbohydrate chains bound to lipid molecules in the cell membrane."
+      },
+      {
+        id: 45,
+        slo: "SLO 2.8.2: Functions of Conjugated Molecules",
+        question: "A patient gets a blood test showing high levels of low-density lipoproteins (LDL). Why are lipoproteins necessary for transporting cholesterol in human blood?",
+        options: ["Cholesterol is non-polar and cannot dissolve directly in water-based blood", "Lipoproteins break cholesterol down into simple glucose molecules", "Blood cells cannot absorb cholesterol without digestive enzymes", "Cholesterol evaporates quickly if not attached to a nucleoprotein"],
+        correct: 0,
+        explanation: "Cholesterol is a hydrophobic, non-polar lipid. It cannot dissolve directly in aqueous plasma and must be carried inside amphipathic lipoproteins (like LDL and HDL)."
+      }
+    ];
+
+    function App() {
+      // Quiz State Management
+      const [quizStarted, setQuizStarted] = useState(false);
+      const [quizMode, setQuizMode] = useState('practice'); // 'practice' or 'blind'
+      const [currentIdx, setCurrentIdx] = useState(0);
+      const [userAnswers, setUserAnswers] = useState({}); // { [qIdx]: selectedOptionIdx }
+      const [timeLeft, setTimeLeft] = useState(45 * 60); // 45 minutes = 2700 seconds
+      const [isSubmitted, setIsSubmitted] = useState(false);
+
+      // Timer Effect
+      useEffect(() => {
+        let timer = null;
+        if (quizStarted && !isSubmitted && timeLeft > 0) {
+          timer = setInterval(() => {
+            setTimeLeft(prev => {
+              if (prev <= 1) {
+                clearInterval(timer);
+                setIsSubmitted(true);
+                return 0;
+              }
+              return prev - 1;
+            });
+          }, 1000);
+        }
+        return () => clearInterval(timer);
+      }, [quizStarted, isSubmitted, timeLeft]);
+
+      // Format time string MM:SS or HH:MM:SS
+      const formatTime = (secs) => {
+        const hrs = Math.floor(secs / 3600);
+        const mins = Math.floor((secs % 3600) / 60);
+        const s = secs % 60;
+        if (hrs > 0) {
+          return `${hrs}:${mins.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+        }
+        return `${mins.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+      };
+
+      // Select Option & Lock Answer
+      const handleSelectOption = (optionIdx) => {
+        if (userAnswers.hasOwnProperty(currentIdx) || isSubmitted) return; // Answer locked
+        setUserAnswers(prev => ({
+          ...prev,
+          [currentIdx]: optionIdx
+        }));
+      };
+
+      // Scoring Calculations
+      const scoreData = useMemo(() => {
+        let correctCount = 0;
+        let wrongCount = 0;
+        let unattemptedCount = 0;
+
+        QUESTIONS.forEach((q, idx) => {
+          if (!userAnswers.hasOwnProperty(idx)) {
+            unattemptedCount++;
+          } else if (userAnswers[idx] === q.correct) {
+            correctCount++;
+          } else {
+            wrongCount++;
+          }
+        });
+
+        const grossMarks = correctCount * 1.0;
+        const penalty = wrongCount * 0.25;
+        const netMarks = Math.max(0, grossMarks - penalty);
+        const maxMarks = QUESTIONS.length * 1.0;
+        const percentage = Number(((netMarks / maxMarks) * 100).toFixed(1));
+
+        return { correctCount, wrongCount, unattemptedCount, grossMarks, penalty, netMarks, maxMarks, percentage };
+      }, [userAnswers]);
+
+      // SLO Weak Area Analysis
+      const sloAnalysis = useMemo(() => {
+        const stats = {};
+        QUESTIONS.forEach((q, idx) => {
+          const sloKey = q.slo;
+          if (!stats[sloKey]) {
+            stats[sloKey] = { total: 0, correct: 0, wrong: 0, unattempted: 0 };
+          }
+          stats[sloKey].total++;
+          if (!userAnswers.hasOwnProperty(idx)) {
+            stats[sloKey].unattempted++;
+          } else if (userAnswers[idx] === q.correct) {
+            stats[sloKey].correct++;
+          } else {
+            stats[sloKey].wrong++;
+          }
+        });
+        return stats;
+      }, [userAnswers]);
+
+      // Motivational Quotes based on percentage score
+      const getMotivationalQuote = (pct) => {
+        if (pct >= 85) return { quote: "Outstanding Mastery! Your grasp of nucleic acids, genetic codes, and conjugated molecules is exemplary.", author: "Qashqarian Academy Academic Council" };
+        if (pct >= 70) return { quote: "Great Job! You have a solid understanding of molecular biology. Review targeted SLOs to hit 100%.", author: "Qashqarian Academy Faculty" };
+        if (pct >= 50) return { quote: "Solid Progress! Carefully study the explanations for your incorrect answers to reinforce complex concepts.", author: "Department of Biology" };
+        return { quote: "Every setback is a setup for a stronger comeback. Re-read Chapter 2 concepts and practice again!", author: "Qashqarian Mentorship Team" };
+      };
+
+      const currentQ = QUESTIONS[currentIdx];
+      const isAnswered = userAnswers.hasOwnProperty(currentIdx);
+      const selectedOption = userAnswers[currentIdx];
+
+      // START SCREEN
+      if (!quizStarted) {
+        return (
+          <div className="min-h-screen flex items-center justify-center p-4 sm:p-6">
+            <div className="max-w-2xl w-full bg-white rounded-2xl shadow-xl border border-sky-100 overflow-hidden animate-fadeIn">
+              {/* Header Banner */}
+              <div className="bg-gradient-to-r from-sky-700 via-sky-600 to-science-800 p-6 sm:p-8 text-white relative">
+                <div className="flex justify-between items-center mb-3">
+                  <span className="bg-sky-500/30 text-sky-100 text-xs font-bold px-3 py-1 rounded-full backdrop-blur-sm border border-sky-300/20 flex items-center gap-1">
+                    🏔️ Qashqarian Academy
+                  </span>
+                  <span className="text-xs font-semibold bg-white/10 px-2.5 py-1 rounded-md border border-white/20">
+                    Class: XI
+                  </span>
+                </div>
+                <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
+                  Chapter 2: Biological Molecules
+                </h1>
+                <p className="text-sky-100 text-sm mt-1">
+                  Part-3: Nucleic Acids & Conjugated Molecules Mock Test (45 MCQs)
+                </p>
+              </div>
+
+              {/* Instructions Content */}
+              <div className="p-6 sm:p-8 space-y-6">
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="bg-sky-50 rounded-xl p-4 border border-sky-100 flex items-center gap-3">
+                    <div className="p-2.5 bg-sky-600 text-white rounded-lg">
+                      <Icon name="clock" className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <p className="text-xs text-slate-500 font-medium">Time Limit</p>
+                      <p className="text-sm font-bold text-slate-800">45 Minutes</p>
+                    </div>
+                  </div>
+                  <div className="bg-sky-50 rounded-xl p-4 border border-sky-100 flex items-center gap-3">
+                    <div className="p-2.5 bg-sky-600 text-white rounded-lg">
+                      <Icon name="award" className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <p className="text-xs text-slate-500 font-medium">Marking Scheme</p>
+                      <p className="text-sm font-bold text-slate-800">+1.0 / -0.25</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Mode Selector */}
+                <div>
+                  <label className="block text-sm font-bold text-slate-700 mb-3">
+                    Select Assessment Mode:
+                  </label>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <button
+                      type="button"
+                      onClick={() => setQuizMode('practice')}
+                      className={`p-4 rounded-xl text-left border-2 transition-all flex flex-col gap-1.5 ${
+                        quizMode === 'practice'
+                          ? 'border-sky-600 bg-sky-50/80 ring-2 ring-sky-500/20'
+                          : 'border-slate-200 hover:border-sky-300 bg-white'
+                      }`}
+                    >
+                      <div className="flex items-center justify-between">
+                        <span className="font-bold text-sm text-sky-900 flex items-center gap-1.5">
+                          <Icon name="zap" className="w-4 h-4 text-sky-600" />
+                          Practice Mode
+                        </span>
+                        {quizMode === 'practice' && <Icon name="check" className="w-4 h-4 text-sky-600" />}
+                      </div>
+                      <p className="text-xs text-slate-500 leading-relaxed">
+                        Instant right/wrong verification with detailed explanation immediately upon selecting an answer.
+                      </p>
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => setQuizMode('blind')}
+                      className={`p-4 rounded-xl text-left border-2 transition-all flex flex-col gap-1.5 ${
+                        quizMode === 'blind'
+                          ? 'border-sky-600 bg-sky-50/80 ring-2 ring-sky-500/20'
+                          : 'border-slate-200 hover:border-sky-300 bg-white'
+                      }`}
+                    >
+                      <div className="flex items-center justify-between">
+                        <span className="font-bold text-sm text-sky-900 flex items-center gap-1.5">
+                          <Icon name="shield" className="w-4 h-4 text-sky-600" />
+                          Blind / Exam Mode
+                        </span>
+                        {quizMode === 'blind' && <Icon name="check" className="w-4 h-4 text-sky-600" />}
+                      </div>
+                      <p className="text-xs text-slate-500 leading-relaxed">
+                        Simulate real exam condition. Detailed rationales and score analysis are revealed after final submission.
+                      </p>
+                    </button>
+                  </div>
+                </div>
+
+                {/* Rules Box */}
+                <div className="bg-amber-50/80 border border-amber-200 rounded-xl p-4 text-xs text-amber-900 space-y-1.5">
+                  <p className="font-bold text-amber-950 flex items-center gap-1.5">
+                    <Icon name="alert-triangle" className="w-4 h-4 text-amber-600" />
+                    Negative Marking Notice & Assessment Rules:
+                  </p>
+                  <ul className="list-disc list-inside space-y-1 pl-1 text-amber-800">
+                    <li>Once an option is selected, it is permanently locked for that question.</li>
+                    <li>Incorrect choices incur a <strong>-0.25 mark penalty</strong>.</li>
+                    <li>Unattempted questions carry zero penalty.</li>
+                  </ul>
+                </div>
+
+                <button
+                  onClick={() => setQuizStarted(true)}
+                  className="w-full bg-sky-600 hover:bg-sky-700 text-white font-bold py-3.5 px-6 rounded-xl shadow-lg shadow-sky-600/25 transition-all flex items-center justify-center gap-2 group"
+                >
+                  <span>Start Mock Test</span>
+                  <Icon name="arrow-right" className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                </button>
+              </div>
+            </div>
+          </div>
+        );
+      }
+
+      // FINAL RESULTS SCREEN
+      if (isSubmitted) {
+        const quoteObj = getMotivationalQuote(scoreData.percentage);
+
+        return (
+          <div className="min-h-screen py-8 px-4 sm:px-6 flex justify-center">
+            <div className="max-w-4xl w-full bg-white rounded-2xl shadow-xl border border-sky-100 overflow-hidden animate-fadeIn space-y-6">
+              
+              {/* Header Banner */}
+              <div className="bg-gradient-to-r from-sky-700 via-sky-600 to-science-800 p-6 sm:p-8 text-white relative">
+                <div className="flex justify-between items-center mb-2">
+                  <span className="text-xs font-bold bg-white/20 px-3 py-1 rounded-full flex items-center gap-1">
+                    🏔️ Qashqarian Academy
+                  </span>
+                  <span className="text-xs font-semibold bg-white/10 px-2.5 py-1 rounded-md">
+                    Class: XI
+                  </span>
+                </div>
+                <h1 className="text-2xl sm:text-3xl font-extrabold">
+                  Performance Evaluation Summary
+                </h1>
+                <p className="text-sky-100 text-xs sm:text-sm mt-1">
+                  Chapter 2: Biological Molecules (Part-3) Mock Test Results
+                </p>
+              </div>
+
+              <div className="p-6 sm:p-8 space-y-8">
+                
+                {/* Motivational Quote Box */}
+                <div className="bg-sky-50/80 border-l-4 border-sky-600 p-4 rounded-r-xl space-y-1">
+                  <p className="text-sm font-semibold text-sky-950 italic">
+                    "{quoteObj.quote}"
+                  </p>
+                  <p className="text-xs text-sky-700 font-bold">— {quoteObj.author}</p>
+                </div>
+
+                {/* Score Summary Metrics */}
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                  <div className="bg-sky-50 border border-sky-100 rounded-xl p-4 text-center">
+                    <p className="text-xs text-slate-500 font-semibold mb-1">Net Percentage</p>
+                    <p className="text-3xl font-black text-sky-600">{scoreData.percentage}%</p>
+                  </div>
+                  <div className="bg-emerald-50 border border-emerald-100 rounded-xl p-4 text-center">
+                    <p className="text-xs text-emerald-700 font-semibold mb-1">Correct Answers</p>
+                    <p className="text-3xl font-black text-emerald-600">{scoreData.correctCount}</p>
+                    <p className="text-[10px] text-emerald-600 font-medium">+{scoreData.grossMarks} Marks</p>
+                  </div>
+                  <div className="bg-rose-50 border border-rose-100 rounded-xl p-4 text-center">
+                    <p className="text-xs text-rose-700 font-semibold mb-1">Wrong Answers</p>
+                    <p className="text-3xl font-black text-rose-600">{scoreData.wrongCount}</p>
+                    <p className="text-[10px] text-rose-600 font-medium">-{scoreData.penalty} Penalty</p>
+                  </div>
+                  <div className="bg-amber-50 border border-amber-100 rounded-xl p-4 text-center">
+                    <p className="text-xs text-amber-700 font-semibold mb-1">Unattempted</p>
+                    <p className="text-3xl font-black text-amber-600">{scoreData.unattemptedCount}</p>
+                    <p className="text-[10px] text-amber-600 font-medium">0 Penalty</p>
+                  </div>
+                </div>
+
+                {/* Net Score Summary Bar */}
+                <div className="bg-slate-900 text-white rounded-xl p-4 flex justify-between items-center text-sm">
+                  <span>Final Net Score (After Negative Marking):</span>
+                  <span className="font-extrabold text-sky-400 text-base">
+                    {scoreData.netMarks} / {scoreData.maxMarks} Marks
+                  </span>
+                </div>
+
+                {/* Weak Area SLO Breakdown */}
+                <div className="space-y-3">
+                  <h3 className="text-base font-bold text-slate-800 flex items-center gap-2">
+                    <Icon name="bar-chart" className="w-5 h-5 text-sky-600" />
+                    SLO Performance & Weak Area Analysis
+                  </h3>
+
+                  <div className="space-y-3 max-h-80 overflow-y-auto pr-2 custom-scrollbar">
+                    {Object.entries(sloAnalysis).map(([slo, stats], idx) => {
+                      const sloPct = stats.total > 0 ? Math.round((stats.correct / stats.total) * 100) : 0;
+                      return (
+                        <div key={idx} className="bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs space-y-2">
+                          <div className="flex justify-between items-start gap-2">
+                            <span className="font-semibold text-slate-800">{slo}</span>
+                            <span className={`font-bold px-2 py-0.5 rounded text-[11px] ${
+                              sloPct >= 80 ? 'bg-emerald-100 text-emerald-800' :
+                              sloPct >= 50 ? 'bg-amber-100 text-amber-800' : 'bg-rose-100 text-rose-800'
+                            }`}>
+                              {sloPct}% Mastered
+                            </span>
+                          </div>
+                          <div className="w-full bg-slate-200 h-2 rounded-full overflow-hidden">
+                            <div 
+                              className={`h-full transition-all duration-500 ${
+                                sloPct >= 80 ? 'bg-emerald-500' : sloPct >= 50 ? 'bg-amber-500' : 'bg-rose-500'
+                              }`}
+                              style={{ width: `${sloPct}%` }}
+                            />
+                          </div>
+                          <div className="flex gap-4 text-[11px] text-slate-500">
+                            <span>Correct: {stats.correct}</span>
+                            <span>Wrong: {stats.wrong}</span>
+                            <span>Skipped: {stats.unattempted}</span>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                {/* Detailed Analysis of Wrong/Skipped MCQs */}
+                <div className="space-y-4">
+                  <h3 className="text-base font-bold text-slate-800 flex items-center gap-2">
+                    <Icon name="book-open" className="w-5 h-5 text-sky-600" />
+                    Detailed Answer Rationales & Explanations
+                  </h3>
+
+                  <div className="space-y-4 max-h-96 overflow-y-auto pr-2 custom-scrollbar">
+                    {QUESTIONS.map((q, qIdx) => {
+                      const userSel = userAnswers[qIdx];
+                      const isCorrect = userSel === q.correct;
+                      const isUnattempted = !userAnswers.hasOwnProperty(qIdx);
+
+                      return (
+                        <div 
+                          key={q.id}
+                          className={`p-4 rounded-xl border text-xs space-y-2.5 ${
+                            isCorrect ? 'bg-emerald-50/50 border-emerald-200' :
+                            isUnattempted ? 'bg-amber-50/50 border-amber-200' : 'bg-rose-50/50 border-rose-200'
+                          }`}
+                        >
+                          <div className="flex justify-between items-start gap-2">
+                            <span className="font-bold text-slate-900">
+                              Q{qIdx + 1}. {q.question}
+                            </span>
+                            <span className={`px-2 py-0.5 rounded font-bold text-[10px] whitespace-nowrap ${
+                              isCorrect ? 'bg-emerald-600 text-white' :
+                              isUnattempted ? 'bg-amber-500 text-white' : 'bg-rose-600 text-white'
+                            }`}>
+                              {isCorrect ? 'CORRECT (+1.0)' : isUnattempted ? 'SKIPPED (0.0)' : 'WRONG (-0.25)'}
+                            </span>
+                          </div>
+
+                          <p className="text-[11px] text-slate-500 font-medium">{q.slo}</p>
+
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                            {q.options.map((opt, oIdx) => {
+                              const isOptCorrect = oIdx === q.correct;
+                              const isOptUserChoice = oIdx === userSel;
+
+                              return (
+                                <div 
+                                  key={oIdx}
+                                  className={`p-2 rounded-lg border font-medium flex items-center justify-between ${
+                                    isOptCorrect ? 'bg-emerald-100 border-emerald-300 text-emerald-900 font-bold' :
+                                    isOptUserChoice ? 'bg-rose-100 border-rose-300 text-rose-900' : 'bg-white border-slate-200 text-slate-600'
+                                  }`}
+                                >
+                                  <span>{String.fromCharCode(65 + oIdx)}. {opt}</span>
+                                  {isOptCorrect && <Icon name="check" className="w-3.5 h-3.5 text-emerald-700" />}
+                                  {isOptUserChoice && !isOptCorrect && <Icon name="x" className="w-3.5 h-3.5 text-rose-700" />}
+                                </div>
+                              );
+                            })}
+                          </div>
+
+                          <div className="bg-white/80 p-2.5 rounded-lg border border-slate-200 text-slate-700 leading-relaxed">
+                            <span className="font-bold text-sky-900">Explanation & Rationale: </span>
+                            {q.explanation}
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                {/* Restart Button */}
+                <button
+                  onClick={() => {
+                    setIsSubmitted(false);
+                    setQuizStarted(false);
+                    setCurrentIdx(0);
+                    setUserAnswers({});
+                    setTimeLeft(45 * 60);
+                  }}
+                  className="w-full bg-sky-600 hover:bg-sky-700 text-white font-bold py-3.5 px-6 rounded-xl shadow-lg shadow-sky-600/25 transition-all flex items-center justify-center gap-2"
+                >
+                  <Icon name="rotate-ccw" className="w-5 h-5" />
+                  <span>Restart Assessment</span>
+                </button>
+
+              </div>
+            </div>
+          </div>
+        );
+      }
+
+      // ACTIVE QUIZ SCREEN
+      return (
+        <div className="min-h-screen py-6 px-4 sm:px-6 flex flex-col items-center">
+          
+          {/* Top Navigation Header Card */}
+          <div className="max-w-3xl w-full bg-white rounded-2xl shadow-sm border border-sky-100 p-4 mb-4 space-y-3">
+            
+            {/* Header Title & Class Name */}
+            <div className="flex justify-between items-center text-xs sm:text-sm font-bold text-sky-900">
+              <span className="flex items-center gap-1.5">
+                <span className="text-base">🏔️</span> Qashqarian Academy
+              </span>
+              <span className="bg-sky-100 text-sky-800 px-2.5 py-0.5 rounded-md font-semibold text-xs">
+                Class: XI
+              </span>
+            </div>
+
+            {/* Question Counter & Timer */}
+            <div className="flex justify-between items-center text-xs font-semibold text-slate-600">
+              <span>Q {currentIdx + 1} / {QUESTIONS.length}</span>
+              <div className={`flex items-center gap-1.5 px-2.5 py-1 rounded-lg font-mono font-bold ${
+                timeLeft < 300 ? 'bg-rose-100 text-rose-700 animate-pulse' : 'bg-sky-50 text-sky-800'
+              }`}>
+                <Icon name="clock" className="w-3.5 h-3.5" />
+                <span>{formatTime(timeLeft)}</span>
+              </div>
+            </div>
+
+            {/* Top Visual Progress Bar */}
+            <div className="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+              <div 
+                className="bg-sky-600 h-full transition-all duration-300"
+                style={{ width: `${((currentIdx + 1) / QUESTIONS.length) * 100}%` }}
+              />
+            </div>
+          </div>
+
+          {/* Centered Main Question Card */}
+          <div className="max-w-3xl w-full bg-white rounded-2xl shadow-lg border border-sky-100 p-6 sm:p-8 relative overflow-hidden flex flex-col min-h-[460px] justify-between">
+            
+            {/* Watermark Logo in Center */}
+            <div className="watermark-bg">
+              <p className="text-5xl sm:text-6xl font-black text-sky-900 tracking-widest">
+                🏔️ QASHQARIAN ACADEMY
+              </p>
+            </div>
+
+            {/* Question Header & Options */}
+            <div className="relative z-10 space-y-5">
+              
+              {/* Relative SLO Tag */}
+              <div className="inline-block bg-sky-50 border border-sky-200 text-sky-900 text-xs font-semibold px-3 py-1 rounded-full">
+                {currentQ.slo}
+              </div>
+
+              {/* Question Text */}
+              <h2 className="text-base sm:text-lg font-bold text-slate-900 leading-snug">
+                Q{currentIdx + 1}. {currentQ.question}
+              </h2>
+
+              {/* MCQ Options A, B, C, D */}
+              <div className="space-y-3 pt-2">
+                {currentQ.options.map((optionText, optIdx) => {
+                  const isSelected = selectedOption === optIdx;
+                  const isCorrect = currentQ.correct === optIdx;
+
+                  let btnStyle = "border-slate-200 hover:border-sky-300 hover:bg-sky-50/50 text-slate-800 bg-white";
+
+                  if (isAnswered) {
+                    if (quizMode === 'practice') {
+                      if (isCorrect) {
+                        btnStyle = "border-emerald-500 bg-emerald-50 text-emerald-950 font-semibold ring-2 ring-emerald-500/20";
+                      } else if (isSelected) {
+                        btnStyle = "border-rose-500 bg-rose-50 text-rose-950 font-semibold ring-2 ring-rose-500/20";
+                      } else {
+                        btnStyle = "border-slate-200 opacity-60 bg-white text-slate-500";
+                      }
+                    } else {
+                      // Blind Mode: highlight locked choice with neutral style
+                      if (isSelected) {
+                        btnStyle = "border-sky-600 bg-sky-50 text-sky-950 font-semibold ring-2 ring-sky-500/20";
+                      } else {
+                        btnStyle = "border-slate-200 opacity-60 bg-white text-slate-500";
+                      }
+                    }
+                  }
+
+                  return (
+                    <button
+                      key={optIdx}
+                      disabled={isAnswered}
+                      onClick={() => handleSelectOption(optIdx)}
+                      className={`w-full p-3.5 sm:p-4 rounded-xl border-2 text-left text-xs sm:text-sm transition-all flex items-center justify-between gap-3 ${btnStyle}`}
+                    >
+                      <div className="flex items-center gap-3">
+                        <span className={`w-7 h-7 rounded-lg flex items-center justify-center font-bold text-xs shrink-0 ${
+                          isSelected ? 'bg-sky-600 text-white' : 'bg-slate-100 text-slate-700'
+                        }`}>
+                          {String.fromCharCode(65 + optIdx)}
+                        </span>
+                        <span>{optionText}</span>
+                      </div>
+
+                      {/* Immediate Feedback Icons for Practice Mode */}
+                      {isAnswered && quizMode === 'practice' && (
+                        <div>
+                          {isCorrect && <Icon name="check" className="w-5 h-5 text-emerald-600" />}
+                          {isSelected && !isCorrect && <Icon name="x" className="w-5 h-5 text-rose-600" />}
+                        </div>
+                      )}
+                    </button>
+                  );
+                })}
+              </div>
+
+              {/* Instant Practice Mode Explanation Box */}
+              {isAnswered && quizMode === 'practice' && (
+                <div className={`mt-4 p-4 rounded-xl text-xs leading-relaxed space-y-1 animate-fadeIn border ${
+                  selectedOption === currentQ.correct 
+                    ? 'bg-emerald-50/90 border-emerald-200 text-emerald-950' 
+                    : 'bg-rose-50/90 border-rose-200 text-rose-950'
+                }`}>
+                  <p className="font-bold flex items-center gap-1.5">
+                    <Icon name="info" className="w-4 h-4" />
+                    {selectedOption === currentQ.correct ? 'Correct! Rationale:' : 'Incorrect Answer Explanation:'}
+                  </p>
+                  <p className="text-slate-800">{currentQ.explanation}</p>
+                </div>
+              )}
+            </div>
+
+            {/* Bottom Controls: Previous / Next / Submit Buttons */}
+            <div className="relative z-10 pt-6 mt-6 border-t border-slate-100 flex justify-between items-center gap-4">
+              <button
+                disabled={currentIdx === 0}
+                onClick={() => setCurrentIdx(prev => prev - 1)}
+                className="px-4 py-2.5 rounded-xl border border-slate-200 text-slate-700 text-xs font-bold hover:bg-slate-50 disabled:opacity-40 disabled:cursor-not-allowed flex items-center gap-1.5"
+              >
+                <Icon name="arrow-left" className="w-4 h-4" />
+                Previous
+              </button>
+
+              <div className="flex gap-2">
+                {currentIdx < QUESTIONS.length - 1 ? (
+                  <button
+                    onClick={() => setCurrentIdx(prev => prev + 1)}
+                    className="px-5 py-2.5 rounded-xl bg-sky-600 hover:bg-sky-700 text-white text-xs font-bold shadow-md shadow-sky-600/20 transition-all flex items-center gap-1.5"
+                  >
+                    Next
+                    <Icon name="arrow-right" className="w-4 h-4" />
+                  </button>
+                ) : (
+                  <button
+                    onClick={() => setIsSubmitted(true)}
+                    className="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold shadow-md shadow-emerald-600/20 transition-all flex items-center gap-1.5"
+                  >
+                    Submit Test
+                    <Icon name="check" className="w-4 h-4" />
+                  </button>
+                )}
+              </div>
+            </div>
+
+          </div>
+        </div>
+      );
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<App />);
+  </script>
+</body>
+</html>

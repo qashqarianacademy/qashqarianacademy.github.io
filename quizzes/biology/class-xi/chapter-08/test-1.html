@@ -1,0 +1,1615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Class XI Biology Chapter 8 Mock Test - Qashqarian Academy</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+          },
+          colors: {
+            sky: {
+              50:'#F0F8F8', 100:'#DFF3F2', 200:'#BFE4E7', 300:'#8FCDD5',
+              400:'#4FA9B9', 500:'#1F869B', 600:'#056C82', 700:'#0A5263',
+              800:'#0B4352', 900:'#0B3340'
+            },
+            science: {
+              50:'#F0F8F8', 100:'#DFF3F2', 200:'#BFE4E7', 300:'#8FCDD5',
+              400:'#4FA9B9', 500:'#1F869B', 600:'#056C82', 700:'#0A5263',
+              800:'#0B4352', 900:'#0B3340'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- React 18 & ReactDOM -->
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+  <!-- Babel for JSX -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #f0f7ff;
+    }
+    .watermark-bg {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(-12deg);
+      pointer-events: none;
+      user-select: none;
+      z-index: 0;
+      opacity: 0.035;
+      text-align: center;
+      white-space: nowrap;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: #f1f5f9;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 4px;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fadeIn {
+      animation: fadeIn 0.25s ease-out forwards;
+    }
+    @media print {
+      .no-print { display: none !important; }
+      body { background: white; color: black; }
+    }
+  </style>
+</head>
+<body class="text-slate-800 antialiased selection:bg-sky-200 selection:text-sky-900 min-h-screen">
+<header class="sticky top-0 z-50 bg-[#0B132B] border-b border-cyan-900/40 shadow-md">
+    <div class="max-w-5xl mx-auto px-4 py-2.5 flex items-center justify-between">
+      <a href="../../../../index.html" class="flex items-center gap-2">
+        <img src="../../../../images/brand/logo.png" alt="Qashqarian Academy" class="w-10 h-10 object-contain">
+        <div>
+          <div class="text-base md:text-lg font-extrabold text-white tracking-tight leading-none">Qashqarian</div>
+          <div class="text-[10px] md:text-xs text-[#FF9F1C] font-extrabold tracking-[0.2em] mt-1 leading-none">ACADEMY</div>
+        </div>
+      </a>
+      <a href="../../index.html" class="text-[11px] font-semibold text-slate-300 hover:text-white border border-white/20 rounded-lg px-2.5 py-1">
+        ← Biology Quizzes
+      </a>
+    </div>
+  </header>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const { useState, useEffect, useMemo } = React;
+
+    // SVG Icon Component
+    const Icon = ({ name, className = "w-5 h-5" }) => {
+      const props = {
+        className,
+        xmlns: "http://www.w3.org/2000/svg",
+        viewBox: "0 0 24 24",
+        fill: "none",
+        stroke: "currentColor",
+        strokeWidth: "2",
+        strokeLinecap: "round",
+        strokeLinejoin: "round"
+      };
+
+      switch (name) {
+        case "clock":
+          return <svg {...props}><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>;
+        case "award":
+          return <svg {...props}><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 22 12 17 17 22 15.79 13.88"/></svg>;
+        case "check":
+          return <svg {...props}><polyline points="20 6 9 17 4 12"/></svg>;
+        case "x":
+          return <svg {...props}><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>;
+        case "arrow-left":
+          return <svg {...props}><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>;
+        case "arrow-right":
+          return <svg {...props}><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>;
+        case "rotate-ccw":
+          return <svg {...props}><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>;
+        case "book-open":
+          return <svg {...props}><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>;
+        case "shield":
+          return <svg {...props}><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>;
+        case "zap":
+          return <svg {...props}><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>;
+        case "bar-chart":
+          return <svg {...props}><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg>;
+        case "info":
+          return <svg {...props}><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>;
+        case "alert-triangle":
+          return <svg {...props}><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>;
+        case "flag":
+          return <svg {...props}><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>;
+        case "grid":
+          return <svg {...props}><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>;
+        case "search":
+          return <svg {...props}><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>;
+        case "printer":
+          return <svg {...props}><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>;
+        case "key":
+          return <svg {...props}><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg>;
+        default:
+          return <svg {...props}><circle cx="12" cy="12" r="10"/></svg>;
+      }
+    };
+
+    const QUESTIONS = [
+      // SLO 8.1.1: Differentiate Between Fungi and Organisms of Other Kingdoms
+      {
+        id: 1,
+        slo: "SLO 8.1.1: Differentiate Between Fungi and Organisms of Other Kingdoms",
+        question: "Which structural component forms the rigid cell wall of fungi, distinguishing them from green plants whose cell walls contain cellulose?",
+        options: ["Peptidoglycan", "Chitin", "Lignin", "Silicate"],
+        correct: 1,
+        explanation: "Fungal cell walls are composed of chitin, a tough nitrogen-containing polysaccharide, unlike plant cell walls which are composed of cellulose.",
+        wrongExplanations: [
+          "Peptidoglycan forms the rigid cell wall of domain Bacteria, not fungi.",
+          "Chitin is the correct structural polymer of fungal cell walls.",
+          "Lignin provides structural support in plant vascular tissues (xylem).",
+          "Silicate forms the rigid cell walls (frustules) of diatoms."
+        ]
+      },
+      {
+        id: 2,
+        slo: "SLO 8.1.1: Differentiate Between Fungi and Organisms of Other Kingdoms",
+        question: "How do fungi obtain nutrition differently from animals, even though both are heterotrophic organisms?",
+        options: [
+          "Fungi ingest solid food particles before digesting them internally",
+          "Fungi perform photosynthesis in low-light environments",
+          "Fungi absorb inorganic sunlight directly through hyphal membranes",
+          "Fungi secrete digestive enzymes externally and absorb soluble nutrients"
+        ],
+        correct: 3,
+        explanation: "Fungi are absorptive heterotrophs; they release extracellular digestive enzymes into their surrounding substrate and absorb the resulting soluble organic nutrients.",
+        wrongExplanations: [
+          "Animals ingest solid food prior to internal digestion; fungi digest food extracellularly before absorption.",
+          "Fungi lack chlorophyll and are strictly non-photosynthetic organisms.",
+          "Fungi cannot absorb solar light for nutritional energy.",
+          "This is the correct absorptive heterotrophic mode of fungal nutrition."
+        ]
+      },
+      {
+        id: 3,
+        slo: "SLO 8.1.1: Differentiate Between Fungi and Organisms of Other Kingdoms",
+        question: "[Real-Life Scenario] A student analyzes a liver tissue sample and a mushroom tissue sample in a lab. She observes that both store extra carbohydrate energy in the exact same chemical form. Which molecule is present in both?",
+        options: ["Glycogen", "Starch", "Sucrose", "Cellulose"],
+        correct: 0,
+        explanation: "Both fungi and animals store excess glucose as glycogen, highlighting an evolutionary affinity between fungi and animal lineages.",
+        wrongExplanations: [
+          "Glycogen is the common energy storage polysaccharide in fungi and animals.",
+          "Starch is the primary storage carbohydrate in green plants.",
+          "Sucrose is a transport disaccharide synthesized in vascular plants.",
+          "Cellulose is a structural polymer forming plant cell walls."
+        ]
+      },
+      {
+        id: 4,
+        slo: "SLO 8.1.1: Differentiate Between Fungi and Organisms of Other Kingdoms",
+        question: "Which mitotic feature is uniquely characteristic of fungal cell division, setting them apart from plants and animals?",
+        options: [
+          "Complete breakdown of the nuclear envelope during prophase",
+          "Formation of a cell plate during cytokinesis",
+          "Nuclear mitosis, where the nuclear envelope remains intact during division",
+          "Total absence of spindle fibers during chromosome separation"
+        ],
+        correct: 2,
+        explanation: "Fungi undergo closed nuclear mitosis (karyochoresis), in which the nuclear envelope remains intact while spindle fibers assemble internally.",
+        wrongExplanations: [
+          "Nuclear envelope breakdown occurs during open mitosis in plants and animals.",
+          "Cell plate formation is characteristic of plant cell cytokinesis.",
+          "Nuclear mitosis keeps the envelope intact during nuclear division.",
+          "Spindle apparatus forms inside the fungal nucleus during division."
+        ]
+      },
+      {
+        id: 5,
+        slo: "SLO 8.1.1: Differentiate Between Fungi and Organisms of Other Kingdoms",
+        question: "Why were fungi removed from Kingdom Plantae and placed into their own separate kingdom in modern biological classification?",
+        options: [
+          "Fungi lack cell membranes and membrane-bound nuclei",
+          "Fungi lack chlorophyll and are strictly absorptive heterotrophs",
+          "Fungi are always microscopic single-celled organisms",
+          "Fungi store excess energy as plant starch"
+        ],
+        correct: 1,
+        explanation: "Fungi were separated from Plantae because they lack photosynthetic pigments (chlorophyll), possess chitinous cell walls, and practice absorptive heterotrophy.",
+        wrongExplanations: [
+          "Fungi are true eukaryotes possessing cell membranes and double-membraned nuclei.",
+          "This is the fundamental evolutionary difference that separated fungi from plants.",
+          "Most fungi are multicellular thread-like organisms, with unicellular yeast as an exception.",
+          "Fungi store energy as glycogen, never plant starch."
+        ]
+      },
+
+      // SLO 8.1.2: Describe Structure and Nutrition in Fungi
+      {
+        id: 6,
+        slo: "SLO 8.1.2: Describe Structure and Nutrition in Fungi",
+        question: "The vegetative body of a multicellular fungus consists of a woven, thread-like network of microscopic filaments called:",
+        options: ["Rhizoids", "Sporangia", "Mycelium", "Basidia"],
+        correct: 2,
+        explanation: "The entire vegetative body of a multicellular fungus is called a mycelium, composed of a dense network of thread-like filaments named hyphae.",
+        wrongExplanations: [
+          "Rhizoids are specialized root-like anchoring hyphae.",
+          "Sporangia are reproductive sac-like spore structures.",
+          "Mycelium is the correct collective name for the fungal body.",
+          "Basidia are microscopic club-shaped sexual spore-bearing structures."
+        ]
+      },
+      {
+        id: 7,
+        slo: "SLO 8.1.2: Describe Structure and Nutrition in Fungi",
+        question: "Hyphae that lack cross-walls (septa) and exist as continuous, multinucleate cytoplasmic tubes are termed:",
+        options: ["Aseptate (Coenocytic) hyphae", "Septate hyphae", "Monokaryotic hyphae", "Haustorial hyphae"],
+        correct: 0,
+        explanation: "Aseptate or coenocytic hyphae lack septal cross-walls, resulting in continuous cytoplasmic tubes with multiple nuclei flowing freely.",
+        wrongExplanations: [
+          "Aseptate/coenocytic hyphae continuous multinucleate tubes lacking cross-walls.",
+          "Septate hyphae possess cross-walls dividing hyphae into discrete cellular units.",
+          "Monokaryotic hyphae contain a single haploid nucleus per compartment.",
+          "Haustorial hyphae are specialized nutrient-absorbing structures in parasitic fungi."
+        ]
+      },
+      {
+        id: 8,
+        slo: "SLO 8.1.2: Describe Structure and Nutrition in Fungi",
+        question: "[Real-Life Scenario] A slice of moist bread left on a kitchen counter develops a black fuzzy mold (Rhizopus). Under a magnifying glass, root-like hyphae are seen anchoring the mold and absorbing digested starch from the bread. What are these root-like hyphae called?",
+        options: ["Stolon", "Conidiophore", "Sporangiophora", "Rhizoids"],
+        correct: 3,
+        explanation: "Rhizoids are root-like hyphae that anchor saprophytic fungi like Rhizopus into the substrate, secreting enzymes and absorbing nutrients.",
+        wrongExplanations: [
+          "Stolons are horizontal surface hyphae that spread across substrate surfaces.",
+          "Conidiophores are aerial hyphae that bear asexual conidia spores.",
+          "Sporangiophores are erect specialized stalk hyphae supporting sporangia.",
+          "Rhizoids are the specific root-like anchoring and absorbing hyphae."
+        ]
+      },
+      {
+        id: 9,
+        slo: "SLO 8.1.2: Describe Structure and Nutrition in Fungi",
+        question: "Specialized hyphal tips formed by parasitic fungi to penetrate host plant cells and absorb nutrients directly from host cytoplasm are known as:",
+        options: ["Mycelia", "Haustoria", "Ascocarps", "Sclerotia"],
+        correct: 1,
+        explanation: "Haustoria are specialized hyphal outgrowths of obligate parasitic fungi that penetrate host plant cell walls to draw organic nutrients directly from cytoplasm.",
+        wrongExplanations: [
+          "Mycelium is the vegetative mass of hyphae.",
+          "Haustoria are the specialized host-penetrating absorbing tips.",
+          "Ascocarps are complex sexual fruiting bodies of sac fungi.",
+          "Sclerotia are compact hardened masses of hyphae used for survival."
+        ]
+      },
+      {
+        id: 10,
+        slo: "SLO 8.1.2: Describe Structure and Nutrition in Fungi",
+        question: "Fungi that feed on non-living organic matter and dead organisms by releasing extracellular enzymes are classified ecologically as:",
+        options: ["Saprophytes (Decomposers)", "Obligate parasites", "Mutualistic symbionts", "Endoparasites"],
+        correct: 0,
+        explanation: "Saprophytes (decomposers) derive nourishment from non-living organic matter and dead remains, recycling vital chemical elements back into the environment.",
+        wrongExplanations: [
+          "Saprophytes break down non-living organic matter externally.",
+          "Obligate parasites can only survive and feed on living host tissue.",
+          "Mutualistic symbionts establish mutually beneficial partnerships with living hosts.",
+          "Endoparasites live inside the bodies of living host organisms."
+        ]
+      },
+
+      // SLO 8.1.3: Compare Lichens with Mycorrhizae
+      {
+        id: 11,
+        slo: "SLO 8.1.3: Compare Lichens with Mycorrhizae",
+        question: "A lichen is a mutualistic symbiotic association formed between a fungus and which autotrophic partner?",
+        options: ["Moss protonema or fern gametophyte", "Leguminous plant root", "Green alga or cyanobacterium", "Conifer seed pod"],
+        correct: 2,
+        explanation: "Lichens represent a symbiotic mutualism composed of a fungal partner (mycobiont) and a photosynthetic partner (phytobiont)—either a green alga or cyanobacterium.",
+        wrongExplanations: [
+          "Moss protonemata and fern gametophytes are independent photosynthetic plant stages.",
+          "Leguminous roots form nitrogen-fixing nodules with Rhizobium bacteria.",
+          "Green algae or cyanobacteria serve as the photosynthetic partners in lichens.",
+          "Conifer seed pods are plant reproductive structures."
+        ]
+      },
+      {
+        id: 12,
+        slo: "SLO 8.1.3: Compare Lichens with Mycorrhizae",
+        question: "In ectomycorrhizae, how do the fungal hyphae interact with the host plant root cells?",
+        options: [
+          "Hyphae penetrate through the plant cell wall into the inner cytoplasm",
+          "Hyphae surround the root exterior forming a mantle and Hartig net between cortical cells",
+          "Hyphae destroy the root cortex cells to absorb sugar",
+          "Hyphae form air bubbles inside root vascular bundles"
+        ],
+        correct: 1,
+        explanation: "Ectomycorrhizae form an outer fungal sheath (mantle) over the root tip and extend a intercellular network (Hartig net) between cortical cells without entering cell walls.",
+        wrongExplanations: [
+          "Penetrating root cell walls is characteristic of endomycorrhizae (arbuscular mycorrhizae).",
+          "Ectomycorrhizae form a surrounding sheath and Hartig net without penetrating cell walls.",
+          "Hyphae establish a mutualistic exchange, not destructive cell killing.",
+          "Hyphae do not form air bubbles inside vascular vessels."
+        ]
+      },
+      {
+        id: 13,
+        slo: "SLO 8.1.3: Compare Lichens with Mycorrhizae",
+        question: "[Real-Life Scenario] An environmental scientist notices that lichens are completely absent from trees in an industrial area with heavy traffic, but thrive on trees in a rural forest. Which pollutant makes lichens effective bio-indicators of air quality?",
+        options: ["Methane gas", "Carbon monoxide", "Lead dust", "Sulfur dioxide (SO₂)"],
+        correct: 3,
+        explanation: "Lichens readily absorb rainwater and air pollutants over their entire surface; they are exceptionally sensitive to sulfur dioxide ($SO_2$), making them effective air quality bio-indicators.",
+        wrongExplanations: [
+          "Methane is a greenhouse gas that does not uniquely kill lichens at ambient levels.",
+          "Carbon monoxide does not act as the primary toxic driver of lichen death in cities.",
+          "Heavy metal dust accumulates in lichens, but $SO_2$ gas causes direct toxicity and absence.",
+          "Sulfur dioxide ($SO_2$) destroys lichen chlorophyll, rendering them extinct in polluted urban zones."
+        ]
+      },
+      {
+        id: 14,
+        slo: "SLO 8.1.3: Compare Lichens with Mycorrhizae",
+        question: "What primary advantage does a vascular plant gain from a mycorrhizal association with soil fungi?",
+        options: [
+          "Enhanced absorption of water and essential minerals like phosphorus",
+          "Increased production of photosynthetic chlorophyll",
+          "Protection from excessive direct sunlight exposure",
+          "Direct absorption of atmospheric nitrogen gas"
+        ],
+        correct: 0,
+        explanation: "Mycorrhizal fungal hyphae enormously increase the effective root surface area in soil, vastly enhancing the absorption of water and phosphorus.",
+        wrongExplanations: [
+          "Mycorrhizae primarily provide enhanced water and mineral uptake (especially phosphate).",
+          "Chlorophyll synthesis occurs intrinsically within host plant plastids.",
+          "Soil mycorrhizae are underground structures and do not shield leaves from sunlight.",
+          "Atmospheric nitrogen fixation is carried out by nitrogen-fixing bacteria, not mycorrhizal fungi."
+        ]
+      },
+      {
+        id: 15,
+        slo: "SLO 8.1.3: Compare Lichens with Mycorrhizae",
+        question: "In a lichen association, what vital contribution does the photosynthetic partner (phytobiont) provide to the fungal partner (mycobiont)?",
+        options: ["Anchorage and moisture retention", "Protection against ultraviolet light", "Organic carbohydrates (food)", "Minerals like potassium and calcium"],
+        correct: 2,
+        explanation: "The autotrophic phytobiont (alga/cyanobacterium) carries out photosynthesis and synthesizes organic carbohydrates (sugars) that nourish the heterotrophic fungal mycobiont.",
+        wrongExplanations: [
+          "Anchorage and moisture retention are provided by the fungal partner (mycobiont).",
+          "Shading and structural protection from desiccation are fungal contributions.",
+          "The phytobiont provides photosynthetic organic carbohydrates.",
+          "Mineral uptake from rock/soil substrates is managed by the fungal hyphae."
+        ]
+      },
+
+      // SLO 8.1.4: Methods of Asexual and Sexual Reproduction in Fungi
+      {
+        id: 16,
+        slo: "SLO 8.1.4: Methods of Asexual and Sexual Reproduction in Fungi",
+        question: "Non-motile asexual spores produced externally at the tips of specialized hyphae without being enclosed in a sac are called:",
+        options: ["Sporangiospores", "Conidia", "Basidiospores", "Zygospores"],
+        correct: 1,
+        explanation: "Conidia are non-motile asexual fungal spores formed externally (cut off individually or in chains) at the tips of specialized hyphae termed conidiophores.",
+        wrongExplanations: [
+          "Sporangiospores are formed inside an enclosed sac (sporangium).",
+          "Conidia are external, naked asexual spores produced on conidiophores.",
+          "Basidiospores are sexual spores produced externally on club-shaped basidia.",
+          "Zygospores are thick-walled sexual resting spores."
+        ]
+      },
+      {
+        id: 17,
+        slo: "SLO 8.1.4: Methods of Asexual and Sexual Reproduction in Fungi",
+        question: "During fungal sexual reproduction, the fusion of haploid cell nuclei following cytoplasm fusion is specifically called:",
+        options: ["Plasmogamy", "Cytokinesis", "Conjugation", "Karyogamy"],
+        correct: 3,
+        explanation: "Karyogamy is the nuclear fusion step in fungal sexual reproduction where two compatible haploid nuclei fuse to form a diploid ($2n$) zygotic nucleus.",
+        wrongExplanations: [
+          "Plasmogamy is the initial step involving fusion of parental cell cytoplasm.",
+          "Cytokinesis refers to physical cytoplasm division into daughter cells.",
+          "Conjugation is direct cell-to-cell transfer of genetic material in prokaryotes/protists.",
+          "Karyogamy specifically designates nuclear fusion."
+        ]
+      },
+      {
+        id: 18,
+        slo: "SLO 8.1.4: Methods of Asexual and Sexual Reproduction in Fungi",
+        question: "[Real-Life Scenario] A student observing baker's yeast under a microscope notices small, unequal outgrowths pinching off from parent single cells to form new individual yeasts. Which asexual reproduction method is being observed?",
+        options: ["Budding", "Fragmentation", "Spore formation", "Binary fission"],
+        correct: 0,
+        explanation: "Budding is an asexual reproductive process in yeasts where an asymmetric outgrowth forms on the parent cell, receives a daughter nucleus, and pinches off.",
+        wrongExplanations: [
+          "Budding is the formation of unequal daughter outgrowths on single-celled yeasts.",
+          "Fragmentation involves breaking multicellular fungal hyphae into segments.",
+          "Spore formation involves specialized reproductive units like conidia or sporangiospores.",
+          "Binary fission involves symmetrical division into two equal daughter cells."
+        ]
+      },
+      {
+        id: 19,
+        slo: "SLO 8.1.4: Methods of Asexual and Sexual Reproduction in Fungi",
+        question: "A cell or hypha containing two genetically distinct haploid nuclei (n+n) derived from different parents prior to nuclear fusion is described as:",
+        options: ["Diploid (2n)", "Polyploid", "Dikaryotic", "Aneuploid"],
+        correct: 2,
+        explanation: "A dikaryotic hypha/cell contains two separate compatible haploid nuclei ($n+n$) per cell resulting from plasmogamy, before karyogamy takes place.",
+        wrongExplanations: [
+          "Diploid ($2n$) status is achieved only after karyogamy occurs.",
+          "Polyploid cells contain more than two sets of paired homologous chromosomes.",
+          "Dikaryotic ($n+n$) describes cells with two distinct haploid nuclei per cell.",
+          "Aneuploid refers to cells having an abnormal non-integral chromosome count."
+        ]
+      },
+      {
+        id: 20,
+        slo: "SLO 8.1.4: Methods of Asexual and Sexual Reproduction in Fungi",
+        question: "In black bread mold (Rhizopus), non-motile asexual spores are produced in large numbers inside a dedicated sac-like structure called a:",
+        options: ["Conidiophore", "Sporangium", "Ascus", "Basidium"],
+        correct: 1,
+        explanation: "In Rhizopus, asexual reproduction occurs within an enclosed sac-like structure called a sporangium, borne atop aerial sporangiophores.",
+        wrongExplanations: [
+          "Conidiophores are stalk hyphae that bear naked external conidia.",
+          "Sporangium is the enclosed sac structure producing asexual sporangiospores.",
+          "Ascus is a microscopic sexual sac structure characteristic of Ascomycota.",
+          "Basidium is a microscopic sexual club structure characteristic of Basidiomycota."
+        ]
+      },
+
+      // SLO 8.2.1: Differentiate Among Main Groups of Fungi
+      {
+        id: 21,
+        slo: "SLO 8.2.1: Differentiate Among Main Groups of Fungi",
+        question: "Which group of fungi forms a thick-walled, resistant diploid spore called a zygospore as a result of sexual reproduction?",
+        options: ["Zygomycota", "Ascomycota", "Basidiomycota", "Deuteromycota"],
+        correct: 0,
+        explanation: "Members of Zygomycota produce thick-walled, highly resistant diploid sexual resting spores called zygospores during sexual reproduction.",
+        wrongExplanations: [
+          "Zygomycota form thick-walled zygospores during sexual reproduction.",
+          "Ascomycota produce haploid ascospores inside sac-like asci.",
+          "Basidiomycota produce haploid basidiospores on club-like basidia.",
+          "Deuteromycota lack known sexual spore stages."
+        ]
+      },
+      {
+        id: 22,
+        slo: "SLO 8.2.1: Differentiate Among Main Groups of Fungi",
+        question: "Sac fungi (Ascomycota) produce their sexual spores inside a microscopic, sac-like reproductive structure called an:",
+        options: ["Basidium", "Sporangium", "Ascus", "Oogonium"],
+        correct: 2,
+        explanation: "Ascomycota (sac fungi) form their sexual spores (ascospores) internally inside a specialized microscopic sac called an ascus.",
+        wrongExplanations: [
+          "Basidium is the club-shaped sexual structure of Basidiomycota.",
+          "Sporangium is an asexual sac structure producing sporangiospores.",
+          "Ascus is the definitive sexual sac of Ascomycota.",
+          "Oogonium is a female gametangium found in oomycetes and algae."
+        ]
+      },
+      {
+        id: 23,
+        slo: "SLO 8.2.1: Differentiate Among Main Groups of Fungi",
+        question: "[Real-Life Scenario] A gardener finds a club-shaped mushroom growing on lawn soil. Under the cap, she observes microscopic gills bearing tiny stalked spores on club-like cells called basidia. To which fungal group does this mushroom belong?",
+        options: ["Zygomycota", "Basidiomycota", "Ascomycota", "Deuteromycota"],
+        correct: 1,
+        explanation: "Mushrooms are fruiting bodies (basidiocarps) of Basidiomycota (club fungi), characterized by basidia bearing sexual basidiospores on gill surfaces.",
+        wrongExplanations: [
+          "Zygomycota produce zygospores and lack mushroom fruiting bodies with gills.",
+          "Basidiomycota are club fungi that bear basidiospores on basidia.",
+          "Ascomycota form asci inside ascocarps, not basidia on gills.",
+          "Deuteromycota are imperfect fungi with no observed sexual structures."
+        ]
+      },
+      {
+        id: 24,
+        slo: "SLO 8.2.1: Differentiate Among Main Groups of Fungi",
+        question: "Why are fungi belonging to the group Deuteromycota commonly referred to as \"Imperfect Fungi\"?",
+        options: [
+          "They lack cell walls in their hyphae",
+          "They cannot absorb organic nutrients",
+          "They possess single-stranded DNA",
+          "They lack an observed or known sexual phase in their life cycle"
+        ],
+        correct: 3,
+        explanation: "Deuteromycota are called imperfect fungi because they lack an observed sexual (perfect) reproduction stage, reproducing purely via asexual spores.",
+        wrongExplanations: [
+          "Deuteromycetes have normal chitinous cell walls in their hyphae.",
+          "They are fully capable heterotrophs absorbing organic nutrients.",
+          "They have standard double-stranded eukaryotic genomic DNA.",
+          "Lack of a sexual (teleomorph) reproductive phase defines imperfect fungi."
+        ]
+      },
+      {
+        id: 25,
+        slo: "SLO 8.2.1: Differentiate Among Main Groups of Fungi",
+        question: "How many haploid ascospores are typically produced inside a single mature ascus of an ascomycote fungus after meiosis followed by one mitotic division?",
+        options: ["2", "4", "8", "16"],
+        correct: 2,
+        explanation: "In Ascomycota, the diploid nucleus in the young ascus undergoes meiosis yielding 4 haploid nuclei, followed by one mitotic division to form 8 ascospores.",
+        wrongExplanations: [
+          "2 is incorrect.",
+          "4 haploid nuclei are formed immediately after meiosis before mitosis occurs.",
+          "8 ascospores are formed following meiosis (4) and one subsequent mitotic division ($4 \\times 2 = 8$).",
+          "16 is incorrect for standard ascomycete asci."
+        ]
+      },
+
+      // SLO 8.3.1: Adaptive Features of Fungi in the Land Habitat
+      {
+        id: 26,
+        slo: "SLO 8.3.1: Adaptive Features of Fungi in the Land Habitat",
+        question: "Which feature of the fungal cell wall protects land-dwelling fungi from collapsing or bursting due to osmotic changes in terrestrial soil?",
+        options: ["Flexible cell membrane", "Lignified secondary wall", "Cuticle wax layer", "Rigid chitinous wall"],
+        correct: 3,
+        explanation: "The strong, rigid chitinous cell wall protects fungal hyphae from osmotic lysis and collapsing, enabling survival in variable soil osmotic environments.",
+        wrongExplanations: [
+          "Cell membranes alone cannot withstand high turgor pressure without a rigid wall.",
+          "Lignin is found in plant vascular cell walls, not fungal walls.",
+          "Waxy cuticle is a terrestrial plant epidermal layer.",
+          "Rigid chitinous cell wall provides mechanical strength and resists osmotic lysis."
+        ]
+      },
+      {
+        id: 27,
+        slo: "SLO 8.3.1: Adaptive Features of Fungi in the Land Habitat",
+        question: "How do terrestrial fungi successfully spread their offspring over vast land distances without requiring liquid water for fertilization?",
+        options: [
+          "Swimming flagellated sperm cells",
+          "Lightweight, dry spores dispersed by wind currents",
+          "Underground creeping root systems",
+          "Pollen grains carried by flying insects"
+        ],
+        correct: 1,
+        explanation: "Terrestrial fungi adapt to land by producing massive numbers of tiny, lightweight, desiccation-resistant dry spores easily carried by wind currents.",
+        wrongExplanations: [
+          "Swimming flagellated sperm require liquid water and were lost in terrestrial fungal evolution.",
+          "Dry, lightweight wind-blown spores allow widespread land dispersal without liquid water.",
+          "Underground hyphae spread locally, but distant dispersal is achieved by windborne spores.",
+          "Pollen grains are specialized male microgametophytes of seed plants."
+        ]
+      },
+      {
+        id: 28,
+        slo: "SLO 8.3.1: Adaptive Features of Fungi in the Land Habitat",
+        question: "[Real-Life Scenario] A gardener notices that during dry summer weeks, soil bacteria decline in activity, but fungal mycelia continue expanding through dry garden soil. Which adaptation allows fungal hyphae to extract deep soil moisture effectively?",
+        options: [
+          "High internal osmotic pressure and extensive surface-area-to-volume ratio of hyphae",
+          "Thick waterproof bark covering all hyphae",
+          "Stomatal pores that open at night",
+          "Deep taproot systems with vascular vessels"
+        ],
+        correct: 0,
+        explanation: "Fungal hyphae maintain high internal solute concentrations (osmotic potential) and possess a tremendous surface-area-to-volume ratio, drawing residual moisture from dry soil.",
+        wrongExplanations: [
+          "High osmotic pressure and vast surface area enable moisture absorption in dry soil.",
+          "Hyphae are permeable thin filaments, not covered in impermeable plant bark.",
+          "Stomatal pores are photosynthetic gas-exchange structures in plants.",
+          "Fungi lack root systems and vascular xylem/phloem vessels."
+        ]
+      },
+      {
+        id: 29,
+        slo: "SLO 8.3.1: Adaptive Features of Fungi in the Land Habitat",
+        question: "Unlike primitive aquatic protists, almost all advanced terrestrial fungi have completely lost which cellular structure during evolution?",
+        options: ["Ribosomes", "Mitochondria", "Flagellated motile stages", "Cell membranes"],
+        correct: 2,
+        explanation: "Evolutionary adaptation to dry land resulted in the loss of flagellated motile cells in zygomycetes, ascomycetes, and basidiomycetes.",
+        wrongExplanations: [
+          "Ribosomes are essential universal structures required for protein synthesis.",
+          "Mitochondria are retained for cellular aerobic respiration and ATP production.",
+          "Flagellated motile stages were completely lost during adaptation to land.",
+          "Cell membranes are mandatory structural barriers for all living cells."
+        ]
+      },
+      {
+        id: 30,
+        slo: "SLO 8.3.1: Adaptive Features of Fungi in the Land Habitat",
+        question: "Fungal hyphae can rapidly grow and extend towards new food sources on land primarily because of:",
+        options: [
+          "Active muscular contraction of hyphal walls",
+          "Cytoplasmic streaming transporting materials to growing hyphal tips",
+          "Rapid cell migration from spore centers",
+          "Photosynthetic energy production at night"
+        ],
+        correct: 1,
+        explanation: "Rapid apical growth of hyphae is driven by continuous cytoplasmic streaming that transports cell wall materials, enzymes, and vesicles to the growing tips.",
+        wrongExplanations: [
+          "Fungi lack muscular tissue and contractile muscle fibers.",
+          "Cytoplasmic streaming drives rapid apical extension towards nutrient sources.",
+          "Fungal cells are fixed within hyphal walls and do not migrate individually.",
+          "Fungi are strictly non-photosynthetic heterotrophs."
+        ]
+      },
+
+      // SLO 8.4.1: Ecological and Commercial Importance of Fungi
+      {
+        id: 31,
+        slo: "SLO 8.4.1: Ecological and Commercial Importance of Fungi",
+        question: "Together with saprophytic bacteria, fungi play a vital ecological role in terrestrial ecosystems by acting as primary:",
+        options: ["Apex predators", "Primary producers", "Decomposers and nutrient recyclers", "Atmospheric nitrogen fixers"],
+        correct: 2,
+        explanation: "Fungi are the primary decomposers in ecosystems, breaking down complex plant polymers like cellulose and lignin and recycling essential minerals.",
+        wrongExplanations: [
+          "Apex predators are top-tier carnivorous animals.",
+          "Primary producers are autotrophs like plants and algae.",
+          "Decomposers break down organic dead waste and recycle nutrients.",
+          "Nitrogen fixation is performed by prokaryotic bacteria, not fungi."
+        ]
+      },
+      {
+        id: 32,
+        slo: "SLO 8.4.1: Ecological and Commercial Importance of Fungi",
+        question: "The life-saving antibiotic Penicillin, which kills disease-causing bacteria, was originally discovered from which fungal genus?",
+        options: ["Penicillium", "Aspergillus", "Rhizopus", "Candida"],
+        correct: 0,
+        explanation: "Penicillin was discovered by Alexander Fleming from the green mold Penicillium (specifically Penicillium notatum).",
+        wrongExplanations: [
+          "Penicillium is the fungal genus from which penicillin antibiotic was isolated.",
+          "Aspergillus species produce industrial citric acid, soy sauce, and aflatoxins.",
+          "Rhizopus species cause bread molds and soft fruit rots.",
+          "Candida is a yeast genus responsible for candidiasis infections."
+        ]
+      },
+      {
+        id: 33,
+        slo: "SLO 8.4.1: Ecological and Commercial Importance of Fungi",
+        question: "[Real-Life Scenario] A baker mixes flour, sugar, water, and yeast (Saccharomyces cerevisiae) to make bread dough. Before baking, the dough expands and rises significantly in volume. Which gas released during fungal fermentation causes the dough to rise?",
+        options: ["Oxygen", "Nitrogen", "Methane", "Carbon dioxide (CO₂)"],
+        correct: 3,
+        explanation: "Yeast converts dough sugars into ethanol and carbon dioxide ($CO_2$) gas through anaerobic alcoholic fermentation; $CO_2$ gas bubbles get trapped and make the dough rise.",
+        wrongExplanations: [
+          "Oxygen gas is consumed during aerobic respiration, not released in fermentation.",
+          "Nitrogen gas is not generated during yeast sugar fermentation.",
+          "Methane gas is produced by methanogenic archaea, not baking yeast.",
+          "Carbon dioxide ($CO_2$) bubbles expand dough during yeast fermentation."
+        ]
+      },
+      {
+        id: 34,
+        slo: "SLO 8.4.1: Ecological and Commercial Importance of Fungi",
+        question: "Which fungal derivative is used medically as an immunosuppressive drug to prevent organ rejection in liver and kidney transplant patients?",
+        options: ["Ergotamine", "Cyclosporine", "Aflatoxin", "Statins"],
+        correct: 1,
+        explanation: "Cyclosporine, obtained from the soil fungus Tolypocladium inflatum, suppresses immune responses, preventing transplant organ rejection.",
+        wrongExplanations: [
+          "Ergotamine is a fungal alkaloid used for treating migraine headaches.",
+          "Cyclosporine is the critical immunosuppressive drug derived from soil fungi.",
+          "Aflatoxins are potent carcinogenic toxins produced by Aspergillus mold.",
+          "Statins are fungal-derived drugs used to lower blood cholesterol levels."
+        ]
+      },
+      {
+        id: 35,
+        slo: "SLO 8.4.1: Ecological and Commercial Importance of Fungi",
+        question: "Which edible mushroom is cultivated commercially worldwide as a high-protein food source?",
+        options: ["Amanita phalloides (Death Cap)", "Ustilago maydis", "Agaricus bisporus (Button Mushroom)", "Claviceps purpurea"],
+        correct: 2,
+        explanation: "Agaricus bisporus (common button mushroom) is widely cultivated globally as a safe, highly nutritious, protein-rich edible mushroom.",
+        wrongExplanations: [
+          "Amanita phalloides is a deadly toxic mushroom containing amatoxins.",
+          "Ustilago maydis causes corn smut crop disease.",
+          "Agaricus bisporus is the edible button mushroom grown commercially worldwide.",
+          "Claviceps purpurea causes ergotism grain poisoning."
+        ]
+      },
+
+      // SLO 8.4.2: Economic Losses Due to Fungi
+      {
+        id: 36,
+        slo: "SLO 8.4.2: Economic Losses Due to Fungi",
+        question: "Rust diseases, which cause severe destruction of wheat crops worldwide, are caused by parasitic fungi belonging to the genus:",
+        options: ["Puccinia", "Ustilago", "Penicillium", "Alternaria"],
+        correct: 0,
+        explanation: "Rust diseases in wheat and cereal crops are caused by obligate plant parasitic basidiomycetes of the genus Puccinia (e.g., Puccinia graminis).",
+        wrongExplanations: [
+          "Puccinia causes cereal rust diseases worldwide.",
+          "Ustilago causes smut diseases in corn, wheat, and barley.",
+          "Penicillium is primarily a saprophytic mold or penicillin source.",
+          "Alternaria causes early blight in potatoes and tomatoes."
+        ]
+      },
+      {
+        id: 37,
+        slo: "SLO 8.4.2: Economic Losses Due to Fungi",
+        question: "Smut disease of cereal crops (such as wheat and corn), characterized by dark soot-like spore masses replacing healthy grain kernels, is caused by:",
+        options: ["Rhizopus", "Aspergillus", "Phytophthora", "Ustilago"],
+        correct: 3,
+        explanation: "Ustilago species (e.g., Ustilago maydis, Ustilago nuda) cause smut diseases where grain kernels are destroyed and filled with black powdery spores.",
+        wrongExplanations: [
+          "Rhizopus causes soft fruit rots and bread mold.",
+          "Aspergillus causes opportunistic lung infections and food spoilage.",
+          "Phytophthora is a fungus-like oomycete causing potato late blight.",
+          "Ustilago causes smut diseases that replace cereal grains with dark soot-like spores."
+        ]
+      },
+      {
+        id: 38,
+        slo: "SLO 8.4.2: Economic Losses Due to Fungi",
+        question: "[Real-Life Scenario] A fruit exporter inspects a shipment of oranges and finds that many fruits have developed soft rots covered in blue-green powdery molds post-harvest. This post-harvest agricultural loss is primarily caused by:",
+        options: [
+          "Nematode worms",
+          "Fungal spoilage (Penicillium/Aspergillus)",
+          "Photosynthetic algae",
+          "Viral infections"
+        ],
+        correct: 1,
+        explanation: "Post-harvest citrus fruit rot with blue-green powdery spore coatings is caused by fungal spoilage species of Penicillium (P. digitatum and P. italicum).",
+        wrongExplanations: [
+          "Nematode worms infect plant root systems underground.",
+          "Penicillium/Aspergillus molds cause post-harvest soft fruit decay and surface spores.",
+          "Photosynthetic algae require aquatic/moist illuminated surfaces and do not rot stored citrus.",
+          "Viruses cause systemic mosaic or stunt symptoms, not fuzzy surface mold rots."
+        ]
+      },
+      {
+        id: 39,
+        slo: "SLO 8.4.2: Economic Losses Due to Fungi",
+        question: "A toxic fungal contamination of rye grain caused by Claviceps purpurea produces dangerous alkaloids that cause hallucinations and gangrene when consumed by humans. This condition is called:",
+        options: ["Ringworm infection", "Aspergillosis", "Ergotism", "Histoplasmosis"],
+        correct: 2,
+        explanation: "Ergotism (St. Anthony's Fire) is toxic alkaloid poisoning caused by eating rye or grains infected with the fungus Claviceps purpurea.",
+        wrongExplanations: [
+          "Ringworm is a superficial dermatophytic skin fungal infection.",
+          "Aspergillosis is a pulmonary or systemic infection caused by Aspergillus.",
+          "Ergotism is toxic poisoning caused by consuming Claviceps purpurea alkaloids in infected grain.",
+          "Histoplasmosis is a fungal respiratory disease caused by inhaling Histoplasma spores."
+        ]
+      },
+      {
+        id: 40,
+        slo: "SLO 8.4.2: Economic Losses Due to Fungi",
+        question: "Which common human skin infection, characterized by circular red itchy lesions, is caused by dermatophytic fungi rather than a parasitic worm?",
+        options: ["Ringworm", "Malaria", "Amoebiasis", "Tuberculosis"],
+        correct: 0,
+        explanation: "Ringworm (Tinea) is a superficial skin infection caused by dermatophytic fungi (e.g., Trichophyton), not an animal worm.",
+        wrongExplanations: [
+          "Ringworm is a fungal dermatophyte infection of the skin despite its confusing name.",
+          "Malaria is a mosquito-borne blood disease caused by Plasmodium protozoa.",
+          "Amoebiasis is an intestinal infection caused by Entamoeba histolytica protozoa.",
+          "Tuberculosis is a chronic bacterial respiratory infection caused by Mycobacterium tuberculosis."
+        ]
+      }
+    ];
+
+    function App() {
+      // Quiz State
+      const [quizStarted, setQuizStarted] = useState(false);
+      const [quizMode, setQuizMode] = useState('practice'); // 'practice' or 'blind'
+      const [currentIdx, setCurrentIdx] = useState(0);
+      const [userAnswers, setUserAnswers] = useState({}); // { [qIdx]: selectedOptionIdx }
+      const [flaggedQuestions, setFlaggedQuestions] = useState({}); // { [qIdx]: true/false }
+      const [timeLeft, setTimeLeft] = useState(40 * 60); // 40 minutes timer = 2400 seconds
+      const [isSubmitted, setIsSubmitted] = useState(false);
+      const [showNavGrid, setShowNavGrid] = useState(false);
+
+      // Review Filter and Search States
+      const [reviewFilter, setReviewFilter] = useState('all'); // 'all', 'correct', 'wrong', 'skipped', 'flagged'
+      const [reviewSearch, setReviewSearch] = useState('');
+
+      // 40 Minute Timer Effect
+      useEffect(() => {
+        let timer = null;
+        if (quizStarted && !isSubmitted && timeLeft > 0) {
+          timer = setInterval(() => {
+            setTimeLeft(prev => {
+              if (prev <= 1) {
+                clearInterval(timer);
+                setIsSubmitted(true);
+                return 0;
+              }
+              return prev - 1;
+            });
+          }, 1000);
+        }
+        return () => clearInterval(timer);
+      }, [quizStarted, isSubmitted, timeLeft]);
+
+      // Keyboard Shortcuts Listener
+      useEffect(() => {
+        const handleKeyDown = (e) => {
+          if (!quizStarted || isSubmitted) return;
+          if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+
+          const key = e.key.toUpperCase();
+          if (['1', '2', '3', '4'].includes(key)) {
+            handleSelectOption(parseInt(key, 10) - 1);
+          } else if (['A', 'B', 'C', 'D'].includes(key)) {
+            const charCode = key.charCodeAt(0) - 65;
+            handleSelectOption(charCode);
+          } else if (e.key === 'ArrowRight') {
+            if (currentIdx < QUESTIONS.length - 1) setCurrentIdx(prev => prev + 1);
+          } else if (e.key === 'ArrowLeft') {
+            if (currentIdx > 0) setCurrentIdx(prev => prev - 1);
+          } else if (key === 'F') {
+            toggleFlagQuestion(currentIdx);
+          }
+        };
+
+        window.addEventListener('keydown', handleKeyDown);
+        return () => window.removeEventListener('keydown', handleKeyDown);
+      }, [quizStarted, isSubmitted, currentIdx, userAnswers]);
+
+      // Time formatting helper
+      const formatTime = (secs) => {
+        const mins = Math.floor(secs / 60);
+        const s = secs % 60;
+        return `${mins.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+      };
+
+      // Handle locking of answer once selected
+      const handleSelectOption = (optionIdx) => {
+        if (userAnswers.hasOwnProperty(currentIdx) || isSubmitted) return;
+        setUserAnswers(prev => ({
+          ...prev,
+          [currentIdx]: optionIdx
+        }));
+      };
+
+      // Toggle Bookmark/Flag
+      const toggleFlagQuestion = (qIndex) => {
+        setFlaggedQuestions(prev => ({
+          ...prev,
+          [qIndex]: !prev[qIndex]
+        }));
+      };
+
+      // Scoring Calculations (+1.0 for correct, -0.25 for incorrect)
+      const scoreData = useMemo(() => {
+        let correctCount = 0;
+        let wrongCount = 0;
+        let unattemptedCount = 0;
+
+        QUESTIONS.forEach((q, idx) => {
+          if (!userAnswers.hasOwnProperty(idx)) {
+            unattemptedCount++;
+          } else if (userAnswers[idx] === q.correct) {
+            correctCount++;
+          } else {
+            wrongCount++;
+          }
+        });
+
+        const grossMarks = correctCount * 1.0;
+        const penalty = wrongCount * 0.25;
+        const netMarks = Math.max(0, grossMarks - penalty);
+        const maxMarks = QUESTIONS.length * 1.0;
+        const percentage = Number(((netMarks / maxMarks) * 100).toFixed(1));
+
+        return { correctCount, wrongCount, unattemptedCount, grossMarks, penalty, netMarks, maxMarks, percentage };
+      }, [userAnswers]);
+
+      // Weak Area Analysis per SLO
+      const sloAnalysis = useMemo(() => {
+        const stats = {};
+        QUESTIONS.forEach((q, idx) => {
+          const sloKey = q.slo;
+          if (!stats[sloKey]) {
+            stats[sloKey] = { total: 0, correct: 0, wrong: 0, unattempted: 0 };
+          }
+          stats[sloKey].total++;
+          if (!userAnswers.hasOwnProperty(idx)) {
+            stats[sloKey].unattempted++;
+          } else if (userAnswers[idx] === q.correct) {
+            stats[sloKey].correct++;
+          } else {
+            stats[sloKey].wrong++;
+          }
+        });
+        return stats;
+      }, [userAnswers]);
+
+      // Review questions filter logic
+      const filteredReviewQuestions = useMemo(() => {
+        return QUESTIONS.map((q, idx) => ({ ...q, qIdx: idx })).filter(q => {
+          const isUserAns = userAnswers.hasOwnProperty(q.qIdx);
+          const isCorrect = isUserAns && userAnswers[q.qIdx] === q.correct;
+          const isWrong = isUserAns && userAnswers[q.qIdx] !== q.correct;
+          const isSkipped = !isUserAns;
+          const isFlagged = !!flaggedQuestions[q.qIdx];
+
+          let matchesFilter = true;
+          if (reviewFilter === 'correct') matchesFilter = isCorrect;
+          if (reviewFilter === 'wrong') matchesFilter = isWrong;
+          if (reviewFilter === 'skipped') matchesFilter = isSkipped;
+          if (reviewFilter === 'flagged') matchesFilter = isFlagged;
+
+          let matchesSearch = true;
+          if (reviewSearch.trim() !== '') {
+            const term = reviewSearch.toLowerCase();
+            matchesSearch = q.question.toLowerCase().includes(term) ||
+                            q.slo.toLowerCase().includes(term) ||
+                            q.explanation.toLowerCase().includes(term);
+          }
+
+          return matchesFilter && matchesSearch;
+        });
+      }, [userAnswers, flaggedQuestions, reviewFilter, reviewSearch]);
+
+      const getMotivationalQuote = (pct) => {
+        if (pct >= 85) return { quote: "Outstanding Mycological Mastery! You possess exceptional clarity on fungal structures, reproduction, taxonomy, and ecological roles.", author: "Qashqarian Academy Academic Board" };
+        if (pct >= 70) return { quote: "Great Job! You have a solid grasp of Kingdom Fungi. Review your specific weak SLOs to reach 100% precision.", author: "Qashqarian Biology Faculty" };
+        if (pct >= 50) return { quote: "Good Effort! Review the explanations for incorrect questions carefully to master fungal concepts.", author: "Department of Botany & Mycology" };
+        return { quote: "Failure is simply the opportunity to begin again more intelligently. Re-read Chapter 8 notes and retake the test!", author: "Qashqarian Mentorship Cell" };
+      };
+
+      const currentQ = QUESTIONS[currentIdx];
+      const isAnswered = userAnswers.hasOwnProperty(currentIdx);
+      const selectedOption = userAnswers[currentIdx];
+      const isCurrentFlagged = !!flaggedQuestions[currentIdx];
+
+      if (!quizStarted) {
+        return (
+          <div className="min-h-screen flex items-center justify-center p-4 sm:p-6">
+            <div className="max-w-2xl w-full bg-white rounded-2xl shadow-xl border border-sky-100 overflow-hidden animate-fadeIn">
+              
+              {/* Top Header Banner */}
+              <div className="bg-gradient-to-r from-sky-800 via-sky-700 to-science-900 p-6 sm:p-8 text-white relative">
+                <div className="flex justify-between items-center mb-3">
+                  <span className="bg-sky-500/30 text-sky-100 text-xs font-bold px-3 py-1 rounded-full backdrop-blur-sm border border-sky-300/20 flex items-center gap-1.5">
+                    🏔️ Qashqarian Academy
+                  </span>
+                  <span className="text-xs font-bold bg-white/10 px-3 py-1 rounded-md border border-white/20">
+                    Class: XI
+                  </span>
+                </div>
+                <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
+                  Chapter 8: Kingdom Fungi
+                </h1>
+                <p className="text-sky-100 text-sm mt-1">
+                  SLO-Based Biology Mock Assessment (40 MCQs)
+                </p>
+              </div>
+
+              {/* Start Setup Content */}
+              <div className="p-6 sm:p-8 space-y-6">
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                  <div className="bg-sky-50 rounded-xl p-3.5 border border-sky-100 flex items-center gap-3">
+                    <div className="p-2 bg-sky-600 text-white rounded-lg shrink-0">
+                      <Icon name="clock" className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <p className="text-[11px] text-slate-500 font-medium">Timer</p>
+                      <p className="text-xs sm:text-sm font-bold text-slate-800">40 Minutes</p>
+                    </div>
+                  </div>
+                  <div className="bg-sky-50 rounded-xl p-3.5 border border-sky-100 flex items-center gap-3">
+                    <div className="p-2 bg-sky-600 text-white rounded-lg shrink-0">
+                      <Icon name="award" className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <p className="text-[11px] text-slate-500 font-medium">Marking Scheme</p>
+                      <p className="text-xs sm:text-sm font-bold text-slate-800">+1.0 / -0.25</p>
+                    </div>
+                  </div>
+                  <div className="col-span-2 sm:col-span-1 bg-sky-50 rounded-xl p-3.5 border border-sky-100 flex items-center gap-3">
+                    <div className="p-2 bg-sky-600 text-white rounded-lg shrink-0">
+                      <Icon name="key" className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <p className="text-[11px] text-slate-500 font-medium">Shortcuts</p>
+                      <p className="text-xs sm:text-sm font-bold text-slate-800">Keys A-D, ← →</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Select Assessment Mode */}
+                <div>
+                  <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2.5">
+                    Select Mode
+                  </label>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <button
+                      type="button"
+                      onClick={() => setQuizMode('practice')}
+                      className={`p-4 rounded-xl text-left border-2 transition-all flex flex-col gap-1.5 ${
+                        quizMode === 'practice'
+                          ? 'border-sky-600 bg-sky-50/80 ring-2 ring-sky-500/20'
+                          : 'border-slate-200 hover:border-sky-300 bg-white'
+                      }`}
+                    >
+                      <div className="flex items-center justify-between">
+                        <span className="font-bold text-sm text-sky-900 flex items-center gap-1.5">
+                          <Icon name="zap" className="w-4 h-4 text-sky-600" />
+                          Practice Mode
+                        </span>
+                        {quizMode === 'practice' && <Icon name="check" className="w-4 h-4 text-sky-600" />}
+                      </div>
+                      <p className="text-xs text-slate-500 leading-relaxed">
+                        Instant right/wrong answer verification with rationale provided immediately after answering each MCQ.
+                      </p>
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => setQuizMode('blind')}
+                      className={`p-4 rounded-xl text-left border-2 transition-all flex flex-col gap-1.5 ${
+                        quizMode === 'blind'
+                          ? 'border-sky-600 bg-sky-50/80 ring-2 ring-sky-500/20'
+                          : 'border-slate-200 hover:border-sky-300 bg-white'
+                      }`}
+                    >
+                      <div className="flex items-center justify-between">
+                        <span className="font-bold text-sm text-sky-900 flex items-center gap-1.5">
+                          <Icon name="shield" className="w-4 h-4 text-sky-600" />
+                          Blind / Exam Mode
+                        </span>
+                        {quizMode === 'blind' && <Icon name="check" className="w-4 h-4 text-sky-600" />}
+                      </div>
+                      <p className="text-xs text-slate-500 leading-relaxed">
+                        Simulate real exam conditions. Correct answers, rationales, and marks revealed only upon test submission.
+                      </p>
+                    </button>
+                  </div>
+                </div>
+
+                {/* Rules & Negative Marking Notice */}
+                <div className="bg-amber-50/80 border border-amber-200 rounded-xl p-4 text-xs text-amber-900 space-y-1.5">
+                  <p className="font-bold text-amber-950 flex items-center gap-1.5">
+                    <Icon name="alert-triangle" className="w-4 h-4 text-amber-600" />
+                    Assessment Rules & Negative Marking:
+                  </p>
+                  <ul className="list-disc list-inside space-y-1 pl-1 text-amber-800">
+                    <li>Once selected, an option is locked permanently for that question.</li>
+                    <li>Incorrect answers incur a <strong>-0.25 mark negative penalty</strong>.</li>
+                    <li>Unattempted questions carry zero penalty.</li>
+                    <li>Use the <strong>Flag (Key F)</strong> button to bookmark items to review later.</li>
+                  </ul>
+                </div>
+
+                <button
+                  onClick={() => setQuizStarted(true)}
+                  className="w-full bg-sky-600 hover:bg-sky-700 text-white font-bold py-3.5 px-6 rounded-xl shadow-lg shadow-sky-600/25 transition-all flex items-center justify-center gap-2 group text-sm"
+                >
+                  <span>Start Chapter 8 Assessment</span>
+                  <Icon name="arrow-right" className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                </button>
+              </div>
+            </div>
+          </div>
+        );
+      }
+
+      if (isSubmitted) {
+        const quoteObj = getMotivationalQuote(scoreData.percentage);
+
+        return (
+          <div className="min-h-screen py-8 px-4 sm:px-6 flex justify-center">
+            <div className="max-w-4xl w-full bg-white rounded-2xl shadow-xl border border-sky-100 overflow-hidden animate-fadeIn space-y-6 pb-8">
+              
+              {/* Header Banner */}
+              <div className="bg-gradient-to-r from-sky-800 via-sky-700 to-science-900 p-6 sm:p-8 text-white relative">
+                <div className="flex justify-between items-center mb-2 no-print">
+                  <span className="text-xs font-bold bg-white/20 px-3 py-1 rounded-full flex items-center gap-1.5">
+                    🏔️ Qashqarian Academy
+                  </span>
+                  <span className="text-xs font-bold bg-white/10 px-3 py-1 rounded-md border border-white/20">
+                    Class: XI
+                  </span>
+                  <button 
+                    onClick={() => window.print()} 
+                    className="bg-white/10 hover:bg-white/20 text-white text-xs font-semibold px-3 py-1.5 rounded-lg border border-white/20 transition-all flex items-center gap-1.5"
+                  >
+                    <Icon name="printer" className="w-4 h-4" />
+                    Print Results
+                  </button>
+                </div>
+                <h1 className="text-2xl sm:text-3xl font-extrabold">
+                  Performance Evaluation Summary
+                </h1>
+                <p className="text-sky-100 text-xs sm:text-sm mt-1">
+                  Chapter 8: Kingdom Fungi Mock Assessment
+                </p>
+              </div>
+
+              <div className="p-6 sm:p-8 space-y-8">
+                
+                {/* Motivational Quote Banner */}
+                <div className="bg-sky-50/80 border-l-4 border-sky-600 p-4 rounded-r-xl space-y-1">
+                  <p className="text-sm font-semibold text-sky-950 italic">
+                    "{quoteObj.quote}"
+                  </p>
+                  <p className="text-xs text-sky-700 font-bold">— {quoteObj.author}</p>
+                </div>
+
+                {/* Performance Metrics */}
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                  <div className="bg-sky-50 border border-sky-100 rounded-xl p-4 text-center">
+                    <p className="text-xs text-slate-500 font-semibold mb-1">Net Percentage</p>
+                    <p className="text-3xl font-black text-sky-600">{scoreData.percentage}%</p>
+                  </div>
+                  <div className="bg-emerald-50 border border-emerald-100 rounded-xl p-4 text-center">
+                    <p className="text-xs text-emerald-700 font-semibold mb-1">Correct Answers</p>
+                    <p className="text-3xl font-black text-emerald-600">{scoreData.correctCount}</p>
+                    <p className="text-[10px] text-emerald-600 font-medium">+{scoreData.grossMarks} Marks</p>
+                  </div>
+                  <div className="bg-rose-50 border border-rose-100 rounded-xl p-4 text-center">
+                    <p className="text-xs text-rose-700 font-semibold mb-1">Wrong Answers</p>
+                    <p className="text-3xl font-black text-rose-600">{scoreData.wrongCount}</p>
+                    <p className="text-[10px] text-rose-600 font-medium">-{scoreData.penalty} Penalty</p>
+                  </div>
+                  <div className="bg-amber-50 border border-amber-100 rounded-xl p-4 text-center">
+                    <p className="text-xs text-amber-700 font-semibold mb-1">Unattempted</p>
+                    <p className="text-3xl font-black text-amber-600">{scoreData.unattemptedCount}</p>
+                    <p className="text-[10px] text-amber-600 font-medium">0 Penalty</p>
+                  </div>
+                </div>
+
+                {/* Net Score Bar */}
+                <div className="bg-slate-900 text-white rounded-xl p-4 flex justify-between items-center text-sm">
+                  <span>Final Score (after -0.25 negative marking):</span>
+                  <span className="font-extrabold text-sky-400 text-base">
+                    {scoreData.netMarks} / {scoreData.maxMarks} Marks
+                  </span>
+                </div>
+
+                {/* Weak Area SLO Breakdown */}
+                <div className="space-y-3">
+                  <h3 className="text-base font-bold text-slate-800 flex items-center gap-2">
+                    <Icon name="bar-chart" className="w-5 h-5 text-sky-600" />
+                    SLO Performance & Weak Area Analysis
+                  </h3>
+
+                  <div className="space-y-3 max-h-80 overflow-y-auto pr-2 custom-scrollbar">
+                    {Object.entries(sloAnalysis).map(([slo, stats], idx) => {
+                      const sloPct = stats.total > 0 ? Math.round((stats.correct / stats.total) * 100) : 0;
+                      return (
+                        <div key={idx} className="bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs space-y-2">
+                          <div className="flex justify-between items-start gap-2">
+                            <span className="font-semibold text-slate-800">{slo}</span>
+                            <span className={`font-bold px-2 py-0.5 rounded text-[11px] ${
+                              sloPct >= 80 ? 'bg-emerald-100 text-emerald-800' :
+                              sloPct >= 50 ? 'bg-amber-100 text-amber-800' : 'bg-rose-100 text-rose-800'
+                            }`}>
+                              {sloPct}% Mastery
+                            </span>
+                          </div>
+                          <div className="w-full bg-slate-200 h-2 rounded-full overflow-hidden">
+                            <div 
+                              className={`h-full transition-all duration-500 ${
+                                sloPct >= 80 ? 'bg-emerald-500' : sloPct >= 50 ? 'bg-amber-500' : 'bg-rose-500'
+                              }`}
+                              style={{ width: `${sloPct}%` }}
+                            />
+                          </div>
+                          <div className="flex gap-4 text-[11px] text-slate-500">
+                            <span>Correct: {stats.correct}</span>
+                            <span>Wrong: {stats.wrong}</span>
+                            <span>Skipped: {stats.unattempted}</span>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                {/* Question Review Section with Filter & Search */}
+                <div className="space-y-4 no-print">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-2">
+                    <h3 className="text-base font-bold text-slate-800 flex items-center gap-2">
+                      <Icon name="book-open" className="w-5 h-5 text-sky-600" />
+                      Detailed Explanations & Wrong Answer Analysis
+                    </h3>
+
+                    {/* Filter Pills */}
+                    <div className="flex flex-wrap gap-1.5 text-xs">
+                      {[
+                        { id: 'all', label: 'All' },
+                        { id: 'correct', label: 'Correct' },
+                        { id: 'wrong', label: 'Wrong' },
+                        { id: 'skipped', label: 'Skipped' },
+                        { id: 'flagged', label: 'Flagged' },
+                      ].map(tab => (
+                        <button
+                          key={tab.id}
+                          onClick={() => setReviewFilter(tab.id)}
+                          className={`px-3 py-1.5 rounded-lg font-semibold transition-all ${
+                            reviewFilter === tab.id
+                              ? 'bg-sky-600 text-white shadow-sm'
+                              : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                          }`}
+                        >
+                          {tab.label}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Search Bar */}
+                  <div className="relative">
+                    <input
+                      type="text"
+                      placeholder="Search question text, SLO, or explanation rationale..."
+                      value={reviewSearch}
+                      onChange={(e) => setReviewSearch(e.target.value)}
+                      className="w-full pl-9 pr-4 py-2.5 rounded-xl border border-slate-200 text-xs focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent bg-slate-50/50"
+                    />
+                    <div className="absolute left-3 top-3 text-slate-400">
+                      <Icon name="search" className="w-4 h-4" />
+                    </div>
+                  </div>
+
+                  {/* Question Cards */}
+                  <div className="space-y-4 max-h-[500px] overflow-y-auto pr-2 custom-scrollbar">
+                    {filteredReviewQuestions.length === 0 ? (
+                      <div className="p-8 text-center text-xs text-slate-500 bg-slate-50 rounded-xl border border-dashed border-slate-200">
+                        No questions match the current search or filter.
+                      </div>
+                    ) : (
+                      filteredReviewQuestions.map((q) => {
+                        const qIdx = q.qIdx;
+                        const userSel = userAnswers[qIdx];
+                        const isCorrect = userSel === q.correct;
+                        const isUnattempted = !userAnswers.hasOwnProperty(qIdx);
+                        const isFlagged = flaggedQuestions[qIdx];
+
+                        return (
+                          <div 
+                            key={q.id}
+                            className={`p-4 rounded-xl border text-xs space-y-2.5 transition-all ${
+                              isCorrect ? 'bg-emerald-50/50 border-emerald-200' :
+                              isUnattempted ? 'bg-amber-50/50 border-amber-200' : 'bg-rose-50/50 border-rose-200'
+                            }`}
+                          >
+                            <div className="flex justify-between items-start gap-2">
+                              <span className="font-bold text-slate-900 flex items-center gap-2">
+                                <span>Q{qIdx + 1}. {q.question}</span>
+                                {isFlagged && (
+                                  <span className="bg-amber-100 text-amber-800 text-[10px] px-2 py-0.5 rounded font-bold flex items-center gap-1">
+                                    <Icon name="flag" className="w-3 h-3 text-amber-600" /> Flagged
+                                  </span>
+                                )}
+                              </span>
+                              <span className={`px-2 py-0.5 rounded font-bold text-[10px] whitespace-nowrap shrink-0 ${
+                                isCorrect ? 'bg-emerald-600 text-white' :
+                                isUnattempted ? 'bg-amber-500 text-white' : 'bg-rose-600 text-white'
+                              }`}>
+                                {isCorrect ? 'CORRECT (+1.0)' : isUnattempted ? 'SKIPPED (0.0)' : 'WRONG (-0.25)'}
+                              </span>
+                            </div>
+
+                            <p className="text-[11px] text-slate-500 font-medium">{q.slo}</p>
+
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                              {q.options.map((opt, oIdx) => {
+                                const isOptCorrect = oIdx === q.correct;
+                                const isOptUserChoice = oIdx === userSel;
+
+                                return (
+                                  <div 
+                                    key={oIdx}
+                                    className={`p-2 rounded-lg border font-medium flex items-center justify-between ${
+                                      isOptCorrect ? 'bg-emerald-100 border-emerald-300 text-emerald-900 font-bold' :
+                                      isOptUserChoice ? 'bg-rose-100 border-rose-300 text-rose-900' : 'bg-white border-slate-200 text-slate-600'
+                                    }`}
+                                  >
+                                    <span>{String.fromCharCode(65 + oIdx)}. {opt}</span>
+                                    {isOptCorrect && <Icon name="check" className="w-3.5 h-3.5 text-emerald-700" />}
+                                    {isOptUserChoice && !isOptCorrect && <Icon name="x" className="w-3.5 h-3.5 text-rose-700" />}
+                                  </div>
+                                );
+                              })}
+                            </div>
+
+                            {/* Detailed Explanation & Why Incorrect Options are Wrong */}
+                            <div className="bg-white/90 p-3 rounded-lg border border-slate-200 text-slate-700 leading-relaxed space-y-1.5">
+                              <p className="text-slate-800">
+                                <strong className="text-sky-900">Correct Answer Rationale: </strong> 
+                                {q.explanation}
+                              </p>
+
+                              {!isCorrect && !isUnattempted && q.wrongExplanations && (
+                                <div className="mt-2 pt-2 border-t border-slate-100 text-[11px] text-rose-900 bg-rose-50/60 p-2 rounded-md">
+                                  <strong>Why option {String.fromCharCode(65 + userSel)} is incorrect: </strong>
+                                  {q.wrongExplanations[userSel] || "This choice does not satisfy the scientific concept."}
+                                </div>
+                              )}
+                            </div>
+                          </div>
+                        );
+                      })
+                    )}
+                  </div>
+                </div>
+
+                {/* Restart Button */}
+                <button
+                  onClick={() => {
+                    setIsSubmitted(false);
+                    setQuizStarted(false);
+                    setCurrentIdx(0);
+                    setUserAnswers({});
+                    setFlaggedQuestions({});
+                    setTimeLeft(40 * 60);
+                  }}
+                  className="w-full bg-sky-600 hover:bg-sky-700 text-white font-bold py-3.5 px-6 rounded-xl shadow-lg shadow-sky-600/25 transition-all flex items-center justify-center gap-2 text-sm no-print"
+                >
+                  <Icon name="rotate-ccw" className="w-5 h-5" />
+                  <span>Restart Chapter 8 Assessment</span>
+                </button>
+
+              </div>
+            </div>
+          </div>
+        );
+      }
+
+      const flaggedCount = Object.values(flaggedQuestions).filter(Boolean).length;
+
+      return (
+        <div className="min-h-screen py-6 px-4 sm:px-6 flex flex-col items-center">
+          
+          {/* Top Header Navigation Card */}
+          <div className="max-w-3xl w-full bg-white rounded-2xl shadow-sm border border-sky-100 p-4 mb-4 space-y-3">
+            
+            {/* Academy Name & Class XI Badge */}
+            <div className="flex justify-between items-center text-xs sm:text-sm font-bold text-sky-900">
+              <span className="flex items-center gap-1.5 text-base sm:text-lg tracking-tight">
+                🏔️ Qashqarian Academy
+              </span>
+              
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={() => setShowNavGrid(!showNavGrid)}
+                  className="px-2.5 py-1 bg-sky-50 hover:bg-sky-100 text-sky-800 rounded-lg text-xs font-semibold flex items-center gap-1.5 border border-sky-200 transition-all"
+                >
+                  <Icon name="grid" className="w-3.5 h-3.5" />
+                  <span>Grid ({Object.keys(userAnswers).length}/{QUESTIONS.length})</span>
+                </button>
+
+                <span className="bg-sky-100 text-sky-800 px-2.5 py-1 rounded-lg font-bold text-xs">
+                  Class: XI
+                </span>
+              </div>
+            </div>
+
+            {/* Question Counter (Q 1 / 40) & 40 Min Timer */}
+            <div className="flex justify-between items-center text-xs font-semibold text-slate-600">
+              <div className="flex items-center gap-3">
+                <span className="text-sky-900 font-extrabold text-sm">Q {currentIdx + 1} / {QUESTIONS.length}</span>
+                {flaggedCount > 0 && (
+                  <span className="text-amber-700 bg-amber-50 border border-amber-200 px-2 py-0.5 rounded text-[11px] font-bold flex items-center gap-1">
+                    <Icon name="flag" className="w-3 h-3 text-amber-600" />
+                    {flaggedCount} Flagged
+                  </span>
+                )}
+              </div>
+
+              <div className={`flex items-center gap-1.5 px-2.5 py-1 rounded-lg font-mono font-bold ${
+                timeLeft < 300 ? 'bg-rose-100 text-rose-700 animate-pulse' : 'bg-sky-50 text-sky-800'
+              }`}>
+                <Icon name="clock" className="w-3.5 h-3.5" />
+                <span>{formatTime(timeLeft)}</span>
+              </div>
+            </div>
+
+            {/* Top Progress Bar */}
+            <div className="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+              <div 
+                className="bg-sky-600 h-full transition-all duration-300"
+                style={{ width: `${((currentIdx + 1) / QUESTIONS.length) * 100}%` }}
+              />
+            </div>
+          </div>
+
+          {/* Quick Navigator Grid Modal */}
+          {showNavGrid && (
+            <div className="max-w-3xl w-full bg-white rounded-2xl shadow-lg border border-sky-200 p-5 mb-4 animate-fadeIn space-y-3">
+              <div className="flex justify-between items-center text-xs font-bold text-slate-800 border-b pb-2">
+                <span>Question Quick Navigator Matrix</span>
+                <button 
+                  onClick={() => setShowNavGrid(false)}
+                  className="text-slate-400 hover:text-slate-600"
+                >
+                  <Icon name="x" className="w-4 h-4" />
+                </button>
+              </div>
+
+              <div className="grid grid-cols-5 sm:grid-cols-10 gap-2 max-h-52 overflow-y-auto p-1 custom-scrollbar">
+                {QUESTIONS.map((_, idx) => {
+                  const isAns = userAnswers.hasOwnProperty(idx);
+                  const isCur = currentIdx === idx;
+                  const isFlg = !!flaggedQuestions[idx];
+
+                  let boxStyle = "bg-slate-100 text-slate-700 hover:bg-slate-200";
+                  if (isCur) boxStyle = "bg-sky-600 text-white font-bold ring-2 ring-sky-500/50";
+                  else if (isAns) boxStyle = "bg-emerald-100 text-emerald-900 font-semibold border border-emerald-300";
+
+                  return (
+                    <button
+                      key={idx}
+                      onClick={() => {
+                        setCurrentIdx(idx);
+                        setShowNavGrid(false);
+                      }}
+                      className={`h-8 rounded-lg text-xs transition-all relative flex items-center justify-center ${boxStyle}`}
+                    >
+                      {idx + 1}
+                      {isFlg && (
+                        <span className="absolute -top-1 -right-1 bg-amber-500 w-2.5 h-2.5 rounded-full border border-white" />
+                      )}
+                    </button>
+                  );
+                })}
+              </div>
+
+              <div className="flex gap-4 text-[10px] text-slate-500 pt-2 border-t justify-center">
+                <span className="flex items-center gap-1"><span className="w-2.5 h-2.5 rounded bg-emerald-300" /> Answered</span>
+                <span className="flex items-center gap-1"><span className="w-2.5 h-2.5 rounded bg-slate-200" /> Unanswered</span>
+                <span className="flex items-center gap-1"><span className="w-2.5 h-2.5 rounded bg-sky-600" /> Current</span>
+                <span className="flex items-center gap-1"><span className="w-2.5 h-2.5 rounded-full bg-amber-500" /> Flagged</span>
+              </div>
+            </div>
+          )}
+
+          {/* Centered Main Question Card */}
+          <div className="max-w-3xl w-full bg-white rounded-2xl shadow-lg border border-sky-100 p-6 sm:p-8 relative overflow-hidden flex flex-col min-h-[460px] justify-between">
+            
+            {/* Watermark in Center Background */}
+            <div className="watermark-bg">
+              <p className="text-5xl sm:text-6xl font-black text-sky-900 tracking-widest">
+                🏔️ QASHQARIAN ACADEMY
+              </p>
+            </div>
+
+            {/* Question Header & Options */}
+            <div className="relative z-10 space-y-5">
+              
+              {/* SLO Tag above Question */}
+              <div className="flex justify-between items-center gap-2">
+                <div className="inline-block bg-sky-50 border border-sky-200 text-sky-900 text-xs font-bold px-3 py-1 rounded-full">
+                  {currentQ.slo}
+                </div>
+
+                <button
+                  onClick={() => toggleFlagQuestion(currentIdx)}
+                  className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 ${
+                    isCurrentFlagged 
+                      ? 'bg-amber-100 text-amber-800 border border-amber-300' 
+                      : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                  }`}
+                  title="Bookmark for review (Key: F)"
+                >
+                  <Icon name="flag" className={`w-3.5 h-3.5 ${isCurrentFlagged ? 'text-amber-600 fill-amber-500' : ''}`} />
+                  <span>{isCurrentFlagged ? 'Flagged' : 'Flag'}</span>
+                </button>
+              </div>
+
+              {/* Question Text */}
+              <h2 className="text-base sm:text-lg font-bold text-slate-900 leading-snug">
+                Q{currentIdx + 1}. {currentQ.question}
+              </h2>
+
+              {/* Multiple Choice Options (A, B, C, D) */}
+              <div className="space-y-3 pt-2">
+                {currentQ.options.map((optionText, optIdx) => {
+                  const isSelected = selectedOption === optIdx;
+                  const isCorrect = currentQ.correct === optIdx;
+
+                  let btnStyle = "border-slate-200 hover:border-sky-300 hover:bg-sky-50/50 text-slate-800 bg-white";
+
+                  if (isAnswered) {
+                    if (quizMode === 'practice') {
+                      if (isCorrect) {
+                        btnStyle = "border-emerald-500 bg-emerald-50 text-emerald-950 font-semibold ring-2 ring-emerald-500/20";
+                      } else if (isSelected) {
+                        btnStyle = "border-rose-500 bg-rose-50 text-rose-950 font-semibold ring-2 ring-rose-500/20";
+                      } else {
+                        btnStyle = "border-slate-200 opacity-60 bg-white text-slate-500";
+                      }
+                    } else {
+                      // Blind Mode
+                      if (isSelected) {
+                        btnStyle = "border-sky-600 bg-sky-50 text-sky-950 font-semibold ring-2 ring-sky-500/20";
+                      } else {
+                        btnStyle = "border-slate-200 opacity-60 bg-white text-slate-500";
+                      }
+                    }
+                  }
+
+                  return (
+                    <button
+                      key={optIdx}
+                      disabled={isAnswered}
+                      onClick={() => handleSelectOption(optIdx)}
+                      className={`w-full p-3.5 sm:p-4 rounded-xl border-2 text-left text-xs sm:text-sm transition-all flex items-center justify-between gap-3 ${btnStyle}`}
+                    >
+                      <div className="flex items-center gap-3">
+                        <span className={`w-7 h-7 rounded-lg flex items-center justify-center font-bold text-xs shrink-0 ${
+                          isSelected ? 'bg-sky-600 text-white' : 'bg-slate-100 text-slate-700'
+                        }`}>
+                          {String.fromCharCode(65 + optIdx)}
+                        </span>
+                        <span>{optionText}</span>
+                      </div>
+
+                      {isAnswered && quizMode === 'practice' && (
+                        <div>
+                          {isCorrect && <Icon name="check" className="w-5 h-5 text-emerald-600" />}
+                          {isSelected && !isCorrect && <Icon name="x" className="w-5 h-5 text-rose-600" />}
+                        </div>
+                      )}
+                    </button>
+                  );
+                })}
+              </div>
+
+              {/* Practice Mode Explanation Box */}
+              {isAnswered && quizMode === 'practice' && (
+                <div className={`mt-4 p-4 rounded-xl text-xs leading-relaxed space-y-1.5 animate-fadeIn border ${
+                  selectedOption === currentQ.correct 
+                    ? 'bg-emerald-50/90 border-emerald-200 text-emerald-950' 
+                    : 'bg-rose-50/90 border-rose-200 text-rose-950'
+                }`}>
+                  <p className="font-bold flex items-center gap-1.5">
+                    <Icon name="info" className="w-4 h-4" />
+                    {selectedOption === currentQ.correct ? 'Correct Answer Rationale:' : 'Incorrect Answer Explanation:'}
+                  </p>
+                  <p className="text-slate-800">{currentQ.explanation}</p>
+                  
+                  {selectedOption !== currentQ.correct && currentQ.wrongExplanations && (
+                    <p className="text-rose-900 font-medium pt-1 border-t border-rose-200/60">
+                      <strong>Why option {String.fromCharCode(65 + selectedOption)} is wrong: </strong>
+                      {currentQ.wrongExplanations[selectedOption]}
+                    </p>
+                  )}
+                </div>
+              )}
+            </div>
+
+            {/* Bottom Nav Controls (Previous / Next / Submit) */}
+            <div className="relative z-10 pt-6 mt-6 border-t border-slate-100 flex justify-between items-center gap-4">
+              <button
+                disabled={currentIdx === 0}
+                onClick={() => setCurrentIdx(prev => prev - 1)}
+                className="px-4 py-2.5 rounded-xl border border-slate-200 text-slate-700 text-xs font-bold hover:bg-slate-50 disabled:opacity-40 disabled:cursor-not-allowed flex items-center gap-1.5"
+              >
+                <Icon name="arrow-left" className="w-4 h-4" />
+                Previous
+              </button>
+
+              <div className="flex gap-2">
+                {currentIdx < QUESTIONS.length - 1 ? (
+                  <button
+                    onClick={() => setCurrentIdx(prev => prev + 1)}
+                    className="px-5 py-2.5 rounded-xl bg-sky-600 hover:bg-sky-700 text-white text-xs font-bold shadow-md shadow-sky-600/20 transition-all flex items-center gap-1.5"
+                  >
+                    Next
+                    <Icon name="arrow-right" className="w-4 h-4" />
+                  </button>
+                ) : (
+                  <button
+                    onClick={() => setIsSubmitted(true)}
+                    className="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold shadow-md shadow-emerald-600/20 transition-all flex items-center gap-1.5"
+                  >
+                    Submit Test
+                    <Icon name="check" className="w-4 h-4" />
+                  </button>
+                )}
+              </div>
+            </div>
+
+          </div>
+        </div>
+      );
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<App />);
+  </script>
+</body>
+</html>

@@ -1,0 +1,1525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Class XI Biology Chapter 3 Mock Test - Qashqarian Academy</title>
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+ <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+          },
+          colors: {
+            sky: {
+              50:'#F0F8F8', 100:'#DFF3F2', 200:'#BFE4E7', 300:'#8FCDD5',
+              400:'#4FA9B9', 500:'#1F869B', 600:'#056C82', 700:'#0A5263',
+              800:'#0B4352', 900:'#0B3340'
+            },
+            science: {
+              50:'#F0F8F8', 100:'#DFF3F2', 200:'#BFE4E7', 300:'#8FCDD5',
+              400:'#4FA9B9', 500:'#1F869B', 600:'#056C82', 700:'#0A5263',
+              800:'#0B4352', 900:'#0B3340'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- React 18 & ReactDOM -->
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+  <!-- Babel for JSX -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #f0f7ff;
+    }
+    .watermark-bg {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(-12deg);
+      pointer-events: none;
+      user-select: none;
+      z-index: 0;
+      opacity: 0.035;
+      text-align: center;
+      white-space: nowrap;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: #f1f5f9;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 4px;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fadeIn {
+      animation: fadeIn 0.25s ease-out forwards;
+    }
+    @media print {
+      .no-print { display: none !important; }
+      body { background: white; color: black; }
+      .print-shadow-none { box-shadow: none !important; border: 1px solid #ccc !important; }
+    }
+  </style>
+</head>
+<body class="text-slate-800 antialiased selection:bg-sky-200 selection:text-sky-900 min-h-screen">
+<header class="sticky top-0 z-50 bg-[#0B132B] border-b border-cyan-900/40 shadow-md">
+    <div class="max-w-5xl mx-auto px-4 py-2.5 flex items-center justify-between">
+      <a href="../../../../index.html" class="flex items-center gap-2">
+        <img src="../../../../images/brand/logo.png" alt="Qashqarian Academy" class="w-10 h-10 object-contain">
+        <div>
+          <div class="text-base md:text-lg font-extrabold text-white tracking-tight leading-none">Qashqarian</div>
+          <div class="text-[10px] md:text-xs text-[#FF9F1C] font-extrabold tracking-[0.2em] mt-1 leading-none">ACADEMY</div>
+        </div>
+      </a>
+      <a href="../../index.html" class="text-[11px] font-semibold text-slate-300 hover:text-white border border-white/20 rounded-lg px-2.5 py-1">
+        ← Biology Quizzes
+      </a>
+    </div>
+  </header>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const { useState, useEffect, useMemo } = React;
+
+    // SVG Icon Component
+    const Icon = ({ name, className = "w-5 h-5" }) => {
+      const props = {
+        className,
+        xmlns: "http://www.w3.org/2000/svg",
+        viewBox: "0 0 24 24",
+        fill: "none",
+        stroke: "currentColor",
+        strokeWidth: "2",
+        strokeLinecap: "round",
+        strokeLinejoin: "round"
+      };
+
+      switch (name) {
+        case "clock":
+          return <svg {...props}><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>;
+        case "award":
+          return <svg {...props}><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 22 12 17 17 22 15.79 13.88"/></svg>;
+        case "check":
+          return <svg {...props}><polyline points="20 6 9 17 4 12"/></svg>;
+        case "x":
+          return <svg {...props}><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>;
+        case "arrow-left":
+          return <svg {...props}><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>;
+        case "arrow-right":
+          return <svg {...props}><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>;
+        case "rotate-ccw":
+          return <svg {...props}><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>;
+        case "book-open":
+          return <svg {...props}><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>;
+        case "shield":
+          return <svg {...props}><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>;
+        case "zap":
+          return <svg {...props}><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>;
+        case "bar-chart":
+          return <svg {...props}><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg>;
+        case "info":
+          return <svg {...props}><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>;
+        case "alert-triangle":
+          return <svg {...props}><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>;
+        case "flag":
+          return <svg {...props}><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>;
+        case "grid":
+          return <svg {...props}><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>;
+        case "search":
+          return <svg {...props}><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>;
+        case "printer":
+          return <svg {...props}><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>;
+        case "key":
+          return <svg {...props}><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg>;
+        default:
+          return <svg {...props}><circle cx="12" cy="12" r="10"/></svg>;
+      }
+    };
+
+    const QUESTIONS = [
+      // SLO 3.1.1: Describe Enzyme, Cofactor, Apoenzyme, and Holoenzyme
+      {
+        id: 1,
+        slo: "SLO 3.1.1: Describe Enzyme, Cofactor, Apoenzyme, and Holoenzyme",
+        question: "What is the chemical nature of almost all biological enzymes?",
+        options: ["Polysaccharides", "Steroid lipids", "Globular proteins", "Carbohydrates"],
+        correct: 2,
+        explanation: "Almost all biological enzymes are globular proteins composed of complex folded polypeptide chains forming specific 3D catalytic sites."
+      },
+      {
+        id: 2,
+        slo: "SLO 3.1.1: Describe Enzyme, Cofactor, Apoenzyme, and Holoenzyme",
+        question: "The non-protein helper component required by an enzyme for its activity is called a:",
+        options: ["Substrate", "Cofactor", "Apoenzyme", "Product"],
+        correct: 1,
+        explanation: "A cofactor is a non-protein chemical compound or metallic ion that is required for an enzyme's biological activity as a catalyst."
+      },
+      {
+        id: 3,
+        slo: "SLO 3.1.1: Describe Enzyme, Cofactor, Apoenzyme, and Holoenzyme",
+        question: "An inactive enzyme protein that lacks its non-protein helper molecule is termed an:",
+        options: ["Apoenzyme", "Holoenzyme", "Coenzyme", "Isoenzyme"],
+        correct: 0,
+        explanation: "An apoenzyme is the purely protein catalytic portion of an enzyme, which remains catalytically inactive until it binds to its required cofactor."
+      },
+      {
+        id: 4,
+        slo: "SLO 3.1.1: Describe Enzyme, Cofactor, Apoenzyme, and Holoenzyme",
+        question: "A tightly or covalently bound organic cofactor attached to an enzyme is a:",
+        options: ["Coenzyme", "Metal activator", "Zymogen", "Prosthetic group"],
+        correct: 3,
+        explanation: "A prosthetic group is an organic cofactor (like heme or FAD) that is tightly or permanently bound to the enzyme structure."
+      },
+      {
+        id: 5,
+        slo: "SLO 3.1.1: Describe Enzyme, Cofactor, Apoenzyme, and Holoenzyme",
+        question: "[Real-Life Scenario] A patient with a dietary deficiency of vitamin B3 (niacin) experiences fatigue because niacin forms NAD+, a loosely bound organic molecule assisting respiratory enzymes. What is NAD+ classified as?",
+        options: ["Prosthetic group", "Coenzyme", "Apoenzyme", "Inorganic activator"],
+        correct: 1,
+        explanation: "Coenzymes are non-protein organic molecules (often derived from vitamins like B3) that bind loosely to apoenzymes to assist electron or functional group transfers."
+      },
+
+      // SLO 3.2.1: Describe Characteristics of Enzymes
+      {
+        id: 6,
+        slo: "SLO 3.2.1: Describe Characteristics of Enzymes",
+        question: "Which statement correctly describes a primary characteristic of enzymes?",
+        options: ["They are consumed during chemical reactions", "They speed up reactions without being altered", "They change the final products of reactions", "They provide energy to drive chemical reactions"],
+        correct: 1,
+        explanation: "Enzymes act as biological catalysts; they accelerate the rates of chemical reactions without being consumed or permanently changed."
+      },
+      {
+        id: 7,
+        slo: "SLO 3.2.1: Describe Characteristics of Enzymes",
+        question: "The specific region on an enzyme molecule where the substrate binds is called the:",
+        options: ["Allosteric site", "Active site", "Regulatory site", "Inhibitory site"],
+        correct: 1,
+        explanation: "The active site is the specialized 3D pocket or cleft on an enzyme where substrate molecules bind and undergo chemical reaction."
+      },
+      {
+        id: 8,
+        slo: "SLO 3.2.1: Describe Characteristics of Enzymes",
+        question: "Why are enzymes required in only tiny quantities inside living cells?",
+        options: ["They are very large molecules", "They are continuously recycled and reused", "They store huge amounts of energy", "They degrade immediately after one reaction"],
+        correct: 1,
+        explanation: "Because enzymes are not consumed during catalysis, a single enzyme molecule can continuously process thousands of substrate molecules per second."
+      },
+      {
+        id: 9,
+        slo: "SLO 3.2.1: Describe Characteristics of Enzymes",
+        question: "What happens to the structure and function of an enzyme exposed to extreme heat?",
+        options: ["Its activity doubles permanently", "It undergoes denaturation and loses activity", "It converts into a coenzyme", "Its active site becomes wider"],
+        correct: 1,
+        explanation: "Extreme thermal energy disrupts hydrogen and ionic bonds stabilizing the tertiary protein structure, causing irreversible denaturation and loss of function."
+      },
+      {
+        id: 10,
+        slo: "SLO 3.2.1: Describe Characteristics of Enzymes",
+        question: "Enzymes demonstrate high substrate specificity mainly due to the specific shape of their:",
+        options: ["Peptide backbone", "Active site", "Ribosomal sub-unit", "Outer lipid layer"],
+        correct: 1,
+        explanation: "Substrate specificity relies on the precise 3D complementary conformation and chemical charge arrangement within the active site."
+      },
+
+      // SLO 3.3.1: Compare Lock and Key Model and Induced Fit Model
+      {
+        id: 11,
+        slo: "SLO 3.3.1: Compare Lock and Key Model and Induced Fit Model",
+        question: "Who proposed the Lock and Key model of enzyme action in 1894?",
+        options: ["Daniel Koshland", "Emil Fischer", "Melvin Calvin", "Robert Hooke"],
+        correct: 1,
+        explanation: "Emil Fischer proposed the rigid Lock and Key model in 1894, postulating pre-existing rigid complementarity between enzyme and substrate."
+      },
+      {
+        id: 12,
+        slo: "SLO 3.3.1: Compare Lock and Key Model and Induced Fit Model",
+        question: "Who proposed the Induced Fit model of enzyme action in 1958?",
+        options: ["Emil Fischer", "Daniel Koshland", "Theodor Schwann", "Louis Pasteur"],
+        correct: 1,
+        explanation: "Daniel Koshland proposed the dynamic Induced Fit model in 1958, demonstrating flexibility in the enzyme's active site structure upon substrate binding."
+      },
+      {
+        id: 13,
+        slo: "SLO 3.3.1: Compare Lock and Key Model and Induced Fit Model",
+        question: "According to the Lock and Key model, the active site of an enzyme is:",
+        options: ["Flexible", "Rigid", "Dynamic", "Unstable"],
+        correct: 1,
+        explanation: "Fischer's Lock and Key model views the active site as a rigid, static template that perfectly matches the substrate shape without modification."
+      },
+      {
+        id: 14,
+        slo: "SLO 3.3.1: Compare Lock and Key Model and Induced Fit Model",
+        question: "According to the Induced Fit model, binding of the substrate causes a shape change in the:",
+        options: ["Substrate only", "Active site", "Product", "Coenzyme"],
+        correct: 1,
+        explanation: "Koshland's Induced Fit model states that initial substrate contact induces conformational changes in the active site to optimize catalytic alignment."
+      },
+      {
+        id: 15,
+        slo: "SLO 3.3.1: Compare Lock and Key Model and Induced Fit Model",
+        question: "The main difference between Fischer's and Koshland's models is that Koshland's model considers the active site to be:",
+        options: ["Rigid", "Flexible", "Inactive", "Non-specific"],
+        correct: 1,
+        explanation: "Koshland's model emphasizes the flexibility and dynamic adaptability of the active site during substrate interaction."
+      },
+
+      // SLO 3.3.2: Illustrate Mechanism of Enzyme Action
+      {
+        id: 16,
+        slo: "SLO 3.3.2: Illustrate Mechanism of Enzyme Action",
+        question: "The temporary complex formed when a substrate binds to an enzyme's active site is the:",
+        options: ["Enzyme-Product complex", "Enzyme-Substrate complex", "Apoenzyme complex", "Holoenzyme complex"],
+        correct: 1,
+        explanation: "Binding of the substrate to the enzyme active site yields an intermediate Enzyme-Substrate (ES) complex prior to catalytic conversion."
+      },
+      {
+        id: 17,
+        slo: "SLO 3.3.2: Illustrate Mechanism of Enzyme Action",
+        question: "In the induced fit mechanism, physical strain placed on substrate bonds helps to:",
+        options: ["Raise activation energy", "Lower activation energy", "Destroy the enzyme", "Inactivate the coenzyme"],
+        correct: 1,
+        explanation: "Conformational changes exert physical strain on substrate chemical bonds, lowering the activation energy barrier needed to reach the transition state."
+      },
+      {
+        id: 18,
+        slo: "SLO 3.3.2: Illustrate Mechanism of Enzyme Action",
+        question: "What happens to the products once an enzymatic reaction is complete?",
+        options: ["They remain bound to the active site", "They detach from the active site", "They destroy the active site", "They convert back into substrates"],
+        correct: 1,
+        explanation: "Products have a different chemical structure and lower affinity for the active site, causing them to detach and liberate the free enzyme."
+      },
+      {
+        id: 19,
+        slo: "SLO 3.3.2: Illustrate Mechanism of Enzyme Action",
+        question: "The active site consists of two functional regions: the binding site and the:",
+        options: ["Allosteric site", "Catalytic site", "Inhibitory site", "Structural site"],
+        correct: 1,
+        explanation: "The active site is divided into a binding site (which recognizes and holds the substrate) and a catalytic site (which executes chemical transformation)."
+      },
+      {
+        id: 20,
+        slo: "SLO 3.3.2: Illustrate Mechanism of Enzyme Action",
+        question: "[Real-Life Scenario] In a laboratory experiment, a substrate binds to an enzyme forming an ES complex. After products are generated and released, what happens to the enzyme?",
+        options: ["It breaks down completely", "It retains its structure to process another substrate", "It permanently alters its active site", "It turns into a product molecule"],
+        correct: 1,
+        explanation: "Enzymes emerge unchanged at the conclusion of a reaction, immediately available to engage another substrate molecule."
+      },
+
+      // SLO 3.3.3: Define Energy of Activation
+      {
+        id: 21,
+        slo: "SLO 3.3.3: Define Energy of Activation",
+        question: "The minimum energy required to start a chemical reaction is called:",
+        options: ["Kinetic energy", "Activation energy", "Potential energy", "Thermal energy"],
+        correct: 1,
+        explanation: "Activation energy (E_a) is the threshold kinetic energy required to initiate a chemical reaction by destabilizing existing chemical bonds."
+      },
+      {
+        id: 22,
+        slo: "SLO 3.3.3: Define Energy of Activation",
+        question: "Reactant molecules must reach an unstable high-energy state before forming products, called the:",
+        options: ["Ground state", "Transition state", "Basal state", "Final state"],
+        correct: 1,
+        explanation: "The transition state is a high-energy, unstable intermediate configuration where old chemical bonds are breaking and new bonds are forming."
+      },
+      {
+        id: 23,
+        slo: "SLO 3.3.3: Define Energy of Activation",
+        question: "Activation energy is represented in chemical equations and graphs by the abbreviation:",
+        options: ["E_a", "A_e", "E_k", "P_e"],
+        correct: 0,
+        explanation: "In biochemistry and thermodynamics, activation energy is universally denoted as E_a."
+      },
+      {
+        id: 24,
+        slo: "SLO 3.3.3: Define Energy of Activation",
+        question: "Without gaining sufficient activation energy, colliding reactant molecules will:",
+        options: ["Form products immediately", "Rebound without reacting", "Produce enzymes", "Release light energy"],
+        correct: 1,
+        explanation: "If colliding reactant molecules possess energy lower than E_a, they fail to overcome the electrostatic barrier and simply bounce apart."
+      },
+      {
+        id: 25,
+        slo: "SLO 3.3.3: Define Energy of Activation",
+        question: "Uncatalyzed biochemical reactions occur very slowly in cells primarily due to:",
+        options: ["High activation energy barriers", "Low cell temperatures", "Absence of water", "Lack of ATP"],
+        correct: 0,
+        explanation: "Without catalysts, high activation energy barriers make spontaneous transitions to product state exceedingly rare at body temperature."
+      },
+
+      // SLO 3.3.4: Lowering Energy of Activation
+      {
+        id: 26,
+        slo: "SLO 3.3.4: Lowering Energy of Activation",
+        question: "How do enzymes speed up metabolic reactions inside cells?",
+        options: ["By raising reaction temperature", "By lowering activation energy", "By increasing reactant mass", "By altering product energy"],
+        correct: 1,
+        explanation: "Enzymes catalyze reactions specifically by lowering the activation energy barrier, enabling a higher fraction of molecules to react."
+      },
+      {
+        id: 27,
+        slo: "SLO 3.3.4: Lowering Energy of Activation",
+        question: "On an energy profile graph of a reaction, the peak of the curve represents the:",
+        options: ["Energy of reactants", "Energy of products", "Transition state energy", "Total heat released"],
+        correct: 2,
+        explanation: "The highest energy peak on a reaction energy diagram marks the transition state level."
+      },
+      {
+        id: 28,
+        slo: "SLO 3.3.4: Lowering Energy of Activation",
+        question: "How does an enzyme affect the overall free energy change (ΔG) of a reaction?",
+        options: ["It increases ΔG", "It decreases ΔG", "It does not change ΔG", "It makes ΔG zero"],
+        correct: 2,
+        explanation: "Enzymes accelerate reaction kinetics without altering thermodynamic equilibrium or the overall free energy change (ΔG) between reactants and products."
+      },
+      {
+        id: 29,
+        slo: "SLO 3.3.4: Lowering Energy of Activation",
+        question: "Comparing energy graph curves of catalyzed and uncatalyzed reactions, the catalyzed curve has a:",
+        options: ["Higher energy peak", "Lower energy peak", "Shifted product line", "Shifted reactant line"],
+        correct: 1,
+        explanation: "Enzymatic catalysis significantly reduces the transition state peak height compared to the uncatalyzed path."
+      },
+      {
+        id: 30,
+        slo: "SLO 3.3.4: Lowering Energy of Activation",
+        question: "[Real-Life Scenario] A scientist plots an energy curve for glycogen breakdown with and without the enzyme phosphorylase. The graph shows a much lower peak when phosphorylase is present. What does this lower peak indicate?",
+        options: ["Increase in reactant energy", "Lowering of activation energy", "Destruction of glycogen", "Release of excess heat"],
+        correct: 1,
+        explanation: "A reduced peak on an energy profile graph demonstrates that the enzyme provides an alternative reaction pathway with lower activation energy."
+      },
+
+      // SLO 3.4.1: Effect of Factors (pH and Temperature)
+      {
+        id: 31,
+        slo: "SLO 3.4.1: Effect of Factors (pH and Temperature)",
+        question: "The temperature at which an enzyme displays its maximum rate of reaction is its:",
+        options: ["Minimum temperature", "Optimum temperature", "Critical temperature", "Denaturation point"],
+        correct: 1,
+        explanation: "The optimum temperature represents the thermal point where molecular kinetic energy and active site stability combine for maximal catalytic rate."
+      },
+      {
+        id: 32,
+        slo: "SLO 3.4.1: Effect of Factors (pH and Temperature)",
+        question: "On an enzyme activity vs. temperature graph, why does activity drop sharply past the optimum temperature?",
+        options: ["Substrates evaporate", "Enzyme undergoes thermal denaturation", "Products inhibit the active site", "Activation energy increases"],
+        correct: 1,
+        explanation: "Exceeding optimum temperature leads to rapid denaturation, unfolding the enzyme protein and destroying active site geometry."
+      },
+      {
+        id: 33,
+        slo: "SLO 3.4.1: Effect of Factors (pH and Temperature)",
+        question: "At 0°C, most human enzymes become:",
+        options: ["Permanently destroyed", "Temporarily inactive", "Highly active", "Fully denatured"],
+        correct: 1,
+        explanation: "At near-freezing temperatures, enzymes become temporarily inactive due to low molecular kinetic energy, but remain non-denatured."
+      },
+      {
+        id: 34,
+        slo: "SLO 3.4.1: Effect of Factors (pH and Temperature)",
+        question: "How do extreme changes in pH reduce enzyme activity?",
+        options: ["By altering charges on active site amino acids", "By increasing molecular movement", "By evaporating coenzymes", "By breaking all peptide bonds"],
+        correct: 0,
+        explanation: "Changes in H+ concentration alter ionization states of R-groups in the active site, disrupting ionic bonds and substrate binding."
+      },
+      {
+        id: 35,
+        slo: "SLO 3.4.1: Effect of Factors (pH and Temperature)",
+        question: "[Real-Life Scenario] An experiment measures salivary amylase activity across different pH levels, obtaining a bell-shaped curve peaking at pH 6.8. What happens to amylase activity when it enters the stomach (pH 2.0)?",
+        options: ["Activity increases", "Activity stops due to denaturation", "Activity remains unchanged", "Amylase breaks down stomach acid"],
+        correct: 1,
+        explanation: "The strong acidity of gastric juice (pH ~2.0) drastically alters ionization in amylase, denaturing the enzyme and halting starch digestion."
+      },
+
+      // SLO 3.4.2: Optimum Temperature (Human vs Thermophilic Bacteria)
+      {
+        id: 36,
+        slo: "SLO 3.4.2: Optimum Temperature (Human vs Thermophilic Bacteria)",
+        question: "What is the average optimum temperature for enzymes operating in the human body?",
+        options: ["25°C", "37°C", "50°C", "70°C"],
+        correct: 1,
+        explanation: "Human enzymes have evolved to function optimally at normal physiological core body temperature (~37°C)."
+      },
+      {
+        id: 37,
+        slo: "SLO 3.4.2: Optimum Temperature (Human vs Thermophilic Bacteria)",
+        question: "Bacteria that thrive in thermal hot springs and deep-sea vents are classified as:",
+        options: ["Mesophiles", "Thermophiles", "Psychrophiles", "Halophiles"],
+        correct: 1,
+        explanation: "Thermophiles are extremophilic organisms adapted to thrive at high temperatures between 45°C and 122°C."
+      },
+      {
+        id: 38,
+        slo: "SLO 3.4.2: Optimum Temperature (Human vs Thermophilic Bacteria)",
+        question: "Enzymes isolated from thermophilic bacteria typically have optimum temperatures near:",
+        options: ["10°C - 20°C", "35°C - 40°C", "70°C - 80°C", "0°C - 5°C"],
+        correct: 2,
+        explanation: "Thermophilic enzymes (like Taq polymerase) exhibit thermal stability with optimum performance around 70°C to 80°C."
+      },
+      {
+        id: 39,
+        slo: "SLO 3.4.2: Optimum Temperature (Human vs Thermophilic Bacteria)",
+        question: "Thermophilic enzymes withstand high temperatures without denaturing because they have:",
+        options: ["Flexible lipid coatings", "Stronger structural bonds", "No active sites", "Simple nucleic acid structures"],
+        correct: 1,
+        explanation: "Thermophilic enzymes feature increased hydrogen bonding, disulfide bridges, and hydrophobic salt bridges that prevent thermal denaturation."
+      },
+      {
+        id: 40,
+        slo: "SLO 3.4.2: Optimum Temperature (Human vs Thermophilic Bacteria)",
+        question: "[Real-Life Scenario] PCR diagnostic tests use Taq polymerase to copy DNA at 72°C. Why can human DNA polymerase not be used in this test?",
+        options: ["It works too fast", "It denatures rapidly at high temperatures", "It requires low pH", "It lacks an active site"],
+        correct: 1,
+        explanation: "Human DNA polymerase denatures near 40°-50°C, rendering it inactive during high-temperature PCR denaturation cycles."
+      },
+
+      // SLO 3.4.3: Optimum pH (Pepsin vs Trypsin)
+      {
+        id: 41,
+        slo: "SLO 3.4.3: Optimum pH (Pepsin vs Trypsin)",
+        question: "What is the optimum pH range for the gastric enzyme pepsin?",
+        options: ["1.5 – 2.0", "7.0 – 7.4", "8.0 – 9.0", "11.0 – 12.0"],
+        correct: 0,
+        explanation: "Pepsin operates in the highly acidic stomach, exhibiting maximum activity at pH 1.5 to 2.0."
+      },
+      {
+        id: 42,
+        slo: "SLO 3.4.3: Optimum pH (Pepsin vs Trypsin)",
+        question: "In which human organ does trypsin perform its digestive function?",
+        options: ["Mouth", "Stomach", "Small intestine", "Esophagus"],
+        correct: 2,
+        explanation: "Trypsin is secreted into the duodenum of the small intestine to break down polypeptides."
+      },
+      {
+        id: 43,
+        slo: "SLO 3.4.3: Optimum pH (Pepsin vs Trypsin)",
+        question: "What is the optimum pH for the intestinal enzyme trypsin?",
+        options: ["pH 2.0", "pH 5.5", "pH 8.0", "pH 11.0"],
+        correct: 2,
+        explanation: "Trypsin operates in the alkaline environment of the small intestine with an optimum pH of ~8.0."
+      },
+      {
+        id: 44,
+        slo: "SLO 3.4.3: Optimum pH (Pepsin vs Trypsin)",
+        question: "If pepsin moves from the acidic stomach into the alkaline small intestine, its activity will:",
+        options: ["Increase rapidly", "Stop due to denaturation", "Remain unchanged", "Convert trypsin into pepsin"],
+        correct: 1,
+        explanation: "The transition from acidic pH 2.0 to alkaline pH 8.0 denatures pepsin, rendering it inactive in the small intestine."
+      },
+      {
+        id: 45,
+        slo: "SLO 3.4.3: Optimum pH (Pepsin vs Trypsin)",
+        question: "[Real-Life Scenario] A patient takes an antacid tablet that raises stomach pH from 2.0 to 6.5. How will this change affect protein digestion by pepsin in the stomach?",
+        options: ["Pepsin activity will decrease significantly", "Pepsin activity will double", "Pepsin will digest carbohydrates instead", "Pepsin will turn into trypsin"],
+        correct: 0,
+        explanation: "Raising stomach pH away from pepsin's optimum (1.5-2.0) reduces its catalytic speed and impairs protein breakdown."
+      },
+
+      // SLO 3.5.1: Classify Inhibitors (Competitive vs Non-Competitive)
+      {
+        id: 46,
+        slo: "SLO 3.5.1: Classify Inhibitors (Competitive vs Non-Competitive)",
+        question: "A competitive inhibitor reduces enzyme activity by binding directly to the:",
+        options: ["Allosteric site", "Active site", "Coenzyme", "Substrate"],
+        correct: 1,
+        explanation: "Competitive inhibitors structurally resemble the substrate and directly compete for binding at the active site."
+      },
+      {
+        id: 47,
+        slo: "SLO 3.5.1: Classify Inhibitors (Competitive vs Non-Competitive)",
+        question: "A non-competitive inhibitor binds to a secondary region on the enzyme called the:",
+        options: ["Active site", "Allosteric site", "Catalytic site", "Substrate site"],
+        correct: 1,
+        explanation: "Non-competitive inhibitors bind to an allosteric site (a site other than the active site), altering enzyme conformation."
+      },
+      {
+        id: 48,
+        slo: "SLO 3.5.1: Classify Inhibitors (Competitive vs Non-Competitive)",
+        question: "In a laboratory assay, competitive inhibition can be reversed by adding more:",
+        options: ["Inhibitor", "Substrate", "Water", "Coenzyme"],
+        correct: 1,
+        explanation: "Increasing substrate concentration overcomes competitive inhibition by outcompeting the inhibitor for active site occupation."
+      },
+      {
+        id: 49,
+        slo: "SLO 3.5.1: Classify Inhibitors (Competitive vs Non-Competitive)",
+        question: "Which type of inhibitor alters the active site shape upon binding to a secondary site?",
+        options: ["Competitive inhibitor", "Non-competitive inhibitor", "Prosthetic group", "Coenzyme"],
+        correct: 1,
+        explanation: "Non-competitive binding at an allosteric site induces a conformational shift that deforms the active site shape."
+      },
+      {
+        id: 50,
+        slo: "SLO 3.5.1: Classify Inhibitors (Competitive vs Non-Competitive)",
+        question: "[Real-Life Scenario] Malonate resembles succinate in structure and competes with succinate to bind to the active site of succinate dehydrogenase. What type of inhibition is this?",
+        options: ["Non-competitive inhibition", "Competitive inhibition", "Feedback inhibition", "Irreversible allosteric inhibition"],
+        correct: 1,
+        explanation: "Because malonate mimics succinate's structure and competes for active site binding, it represents classic competitive inhibition."
+      },
+
+      // SLO 3.5.2: Describe Significance of Inhibitors
+      {
+        id: 51,
+        slo: "SLO 3.5.2: Describe Significance of Inhibitors",
+        question: "Why are enzyme inhibitors clinically important in medicine?",
+        options: ["They provide energy to body cells", "Many antibiotics act as enzyme inhibitors in bacteria", "They synthesize human vitamins", "They increase blood sugar levels"],
+        correct: 1,
+        explanation: "Many pharmaceuticals, antibiotics, and chemo drugs work as specific inhibitors targeting critical bacterial or cancer enzymes."
+      },
+      {
+        id: 52,
+        slo: "SLO 3.5.2: Describe Significance of Inhibitors",
+        question: "Penicillin treats bacterial infections by inhibiting the enzyme responsible for building bacterial:",
+        options: ["Cell walls", "Cell membranes", "Ribosomes", "Mitochondria"],
+        correct: 0,
+        explanation: "Penicillin inhibits transpeptidase, preventing peptidoglycan cross-linking necessary for bacterial cell wall integrity."
+      },
+      {
+        id: 53,
+        slo: "SLO 3.5.2: Describe Significance of Inhibitors",
+        question: "How do many insecticides kill insect pests in agricultural fields?",
+        options: ["By destroying plant leaves", "By inhibiting key nervous system enzymes in insects", "By increasing insect digestion rate", "By lowering air temperature"],
+        correct: 1,
+        explanation: "Organophosphate insecticides inhibit acetylcholinesterase in nervous systems, leading to pest death."
+      },
+      {
+        id: 54,
+        slo: "SLO 3.5.2: Describe Significance of Inhibitors",
+        question: "Cyanide is a deadly poison because it inhibits cytochrome oxidase, blocking cellular:",
+        options: ["Photosynthesis", "Respiration", "Protein synthesis", "Fat absorption"],
+        correct: 1,
+        explanation: "Cyanide binds cytochrome c oxidase in mitochondria, halting ATP synthesis via cellular respiration."
+      },
+      {
+        id: 55,
+        slo: "SLO 3.5.2: Describe Significance of Inhibitors",
+        question: "[Real-Life Scenario] Doctors prescribe statin medications to patients with high cholesterol. Statins inhibit HMG-CoA reductase, an enzyme in cholesterol synthesis. What is the clinical purpose of statins here?",
+        options: ["Curing viral infections", "Regulating metabolic pathways for medical benefit", "Destroying liver cells", "Increasing lipid digestion"],
+        correct: 1,
+        explanation: "Statins selectively inhibit HMG-CoA reductase to lower endogenous hepatic cholesterol production."
+      },
+
+      // SLO 3.5.3: Explain Feedback Inhibition
+      {
+        id: 56,
+        slo: "SLO 3.5.3: Explain Feedback Inhibition",
+        question: "In feedback inhibition, the first enzyme in a metabolic pathway is inhibited by the:",
+        options: ["Substrate", "End-product", "Coenzyme", "Inorganic ion"],
+        correct: 1,
+        explanation: "In feedback inhibition (end-product inhibition), accumulation of the pathway's final product inhibits the initial pathway enzyme."
+      },
+      {
+        id: 57,
+        slo: "SLO 3.5.3: Explain Feedback Inhibition",
+        question: "What is the primary biological purpose of feedback inhibition in cells?",
+        options: ["To destroy unwanted enzymes", "To prevent wasteful overproduction of products", "To raise cell temperature", "To speed up all metabolic pathways"],
+        correct: 1,
+        explanation: "Feedback inhibition conserves cellular resources and energy by halting synthesis once adequate product levels are reached."
+      },
+      {
+        id: 58,
+        slo: "SLO 3.5.3: Explain Feedback Inhibition",
+        question: "Where does the end-product bind on the initial enzyme during feedback inhibition?",
+        options: ["Active site", "Allosteric site", "Catalytic domain", "Substrate tail"],
+        correct: 1,
+        explanation: "The end-product binds to an allosteric site on the first enzyme, triggering conformational inactivation."
+      },
+      {
+        id: 59,
+        slo: "SLO 3.5.3: Explain Feedback Inhibition",
+        question: "Feedback inhibition is an example of which cellular control mechanism?",
+        options: ["Positive feedback", "Negative feedback", "Thermal regulation", "Gene mutation"],
+        correct: 1,
+        explanation: "Feedback inhibition operates as a homeostatic negative feedback loop where output reduces its own production rate."
+      },
+      {
+        id: 60,
+        slo: "SLO 3.5.3: Explain Feedback Inhibition",
+        question: "[Real-Life Scenario] In bacteria, threonine is converted into isoleucine through five enzymatic steps. When isoleucine accumulates, it binds to the first enzyme and halts production. What is this mechanism called?",
+        options: ["Competitive activation", "Feedback inhibition", "Substrate induction", "Thermal denaturation"],
+        correct: 1,
+        explanation: "Isoleucine inhibiting threonine deaminase (the first enzyme in its pathway) is a classic example of feedback inhibition."
+      },
+
+      // SLO 3.6.1: Classify Enzymes
+      {
+        id: 61,
+        slo: "SLO 3.6.1: Classify Enzymes",
+        question: "Enzymes that catalyze oxidation-reduction reactions belong to the class:",
+        options: ["Hydrolases", "Oxidoreductases", "Transferases", "Ligases"],
+        correct: 1,
+        explanation: "Oxidoreductases catalyze electron or hydrogen transfer between chemical species in redox reactions."
+      },
+      {
+        id: 62,
+        slo: "SLO 3.6.1: Classify Enzymes",
+        question: "Which class of enzymes catalyzes bond breakage by adding water molecules?",
+        options: ["Hydrolases", "Lyases", "Isomerases", "Ligases"],
+        correct: 0,
+        explanation: "Hydrolases cleave chemical bonds (such as ester, peptide, or glycosidic bonds) via hydrolysis."
+      },
+      {
+        id: 63,
+        slo: "SLO 3.6.1: Classify Enzymes",
+        question: "Enzymes that join two molecules together using energy from ATP are classified as:",
+        options: ["Transferases", "Ligases", "Hydrolases", "Oxidoreductases"],
+        correct: 1,
+        explanation: "Ligases join two chemical fragments together coupled with ATP hydrolysis energy."
+      },
+      {
+        id: 64,
+        slo: "SLO 3.6.1: Classify Enzymes",
+        question: "An enzyme that transfers a functional group (such as a phosphate group) from one molecule to another is a:",
+        options: ["Transferase", "Isomerase", "Lyase", "Hydrolase"],
+        correct: 0,
+        explanation: "Transferases move chemical groups (amino, methyl, phosphate, etc.) from a donor to an acceptor substrate."
+      },
+      {
+        id: 65,
+        slo: "SLO 3.6.1: Classify Enzymes",
+        question: "[Real-Life Scenario] During digestion, pancreatic amylase breaks down starch into maltose by splitting bonds with the addition of water. To which enzyme class does amylase belong?",
+        options: ["Ligases", "Hydrolases", "Oxidoreductases", "Isomerases"],
+        correct: 1,
+        explanation: "Amylase hydrolyzes glycosidic linkages using water, placing it in the Hydrolase enzyme class."
+      }
+    ];
+
+    function App() {
+      // Quiz State
+      const [quizStarted, setQuizStarted] = useState(false);
+      const [quizMode, setQuizMode] = useState('practice'); // 'practice' or 'blind'
+      const [currentIdx, setCurrentIdx] = useState(0);
+      const [userAnswers, setUserAnswers] = useState({}); // { [qIdx]: selectedOptionIdx }
+      const [flaggedQuestions, setFlaggedQuestions] = useState({}); // { [qIdx]: true/false }
+      const [timeLeft, setTimeLeft] = useState(65 * 60); // 65 minutes = 3900 seconds
+      const [isSubmitted, setIsSubmitted] = useState(false);
+      const [showNavGrid, setShowNavGrid] = useState(false);
+
+      // Review Section Search and Filter States
+      const [reviewFilter, setReviewFilter] = useState('all'); // 'all', 'correct', 'wrong', 'skipped', 'flagged'
+      const [reviewSearch, setReviewSearch] = useState('');
+
+      // Timer Effect
+      useEffect(() => {
+        let timer = null;
+        if (quizStarted && !isSubmitted && timeLeft > 0) {
+          timer = setInterval(() => {
+            setTimeLeft(prev => {
+              if (prev <= 1) {
+                clearInterval(timer);
+                setIsSubmitted(true);
+                return 0;
+              }
+              return prev - 1;
+            });
+          }, 1000);
+        }
+        return () => clearInterval(timer);
+      }, [quizStarted, isSubmitted, timeLeft]);
+
+      // Keyboard Shortcuts for Test Navigation
+      useEffect(() => {
+        const handleKeyDown = (e) => {
+          if (!quizStarted || isSubmitted) return;
+
+          if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+
+          const key = e.key.toUpperCase();
+          if (['1', '2', '3', '4'].includes(key)) {
+            handleSelectOption(parseInt(key, 10) - 1);
+          } else if (['A', 'B', 'C', 'D'].includes(key)) {
+            const charCode = key.charCodeAt(0) - 65;
+            handleSelectOption(charCode);
+          } else if (e.key === 'ArrowRight') {
+            if (currentIdx < QUESTIONS.length - 1) setCurrentIdx(prev => prev + 1);
+          } else if (e.key === 'ArrowLeft') {
+            if (currentIdx > 0) setCurrentIdx(prev => prev - 1);
+          } else if (key === 'F') {
+            toggleFlagQuestion(currentIdx);
+          }
+        };
+
+        window.addEventListener('keydown', handleKeyDown);
+        return () => window.removeEventListener('keydown', handleKeyDown);
+      }, [quizStarted, isSubmitted, currentIdx, userAnswers]);
+
+      // Format time string MM:SS or HH:MM:SS
+      const formatTime = (secs) => {
+        const hrs = Math.floor(secs / 3600);
+        const mins = Math.floor((secs % 3600) / 60);
+        const s = secs % 60;
+        if (hrs > 0) {
+          return `${hrs}:${mins.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+        }
+        return `${mins.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+      };
+
+      // Select Option & Lock Answer
+      const handleSelectOption = (optionIdx) => {
+        if (userAnswers.hasOwnProperty(currentIdx) || isSubmitted) return; // Locked once chosen
+        setUserAnswers(prev => ({
+          ...prev,
+          [currentIdx]: optionIdx
+        }));
+      };
+
+      // Toggle Question Flag / Bookmark
+      const toggleFlagQuestion = (qIndex) => {
+        setFlaggedQuestions(prev => ({
+          ...prev,
+          [qIndex]: !prev[qIndex]
+        }));
+      };
+
+      // Scoring Calculations (-0.25 negative marking)
+      const scoreData = useMemo(() => {
+        let correctCount = 0;
+        let wrongCount = 0;
+        let unattemptedCount = 0;
+
+        QUESTIONS.forEach((q, idx) => {
+          if (!userAnswers.hasOwnProperty(idx)) {
+            unattemptedCount++;
+          } else if (userAnswers[idx] === q.correct) {
+            correctCount++;
+          } else {
+            wrongCount++;
+          }
+        });
+
+        const grossMarks = correctCount * 1.0;
+        const penalty = wrongCount * 0.25;
+        const netMarks = Math.max(0, grossMarks - penalty);
+        const maxMarks = QUESTIONS.length * 1.0;
+        const percentage = Number(((netMarks / maxMarks) * 100).toFixed(1));
+
+        return { correctCount, wrongCount, unattemptedCount, grossMarks, penalty, netMarks, maxMarks, percentage };
+      }, [userAnswers]);
+
+      // SLO Weak Area Analysis
+      const sloAnalysis = useMemo(() => {
+        const stats = {};
+        QUESTIONS.forEach((q, idx) => {
+          const sloKey = q.slo;
+          if (!stats[sloKey]) {
+            stats[sloKey] = { total: 0, correct: 0, wrong: 0, unattempted: 0 };
+          }
+          stats[sloKey].total++;
+          if (!userAnswers.hasOwnProperty(idx)) {
+            stats[sloKey].unattempted++;
+          } else if (userAnswers[idx] === q.correct) {
+            stats[sloKey].correct++;
+          } else {
+            stats[sloKey].wrong++;
+          }
+        });
+        return stats;
+      }, [userAnswers]);
+
+      // Filtered questions for the post-exam review list
+      const filteredReviewQuestions = useMemo(() => {
+        return QUESTIONS.map((q, idx) => ({ ...q, qIdx: idx })).filter(q => {
+          const isUserAns = userAnswers.hasOwnProperty(q.qIdx);
+          const isCorrect = isUserAns && userAnswers[q.qIdx] === q.correct;
+          const isWrong = isUserAns && userAnswers[q.qIdx] !== q.correct;
+          const isSkipped = !isUserAns;
+          const isFlagged = !!flaggedQuestions[q.qIdx];
+
+          // Filter match
+          let matchesFilter = true;
+          if (reviewFilter === 'correct') matchesFilter = isCorrect;
+          if (reviewFilter === 'wrong') matchesFilter = isWrong;
+          if (reviewFilter === 'skipped') matchesFilter = isSkipped;
+          if (reviewFilter === 'flagged') matchesFilter = isFlagged;
+
+          // Search match
+          let matchesSearch = true;
+          if (reviewSearch.trim() !== '') {
+            const term = reviewSearch.toLowerCase();
+            matchesSearch = q.question.toLowerCase().includes(term) ||
+                            q.slo.toLowerCase().includes(term) ||
+                            q.explanation.toLowerCase().includes(term);
+          }
+
+          return matchesFilter && matchesSearch;
+        });
+      }, [userAnswers, flaggedQuestions, reviewFilter, reviewSearch]);
+
+      const getMotivationalQuote = (pct) => {
+        if (pct >= 85) return { quote: "Outstanding Mastery! Your understanding of enzyme catalysis, kinetics, models, and inhibition is stellar.", author: "Qashqarian Academy Academic Council" };
+        if (pct >= 70) return { quote: "Great Job! You have a solid grasp of Chapter 3 concepts. Review your specific weak SLOs to achieve 100%.", author: "Qashqarian Academy Faculty" };
+        if (pct >= 50) return { quote: "Solid Progress! Go through the explanations for your incorrect answers carefully to master enzymatic kinetics.", author: "Department of Biology" };
+        return { quote: "Every setback is a stepping stone to excellence. Re-read Chapter 3 concepts and retake the test!", author: "Qashqarian Mentorship Team" };
+      };
+
+      const currentQ = QUESTIONS[currentIdx];
+      const isAnswered = userAnswers.hasOwnProperty(currentIdx);
+      const selectedOption = userAnswers[currentIdx];
+      const isCurrentFlagged = !!flaggedQuestions[currentIdx];
+
+      if (!quizStarted) {
+        return (
+          <div className="min-h-screen flex items-center justify-center p-4 sm:p-6">
+            <div className="max-w-2xl w-full bg-white rounded-2xl shadow-xl border border-sky-100 overflow-hidden animate-fadeIn">
+              {/* Header Banner */}
+              <div className="bg-gradient-to-r from-sky-800 via-sky-700 to-science-900 p-6 sm:p-8 text-white relative">
+                <div className="flex justify-between items-center mb-3">
+                  <span className="bg-sky-500/30 text-sky-100 text-xs font-bold px-3 py-1 rounded-full backdrop-blur-sm border border-sky-300/20 flex items-center gap-1">
+                    🏔️ Qashqarian Academy
+                  </span>
+                  <span className="text-xs font-semibold bg-white/10 px-2.5 py-1 rounded-md border border-white/20">
+                    Class: XI
+                  </span>
+                </div>
+                <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
+                  Chapter 3: Enzymes
+                </h1>
+                <p className="text-sky-100 text-sm mt-1">
+                  Comprehensive Biology Mock Assessment (65 MCQs)
+                </p>
+              </div>
+
+              {/* Instructions Content */}
+              <div className="p-6 sm:p-8 space-y-6">
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                  <div className="bg-sky-50 rounded-xl p-3.5 border border-sky-100 flex items-center gap-3">
+                    <div className="p-2 bg-sky-600 text-white rounded-lg shrink-0">
+                      <Icon name="clock" className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <p className="text-[11px] text-slate-500 font-medium">Time Limit</p>
+                      <p className="text-xs sm:text-sm font-bold text-slate-800">65 Minutes</p>
+                    </div>
+                  </div>
+                  <div className="bg-sky-50 rounded-xl p-3.5 border border-sky-100 flex items-center gap-3">
+                    <div className="p-2 bg-sky-600 text-white rounded-lg shrink-0">
+                      <Icon name="award" className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <p className="text-[11px] text-slate-500 font-medium">Marking Scheme</p>
+                      <p className="text-xs sm:text-sm font-bold text-slate-800">+1.0 / -0.25</p>
+                    </div>
+                  </div>
+                  <div className="col-span-2 sm:col-span-1 bg-sky-50 rounded-xl p-3.5 border border-sky-100 flex items-center gap-3">
+                    <div className="p-2 bg-sky-600 text-white rounded-lg shrink-0">
+                      <Icon name="key" className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <p className="text-[11px] text-slate-500 font-medium">Shortcuts</p>
+                      <p className="text-xs sm:text-sm font-bold text-slate-800">Keys A-D, ← →</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Mode Selector */}
+                <div>
+                  <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2.5">
+                    Select Assessment Mode
+                  </label>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <button
+                      type="button"
+                      onClick={() => setQuizMode('practice')}
+                      className={`p-4 rounded-xl text-left border-2 transition-all flex flex-col gap-1.5 ${
+                        quizMode === 'practice'
+                          ? 'border-sky-600 bg-sky-50/80 ring-2 ring-sky-500/20'
+                          : 'border-slate-200 hover:border-sky-300 bg-white'
+                      }`}
+                    >
+                      <div className="flex items-center justify-between">
+                        <span className="font-bold text-sm text-sky-900 flex items-center gap-1.5">
+                          <Icon name="zap" className="w-4 h-4 text-sky-600" />
+                          Practice Mode
+                        </span>
+                        {quizMode === 'practice' && <Icon name="check" className="w-4 h-4 text-sky-600" />}
+                      </div>
+                      <p className="text-xs text-slate-500 leading-relaxed">
+                        Instant right/wrong verification with detailed rationale immediately upon selecting an answer.
+                      </p>
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => setQuizMode('blind')}
+                      className={`p-4 rounded-xl text-left border-2 transition-all flex flex-col gap-1.5 ${
+                        quizMode === 'blind'
+                          ? 'border-sky-600 bg-sky-50/80 ring-2 ring-sky-500/20'
+                          : 'border-slate-200 hover:border-sky-300 bg-white'
+                      }`}
+                    >
+                      <div className="flex items-center justify-between">
+                        <span className="font-bold text-sm text-sky-900 flex items-center gap-1.5">
+                          <Icon name="shield" className="w-4 h-4 text-sky-600" />
+                          Blind / Exam Mode
+                        </span>
+                        {quizMode === 'blind' && <Icon name="check" className="w-4 h-4 text-sky-600" />}
+                      </div>
+                      <p className="text-xs text-slate-500 leading-relaxed">
+                        Simulate exam environment. Correct answers and explanations are locked until test completion.
+                      </p>
+                    </button>
+                  </div>
+                </div>
+
+                {/* Rules Box */}
+                <div className="bg-amber-50/80 border border-amber-200 rounded-xl p-4 text-xs text-amber-900 space-y-1.5">
+                  <p className="font-bold text-amber-950 flex items-center gap-1.5">
+                    <Icon name="alert-triangle" className="w-4 h-4 text-amber-600" />
+                    Negative Marking Notice & Assessment Rules:
+                  </p>
+                  <ul className="list-disc list-inside space-y-1 pl-1 text-amber-800">
+                    <li>Selecting an answer locks it permanently for that question.</li>
+                    <li>Incorrect choices incur a <strong>-0.25 mark penalty</strong>.</li>
+                    <li>Unattempted questions carry zero penalty.</li>
+                    <li>Use the <strong>Flag (F)</strong> button to bookmark items to review via the Navigator Grid.</li>
+                  </ul>
+                </div>
+
+                <button
+                  onClick={() => setQuizStarted(true)}
+                  className="w-full bg-sky-600 hover:bg-sky-700 text-white font-bold py-3.5 px-6 rounded-xl shadow-lg shadow-sky-600/25 transition-all flex items-center justify-center gap-2 group text-sm"
+                >
+                  <span>Start Chapter 3 Assessment</span>
+                  <Icon name="arrow-right" className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                </button>
+              </div>
+            </div>
+          </div>
+        );
+      }
+
+      if (isSubmitted) {
+        const quoteObj = getMotivationalQuote(scoreData.percentage);
+
+        return (
+          <div className="min-h-screen py-8 px-4 sm:px-6 flex justify-center">
+            <div className="max-w-4xl w-full bg-white rounded-2xl shadow-xl border border-sky-100 overflow-hidden animate-fadeIn space-y-6 pb-8">
+              
+              {/* Header Banner */}
+              <div className="bg-gradient-to-r from-sky-800 via-sky-700 to-science-900 p-6 sm:p-8 text-white relative">
+                <div className="flex justify-between items-center mb-2 no-print">
+                  <span className="text-xs font-bold bg-white/20 px-3 py-1 rounded-full flex items-center gap-1">
+                    🏔️ Qashqarian Academy
+                  </span>
+                  <span className="text-xs font-semibold bg-white/10 px-2.5 py-1 rounded-md border border-white/20">
+                    Class: XI
+                  </span>
+                  <button 
+                    onClick={() => window.print()} 
+                    className="bg-white/10 hover:bg-white/20 text-white text-xs font-semibold px-3 py-1.5 rounded-lg border border-white/20 transition-all flex items-center gap-1.5"
+                  >
+                    <Icon name="printer" className="w-4 h-4" />
+                    Print Report
+                  </button>
+                </div>
+                <h1 className="text-2xl sm:text-3xl font-extrabold">
+                  Performance Evaluation Summary
+                </h1>
+                <p className="text-sky-100 text-xs sm:text-sm mt-1">
+                  Chapter 3: Enzymes Mock Test Results
+                </p>
+              </div>
+
+              <div className="p-6 sm:p-8 space-y-8">
+                
+                {/* Motivational Quote Box */}
+                <div className="bg-sky-50/80 border-l-4 border-sky-600 p-4 rounded-r-xl space-y-1">
+                  <p className="text-sm font-semibold text-sky-950 italic">
+                    "{quoteObj.quote}"
+                  </p>
+                  <p className="text-xs text-sky-700 font-bold">— {quoteObj.author}</p>
+                </div>
+
+                {/* Score Summary Metrics */}
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                  <div className="bg-sky-50 border border-sky-100 rounded-xl p-4 text-center">
+                    <p className="text-xs text-slate-500 font-semibold mb-1">Net Percentage</p>
+                    <p className="text-3xl font-black text-sky-600">{scoreData.percentage}%</p>
+                  </div>
+                  <div className="bg-emerald-50 border border-emerald-100 rounded-xl p-4 text-center">
+                    <p className="text-xs text-emerald-700 font-semibold mb-1">Correct Answers</p>
+                    <p className="text-3xl font-black text-emerald-600">{scoreData.correctCount}</p>
+                    <p className="text-[10px] text-emerald-600 font-medium">+{scoreData.grossMarks} Marks</p>
+                  </div>
+                  <div className="bg-rose-50 border border-rose-100 rounded-xl p-4 text-center">
+                    <p className="text-xs text-rose-700 font-semibold mb-1">Wrong Answers</p>
+                    <p className="text-3xl font-black text-rose-600">{scoreData.wrongCount}</p>
+                    <p className="text-[10px] text-rose-600 font-medium">-{scoreData.penalty} Penalty</p>
+                  </div>
+                  <div className="bg-amber-50 border border-amber-100 rounded-xl p-4 text-center">
+                    <p className="text-xs text-amber-700 font-semibold mb-1">Unattempted</p>
+                    <p className="text-3xl font-black text-amber-600">{scoreData.unattemptedCount}</p>
+                    <p className="text-[10px] text-amber-600 font-medium">0 Penalty</p>
+                  </div>
+                </div>
+
+                {/* Net Score Summary Bar */}
+                <div className="bg-slate-900 text-white rounded-xl p-4 flex justify-between items-center text-sm">
+                  <span>Final Net Score (After Negative Marking):</span>
+                  <span className="font-extrabold text-sky-400 text-base">
+                    {scoreData.netMarks} / {scoreData.maxMarks} Marks
+                  </span>
+                </div>
+
+                {/* Weak Area SLO Breakdown */}
+                <div className="space-y-3">
+                  <h3 className="text-base font-bold text-slate-800 flex items-center gap-2">
+                    <Icon name="bar-chart" className="w-5 h-5 text-sky-600" />
+                    SLO Performance & Weak Area Analysis
+                  </h3>
+
+                  <div className="space-y-3 max-h-80 overflow-y-auto pr-2 custom-scrollbar">
+                    {Object.entries(sloAnalysis).map(([slo, stats], idx) => {
+                      const sloPct = stats.total > 0 ? Math.round((stats.correct / stats.total) * 100) : 0;
+                      return (
+                        <div key={idx} className="bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs space-y-2">
+                          <div className="flex justify-between items-start gap-2">
+                            <span className="font-semibold text-slate-800">{slo}</span>
+                            <span className={`font-bold px-2 py-0.5 rounded text-[11px] ${
+                              sloPct >= 80 ? 'bg-emerald-100 text-emerald-800' :
+                              sloPct >= 50 ? 'bg-amber-100 text-amber-800' : 'bg-rose-100 text-rose-800'
+                            }`}>
+                              {sloPct}% Mastered
+                            </span>
+                          </div>
+                          <div className="w-full bg-slate-200 h-2 rounded-full overflow-hidden">
+                            <div 
+                              className={`h-full transition-all duration-500 ${
+                                sloPct >= 80 ? 'bg-emerald-500' : sloPct >= 50 ? 'bg-amber-500' : 'bg-rose-500'
+                              }`}
+                              style={{ width: `${sloPct}%` }}
+                            />
+                          </div>
+                          <div className="flex gap-4 text-[11px] text-slate-500">
+                            <span>Correct: {stats.correct}</span>
+                            <span>Wrong: {stats.wrong}</span>
+                            <span>Skipped: {stats.unattempted}</span>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                {/* Interactive Filter & Search for Review Section */}
+                <div className="space-y-4 no-print">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-2">
+                    <h3 className="text-base font-bold text-slate-800 flex items-center gap-2">
+                      <Icon name="book-open" className="w-5 h-5 text-sky-600" />
+                      Detailed Answer Rationales & Explanations
+                    </h3>
+
+                    {/* Filter Pills */}
+                    <div className="flex flex-wrap gap-1.5 text-xs">
+                      {[
+                        { id: 'all', label: 'All' },
+                        { id: 'correct', label: 'Correct' },
+                        { id: 'wrong', label: 'Wrong' },
+                        { id: 'skipped', label: 'Skipped' },
+                        { id: 'flagged', label: 'Flagged' },
+                      ].map(tab => (
+                        <button
+                          key={tab.id}
+                          onClick={() => setReviewFilter(tab.id)}
+                          className={`px-3 py-1.5 rounded-lg font-semibold transition-all ${
+                            reviewFilter === tab.id
+                              ? 'bg-sky-600 text-white shadow-sm'
+                              : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                          }`}
+                        >
+                          {tab.label}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Search Input */}
+                  <div className="relative">
+                    <input
+                      type="text"
+                      placeholder="Search question keywords or explanations..."
+                      value={reviewSearch}
+                      onChange={(e) => setReviewSearch(e.target.value)}
+                      className="w-full pl-9 pr-4 py-2.5 rounded-xl border border-slate-200 text-xs focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent bg-slate-50/50"
+                    />
+                    <div className="absolute left-3 top-3 text-slate-400">
+                      <Icon name="search" className="w-4 h-4" />
+                    </div>
+                  </div>
+
+                  {/* Question Review Cards */}
+                  <div className="space-y-4 max-h-[500px] overflow-y-auto pr-2 custom-scrollbar">
+                    {filteredReviewQuestions.length === 0 ? (
+                      <div className="p-8 text-center text-xs text-slate-500 bg-slate-50 rounded-xl border border-dashed border-slate-200">
+                        No questions matched your search or filter criteria.
+                      </div>
+                    ) : (
+                      filteredReviewQuestions.map((q) => {
+                        const qIdx = q.qIdx;
+                        const userSel = userAnswers[qIdx];
+                        const isCorrect = userSel === q.correct;
+                        const isUnattempted = !userAnswers.hasOwnProperty(qIdx);
+                        const isFlagged = flaggedQuestions[qIdx];
+
+                        return (
+                          <div 
+                            key={q.id}
+                            className={`p-4 rounded-xl border text-xs space-y-2.5 transition-all ${
+                              isCorrect ? 'bg-emerald-50/50 border-emerald-200' :
+                              isUnattempted ? 'bg-amber-50/50 border-amber-200' : 'bg-rose-50/50 border-rose-200'
+                            }`}
+                          >
+                            <div className="flex justify-between items-start gap-2">
+                              <span className="font-bold text-slate-900 flex items-center gap-2">
+                                <span>Q{qIdx + 1}. {q.question}</span>
+                                {isFlagged && (
+                                  <span className="bg-amber-100 text-amber-800 text-[10px] px-2 py-0.5 rounded font-bold flex items-center gap-1">
+                                    <Icon name="flag" className="w-3 h-3 text-amber-600" /> Flagged
+                                  </span>
+                                )}
+                              </span>
+                              <span className={`px-2 py-0.5 rounded font-bold text-[10px] whitespace-nowrap shrink-0 ${
+                                isCorrect ? 'bg-emerald-600 text-white' :
+                                isUnattempted ? 'bg-amber-500 text-white' : 'bg-rose-600 text-white'
+                              }`}>
+                                {isCorrect ? 'CORRECT (+1.0)' : isUnattempted ? 'SKIPPED (0.0)' : 'WRONG (-0.25)'}
+                              </span>
+                            </div>
+
+                            <p className="text-[11px] text-slate-500 font-medium">{q.slo}</p>
+
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                              {q.options.map((opt, oIdx) => {
+                                const isOptCorrect = oIdx === q.correct;
+                                const isOptUserChoice = oIdx === userSel;
+
+                                return (
+                                  <div 
+                                    key={oIdx}
+                                    className={`p-2 rounded-lg border font-medium flex items-center justify-between ${
+                                      isOptCorrect ? 'bg-emerald-100 border-emerald-300 text-emerald-900 font-bold' :
+                                      isOptUserChoice ? 'bg-rose-100 border-rose-300 text-rose-900' : 'bg-white border-slate-200 text-slate-600'
+                                    }`}
+                                  >
+                                    <span>{String.fromCharCode(65 + oIdx)}. {opt}</span>
+                                    {isOptCorrect && <Icon name="check" className="w-3.5 h-3.5 text-emerald-700" />}
+                                    {isOptUserChoice && !isOptCorrect && <Icon name="x" className="w-3.5 h-3.5 text-rose-700" />}
+                                  </div>
+                                );
+                              })}
+                            </div>
+
+                            <div className="bg-white/90 p-3 rounded-lg border border-slate-200 text-slate-700 leading-relaxed">
+                              <span className="font-bold text-sky-900">Explanation & Rationale: </span>
+                              {q.explanation}
+                            </div>
+                          </div>
+                        );
+                      })
+                    )}
+                  </div>
+                </div>
+
+                {/* Restart Button */}
+                <button
+                  onClick={() => {
+                    setIsSubmitted(false);
+                    setQuizStarted(false);
+                    setCurrentIdx(0);
+                    setUserAnswers({});
+                    setFlaggedQuestions({});
+                    setTimeLeft(65 * 60);
+                  }}
+                  className="w-full bg-sky-600 hover:bg-sky-700 text-white font-bold py-3.5 px-6 rounded-xl shadow-lg shadow-sky-600/25 transition-all flex items-center justify-center gap-2 text-sm no-print"
+                >
+                  <Icon name="rotate-ccw" className="w-5 h-5" />
+                  <span>Restart Assessment</span>
+                </button>
+
+              </div>
+            </div>
+          </div>
+        );
+      }
+
+      const flaggedCount = Object.values(flaggedQuestions).filter(Boolean).length;
+
+      return (
+        <div className="min-h-screen py-6 px-4 sm:px-6 flex flex-col items-center">
+          
+          {/* Top Navigation Header Card */}
+          <div className="max-w-3xl w-full bg-white rounded-2xl shadow-sm border border-sky-100 p-4 mb-4 space-y-3">
+            
+            {/* Header Title & Navigation Controls */}
+            <div className="flex justify-between items-center text-xs sm:text-sm font-bold text-sky-900">
+              <span className="flex items-center gap-1.5 text-base sm:text-lg">
+                🏔️ Qashqarian Academy
+              </span>
+              
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={() => setShowNavGrid(!showNavGrid)}
+                  className="px-2.5 py-1 bg-sky-50 hover:bg-sky-100 text-sky-800 rounded-lg text-xs font-semibold flex items-center gap-1.5 border border-sky-200 transition-all"
+                >
+                  <Icon name="grid" className="w-3.5 h-3.5" />
+                  <span>Grid ({Object.keys(userAnswers).length}/{QUESTIONS.length})</span>
+                </button>
+
+                <span className="bg-sky-100 text-sky-800 px-2.5 py-1 rounded-lg font-semibold text-xs">
+                  Class: XI
+                </span>
+              </div>
+            </div>
+
+            {/* Question Counter, Timer, and Flag Indicator */}
+            <div className="flex justify-between items-center text-xs font-semibold text-slate-600">
+              <div className="flex items-center gap-3">
+                <span className="text-sky-900 font-bold text-sm">Q {currentIdx + 1} / {QUESTIONS.length}</span>
+                {flaggedCount > 0 && (
+                  <span className="text-amber-700 bg-amber-50 border border-amber-200 px-2 py-0.5 rounded text-[11px] font-bold flex items-center gap-1">
+                    <Icon name="flag" className="w-3 h-3 text-amber-600" />
+                    {flaggedCount} Flagged
+                  </span>
+                )}
+              </div>
+
+              <div className={`flex items-center gap-1.5 px-2.5 py-1 rounded-lg font-mono font-bold ${
+                timeLeft < 300 ? 'bg-rose-100 text-rose-700 animate-pulse' : 'bg-sky-50 text-sky-800'
+              }`}>
+                <Icon name="clock" className="w-3.5 h-3.5" />
+                <span>{formatTime(timeLeft)}</span>
+              </div>
+            </div>
+
+            {/* Top Visual Progress Bar */}
+            <div className="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+              <div 
+                className="bg-sky-600 h-full transition-all duration-300"
+                style={{ width: `${((currentIdx + 1) / QUESTIONS.length) * 100}%` }}
+              />
+            </div>
+          </div>
+
+          {/* Quick Question Matrix / Grid Drawer Modal */}
+          {showNavGrid && (
+            <div className="max-w-3xl w-full bg-white rounded-2xl shadow-lg border border-sky-200 p-5 mb-4 animate-fadeIn space-y-3">
+              <div className="flex justify-between items-center text-xs font-bold text-slate-800 border-b pb-2">
+                <span>Question Quick Navigator Matrix</span>
+                <button 
+                  onClick={() => setShowNavGrid(false)}
+                  className="text-slate-400 hover:text-slate-600"
+                >
+                  <Icon name="x" className="w-4 h-4" />
+                </button>
+              </div>
+
+              <div className="grid grid-cols-5 sm:grid-cols-10 gap-2 max-h-52 overflow-y-auto p-1 custom-scrollbar">
+                {QUESTIONS.map((_, idx) => {
+                  const isAns = userAnswers.hasOwnProperty(idx);
+                  const isCur = currentIdx === idx;
+                  const isFlg = !!flaggedQuestions[idx];
+
+                  let boxStyle = "bg-slate-100 text-slate-700 hover:bg-slate-200";
+                  if (isCur) boxStyle = "bg-sky-600 text-white font-bold ring-2 ring-sky-500/50";
+                  else if (isAns) boxStyle = "bg-emerald-100 text-emerald-900 font-semibold border border-emerald-300";
+
+                  return (
+                    <button
+                      key={idx}
+                      onClick={() => {
+                        setCurrentIdx(idx);
+                        setShowNavGrid(false);
+                      }}
+                      className={`h-8 rounded-lg text-xs transition-all relative flex items-center justify-center ${boxStyle}`}
+                    >
+                      {idx + 1}
+                      {isFlg && (
+                        <span className="absolute -top-1 -right-1 bg-amber-500 w-2.5 h-2.5 rounded-full border border-white" />
+                      )}
+                    </button>
+                  );
+                })}
+              </div>
+
+              <div className="flex gap-4 text-[10px] text-slate-500 pt-2 border-t justify-center">
+                <span className="flex items-center gap-1"><span className="w-2.5 h-2.5 rounded bg-emerald-300" /> Answered</span>
+                <span className="flex items-center gap-1"><span className="w-2.5 h-2.5 rounded bg-slate-200" /> Unanswered</span>
+                <span className="flex items-center gap-1"><span className="w-2.5 h-2.5 rounded bg-sky-600" /> Current</span>
+                <span className="flex items-center gap-1"><span className="w-2.5 h-2.5 rounded-full bg-amber-500" /> Flagged</span>
+              </div>
+            </div>
+          )}
+
+          {/* Centered Main Question Card */}
+          <div className="max-w-3xl w-full bg-white rounded-2xl shadow-lg border border-sky-100 p-6 sm:p-8 relative overflow-hidden flex flex-col min-h-[460px] justify-between">
+            
+            {/* Watermark Logo in Center */}
+            <div className="watermark-bg">
+              <p className="text-5xl sm:text-6xl font-black text-sky-900 tracking-widest">
+                🏔️ QASHQARIAN ACADEMY
+              </p>
+            </div>
+
+            {/* Question Header & Options */}
+            <div className="relative z-10 space-y-5">
+              
+              {/* Top Meta Bar (SLO Tag + Bookmark Flag Button) */}
+              <div className="flex justify-between items-center gap-2">
+                <div className="inline-block bg-sky-50 border border-sky-200 text-sky-900 text-xs font-semibold px-3 py-1 rounded-full">
+                  {currentQ.slo}
+                </div>
+
+                <button
+                  onClick={() => toggleFlagQuestion(currentIdx)}
+                  className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 ${
+                    isCurrentFlagged 
+                      ? 'bg-amber-100 text-amber-800 border border-amber-300' 
+                      : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                  }`}
+                  title="Bookmark/Flag for review (Shortcut: Key F)"
+                >
+                  <Icon name="flag" className={`w-3.5 h-3.5 ${isCurrentFlagged ? 'text-amber-600 fill-amber-500' : ''}`} />
+                  <span>{isCurrentFlagged ? 'Flagged' : 'Flag'}</span>
+                </button>
+              </div>
+
+              {/* Question Text */}
+              <h2 className="text-base sm:text-lg font-bold text-slate-900 leading-snug">
+                Q{currentIdx + 1}. {currentQ.question}
+              </h2>
+
+              {/* MCQ Options A, B, C, D */}
+              <div className="space-y-3 pt-2">
+                {currentQ.options.map((optionText, optIdx) => {
+                  const isSelected = selectedOption === optIdx;
+                  const isCorrect = currentQ.correct === optIdx;
+
+                  let btnStyle = "border-slate-200 hover:border-sky-300 hover:bg-sky-50/50 text-slate-800 bg-white";
+
+                  if (isAnswered) {
+                    if (quizMode === 'practice') {
+                      if (isCorrect) {
+                        btnStyle = "border-emerald-500 bg-emerald-50 text-emerald-950 font-semibold ring-2 ring-emerald-500/20";
+                      } else if (isSelected) {
+                        btnStyle = "border-rose-500 bg-rose-50 text-rose-950 font-semibold ring-2 ring-rose-500/20";
+                      } else {
+                        btnStyle = "border-slate-200 opacity-60 bg-white text-slate-500";
+                      }
+                    } else {
+                      // Blind Mode: highlight locked choice with neutral style
+                      if (isSelected) {
+                        btnStyle = "border-sky-600 bg-sky-50 text-sky-950 font-semibold ring-2 ring-sky-500/20";
+                      } else {
+                        btnStyle = "border-slate-200 opacity-60 bg-white text-slate-500";
+                      }
+                    }
+                  }
+
+                  return (
+                    <button
+                      key={optIdx}
+                      disabled={isAnswered}
+                      onClick={() => handleSelectOption(optIdx)}
+                      className={`w-full p-3.5 sm:p-4 rounded-xl border-2 text-left text-xs sm:text-sm transition-all flex items-center justify-between gap-3 ${btnStyle}`}
+                    >
+                      <div className="flex items-center gap-3">
+                        <span className={`w-7 h-7 rounded-lg flex items-center justify-center font-bold text-xs shrink-0 ${
+                          isSelected ? 'bg-sky-600 text-white' : 'bg-slate-100 text-slate-700'
+                        }`}>
+                          {String.fromCharCode(65 + optIdx)}
+                        </span>
+                        <span>{optionText}</span>
+                      </div>
+
+                      {/* Immediate Feedback Icons for Practice Mode */}
+                      {isAnswered && quizMode === 'practice' && (
+                        <div>
+                          {isCorrect && <Icon name="check" className="w-5 h-5 text-emerald-600" />}
+                          {isSelected && !isCorrect && <Icon name="x" className="w-5 h-5 text-rose-600" />}
+                        </div>
+                      )}
+                    </button>
+                  );
+                })}
+              </div>
+
+              {/* Instant Practice Mode Explanation Box */}
+              {isAnswered && quizMode === 'practice' && (
+                <div className={`mt-4 p-4 rounded-xl text-xs leading-relaxed space-y-1 animate-fadeIn border ${
+                  selectedOption === currentQ.correct 
+                    ? 'bg-emerald-50/90 border-emerald-200 text-emerald-950' 
+                    : 'bg-rose-50/90 border-rose-200 text-rose-950'
+                }`}>
+                  <p className="font-bold flex items-center gap-1.5">
+                    <Icon name="info" className="w-4 h-4" />
+                    {selectedOption === currentQ.correct ? 'Correct! Rationale:' : 'Incorrect Answer Explanation:'}
+                  </p>
+                  <p className="text-slate-800">{currentQ.explanation}</p>
+                </div>
+              )}
+            </div>
+
+            {/* Bottom Controls: Previous / Next / Submit Buttons */}
+            <div className="relative z-10 pt-6 mt-6 border-t border-slate-100 flex justify-between items-center gap-4">
+              <button
+                disabled={currentIdx === 0}
+                onClick={() => setCurrentIdx(prev => prev - 1)}
+                className="px-4 py-2.5 rounded-xl border border-slate-200 text-slate-700 text-xs font-bold hover:bg-slate-50 disabled:opacity-40 disabled:cursor-not-allowed flex items-center gap-1.5"
+              >
+                <Icon name="arrow-left" className="w-4 h-4" />
+                Previous
+              </button>
+
+              <div className="flex gap-2">
+                {currentIdx < QUESTIONS.length - 1 ? (
+                  <button
+                    onClick={() => setCurrentIdx(prev => prev + 1)}
+                    className="px-5 py-2.5 rounded-xl bg-sky-600 hover:bg-sky-700 text-white text-xs font-bold shadow-md shadow-sky-600/20 transition-all flex items-center gap-1.5"
+                  >
+                    Next
+                    <Icon name="arrow-right" className="w-4 h-4" />
+                  </button>
+                ) : (
+                  <button
+                    onClick={() => setIsSubmitted(true)}
+                    className="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold shadow-md shadow-emerald-600/20 transition-all flex items-center gap-1.5"
+                  >
+                    Submit Test
+                    <Icon name="check" className="w-4 h-4" />
+                  </button>
+                )}
+              </div>
+            </div>
+
+          </div>
+        </div>
+      );
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<App />);
+  </script>
+</body>
+</html>

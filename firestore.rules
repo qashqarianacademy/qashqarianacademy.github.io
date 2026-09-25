@@ -1,0 +1,39 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Students can read their own profile.
+    // They cannot create, edit, or delete their own profile
+    // from the browser.
+    match /users/{userId} {
+      allow read: if request.auth != null
+                   && request.auth.uid == userId;
+
+      allow write: if false;
+    }
+
+    // Quiz information can be read by logged-in students.
+    // Quiz creation/editing will be handled later through
+    // the trusted backend/admin system.
+    match /quizzes/{quizId} {
+      allow read: if request.auth != null;
+      allow write: if false;
+    }
+
+    // Students can see their own purchases.
+    // They cannot create or modify purchases themselves.
+    // Payment verification will be handled by the backend.
+    match /purchases/{purchaseId} {
+      allow read: if request.auth != null
+                  && resource.data.userId == request.auth.uid;
+
+      allow write: if false;
+    }
+
+    // Everything else remains locked.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

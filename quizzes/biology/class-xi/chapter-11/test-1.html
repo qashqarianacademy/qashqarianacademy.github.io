@@ -1,0 +1,2370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Class XI Biology Chapter 11 Bioenergetics Mock Assessment - Qashqarian Academy</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+          },
+          colors: {
+            sky: {
+              50:'#F0F8F8', 100:'#DFF3F2', 200:'#BFE4E7', 300:'#8FCDD5',
+              400:'#4FA9B9', 500:'#1F869B', 600:'#056C82', 700:'#0A5263',
+              800:'#0B4352', 900:'#0B3340'
+            },
+            science: {
+              50:'#F0F8F8', 100:'#DFF3F2', 200:'#BFE4E7', 300:'#8FCDD5',
+              400:'#4FA9B9', 500:'#1F869B', 600:'#056C82', 700:'#0A5263',
+              800:'#0B4352', 900:'#0B3340'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- React 18 & ReactDOM -->
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+  <!-- Babel for JSX -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #f0f7ff;
+    }
+    .watermark-bg {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(-12deg);
+      pointer-events: none;
+      user-select: none;
+      z-index: 0;
+      opacity: 0.035;
+      text-align: center;
+      white-space: nowrap;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: #f1f5f9;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 4px;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fadeIn {
+      animation: fadeIn 0.25s ease-out forwards;
+    }
+    @media print {
+      .no-print { display: none !important; }
+      body { background: white; color: black; }
+    }
+  </style>
+</head>
+<body class="text-slate-800 antialiased selection:bg-sky-200 selection:text-sky-900 min-h-screen">
+  <header class="sticky top-0 z-50 bg-[#0B132B] border-b border-cyan-900/40 shadow-md">
+    <div class="max-w-5xl mx-auto px-4 py-2.5 flex items-center justify-between">
+      <a href="../../../../index.html" class="flex items-center gap-2">
+        logo: <img src="../../../../images/brand/logo.png" alt="Qashqarian Academy" class="w-10 h-10 object-contain">
+        <div>
+          <div class="text-base md:text-lg font-extrabold text-white tracking-tight leading-none">Qashqarian</div>
+          <div class="text-[10px] md:text-xs text-[#FF9F1C] font-extrabold tracking-[0.2em] mt-1 leading-none">ACADEMY</div>
+        </div>
+      </a>
+      <a href="../../index.html" class="text-[11px] font-semibold text-slate-300 hover:text-white border border-white/20 rounded-lg px-2.5 py-1">
+        ← Biology Quizzes
+      </a>
+    </div>
+  </header>
+
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const { useState, useEffect, useMemo } = React;
+
+    // SVG Icon Component
+    const Icon = ({ name, className = "w-5 h-5" }) => {
+      const props = {
+        className,
+        xmlns: "http://www.w3.org/2000/svg",
+        viewBox: "0 0 24 24",
+        fill: "none",
+        stroke: "currentColor",
+        strokeWidth: "2",
+        strokeLinecap: "round",
+        strokeLinejoin: "round"
+      };
+
+      switch (name) {
+        case "clock":
+          return <svg {...props}><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>;
+        case "award":
+          return <svg {...props}><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 22 12 17 17 22 15.79 13.88"/></svg>;
+        case "check":
+          return <svg {...props}><polyline points="20 6 9 17 4 12"/></svg>;
+        case "x":
+          return <svg {...props}><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>;
+        case "arrow-left":
+          return <svg {...props}><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>;
+        case "arrow-right":
+          return <svg {...props}><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>;
+        case "rotate-ccw":
+          return <svg {...props}><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>;
+        case "book-open":
+          return <svg {...props}><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>;
+        case "shield":
+          return <svg {...props}><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>;
+        case "zap":
+          return <svg {...props}><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>;
+        case "bar-chart":
+          return <svg {...props}><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg>;
+        case "info":
+          return <svg {...props}><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>;
+        case "alert-triangle":
+          return <svg {...props}><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>;
+        case "flag":
+          return <svg {...props}><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>;
+        case "grid":
+          return <svg {...props}><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>;
+        case "search":
+          return <svg {...props}><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>;
+        case "printer":
+          return <svg {...props}><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>;
+        case "key":
+          return <svg {...props}><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg>;
+        default:
+          return <svg {...props}><circle cx="12" cy="12" r="10"/></svg>;
+      }
+    };
+
+    const QUESTIONS = [
+      // SLO 11.1.1: Definition of Bioenergetics
+      {
+        id: 1,
+        slo: "SLO 11.1.1: Definition of Bioenergetics",
+        question: "Bioenergetics is defined as the biological study of:",
+        options: [
+          "Energy transformations and flow within living organisms",
+          "Physical structures of cellular organelles",
+          "Chemical composition of soil nutrients",
+          "Rates of animal locomotion in ecosystems"
+        ],
+        correct: 0,
+        explanation: "Bioenergetics specifically studies how energy is transformed, transferred, and utilized inside living biological systems.",
+        wrongExplanations: [
+          "Physical structures are studied under cytology and organelle ultrastructure.",
+          "Chemical composition of soil is covered under edaphology and plant nutrition.",
+          "Locomotion rates belong to biomechanics and animal physiology."
+        ]
+      },
+      {
+        id: 2,
+        slo: "SLO 11.1.1: Definition of Bioenergetics",
+        question: "Which fundamental physical principles govern energy conversions studied under bioenergetics?",
+        options: [
+          "Newton's laws of motion",
+          "Laws of thermodynamics",
+          "Archimedes' principle",
+          "Ohm's law of current"
+        ],
+        correct: 1,
+        explanation: "Biological energy transformations obey the First (conservation of energy) and Second (entropy increase) Laws of Thermodynamics.",
+        wrongExplanations: [
+          "Newton's laws govern classical mechanics and macro-motion.",
+          "Archimedes' principle deals with fluid buoyancy.",
+          "Ohm's law describes electrical resistance and voltage in physical circuits."
+        ]
+      },
+      {
+        id: 3,
+        slo: "SLO 11.1.1: Definition of Bioenergetics",
+        question: "An endergonic chemical reaction in a living cell is characterized by:",
+        options: [
+          "Spontaneous release of heat energy",
+          "Absorption and net storage of free energy",
+          "Complete destruction of chemical bonds",
+          "Emission of light without chemical change"
+        ],
+        correct: 1,
+        explanation: "Endergonic reactions require a net input of free energy (ΔG > 0) to build complex molecules.",
+        wrongExplanations: [
+          "Spontaneous heat release characterizes exergonic reactions.",
+          "Chemical reactions rearrange or build chemical bonds, not destroy energy.",
+          "Light emission without chemical change is bioluminescence or fluorescence, not endergonic storage."
+        ]
+      },
+      {
+        id: 4,
+        slo: "SLO 11.1.1: Definition of Bioenergetics",
+        question: "Free energy in biological systems refers to the portion of total energy that:",
+        options: [
+          "Is lost permanently as unrecoverable heat",
+          "Is available to perform cellular work at constant temperature",
+          "Remains stored inside atomic nuclei",
+          "Cannot participate in chemical reactions"
+        ],
+        correct: 1,
+        explanation: "Gibbs free energy (G) is the portion of thermodynamic system energy available to perform biological work under constant temperature and pressure.",
+        wrongExplanations: [
+          "Energy lost as heat increases entropy and is unavailable for work.",
+          "Nuclear energy is locked in atomic nuclei and not involved in biochemical reactions.",
+          "Free energy is the primary driver that participates directly in metabolic reactions."
+        ]
+      },
+      {
+        id: 5,
+        slo: "SLO 11.1.1: Definition of Bioenergetics",
+        question: "Exergonic metabolic reactions, such as the breakdown of glucose, result in a net:",
+        options: [
+          "Gain of potential free energy",
+          "Release of stored free energy",
+          "Absorption of atmospheric sunlight",
+          "Increase in total cellular mass"
+        ],
+        correct: 1,
+        explanation: "Exergonic catabolic reactions breakdown complex molecules, releasing stored free energy (ΔG < 0) to drive cellular work.",
+        wrongExplanations: [
+          "Endergonic reactions lead to a net gain of potential energy, not exergonic ones.",
+          "Sunlight absorption is characteristic of photosynthetic energy capture.",
+          "Cellular mass increases during anabolic endergonic synthesis."
+        ]
+      },
+
+      // SLO 11.1.2: Role of ATP as Currency of Energy
+      {
+        id: 6,
+        slo: "SLO 11.1.2: Role of ATP as Currency of Energy",
+        question: "An ATP molecule is composed of which three sub-units?",
+        options: [
+          "Glucose, fatty acid, and nitrogen",
+          "Adenine nitrogenous base, ribose sugar, and three phosphate groups",
+          "Cytosine, deoxyribose sugar, and two phosphate groups",
+          "Guanine, sucrose, and four phosphate groups"
+        ],
+        correct: 1,
+        explanation: "ATP (Adenosine Triphosphate) is a nucleotide containing adenine, ribose, and three phosphate groups.",
+        wrongExplanations: [
+          "Glucose and fatty acids are organic nutrients, not structural components of ATP.",
+          "Cytosine and deoxyribose are present in DNA molecules.",
+          "Guanine and sucrose form GTP and dissacharides respectively."
+        ]
+      },
+      {
+        id: 7,
+        slo: "SLO 11.1.2: Role of ATP as Currency of Energy",
+        question: "(Scenario 1) During a 100-meter sprint, an athlete's leg muscle cells rapidly break down ATP to power contractions. Which chemical bond in ATP is hydrolyzed to release this immediate energy?",
+        options: [
+          "The bond between adenine and ribose",
+          "The glycosidic bond inside ribose",
+          "The terminal high-energy phosphoanhydride bond",
+          "The hydrogen bond between nitrogen bases"
+        ],
+        correct: 2,
+        explanation: "Hydrolysis of the high-energy phosphoanhydride bond linking the terminal (gamma) phosphate group releases immediate free energy.",
+        wrongExplanations: [
+          "The adenine-ribose glycosidic bond is stable and not broken for quick energy release.",
+          "Internal ribose bonds provide structural framework, not usable metabolic energy.",
+          "Hydrogen bonds exist between complementary base pairs in DNA/RNA double strands."
+        ]
+      },
+      {
+        id: 8,
+        slo: "SLO 11.1.2: Role of ATP as Currency of Energy",
+        question: "Hydrolysis of one mole of ATP into ADP and inorganic phosphate (Pi) under standard conditions releases approximately:",
+        options: [
+          "7.3 kcal (30.5 kJ) of free energy",
+          "1.2 kcal (5.0 kJ) of free energy",
+          "15.0 kcal (62.8 kJ) of free energy",
+          "2.5 kcal (10.4 kJ) of free energy"
+        ],
+        correct: 0,
+        explanation: "Standard molar free energy released by ATP hydrolysis to ADP + Pi is 7.3 kcal/mol (30.5 kJ/mol).",
+        wrongExplanations: [
+          "1.2 kcal is far too low for high-energy phosphate hydrolysis.",
+          "15.0 kcal represents standard energy for two phosphate bonds cleaved completely to AMP.",
+          "2.5 kcal is an underestimation of phosphate bond energy."
+        ]
+      },
+      {
+        id: 9,
+        slo: "SLO 11.1.2: Role of ATP as Currency of Energy",
+        question: "ATP acts as an energy coupling agent in cellular metabolism by transferring energy from:",
+        options: [
+          "Anabolic reactions to photosynthetic light",
+          "Exergonic breakdown pathways to endergonic cellular work",
+          "Thermal heat loss to mechanical friction",
+          "Nuclear radiation to chemical storage"
+        ],
+        correct: 1,
+        explanation: "ATP couples energy-releasing exergonic catabolism to energy-requiring endergonic cellular work.",
+        wrongExplanations: [
+          "Anabolism consumes energy produced from light reactions; it does not transfer energy back to light.",
+          "Heat loss cannot be coupled to do useful work due to entropy.",
+          "Cells do not utilize nuclear radiation for ATP energy coupling."
+        ]
+      },
+      {
+        id: 10,
+        slo: "SLO 11.1.2: Role of ATP as Currency of Energy",
+        question: "The regeneration of ATP from ADP and inorganic phosphate during cellular respiration requires:",
+        options: [
+          "Water release without energy input",
+          "Energy input derived from the oxidation of food molecules",
+          "Permanent destruction of ribose sugar",
+          "Absorption of carbon dioxide gas"
+        ],
+        correct: 1,
+        explanation: "Phosphorylating ADP into ATP is an endergonic condensation requiring energy released from nutrient oxidation.",
+        wrongExplanations: [
+          "Phosphorylation requires free energy input; it cannot occur passively.",
+          "Ribose is conserved and reused through multiple ATP-ADP cycles.",
+          "CO2 is a waste product of respiration, not an energy source for ATP synthesis."
+        ]
+      },
+
+      // SLO 11.2.1: Definition of Photosynthesis
+      {
+        id: 11,
+        slo: "SLO 11.2.1: Definition of Photosynthesis",
+        question: "Photosynthesis is best defined as the biological process by which photoautotrophic organisms convert:",
+        options: [
+          "Chemical energy into heat energy",
+          "Light energy into chemical energy stored in organic bonds",
+          "Kinetic energy into electrical potential",
+          "Organic matter into inorganic mineral salts"
+        ],
+        correct: 1,
+        explanation: "Photosynthesis converts radiant solar energy into stable chemical energy stored in carbon-carbon bonds of sugars.",
+        wrongExplanations: [
+          "Converting chemical energy to heat is an inefficient loss seen in respiration or combustion.",
+          "Kinetic energy conversion deals with physics and physical movement.",
+          "Converting organic matter to inorganic salts is decomposition/mineralization."
+        ]
+      },
+      {
+        id: 12,
+        slo: "SLO 11.2.1: Definition of Photosynthesis",
+        question: "Chloroplasts are the primary organelles of photosynthesis found mainly in leaf:",
+        options: [
+          "Vascular xylem vessels",
+          "Mesophyll tissue cells",
+          "Root cap epidermal cells",
+          "Stem bark tissues"
+        ],
+        correct: 1,
+        explanation: "Mesophyll cells (palisade and spongy layers) are packed with chloroplasts optimized to capture light.",
+        wrongExplanations: [
+          "Xylem consists of dead hollow non-photosynthetic water conduit cells.",
+          "Root cells grow underground in the dark and lack chloroplasts.",
+          "Bark tissues consist mainly of protective cork cells and secondary phloem."
+        ]
+      },
+      {
+        id: 13,
+        slo: "SLO 11.2.1: Definition of Photosynthesis",
+        question: "In green plants, photosynthesis is classified as an endergonic oxidation-reduction process because:",
+        options: [
+          "Water is reduced and carbon dioxide is oxidized",
+          "Water is oxidized and carbon dioxide is reduced using light energy",
+          "Glucose is oxidized directly into oxygen gas",
+          "Nitrogen gas is fixed into proteins"
+        ],
+        correct: 1,
+        explanation: "Water is oxidized (loses electrons to release O2) while CO2 is reduced (gains electrons to form glucose) using light energy.",
+        wrongExplanations: [
+          "Water loses electrons (oxidized), whereas CO2 gains electrons (reduced).",
+          "Glucose oxidation occurs in cellular respiration, releasing energy.",
+          "Nitrogen fixation is performed by nitrogenase in prokaryotes, not photosynthesis."
+        ]
+      },
+      {
+        id: 14,
+        slo: "SLO 11.2.1: Definition of Photosynthesis",
+        question: "Which chloroplast compartment houses the light-harvesting thylakoid membrane system?",
+        options: [
+          "Stroma of the chloroplast",
+          "Inner membrane of the mitochondrion",
+          "Central vacuole",
+          "Cytoplasm"
+        ],
+        correct: 0,
+        explanation: "The fluid stroma matrix surrounds and houses the thylakoid stacks (grana) inside chloroplasts.",
+        wrongExplanations: [
+          "Mitochondrial inner membranes contain the electron transport chain of respiration.",
+          "Central vacuoles store water, ions, and secondary metabolites.",
+          "Cytoplasm surrounds organelles outside the chloroplast double membrane."
+        ]
+      },
+      {
+        id: 15,
+        slo: "SLO 11.2.1: Definition of Photosynthesis",
+        question: "Organisms that utilize solar light energy to synthesize their own organic food from simple inorganic raw materials are called:",
+        options: [
+          "Heterotrophs",
+          "Photoautotrophs",
+          "Chemoheterotrophs",
+          "Saprotrophs"
+        ],
+        correct: 1,
+        explanation: "Photoautotrophs (plants, algae, cyanobacteria) use light energy to fix inorganic carbon into organic nutrients.",
+        wrongExplanations: [
+          "Heterotrophs must ingest preformed organic molecules for energy.",
+          "Chemoheterotrophs derive energy and carbon from organic chemical compounds.",
+          "Saprotrophs feed on dead decaying organic matter by extracellular digestion."
+        ]
+      },
+
+      // SLO 11.2.2: Significance of Photosynthesis
+      {
+        id: 16,
+        slo: "SLO 11.2.2: Significance of Photosynthesis",
+        question: "Photosynthesis is considered the primary ultimate source of energy for life on Earth because it:",
+        options: [
+          "Converts solar energy into chemical bonds accessible to heterotrophs",
+          "Generates electricity directly within topsoil",
+          "Absorbs excess nitrogen from oceans",
+          "Prevents water evaporation from lakes"
+        ],
+        correct: 0,
+        explanation: "Photosynthesis fixes solar energy into biomass, fueling ecological food webs across the planet.",
+        wrongExplanations: [
+          "Photosynthesis does not generate topsoil electricity.",
+          "Nitrogen absorption in oceans is driven by microbial nitrogen cycles.",
+          "Water evaporation is governed by physical thermodynamic solar radiation."
+        ]
+      },
+      {
+        id: 17,
+        slo: "SLO 11.2.2: Significance of Photosynthesis",
+        question: "Which gas essential for aerobic respiration in animals is released into the atmosphere as a byproduct of photosynthesis?",
+        options: [
+          "Carbon dioxide (CO2)",
+          "Oxygen (O2)",
+          "Nitrogen (N2)",
+          "Methane (CH4)"
+        ],
+        correct: 1,
+        explanation: "Oxygen gas (O2) is produced by photolysis of water in Photosystem II and released into the atmosphere.",
+        wrongExplanations: [
+          "CO2 is consumed as a reactant during dark reactions, not released.",
+          "Atmospheric nitrogen (N2) is inert and unreactive in photosynthesis.",
+          "Methane is produced by methanogenic archaea under anaerobic conditions."
+        ]
+      },
+      {
+        id: 18,
+        slo: "SLO 11.2.2: Significance of Photosynthesis",
+        question: "(Scenario 2) A greenhouse farmer installs high-intensity grow lights and pumps carbon dioxide into the enclosed atmosphere. How does increased photosynthesis benefit human society?",
+        options: [
+          "It eliminates root fungi",
+          "It increases crop biomass production forming the base of human food supplies",
+          "It converts nitrogen gas into fertilizer",
+          "It lowers ambient room temperature"
+        ],
+        correct: 1,
+        explanation: "Accelerated photosynthetic rates directly increase crop yield and food biomass production.",
+        wrongExplanations: [
+          "Fungi elimination requires fungicides or microbial bio-control.",
+          "Nitrogen conversion to fertilizer requires industrial Haber-Bosch or nitrogen-fixing bacteria.",
+          "Grow lights generate heat, slightly increasing room temperature."
+        ]
+      },
+      {
+        id: 19,
+        slo: "SLO 11.2.2: Significance of Photosynthesis",
+        question: "Photosynthesis plays a vital global ecological role in regulating Earth's climate by:",
+        options: [
+          "Releasing ozone into the troposphere",
+          "Removing carbon dioxide (CO2), a key greenhouse gas, from the atmosphere",
+          "Depleting atmospheric water vapor",
+          "Increasing atmospheric sulfur dioxide"
+        ],
+        correct: 1,
+        explanation: "By sequestering atmospheric CO2 into organic carbon, photosynthesis mitigates the global greenhouse effect.",
+        wrongExplanations: [
+          "Tropospheric ozone is a pollutant formed by photochemical smog.",
+          "Transpiration actually releases water vapor into the atmosphere.",
+          "Sulfur dioxide originates from volcanic activity and fossil fuel combustion."
+        ]
+      },
+      {
+        id: 20,
+        slo: "SLO 11.2.2: Significance of Photosynthesis",
+        question: "Fossil fuels such as coal, petroleum, and natural gas are energy stores derived from:",
+        options: [
+          "Volcanic ash deposits",
+          "Ancient photosynthetic organisms buried over geological time",
+          "Deep-sea hydrothermal vents",
+          "Radioactive decay of minerals"
+        ],
+        correct: 1,
+        explanation: "Fossil fuels are fossilized remains of ancient plants and phytoplankton that stored solar energy via photosynthesis millions of years ago.",
+        wrongExplanations: [
+          "Volcanic ash consists of inorganic mineral fragments.",
+          "Hydrothermal vent ecosystems rely on chemosynthetic bacteria.",
+          "Radioactive decay produces geothermal heat, not organic fossil fuels."
+        ]
+      },
+
+      // SLO 11.2.3: Reactants and Products of Photosynthesis
+      {
+        id: 21,
+        slo: "SLO 11.2.3: Reactants and Products of Photosynthesis",
+        question: "The overall chemical equation for oxygenic photosynthesis requires which combination of inorganic reactants?",
+        options: [
+          "C6H12O6 and O2",
+          "CO2 and H2O",
+          "ATP and NADPH",
+          "NH3 and H2O"
+        ],
+        correct: 1,
+        explanation: "Oxygenic photosynthesis uses inorganic carbon dioxide (CO2) and water (H2O) to yield glucose and oxygen.",
+        wrongExplanations: [
+          "C6H12O6 and O2 are the products of photosynthesis and reactants of cellular respiration.",
+          "ATP and NADPH are intermediate energy carriers generated internally during light reactions.",
+          "Ammonia (NH3) is involved in nitrogen metabolism, not photosynthetic sugar synthesis."
+        ]
+      },
+      {
+        id: 22,
+        slo: "SLO 11.2.3: Reactants and Products of Photosynthesis",
+        question: "Which molecule serves as the direct source of oxygen gas (O2) released during photosynthesis?",
+        options: [
+          "Carbon dioxide (CO2)",
+          "Water (H2O)",
+          "Glucose (C6H12O6)",
+          "Ribulose bisphosphate (RuBP)"
+        ],
+        correct: 1,
+        explanation: "Isotopic oxygen-18 experiments proved that O2 evolved during photosynthesis comes entirely from splitting H2O.",
+        wrongExplanations: [
+          "CO2 oxygen atoms are incorporated into glucose and water products.",
+          "Glucose is the organic product, not the source of released oxygen gas.",
+          "RuBP is the 5-carbon CO2 acceptor molecule inside the Calvin cycle."
+        ]
+      },
+      {
+        id: 23,
+        slo: "SLO 11.2.3: Reactants and Products of Photosynthesis",
+        question: "In the photosynthesis reaction, 6 CO2 + 6 H2O -> C6H12O6 + 6 O2, carbon dioxide undergoes:",
+        options: [
+          "Oxidation to form oxygen",
+          "Reduction to form carbohydrates",
+          "Hydrolysis to form water",
+          "Photolysis to form nitrogen"
+        ],
+        correct: 1,
+        explanation: "CO2 gains hydrogen electrons (is reduced) during the light-independent Calvin cycle to yield carbohydrates.",
+        wrongExplanations: [
+          "H2O is oxidized to form oxygen; CO2 does not form oxygen gas.",
+          "CO2 is fixed and reduced, not hydrolyzed.",
+          "Photolysis splits water, not carbon dioxide, and does not yield nitrogen."
+        ]
+      },
+      {
+        id: 24,
+        slo: "SLO 11.2.3: Reactants and Products of Photosynthesis",
+        question: "What primary energetic molecules are synthesized during light-dependent reactions to power the light-independent reactions?",
+        options: [
+          "Glucose and Oxygen",
+          "ATP and NADPH",
+          "Carbon dioxide and Water",
+          "ADP and NADP+"
+        ],
+        correct: 1,
+        explanation: "Light reactions capture radiant energy into chemical forms: ATP (energy) and NADPH (reducing power).",
+        wrongExplanations: [
+          "Glucose and oxygen are end products of overall photosynthesis.",
+          "CO2 and H2O are starting raw reactants.",
+          "ADP and NADP+ are depleted uncharged precursors recycled back to light reactions."
+        ]
+      },
+      {
+        id: 25,
+        slo: "SLO 11.2.3: Reactants and Products of Photosynthesis",
+        question: "What six-carbon monosaccharide sugar is ultimately produced as a main product of photosynthetic carbon fixation?",
+        options: [
+          "Sucrose",
+          "Glucose",
+          "Maltose",
+          "Lactose"
+        ],
+        correct: 1,
+        explanation: "Triose phosphate molecules produced in the Calvin cycle combine to form the 6-carbon hexose sugar glucose.",
+        wrongExplanations: [
+          "Sucrose is a disaccharide used for transport in phloem.",
+          "Maltose is a disaccharide product of starch breakdown.",
+          "Lactose is milk sugar found in mammals."
+        ]
+      },
+
+      // SLO 11.2.4: Chromatography and Spectrophotometry
+      {
+        id: 26,
+        slo: "SLO 11.2.4: Chromatography and Spectrophotometry",
+        question: "Paper chromatography separates plant photosynthetic pigments based on their differential:",
+        options: [
+          "Molecular weight and charge",
+          "Solubility in solvent and adsorption to paper fibers",
+          "Evaporation temperature",
+          "Radioactive half-life"
+        ],
+        correct: 1,
+        explanation: "Separation occurs because pigments differ in solubility in the mobile solvent vs adhesion to cellulose paper fibers.",
+        wrongExplanations: [
+          "Molecular weight and charge drive gel electrophoresis separation.",
+          "Evaporation temperature governs distillation.",
+          "Radioactive half-life is an intrinsic nuclear decay property."
+        ]
+      },
+      {
+        id: 27,
+        slo: "SLO 11.2.4: Chromatography and Spectrophotometry",
+        question: "(Scenario 3) A student extracts green leaf pigments using acetone and performs paper chromatography. A bright yellow-orange band appears near the top solvent front. Which pigment is this?",
+        options: [
+          "Chlorophyll a",
+          "Chlorophyll b",
+          "Carotene",
+          "Xanthophyll"
+        ],
+        correct: 2,
+        explanation: "Carotenes are highly non-polar orange-yellow hydrocarbon pigments that dissolve best and travel fastest near the solvent front.",
+        wrongExplanations: [
+          "Chlorophyll a forms a blue-green band lower on the paper.",
+          "Chlorophyll b forms a yellow-green band near the origin.",
+          "Xanthophyll forms a pale yellow band behind carotene."
+        ]
+      },
+      {
+        id: 28,
+        slo: "SLO 11.2.4: Chromatography and Spectrophotometry",
+        question: "A spectrophotometer is a laboratory instrument used to measure the amount of light:",
+        options: [
+          "Emitted by heat",
+          "Absorbed or transmitted by a pigment solution at specific wavelengths",
+          "Reflected by glass prisms",
+          "Stored inside plant roots"
+        ],
+        correct: 1,
+        explanation: "Spectrophotometers measure light absorbance/transmittance through solutions across distinct wavelengths of light.",
+        wrongExplanations: [
+          "Heat emission is measured by pyrometers or thermal cameras.",
+          "Prism reflection is studied in optics and refractometry.",
+          "Light energy is stored chemically in molecules, not measured as physical radiation in roots."
+        ]
+      },
+      {
+        id: 29,
+        slo: "SLO 11.2.4: Chromatography and Spectrophotometry",
+        question: "(Scenario 4) When a purified extract of chlorophyll a is tested in a spectrophotometer, highest absorbance peaks appear at 430 nm (blue) and 660 nm (red). What does this indicate?",
+        options: [
+          "Chlorophyll a reflects blue and red light",
+          "Blue and red wavelengths are most effectively absorbed to drive photosynthesis",
+          "Green light is absorbed most strongly",
+          "Red light destroys chlorophyll molecules"
+        ],
+        correct: 1,
+        explanation: "Peaks in the absorption spectrum demonstrate that blue and red light are absorbed strongly and utilized to power light reactions.",
+        wrongExplanations: [
+          "Chlorophyll reflects green light, not red and blue.",
+          "Green light (~550 nm) shows near-zero absorption.",
+          "Red light excites chlorophyll electrons productively without destroying the molecule."
+        ]
+      },
+      {
+        id: 30,
+        slo: "SLO 11.2.4: Chromatography and Spectrophotometry",
+        question: "On a paper chromatogram, the Retention Factor (Rf) value of a pigment is calculated as:",
+        options: [
+          "Distance traveled by pigment divided by distance traveled by solvent front",
+          "Total weight of paper divided by solvent volume",
+          "Concentration of solvent divided by leaf weight",
+          "Volume of pigment divided by paper width"
+        ],
+        correct: 0,
+        explanation: "Rf = (Distance traveled by pigment) / (Distance traveled by solvent front).",
+        wrongExplanations: [
+          "Paper weight and solvent volume are irrelevant to Rf distance ratio.",
+          "Concentration and leaf weight do not dictate Rf calculations.",
+          "Rf is a dimensionless linear distance ratio, not a volume/width calculation."
+        ]
+      },
+
+      // SLO 11.2.5: Role of Pigments, Light, CO2, and Water
+      {
+        id: 31,
+        slo: "SLO 11.2.5: Role of Pigments, Light, CO2, and Water",
+        question: "Chlorophyll a appears blue-green because it absorbs red and blue-violet wavelengths while reflecting:",
+        options: [
+          "Yellow light",
+          "Green light",
+          "Ultraviolet light",
+          "Infrared light"
+        ],
+        correct: 1,
+        explanation: "Green wavelengths are reflected and transmitted by chlorophyll pigments, giving leaves their characteristic green color.",
+        wrongExplanations: [
+          "Yellow light is absorbed partially by chlorophyll b and reflected by xanthophylls.",
+          "Ultraviolet light has high energy shorter wavelengths outside visible range.",
+          "Infrared light has longer thermal wavelengths outside visible light spectrum."
+        ]
+      },
+      {
+        id: 32,
+        slo: "SLO 11.2.5: Role of Pigments, Light, CO2, and Water",
+        question: "Accessory pigments such as carotenoids benefit green plants by:",
+        options: [
+          "Absorbing additional light wavelengths and protecting chlorophyll from photo-damage",
+          "Splitting carbon dioxide molecules directly",
+          "Transporting water up xylem vessels",
+          "Generating ATP in total darkness"
+        ],
+        correct: 0,
+        explanation: "Carotenoids absorb wavelengths not absorbed by chlorophylls and dissipate excess energy to prevent photoprotective damage.",
+        wrongExplanations: [
+          "Photolysis splits H2O molecules, not carbon dioxide.",
+          "Xylem water transport depends on transpiration pull and cohesion-tension.",
+          "ATP production in darkness occurs via cellular respiration, not carotenoid absorption."
+        ]
+      },
+      {
+        id: 33,
+        slo: "SLO 11.2.5: Role of Pigments, Light, CO2, and Water",
+        question: "(Scenario 5) An aquatic plant (Hydrilla) is placed in water under bright light, producing gas bubbles. When sodium bicarbonate (NaHCO3) is added to the water, the rate of bubbling increases significantly. Why?",
+        options: [
+          "Bicarbonate releases additional dissolved CO2, accelerating photosynthesis",
+          "Bicarbonate cools water temperature",
+          "Bicarbonate closes stomata",
+          "Bicarbonate acts as a nutrient poison"
+        ],
+        correct: 0,
+        explanation: "Sodium bicarbonate dissociates in water releasing CO2, removing CO2 limitation and increasing photosynthetic O2 bubble output.",
+        wrongExplanations: [
+          "NaHCO3 does not cool water temperature.",
+          "Hydrilla is a submerged aquatic plant; increased CO2 promotes photosynthetic activity.",
+          "NaHCO3 serves as a carbon source, not a poison, at proper concentrations."
+        ]
+      },
+      {
+        id: 34,
+        slo: "SLO 11.2.5: Role of Pigments, Light, CO2, and Water",
+        question: "Photolysis (light-driven splitting) of water during light reactions supplies electrons directly to replace those lost by:",
+        options: [
+          "Photosystem II (P680)",
+          "Photosystem I (P700)",
+          "Rubisco enzyme",
+          "ATP Synthase"
+        ],
+        correct: 0,
+        explanation: "Water photolysis releases electrons to replace excited electrons lost by P680 reaction centers in Photosystem II.",
+        wrongExplanations: [
+          "P700 in PS I receives replacement electrons from Photosystem II via plastocyanin.",
+          "Rubisco is an enzyme in the stroma; it does not receive electrons from photolysis.",
+          "ATP Synthase utilizes proton gradients, not direct photolysis electrons."
+        ]
+      },
+      {
+        id: 35,
+        slo: "SLO 11.2.5: Role of Pigments, Light, CO2, and Water",
+        question: "Carbon dioxide gas required for photosynthesis enters leaf mesophyll cells through microscopic openings called:",
+        options: [
+          "Lenticels",
+          "Hydathodes",
+          "Stomata",
+          "Cuticles"
+        ],
+        correct: 2,
+        explanation: "Stomata are specialized epidermal pores flanked by guard cells that regulate leaf CO2 intake and transpirational water loss.",
+        wrongExplanations: [
+          "Lenticels are pores in woody stems for bark gas exchange.",
+          "Hydathodes release liquid water droplets via guttation at leaf margins.",
+          "Cuticle is a waxy hydrophobic outer coating that prevents water loss."
+        ]
+      },
+
+      // SLO 11.2.6: Light Dependent Reactions
+      {
+        id: 36,
+        slo: "SLO 11.2.6: Light Dependent Reactions",
+        question: "The light-dependent reactions of photosynthesis take place within which chloroplast structure?",
+        options: [
+          "Stroma matrix",
+          "Thylakoid membranes",
+          "Outer envelope",
+          "Intermembrane space"
+        ],
+        correct: 1,
+        explanation: "Photosystems, electron transport chains, and ATP synthase are embedded in thylakoid membranes.",
+        wrongExplanations: [
+          "Stroma matrix houses the light-independent Calvin cycle reactions.",
+          "Outer envelope regulates chloroplast transport.",
+          "Intermembrane space separates outer and inner chloroplast membranes."
+        ]
+      },
+      {
+        id: 37,
+        slo: "SLO 11.2.6: Light Dependent Reactions",
+        question: "The reaction-center chlorophyll molecule of Photosystem II is designated as P680 because it:",
+        options: [
+          "Contains 680 carbon atoms",
+          "Has its peak light absorption at a wavelength of 680 nm",
+          "Yields 680 ATP per minute",
+          "Operates at 680 K"
+        ],
+        correct: 1,
+        explanation: "P680 signifies that its reaction center chlorophyll a pair maximally absorbs light at 680 nanometers.",
+        wrongExplanations: [
+          "P680 refers to absorption wavelength, not chemical carbon count.",
+          "ATP output varies dynamically based on metabolic conditions.",
+          "680 K corresponds to ~407°C, which would denature biological proteins."
+        ]
+      },
+      {
+        id: 38,
+        slo: "SLO 11.2.6: Light Dependent Reactions",
+        question: "(Scenario 6) A chemical herbicide blocks electron transport from Photosystem II to plastoquinone. What immediate effect will this have on light-dependent reactions?",
+        options: [
+          "ATP synthesis and NADP+ reduction will halt due to interrupted electron flow",
+          "CO2 fixation will double",
+          "Oxygen output will increase",
+          "Glucose will be formed without light"
+        ],
+        correct: 0,
+        explanation: "Blocking electron flow stops the proton gradient build-up (stopping ATP synthesis) and prevents electron transfer to NADP+.",
+        wrongExplanations: [
+          "CO2 fixation requires ATP and NADPH; halting light reactions stops dark reactions.",
+          "Oxygen output halts because PS II reaction centers remain blocked.",
+          "Glucose synthesis requires NADPH and ATP from light reactions."
+        ]
+      },
+      {
+        id: 39,
+        slo: "SLO 11.2.6: Light Dependent Reactions",
+        question: "During non-cyclic photophosphorylation, the terminal electron acceptor at the end of the electron transport chain is:",
+        options: [
+          "Water",
+          "NADP+",
+          "Oxygen",
+          "Plastoquinone"
+        ],
+        correct: 1,
+        explanation: "NADP+ acts as the final electron acceptor, picking up electrons and H+ to form NADPH.",
+        wrongExplanations: [
+          "Water acts as the initial electron donor, not the acceptor.",
+          "Oxygen is the terminal electron acceptor in aerobic respiration, not photosynthesis.",
+          "Plastoquinone is an intermediate mobile electron carrier within the chain."
+        ]
+      },
+      {
+        id: 40,
+        slo: "SLO 11.2.6: Light Dependent Reactions",
+        question: "ATP synthesis during light reactions occurs as protons (H+) flow back into the stroma through ATP Synthase via:",
+        options: [
+          "Active sodium transport",
+          "Chemiosmosis",
+          "Simple lipid diffusion",
+          "Cyclic osmosis"
+        ],
+        correct: 1,
+        explanation: "Protons accumulated in the thylakoid lumen flow down their electrochemical gradient into the stroma through ATP Synthase (chemiosmosis).",
+        wrongExplanations: [
+          "Sodium ions are not involved in chloroplast ATP chemiosmosis.",
+          "Protons are charged and cannot pass through hydrophobic lipid bilayers via simple diffusion.",
+          "Cyclic osmosis is a non-existent term in cell bioenergetics."
+        ]
+      },
+
+      // SLO 11.2.7: Cyclic vs Non-Cyclic Photophosphorylation
+      {
+        id: 41,
+        slo: "SLO 11.2.7: Cyclic vs Non-Cyclic Photophosphorylation",
+        question: "Cyclic photophosphorylation involves which photosystem?",
+        options: [
+          "Photosystem I (P700) only",
+          "Photosystem II (P680) only",
+          "Both PS I and PS II",
+          "Neither photosystem"
+        ],
+        correct: 0,
+        explanation: "Cyclic pathway recycles electrons exclusively through Photosystem I (P700) back to cytochrome complex.",
+        wrongExplanations: [
+          "PS II participates in non-cyclic photophosphorylation.",
+          "Both photosystems operate together in non-cyclic flow.",
+          "Photosystems are essential light-absorbing complexes for photophosphorylation."
+        ]
+      },
+      {
+        id: 42,
+        slo: "SLO 11.2.7: Cyclic vs Non-Cyclic Photophosphorylation",
+        question: "Which molecule is generated during cyclic photophosphorylation?",
+        options: [
+          "NADPH and O2",
+          "ATP only",
+          "Glucose and O2",
+          "Water and NADP+"
+        ],
+        correct: 1,
+        explanation: "Cyclic electron flow pumps protons to synthesize ATP only, without generating NADPH or photolyzing water to release O2.",
+        wrongExplanations: [
+          "NADPH and O2 require non-cyclic photophosphorylation involving PS II.",
+          "Glucose synthesis occurs in the Calvin cycle using stored ATP/NADPH.",
+          "Water is consumed in non-cyclic photolysis, not produced."
+        ]
+      },
+      {
+        id: 43,
+        slo: "SLO 11.2.7: Cyclic vs Non-Cyclic Photophosphorylation",
+        question: "Unlike non-cyclic photophosphorylation, cyclic photophosphorylation does NOT result in:",
+        options: [
+          "Electron flow through carriers",
+          "Photolysis of water and release of O2",
+          "Absorption of light energy",
+          "ATP production"
+        ],
+        correct: 1,
+        explanation: "Because PS II is inactive in cyclic flow, water splitting (photolysis) does not occur and O2 is not produced.",
+        wrongExplanations: [
+          "Cyclic flow utilizes electron transport carriers like ferredoxin and cytochromes.",
+          "Light energy at 700 nm must be absorbed by PS I to drive cyclic flow.",
+          "ATP generation via chemiosmosis is the primary outcome of cyclic flow."
+        ]
+      },
+      {
+        id: 44,
+        slo: "SLO 11.2.7: Cyclic vs Non-Cyclic Photophosphorylation",
+        question: "Non-cyclic photophosphorylation is termed \"non-cyclic\" because electrons lost from Photosystem II:",
+        options: [
+          "Flow back to P680",
+          "Are transferred to NADP+ and replaced by electrons from water splitting",
+          "Are converted into solar rays",
+          "Escape into the stroma as free gas"
+        ],
+        correct: 1,
+        explanation: "Electrons flow in a non-cyclic one-way path from H2O to PS II to PS I to NADP+.",
+        wrongExplanations: [
+          "Returning electrons to P680 describes a cyclic process, which does not happen in PS II.",
+          "Electrons cannot convert back into solar electromagnetic radiation.",
+          "Electrons travel through protein complexes, not escaping as gas."
+        ]
+      },
+      {
+        id: 45,
+        slo: "SLO 11.2.7: Cyclic vs Non-Cyclic Photophosphorylation",
+        question: "Plant cells switch to cyclic photophosphorylation when there is a cellular demand for extra:",
+        options: [
+          "O2 gas for respiration",
+          "ATP relative to NADPH to satisfy the Calvin cycle",
+          "Water for vacuole storage",
+          "Glucose for root transport"
+        ],
+        correct: 1,
+        explanation: "Calvin cycle requires 9 ATP and 6 NADPH per 3 CO2; cyclic photophosphorylation compensates for this extra ATP requirement.",
+        wrongExplanations: [
+          "O2 gas is produced by PS II during non-cyclic flow, not cyclic flow.",
+          "Water storage is governed by osmoregulation and cell vacuoles.",
+          "Glucose transport depends on phloem sucrose loading."
+        ]
+      },
+
+      // SLO 11.2.8: Light Independent (Dark) Reactions / Calvin Cycle
+      {
+        id: 46,
+        slo: "SLO 11.2.8: Light Independent (Dark) Reactions / Calvin Cycle",
+        question: "The light-independent reactions (Calvin cycle) occur in which part of the chloroplast?",
+        options: [
+          "Thylakoid lumen",
+          "Stroma",
+          "Outer membrane",
+          "Grana stacks"
+        ],
+        correct: 1,
+        explanation: "The liquid stroma contains Rubisco and soluble Calvin cycle enzymes.",
+        wrongExplanations: [
+          "Thylakoid lumen accumulates H+ ions during photophosphorylation.",
+          "Outer membrane acts as a protective boundary barrier.",
+          "Grana stacks contain light-harvesting thylakoid membranes."
+        ]
+      },
+      {
+        id: 47,
+        slo: "SLO 11.2.8: Light Independent (Dark) Reactions / Calvin Cycle",
+        question: "(Scenario 7) Algae exposed to radioactive 14CO2 for 5 seconds under light produce a labeled 3-carbon compound as the first stable product of carbon fixation. What is this molecule?",
+        options: [
+          "Glyceraldehyde-3-phosphate (G3P)",
+          "3-Phosphoglycerate (3-PGA)",
+          "Ribulose bisphosphate (RuBP)",
+          "Oxaloacetate"
+        ],
+        correct: 1,
+        explanation: "Melvin Calvin discovered 3-phosphoglycerate (3-PGA) as the initial 3-carbon intermediate product.",
+        wrongExplanations: [
+          "G3P is produced in the subsequent reduction phase using ATP and NADPH.",
+          "RuBP is the 5-carbon CO2 acceptor starting substrate.",
+          "Oxaloacetate is a 4-carbon compound formed first in C4 pathway fixation."
+        ]
+      },
+      {
+        id: 48,
+        slo: "SLO 11.2.8: Light Independent (Dark) Reactions / Calvin Cycle",
+        question: "Which enzyme catalyzes the initial carbon fixation reaction combining CO2 with Ribulose-1,5-bisphosphate (RuBP)?",
+        options: [
+          "ATP Synthase",
+          "Rubisco",
+          "PEP carboxylase",
+          "Dehydrogenase"
+        ],
+        correct: 1,
+        explanation: "Rubisco (RuBP carboxylase-oxygenase) fixes atmospheric CO2 onto 5-carbon RuBP.",
+        wrongExplanations: [
+          "ATP Synthase synthesizes ATP from ADP + Pi.",
+          "PEP carboxylase fixes CO2 in C4/CAM plants to form oxaloacetate.",
+          "Dehydrogenase enzymes catalyze oxidation-reduction hydrogen transfers."
+        ]
+      },
+      {
+        id: 49,
+        slo: "SLO 11.2.8: Light Independent (Dark) Reactions / Calvin Cycle",
+        question: "What are the three primary phases of the Calvin cycle in correct order?",
+        options: [
+          "Glycolysis, Krebs cycle, Electron transport",
+          "Carbon fixation, Reduction, Regeneration of RuBP",
+          "Photolysis, Chemiosmosis, Phosphorylation",
+          "Decarboxylation, Oxidation, Dehydration"
+        ],
+        correct: 1,
+        explanation: "The Calvin cycle consists of: 1) Carbon Fixation, 2) Reduction phase, and 3) Regeneration of acceptor RuBP.",
+        wrongExplanations: [
+          "Glycolysis, Krebs, and ETC belong to aerobic cellular respiration.",
+          "Photolysis, chemiosmosis, and phosphorylation belong to light reactions.",
+          "Decarboxylation and oxidation occur during catabolic respiration."
+        ]
+      },
+      {
+        id: 50,
+        slo: "SLO 11.2.8: Light Independent (Dark) Reactions / Calvin Cycle",
+        question: "How many net molecules of Glyceraldehyde-3-phosphate (G3P) must exit the Calvin cycle to form one molecule of glucose?",
+        options: [
+          "1",
+          "2",
+          "6",
+          "3"
+        ],
+        correct: 1,
+        explanation: "Two 3-carbon G3P molecules exit the cycle and combine to form one 6-carbon glucose molecule.",
+        wrongExplanations: [
+          "1 G3P contains only 3 carbons, insufficient for a 6-carbon hexose.",
+          "6 G3P molecules are produced total in 3 turns, but 5 must be recycled.",
+          "3 G3P molecules equal 9 carbons, exceeding a hexose sugar."
+        ]
+      },
+
+      // SLO 11.2.9: Compare C3, C4, and CAM Plants
+      {
+        id: 51,
+        slo: "SLO 11.2.9: Compare C3, C4, and CAM Plants",
+        question: "Photorespiration occurs in C3 plants on hot, dry days when Rubisco binds with oxygen (O2) instead of CO2, resulting in:",
+        options: [
+          "A net loss of fixed carbon without producing ATP",
+          "Doubled sugar yield",
+          "Increased synthesis of NADPH",
+          "Accelerated water uptake"
+        ],
+        correct: 0,
+        explanation: "Photorespiration oxidizes RuBP, consuming ATP and releasing fixed carbon dioxide without yielding glucose or ATP.",
+        wrongExplanations: [
+          "Photorespiration reduces photosynthetic efficiency and sugar yield by up to 50%.",
+          "NADPH is consumed during photorespiratory salvage pathways, not produced.",
+          "Water uptake is reduced due to stomatal closure on hot dry days."
+        ]
+      },
+      {
+        id: 52,
+        slo: "SLO 11.2.9: Compare C3, C4, and CAM Plants",
+        question: "(Scenario 8) Pineapple and desert cacti keep stomata tightly closed during hot daytime hours and open them at night to fix CO2 into organic acids. What photosynthetic pathway is used by these succulents?",
+        options: [
+          "C3 pathway",
+          "C4 pathway",
+          "CAM (Crassulacean Acid Metabolism)",
+          "Lactic acid pathway"
+        ],
+        correct: 2,
+        explanation: "CAM plants open stomata at night to fix CO2 into organic acids (malate), storing it in vacuoles until daylight.",
+        wrongExplanations: [
+          "C3 plants open stomata during daylight, undergoing heavy transpiration in hot climates.",
+          "C4 plants separate carbon fixation spatially between mesophyll and bundle-sheath cells.",
+          "Lactic acid pathway is an anaerobic animal/bacterial fermentation process."
+        ]
+      },
+      {
+        id: 53,
+        slo: "SLO 11.2.9: Compare C3, C4, and CAM Plants",
+        question: "(Scenario 9) Maize (corn) and sugarcane avoid photorespiration in hot environments by fixing CO2 in mesophyll cells into a 4-carbon compound using which efficient enzyme?",
+        options: [
+          "Rubisco",
+          "PEP carboxylase",
+          "Amylase",
+          "Lipase"
+        ],
+        correct: 1,
+        explanation: "PEP carboxylase has a high affinity for CO2 and no affinity for O2, preventing photorespiration in C4 mesophyll.",
+        wrongExplanations: [
+          "Rubisco binds O2 readily when CO2 levels drop, triggering photorespiration.",
+          "Amylase hydrolyzes starch into maltose.",
+          "Lipase breaks down lipids into fatty acids and glycerol."
+        ]
+      },
+      {
+        id: 54,
+        slo: "SLO 11.2.9: Compare C3, C4, and CAM Plants",
+        question: "C4 plants possess a specialized internal leaf structure where prominent bundle-sheath cells encircle vascular bundles, known as:",
+        options: [
+          "Kranz anatomy",
+          "Spongy mesophyll",
+          "Epidermal cuticle",
+          "Stomatal complex"
+        ],
+        correct: 0,
+        explanation: "Kranz anatomy features a ring of bundle-sheath cells around vascular bundles, separating C4 initial fixation from Calvin cycle.",
+        wrongExplanations: [
+          "Spongy mesophyll consists of loosely arranged photosynthetic cells in typical C3 leaves.",
+          "Epidermal cuticle is a waxy surface layer.",
+          "Stomatal complex includes guard cells and stomatal pore."
+        ]
+      },
+      {
+        id: 55,
+        slo: "SLO 11.2.9: Compare C3, C4, and CAM Plants",
+        question: "In CAM plants, malic acid synthesized at night is stored until daytime inside which organelle?",
+        options: [
+          "Chloroplast stroma",
+          "Central vacuole",
+          "Mitochondrion",
+          "Peroxisome"
+        ],
+        correct: 1,
+        explanation: "Malic acid produced at night is sequestered inside large central vacuoles to prevent cytoplasmic acidification.",
+        wrongExplanations: [
+          "Chloroplast stroma receives decarboxylated CO2 during the day.",
+          "Mitochondria carry out TCA cycle respiration.",
+          "Peroxisomes process photorespiratory glycolate intermediates."
+        ]
+      },
+
+      // SLO 11.3.1: Cellular Respiration, Oxidative Phosphorylation & Fermentation
+      {
+        id: 56,
+        slo: "SLO 11.3.1: Cellular Respiration, Oxidative Phosphorylation & Fermentation",
+        question: "Cellular respiration is defined as the metabolic process by which cells break down organic food molecules to generate:",
+        options: [
+          "Solar radiation",
+          "ATP energy",
+          "Chlorophyll pigments",
+          "Starch grains"
+        ],
+        correct: 1,
+        explanation: "Cellular respiration harvests chemical energy from organic nutrients to synthesize ATP.",
+        wrongExplanations: [
+          "Solar radiation comes from the sun, captured during photosynthesis.",
+          "Chlorophyll pigments are synthesized by autotrophs for photosynthesis.",
+          "Starch grains are storage carbohydrates produced by plants."
+        ]
+      },
+      {
+        id: 57,
+        slo: "SLO 11.3.1: Cellular Respiration, Oxidative Phosphorylation & Fermentation",
+        question: "Aerobic respiration requires oxygen gas to completely oxidize glucose into:",
+        options: [
+          "Ethanol and lactic acid",
+          "Carbon dioxide (CO2), water (H2O), and ATP",
+          "Methane and hydrogen gas",
+          "Pyruvate and sucrose"
+        ],
+        correct: 1,
+        explanation: "Aerobic respiration fully oxidizes glucose to CO2 and H2O, generating net 30-32 ATP.",
+        wrongExplanations: [
+          "Ethanol and lactic acid are products of anaerobic fermentation.",
+          "Methane and hydrogen are produced by specialized anaerobic methanogens/bacteria.",
+          "Pyruvate is an intermediate; sucrose is a plant transport disaccharide."
+        ]
+      },
+      {
+        id: 58,
+        slo: "SLO 11.3.1: Cellular Respiration, Oxidative Phosphorylation & Fermentation",
+        question: "Oxidative phosphorylation synthesizes ATP using energy derived from electron transport combined with proton pumping called:",
+        options: [
+          "Photolysis",
+          "Chemiosmosis",
+          "Substrate-level transfer only",
+          "Fermentation"
+        ],
+        correct: 1,
+        explanation: "Oxidative phosphorylation uses electron transport energy to pump H+ ions, driving ATP synthesis via chemiosmosis.",
+        wrongExplanations: [
+          "Photolysis is light-driven water splitting in photosynthesis.",
+          "Substrate-level phosphorylation transfers phosphate directly from organic substrates without electron transport.",
+          "Fermentation occurs anaerobically without electron transport chains."
+        ]
+      },
+      {
+        id: 59,
+        slo: "SLO 11.3.1: Cellular Respiration, Oxidative Phosphorylation & Fermentation",
+        question: "Anaerobic respiration or fermentation occurs without oxygen, resulting in:",
+        options: [
+          "Complete breakdown of glucose to CO2 and H2O",
+          "Partial oxidation of glucose with a low net yield of 2 ATP",
+          "Synthesis of 36 ATP per glucose",
+          "Production of ozone"
+        ],
+        correct: 1,
+        explanation: "Fermentation incomplete breaks down glucose without oxygen, yielding only 2 net ATP per glucose via glycolysis.",
+        wrongExplanations: [
+          "Complete breakdown requires oxygen in aerobic respiration.",
+          "36 ATP is achieved only through full aerobic respiration.",
+          "Ozone (O3) is atmospheric gas, not a respiration byproduct."
+        ]
+      },
+      {
+        id: 60,
+        slo: "SLO 11.3.1: Cellular Respiration, Oxidative Phosphorylation & Fermentation",
+        question: "(Scenario 10) A baker mixes active yeast, warm water, and sugar to make bread dough. After an hour, the dough rises significantly due to trapped bubbles of gas. Which gas produced during yeast fermentation causes the dough to rise?",
+        options: [
+          "Oxygen (O2)",
+          "Carbon dioxide (CO2)",
+          "Nitrogen (N2)",
+          "Hydrogen (H2)"
+        ],
+        correct: 1,
+        explanation: "Yeast decarboxylates pyruvate to acetaldehyde, releasing CO2 gas bubbles that expand the dough.",
+        wrongExplanations: [
+          "Oxygen is consumed in respiration and absent in anaerobic fermentation.",
+          "Nitrogen gas is not produced during sugar fermentation.",
+          "Hydrogen gas is produced by specific bacterial fermentations, not yeast."
+        ]
+      },
+
+      // SLO 11.3.2: Alcoholic vs Lactic Acid Fermentation
+      {
+        id: 61,
+        slo: "SLO 11.3.2: Alcoholic vs Lactic Acid Fermentation",
+        question: "What are the principal end products of alcoholic fermentation carried out by yeast?",
+        options: [
+          "Lactic acid and O2",
+          "Ethanol, CO2, and net 2 ATP",
+          "Pyruvate and Water",
+          "Acetyl-CoA and NADH"
+        ],
+        correct: 1,
+        explanation: "Alcoholic fermentation converts glucose to 2 ethanol + 2 CO2 + 2 net ATP.",
+        wrongExplanations: [
+          "Lactic acid is produced in lactic acid fermentation; O2 is absent.",
+          "Pyruvate is converted during fermentation, not an end product.",
+          "Acetyl-CoA and NADH form during aerobic link reaction."
+        ]
+      },
+      {
+        id: 62,
+        slo: "SLO 11.3.2: Alcoholic vs Lactic Acid Fermentation",
+        question: "(Scenario 11) A sprinter completes a high-intensity fast run. Shortly after, her leg muscles experience fatigue and cramping. Which substance accumulates in muscle tissue under oxygen deficiency?",
+        options: [
+          "Ethanol",
+          "Lactic acid",
+          "Citric acid",
+          "Uric acid"
+        ],
+        correct: 1,
+        explanation: "Oxygen debt forces muscle cells into lactic acid fermentation, accumulating lactate and H+ ions.",
+        wrongExplanations: [
+          "Human muscles produce lactic acid, not ethanol.",
+          "Citric acid is an intermediate of the aerobic Krebs cycle.",
+          "Uric acid is a purine nitrogenous waste product excreted by kidneys."
+        ]
+      },
+      {
+        id: 63,
+        slo: "SLO 11.3.2: Alcoholic vs Lactic Acid Fermentation",
+        question: "A fundamental difference between alcoholic fermentation and lactic acid fermentation is that lactic acid fermentation:",
+        options: [
+          "Releases CO2 gas",
+          "Does NOT release CO2 gas",
+          "Yields 36 ATP molecules",
+          "Takes place inside the mitochondrial matrix"
+        ],
+        correct: 1,
+        explanation: "Lactic acid fermentation directly reduces 3-carbon pyruvate to 3-carbon lactate without releasing CO2.",
+        wrongExplanations: [
+          "Alcoholic fermentation releases CO2, whereas lactic acid fermentation does not.",
+          "Both fermentations yield only 2 net ATP per glucose.",
+          "Fermentation occurs in the cytoplasm, not the mitochondrial matrix."
+        ]
+      },
+      {
+        id: 64,
+        slo: "SLO 11.3.2: Alcoholic vs Lactic Acid Fermentation",
+        question: "In both alcoholic and lactic acid fermentation, NADH transfers its electrons to organic acceptors to regenerate:",
+        options: [
+          "NAD+ to keep glycolysis operating",
+          "Oxygen gas",
+          "Glucose molecules",
+          "ATP synthase enzymes"
+        ],
+        correct: 0,
+        explanation: "Regenerating NAD+ from NADH is crucial to supply electron acceptors for ongoing glycolysis.",
+        wrongExplanations: [
+          "Fermentation occurs in the absence of oxygen gas.",
+          "Glucose is consumed at the start of glycolysis, not regenerated.",
+          "ATP synthase is an enzyme protein, not generated by electron recycling."
+        ]
+      },
+      {
+        id: 65,
+        slo: "SLO 11.3.2: Alcoholic vs Lactic Acid Fermentation",
+        question: "(Scenario 12) A sealed container of fresh fruit juice is left at room temperature for several days. Upon opening, fizzy gas escapes and an alcoholic odor is present. Which organism and pathway caused this?",
+        options: [
+          "Lactic acid bacteria",
+          "Yeast performing alcoholic fermentation",
+          "Algal photosynthesis",
+          "Mold performing aerobic respiration"
+        ],
+        correct: 1,
+        explanation: "Yeasts ferment fruit sugars anaerobically producing ethanol (odor) and CO2 gas (fizz).",
+        wrongExplanations: [
+          "Lactic acid bacteria produce sour lactic acid without generating fizzy alcohol.",
+          "Photosynthesis requires light and releases oxygen, not alcohol.",
+          "Aerobic mold growth requires oxygen and produces water without alcohol."
+        ]
+      },
+
+      // SLO 11.3.3: Role of Mitochondria in Respiration
+      {
+        id: 66,
+        slo: "SLO 11.3.3: Role of Mitochondria in Respiration",
+        question: "Mitochondria are termed the \"powerhouses of the cell\" because they house enzymes for:",
+        options: [
+          "Glycolysis and light reactions",
+          "Pyruvate oxidation, Krebs cycle, and oxidative phosphorylation",
+          "Starch synthesis and storage",
+          "Protein secretion"
+        ],
+        correct: 1,
+        explanation: "Mitochondria contain enzymes for link reaction, Krebs cycle, and respiratory ETC to produce bulk ATP.",
+        wrongExplanations: [
+          "Glycolysis occurs in cytoplasm; light reactions occur in chloroplasts.",
+          "Starch synthesis occurs in amyloplasts/chloroplasts.",
+          "Protein secretion is managed by ER and Golgi apparatus."
+        ]
+      },
+      {
+        id: 67,
+        slo: "SLO 11.3.3: Role of Mitochondria in Respiration",
+        question: "The inner membrane of a mitochondrion features deep inward folds termed:",
+        options: [
+          "Thylakoids",
+          "Cristae",
+          "Stroma",
+          "Grana"
+        ],
+        correct: 1,
+        explanation: "Inner membrane folds called cristae increase surface area for respiratory electron transport chains.",
+        wrongExplanations: [
+          "Thylakoids are membrane sacs inside chloroplasts.",
+          "Stroma is the fluid matrix inside chloroplasts.",
+          "Grana are stacks of thylakoids in chloroplasts."
+        ]
+      },
+      {
+        id: 68,
+        slo: "SLO 11.3.3: Role of Mitochondria in Respiration",
+        question: "The fluid-filled compartment enclosed by the inner mitochondrial membrane is called the:",
+        options: [
+          "Intermembrane space",
+          "Matrix",
+          "Cytosol",
+          "Nucleoplasm"
+        ],
+        correct: 1,
+        explanation: "The mitochondrial matrix contains soluble enzymes for pyruvate oxidation and the Krebs cycle.",
+        wrongExplanations: [
+          "Intermembrane space lies between outer and inner mitochondrial membranes.",
+          "Cytosol is the fluid surrounding organelles in the cytoplasm.",
+          "Nucleoplasm is the fluid matrix inside the cell nucleus."
+        ]
+      },
+      {
+        id: 69,
+        slo: "SLO 11.3.3: Role of Mitochondria in Respiration",
+        question: "(Scenario 13) Potassium Cyanide is a toxic compound that binds tightly to cytochrome c oxidase in the inner mitochondrial membrane, blocking electron transfer to oxygen. What is the immediate physiological effect on the cell?",
+        options: [
+          "ATP production halts rapidly, causing cell death",
+          "Glycolysis yields 38 ATP",
+          "Photosynthesis begins in mitochondria",
+          "Oxygen production increases"
+        ],
+        correct: 0,
+        explanation: "Inhibiting Complex IV blocks the electron transport chain, stopping proton pumping and chemiosmotic ATP synthesis.",
+        wrongExplanations: [
+          "Glycolysis yields only 2 net ATP and cannot compensate for oxidative phosphorylation collapse.",
+          "Mitochondria cannot perform photosynthesis.",
+          "Oxygen consumption ceases; oxygen is not produced in mitochondria."
+        ]
+      },
+      {
+        id: 70,
+        slo: "SLO 11.3.3: Role of Mitochondria in Respiration",
+        question: "Electron transport chain protein complexes and ATP Synthase are located specifically within the mitochondrial:",
+        options: [
+          "Outer membrane",
+          "Inner membrane (cristae)",
+          "Matrix fluid",
+          "Nuclear membrane"
+        ],
+        correct: 1,
+        explanation: "Cristae membranes contain electron transport complexes I-IV and ATP synthase.",
+        wrongExplanations: [
+          "Outer membrane contains porins for small molecule transport.",
+          "Matrix fluid houses soluble enzymes for link reaction and Krebs cycle.",
+          "Nuclear membrane encloses genetic material inside the nucleus."
+        ]
+      },
+
+      // SLO 11.3.4: Steps in Mechanism of Cellular Respiration
+      {
+        id: 71,
+        slo: "SLO 11.3.4: Steps in Mechanism of Cellular Respiration",
+        question: "(Scenario 14) Mature human red blood cells lack mitochondria. Through which metabolic pathway do they extract ATP energy from glucose?",
+        options: [
+          "Krebs cycle",
+          "Glycolysis in the cytoplasm",
+          "Respiratory chain on cristae",
+          "Pyruvate oxidation in matrix"
+        ],
+        correct: 1,
+        explanation: "Lacking mitochondria, red blood cells depend entirely on anaerobic cytosolic glycolysis for ATP.",
+        wrongExplanations: [
+          "Krebs cycle requires mitochondrial matrix enzymes.",
+          "Respiratory chains require mitochondrial cristae membranes.",
+          "Pyruvate oxidation takes place inside the mitochondrial matrix."
+        ]
+      },
+      {
+        id: 72,
+        slo: "SLO 11.3.4: Steps in Mechanism of Cellular Respiration",
+        question: "Glycolysis breaks down one 6-carbon glucose molecule in the cytoplasm into two 3-carbon molecules of:",
+        options: [
+          "Acetyl-CoA",
+          "Pyruvate (pyruvic acid)",
+          "Citric acid",
+          "Oxaloacetate"
+        ],
+        correct: 1,
+        explanation: "Glycolysis splits 1 glucose (6C) into 2 pyruvate (3C) molecules.",
+        wrongExplanations: [
+          "Acetyl-CoA (2C) is formed during pyruvate oxidation in mitochondria.",
+          "Citric acid (6C) is formed in the first step of the Krebs cycle.",
+          "Oxaloacetate (4C) is the starting/ending intermediate of the Krebs cycle."
+        ]
+      },
+      {
+        id: 73,
+        slo: "SLO 11.3.4: Steps in Mechanism of Cellular Respiration",
+        question: "During pyruvic acid oxidation inside the mitochondrial matrix, pyruvate is converted into Acetyl-CoA with the release of CO2 and reduction of:",
+        options: [
+          "NAD+ to NADH",
+          "ADP to ATP",
+          "FAD to FADH2",
+          "Water to Oxygen"
+        ],
+        correct: 0,
+        explanation: "Pyruvate dehydrogenase reduces NAD+ to NADH while producing Acetyl-CoA and CO2.",
+        wrongExplanations: [
+          "ADP is not directly phosphorylated during pyruvate oxidation.",
+          "FAD is reduced to FADH2 during the Krebs cycle by succinate dehydrogenase.",
+          "Water oxidation to oxygen occurs in photosystem II, not pyruvate oxidation."
+        ]
+      },
+      {
+        id: 74,
+        slo: "SLO 11.3.4: Steps in Mechanism of Cellular Respiration",
+        question: "(Scenario 15) In active liver cells, Acetyl-CoA enters the Krebs cycle by combining with 4-carbon oxaloacetate to form a 6-carbon molecule called:",
+        options: [
+          "Isocitrate",
+          "Citrate (citric acid)",
+          "Alpha-ketoglutarate",
+          "Succinate"
+        ],
+        correct: 1,
+        explanation: "Citrate synthase condenses Acetyl-CoA (2C) and Oxaloacetate (4C) to yield Citrate (6C).",
+        wrongExplanations: [
+          "Isocitrate is formed by isomerization of citrate.",
+          "Alpha-ketoglutarate is a 5-carbon intermediate of the Krebs cycle.",
+          "Succinate is a 4-carbon intermediate of the Krebs cycle."
+        ]
+      },
+      {
+        id: 75,
+        slo: "SLO 11.3.4: Steps in Mechanism of Cellular Respiration",
+        question: "(Scenario 16) In newborn mammals, brown fat tissue contains uncoupling proteins that allow protons (H+) to leak across the inner mitochondrial membrane without passing through ATP Synthase. What is the biological purpose of this adaptation?",
+        options: [
+          "Generating thermal heat to maintain body temperature instead of making ATP",
+          "Doubling ATP yield during muscle exercise",
+          "Storing oxygen gas inside fat",
+          "Blocking fat breakdown"
+        ],
+        correct: 0,
+        explanation: "Uncoupling proteins dissipate the proton gradient as thermal heat (non-shivering thermogenesis) to keep newborns warm.",
+        wrongExplanations: [
+          "Leaking protons bypass ATP Synthase, reducing ATP yield.",
+          "Oxygen gas cannot be stored by uncoupling proteins.",
+          "Brown fat breakdown is increased to fuel uncoupled respiration."
+        ]
+      }
+    ];
+
+    function App() {
+      // Quiz State
+      const [quizStarted, setQuizStarted] = useState(false);
+      const [quizMode, setQuizMode] = useState('practice'); // 'practice' or 'blind'
+      const [currentIdx, setCurrentIdx] = useState(0);
+      const [userAnswers, setUserAnswers] = useState({}); // { [qIdx]: selectedOptionIdx }
+      const [flaggedQuestions, setFlaggedQuestions] = useState({}); // { [qIdx]: true/false }
+      const [timeLeft, setTimeLeft] = useState(75 * 60); // 75 minutes timer = 4500 seconds
+      const [isSubmitted, setIsSubmitted] = useState(false);
+      const [showNavGrid, setShowNavGrid] = useState(false);
+
+      // Review Filter and Search States
+      const [reviewFilter, setReviewFilter] = useState('all'); // 'all', 'correct', 'wrong', 'skipped', 'flagged'
+      const [reviewSearch, setReviewSearch] = useState('');
+
+      // 75 Minute Timer Effect
+      useEffect(() => {
+        let timer = null;
+        if (quizStarted && !isSubmitted && timeLeft > 0) {
+          timer = setInterval(() => {
+            setTimeLeft(prev => {
+              if (prev <= 1) {
+                clearInterval(timer);
+                setIsSubmitted(true);
+                return 0;
+              }
+              return prev - 1;
+            });
+          }, 1000);
+        }
+        return () => clearInterval(timer);
+      }, [quizStarted, isSubmitted, timeLeft]);
+
+      // Keyboard Shortcuts Listener
+      useEffect(() => {
+        const handleKeyDown = (e) => {
+          if (!quizStarted || isSubmitted) return;
+          if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+
+          const key = e.key.toUpperCase();
+          if (['1', '2', '3', '4'].includes(key)) {
+            handleSelectOption(parseInt(key, 10) - 1);
+          } else if (['A', 'B', 'C', 'D'].includes(key)) {
+            const charCode = key.charCodeAt(0) - 65;
+            handleSelectOption(charCode);
+          } else if (e.key === 'ArrowRight') {
+            if (currentIdx < QUESTIONS.length - 1) setCurrentIdx(prev => prev + 1);
+          } else if (e.key === 'ArrowLeft') {
+            if (currentIdx > 0) setCurrentIdx(prev => prev - 1);
+          } else if (key === 'F') {
+            toggleFlagQuestion(currentIdx);
+          }
+        };
+
+        window.addEventListener('keydown', handleKeyDown);
+        return () => window.removeEventListener('keydown', handleKeyDown);
+      }, [quizStarted, isSubmitted, currentIdx, userAnswers]);
+
+      // Time formatting helper
+      const formatTime = (secs) => {
+        const mins = Math.floor(secs / 60);
+        const s = secs % 60;
+        return `${mins.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+      };
+
+      // Handle locking of answer once selected
+      const handleSelectOption = (optionIdx) => {
+        if (userAnswers.hasOwnProperty(currentIdx) || isSubmitted) return;
+        setUserAnswers(prev => ({
+          ...prev,
+          [currentIdx]: optionIdx
+        }));
+      };
+
+      // Toggle Bookmark/Flag
+      const toggleFlagQuestion = (qIndex) => {
+        setFlaggedQuestions(prev => ({
+          ...prev,
+          [qIndex]: !prev[qIndex]
+        }));
+      };
+
+      // Scoring Calculations (+1.0 for correct, -0.25 for incorrect)
+      const scoreData = useMemo(() => {
+        let correctCount = 0;
+        let wrongCount = 0;
+        let unattemptedCount = 0;
+
+        QUESTIONS.forEach((q, idx) => {
+          if (!userAnswers.hasOwnProperty(idx)) {
+            unattemptedCount++;
+          } else if (userAnswers[idx] === q.correct) {
+            correctCount++;
+          } else {
+            wrongCount++;
+          }
+        });
+
+        const grossMarks = correctCount * 1.0;
+        const penalty = wrongCount * 0.25;
+        const netMarks = Math.max(0, grossMarks - penalty);
+        const maxMarks = QUESTIONS.length * 1.0;
+        const percentage = Number(((netMarks / maxMarks) * 100).toFixed(1));
+
+        return { correctCount, wrongCount, unattemptedCount, grossMarks, penalty, netMarks, maxMarks, percentage };
+      }, [userAnswers]);
+
+      // Weak Area Analysis per SLO
+      const sloAnalysis = useMemo(() => {
+        const stats = {};
+        QUESTIONS.forEach((q, idx) => {
+          const sloKey = q.slo;
+          if (!stats[sloKey]) {
+            stats[sloKey] = { total: 0, correct: 0, wrong: 0, unattempted: 0 };
+          }
+          stats[sloKey].total++;
+          if (!userAnswers.hasOwnProperty(idx)) {
+            stats[sloKey].unattempted++;
+          } else if (userAnswers[idx] === q.correct) {
+            stats[sloKey].correct++;
+          } else {
+            stats[sloKey].wrong++;
+          }
+        });
+        return stats;
+      }, [userAnswers]);
+
+      // Review questions filter logic
+      const filteredReviewQuestions = useMemo(() => {
+        return QUESTIONS.map((q, idx) => ({ ...q, qIdx: idx })).filter(q => {
+          const isUserAns = userAnswers.hasOwnProperty(q.qIdx);
+          const isCorrect = isUserAns && userAnswers[q.qIdx] === q.correct;
+          const isWrong = isUserAns && userAnswers[q.qIdx] !== q.correct;
+          const isSkipped = !isUserAns;
+          const isFlagged = !!flaggedQuestions[q.qIdx];
+
+          let matchesFilter = true;
+          if (reviewFilter === 'correct') matchesFilter = isCorrect;
+          if (reviewFilter === 'wrong') matchesFilter = isWrong;
+          if (reviewFilter === 'skipped') matchesFilter = isSkipped;
+          if (reviewFilter === 'flagged') matchesFilter = isFlagged;
+
+          let matchesSearch = true;
+          if (reviewSearch.trim() !== '') {
+            const term = reviewSearch.toLowerCase();
+            matchesSearch = q.question.toLowerCase().includes(term) ||
+                            q.slo.toLowerCase().includes(term) ||
+                            q.explanation.toLowerCase().includes(term);
+          }
+
+          return matchesFilter && matchesSearch;
+        });
+      }, [userAnswers, flaggedQuestions, reviewFilter, reviewSearch]);
+
+      const getMotivationalQuote = (pct) => {
+        if (pct >= 85) return { quote: "Outstanding Bioenergetic Mastery! Your deep understanding of photosynthesis, respiration, and cellular energetics is remarkable.", author: "Qashqarian Academy Academic Board" };
+        if (pct >= 70) return { quote: "Great Job! You have a solid command of Chapter 11 concepts. Review your weak SLOs to achieve absolute precision.", author: "Qashqarian Biology Faculty" };
+        if (pct >= 50) return { quote: "Good Effort! Go through the explanations for your incorrect answers carefully to master bioenergetic pathways.", author: "Department of Bioenergetics" };
+        return { quote: "Energy transformations require continuous effort! Re-read Chapter 11 notes and retake the test to boost your concepts.", author: "Qashqarian Mentorship Cell" };
+      };
+
+      const currentQ = QUESTIONS[currentIdx];
+      const isAnswered = userAnswers.hasOwnProperty(currentIdx);
+      const selectedOption = userAnswers[currentIdx];
+      const isCurrentFlagged = !!flaggedQuestions[currentIdx];
+
+      if (!quizStarted) {
+        return (
+          <div className="min-h-screen flex items-center justify-center p-4 sm:p-6">
+            <div className="max-w-2xl w-full bg-white rounded-2xl shadow-xl border border-sky-100 overflow-hidden animate-fadeIn">
+              
+              {/* Top Header Banner */}
+              <div className="bg-gradient-to-r from-sky-800 via-sky-700 to-science-900 p-6 sm:p-8 text-white relative">
+                <div className="flex justify-between items-center mb-3">
+                  <span className="bg-sky-500/30 text-sky-100 text-xs font-bold px-3 py-1 rounded-full backdrop-blur-sm border border-sky-300/20 flex items-center gap-1.5">
+                    🏔️ Qashqarian Academy
+                  </span>
+                  <span className="text-xs font-bold bg-white/10 px-3 py-1 rounded-md border border-white/20">
+                    Class: XI
+                  </span>
+                </div>
+                <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
+                  Chapter 11: Bioenergetics
+                </h1>
+                <p className="text-sky-100 text-sm mt-1">
+                  SLO-Based Biology Mock Assessment (75 MCQs)
+                </p>
+              </div>
+
+              {/* Start Setup Content */}
+              <div className="p-6 sm:p-8 space-y-6">
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                  <div className="bg-sky-50 rounded-xl p-3.5 border border-sky-100 flex items-center gap-3">
+                    <div className="p-2 bg-sky-600 text-white rounded-lg shrink-0">
+                      <Icon name="clock" className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <p className="text-[11px] text-slate-500 font-medium">Timer</p>
+                      <p className="text-xs sm:text-sm font-bold text-slate-800">75 Minutes</p>
+                    </div>
+                  </div>
+                  <div className="bg-sky-50 rounded-xl p-3.5 border border-sky-100 flex items-center gap-3">
+                    <div className="p-2 bg-sky-600 text-white rounded-lg shrink-0">
+                      <Icon name="award" className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <p className="text-[11px] text-slate-500 font-medium">Marking Scheme</p>
+                      <p className="text-xs sm:text-sm font-bold text-slate-800">+1.0 / -0.25</p>
+                    </div>
+                  </div>
+                  <div className="col-span-2 sm:col-span-1 bg-sky-50 rounded-xl p-3.5 border border-sky-100 flex items-center gap-3">
+                    <div className="p-2 bg-sky-600 text-white rounded-lg shrink-0">
+                      <Icon name="key" className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <p className="text-[11px] text-slate-500 font-medium">Shortcuts</p>
+                      <p className="text-xs sm:text-sm font-bold text-slate-800">Keys A-D, ← →</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Select Assessment Mode */}
+                <div>
+                  <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2.5">
+                    Select Mode
+                  </label>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <button
+                      type="button"
+                      onClick={() => setQuizMode('practice')}
+                      className={`p-4 rounded-xl text-left border-2 transition-all flex flex-col gap-1.5 ${
+                        quizMode === 'practice'
+                          ? 'border-sky-600 bg-sky-50/80 ring-2 ring-sky-500/20'
+                          : 'border-slate-200 hover:border-sky-300 bg-white'
+                      }`}
+                    >
+                      <div className="flex items-center justify-between">
+                        <span className="font-bold text-sm text-sky-900 flex items-center gap-1.5">
+                          <Icon name="zap" className="w-4 h-4 text-sky-600" />
+                          Practice Mode
+                        </span>
+                        {quizMode === 'practice' && <Icon name="check" className="w-4 h-4 text-sky-600" />}
+                      </div>
+                      <p className="text-xs text-slate-500 leading-relaxed">
+                        Instant right/wrong answer verification with detailed explanation provided immediately after answering each MCQ.
+                      </p>
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => setQuizMode('blind')}
+                      className={`p-4 rounded-xl text-left border-2 transition-all flex flex-col gap-1.5 ${
+                        quizMode === 'blind'
+                          ? 'border-sky-600 bg-sky-50/80 ring-2 ring-sky-500/20'
+                          : 'border-slate-200 hover:border-sky-300 bg-white'
+                      }`}
+                    >
+                      <div className="flex items-center justify-between">
+                        <span className="font-bold text-sm text-sky-900 flex items-center gap-1.5">
+                          <Icon name="shield" className="w-4 h-4 text-sky-600" />
+                          Blind / Exam Mode
+                        </span>
+                        {quizMode === 'blind' && <Icon name="check" className="w-4 h-4 text-sky-600" />}
+                      </div>
+                      <p className="text-xs text-slate-500 leading-relaxed">
+                        Simulate real exam conditions. Correct answers, rationales, and marks revealed only upon test submission.
+                      </p>
+                    </button>
+                  </div>
+                </div>
+
+                {/* Rules & Negative Marking Notice */}
+                <div className="bg-amber-50/80 border border-amber-200 rounded-xl p-4 text-xs text-amber-900 space-y-1.5">
+                  <p className="font-bold text-amber-950 flex items-center gap-1.5">
+                    <Icon name="alert-triangle" className="w-4 h-4 text-amber-600" />
+                    Assessment Rules & Negative Marking:
+                  </p>
+                  <ul className="list-disc list-inside space-y-1 pl-1 text-amber-800">
+                    <li>Once selected, an option is locked permanently for that question.</li>
+                    <li>Incorrect answers incur a <strong>-0.25 mark negative penalty</strong>.</li>
+                    <li>Unattempted questions carry zero penalty.</li>
+                    <li>Use the <strong>Flag (Key F)</strong> button to bookmark items to review later.</li>
+                  </ul>
+                </div>
+
+                <button
+                  onClick={() => setQuizStarted(true)}
+                  className="w-full bg-sky-600 hover:bg-sky-700 text-white font-bold py-3.5 px-6 rounded-xl shadow-lg shadow-sky-600/25 transition-all flex items-center justify-center gap-2 group text-sm"
+                >
+                  <span>Start Chapter 11 Assessment</span>
+                  <Icon name="arrow-right" className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                </button>
+              </div>
+            </div>
+          </div>
+        );
+      }
+
+      if (isSubmitted) {
+        const quoteObj = getMotivationalQuote(scoreData.percentage);
+
+        return (
+          <div className="min-h-screen py-8 px-4 sm:px-6 flex justify-center">
+            <div className="max-w-4xl w-full bg-white rounded-2xl shadow-xl border border-sky-100 overflow-hidden animate-fadeIn space-y-6 pb-8">
+              
+              {/* Header Banner */}
+              <div className="bg-gradient-to-r from-sky-800 via-sky-700 to-science-900 p-6 sm:p-8 text-white relative">
+                <div className="flex justify-between items-center mb-2 no-print">
+                  <span className="text-xs font-bold bg-white/20 px-3 py-1 rounded-full flex items-center gap-1.5">
+                    🏔️ Qashqarian Academy
+                  </span>
+                  <span className="text-xs font-bold bg-white/10 px-3 py-1 rounded-md border border-white/20">
+                    Class: XI
+                  </span>
+                  <button 
+                    onClick={() => window.print()} 
+                    className="bg-white/10 hover:bg-white/20 text-white text-xs font-semibold px-3 py-1.5 rounded-lg border border-white/20 transition-all flex items-center gap-1.5"
+                  >
+                    <Icon name="printer" className="w-4 h-4" />
+                    Print Results
+                  </button>
+                </div>
+                <h1 className="text-2xl sm:text-3xl font-extrabold">
+                  Performance Evaluation Summary
+                </h1>
+                <p className="text-sky-100 text-xs sm:text-sm mt-1">
+                  Chapter 11: Bioenergetics Mock Assessment
+                </p>
+              </div>
+
+              <div className="p-6 sm:p-8 space-y-8">
+                
+                {/* Motivational Quote Banner */}
+                <div className="bg-sky-50/80 border-l-4 border-sky-600 p-4 rounded-r-xl space-y-1">
+                  <p className="text-sm font-semibold text-sky-950 italic">
+                    "{quoteObj.quote}"
+                  </p>
+                  <p className="text-xs text-sky-700 font-bold">— {quoteObj.author}</p>
+                </div>
+
+                {/* Performance Metrics */}
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                  <div className="bg-sky-50 border border-sky-100 rounded-xl p-4 text-center">
+                    <p className="text-xs text-slate-500 font-semibold mb-1">Net Percentage</p>
+                    <p className="text-3xl font-black text-sky-600">{scoreData.percentage}%</p>
+                  </div>
+                  <div className="bg-emerald-50 border border-emerald-100 rounded-xl p-4 text-center">
+                    <p className="text-xs text-emerald-700 font-semibold mb-1">Correct Answers</p>
+                    <p className="text-3xl font-black text-emerald-600">{scoreData.correctCount}</p>
+                    <p className="text-[10px] text-emerald-600 font-medium">+{scoreData.grossMarks} Marks</p>
+                  </div>
+                  <div className="bg-rose-50 border border-rose-100 rounded-xl p-4 text-center">
+                    <p className="text-xs text-rose-700 font-semibold mb-1">Wrong Answers</p>
+                    <p className="text-3xl font-black text-rose-600">{scoreData.wrongCount}</p>
+                    <p className="text-[10px] text-rose-600 font-medium">-{scoreData.penalty} Penalty</p>
+                  </div>
+                  <div className="bg-amber-50 border border-amber-100 rounded-xl p-4 text-center">
+                    <p className="text-xs text-amber-700 font-semibold mb-1">Unattempted</p>
+                    <p className="text-3xl font-black text-amber-600">{scoreData.unattemptedCount}</p>
+                    <p className="text-[10px] text-amber-600 font-medium">0 Penalty</p>
+                  </div>
+                </div>
+
+                {/* Net Score Bar */}
+                <div className="bg-slate-900 text-white rounded-xl p-4 flex justify-between items-center text-sm">
+                  <span>Final Score (after -0.25 negative marking):</span>
+                  <span className="font-extrabold text-sky-400 text-base">
+                    {scoreData.netMarks} / {scoreData.maxMarks} Marks
+                  </span>
+                </div>
+
+                {/* Weak Area SLO Breakdown */}
+                <div className="space-y-3">
+                  <h3 className="text-base font-bold text-slate-800 flex items-center gap-2">
+                    <Icon name="bar-chart" className="w-5 h-5 text-sky-600" />
+                    SLO Performance & Weak Area Analysis
+                  </h3>
+
+                  <div className="space-y-3 max-h-80 overflow-y-auto pr-2 custom-scrollbar">
+                    {Object.entries(sloAnalysis).map(([slo, stats], idx) => {
+                      const sloPct = stats.total > 0 ? Math.round((stats.correct / stats.total) * 100) : 0;
+                      return (
+                        <div key={idx} className="bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs space-y-2">
+                          <div className="flex justify-between items-start gap-2">
+                            <span className="font-semibold text-slate-800">{slo}</span>
+                            <span className={`font-bold px-2 py-0.5 rounded text-[11px] ${
+                              sloPct >= 80 ? 'bg-emerald-100 text-emerald-800' :
+                              sloPct >= 50 ? 'bg-amber-100 text-amber-800' : 'bg-rose-100 text-rose-800'
+                            }`}>
+                              {sloPct}% Mastery
+                            </span>
+                          </div>
+                          <div className="w-full bg-slate-200 h-2 rounded-full overflow-hidden">
+                            <div 
+                              className={`h-full transition-all duration-500 ${
+                                sloPct >= 80 ? 'bg-emerald-500' : sloPct >= 50 ? 'bg-amber-500' : 'bg-rose-500'
+                              }`}
+                              style={{ width: `${sloPct}%` }}
+                            />
+                          </div>
+                          <div className="flex gap-4 text-[11px] text-slate-500">
+                            <span>Correct: {stats.correct}</span>
+                            <span>Wrong: {stats.wrong}</span>
+                            <span>Skipped: {stats.unattempted}</span>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                {/* Question Review Section with Filter & Search */}
+                <div className="space-y-4 no-print">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-2">
+                    <h3 className="text-base font-bold text-slate-800 flex items-center gap-2">
+                      <Icon name="book-open" className="w-5 h-5 text-sky-600" />
+                      Detailed Explanations & Wrong Answer Analysis
+                    </h3>
+
+                    {/* Filter Pills */}
+                    <div className="flex flex-wrap gap-1.5 text-xs">
+                      {[
+                        { id: 'all', label: 'All' },
+                        { id: 'correct', label: 'Correct' },
+                        { id: 'wrong', label: 'Wrong' },
+                        { id: 'skipped', label: 'Skipped' },
+                        { id: 'flagged', label: 'Flagged' },
+                      ].map(tab => (
+                        <button
+                          key={tab.id}
+                          onClick={() => setReviewFilter(tab.id)}
+                          className={`px-3 py-1.5 rounded-lg font-semibold transition-all ${
+                            reviewFilter === tab.id
+                              ? 'bg-sky-600 text-white shadow-sm'
+                              : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                          }`}
+                        >
+                          {tab.label}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Search Bar */}
+                  <div className="relative">
+                    <input
+                      type="text"
+                      placeholder="Search question text, SLO, or explanation rationale..."
+                      value={reviewSearch}
+                      onChange={(e) => setReviewSearch(e.target.value)}
+                      className="w-full pl-9 pr-4 py-2.5 rounded-xl border border-slate-200 text-xs focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent bg-slate-50/50"
+                    />
+                    <div className="absolute left-3 top-3 text-slate-400">
+                      <Icon name="search" className="w-4 h-4" />
+                    </div>
+                  </div>
+
+                  {/* Question Cards */}
+                  <div className="space-y-4 max-h-[500px] overflow-y-auto pr-2 custom-scrollbar">
+                    {filteredReviewQuestions.length === 0 ? (
+                      <div className="p-8 text-center text-xs text-slate-500 bg-slate-50 rounded-xl border border-dashed border-slate-200">
+                        No questions match the current search or filter.
+                      </div>
+                    ) : (
+                      filteredReviewQuestions.map((q) => {
+                        const qIdx = q.qIdx;
+                        const userSel = userAnswers[qIdx];
+                        const isCorrect = userSel === q.correct;
+                        const isUnattempted = !userAnswers.hasOwnProperty(qIdx);
+                        const isFlagged = flaggedQuestions[qIdx];
+
+                        return (
+                          <div 
+                            key={q.id}
+                            className={`p-4 rounded-xl border text-xs space-y-2.5 transition-all ${
+                              isCorrect ? 'bg-emerald-50/50 border-emerald-200' :
+                              isUnattempted ? 'bg-amber-50/50 border-amber-200' : 'bg-rose-50/50 border-rose-200'
+                            }`}
+                          >
+                            <div className="flex justify-between items-start gap-2">
+                              <span className="font-bold text-slate-900 flex items-center gap-2">
+                                <span>Q{qIdx + 1}. {q.question}</span>
+                                {isFlagged && (
+                                  <span className="bg-amber-100 text-amber-800 text-[10px] px-2 py-0.5 rounded font-bold flex items-center gap-1">
+                                    <Icon name="flag" className="w-3 h-3 text-amber-600" /> Flagged
+                                  </span>
+                                )}
+                              </span>
+                              <span className={`px-2 py-0.5 rounded font-bold text-[10px] whitespace-nowrap shrink-0 ${
+                                isCorrect ? 'bg-emerald-600 text-white' :
+                                isUnattempted ? 'bg-amber-500 text-white' : 'bg-rose-600 text-white'
+                              }`}>
+                                {isCorrect ? 'CORRECT (+1.0)' : isUnattempted ? 'SKIPPED (0.0)' : 'WRONG (-0.25)'}
+                              </span>
+                            </div>
+
+                            <p className="text-[11px] text-slate-500 font-medium">{q.slo}</p>
+
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                              {q.options.map((opt, oIdx) => {
+                                const isOptCorrect = oIdx === q.correct;
+                                const isOptUserChoice = oIdx === userSel;
+
+                                return (
+                                  <div 
+                                    key={oIdx}
+                                    className={`p-2 rounded-lg border font-medium flex items-center justify-between ${
+                                      isOptCorrect ? 'bg-emerald-100 border-emerald-300 text-emerald-900 font-bold' :
+                                      isOptUserChoice ? 'bg-rose-100 border-rose-300 text-rose-900' : 'bg-white border-slate-200 text-slate-600'
+                                    }`}
+                                  >
+                                    <span>{String.fromCharCode(65 + oIdx)}. {opt}</span>
+                                    {isOptCorrect && <Icon name="check" className="w-3.5 h-3.5 text-emerald-700" />}
+                                    {isOptUserChoice && !isOptCorrect && <Icon name="x" className="w-3.5 h-3.5 text-rose-700" />}
+                                  </div>
+                                );
+                              })}
+                            </div>
+
+                            {/* Detailed Explanation & Why Incorrect Options are Wrong */}
+                            <div className="bg-white/90 p-3 rounded-lg border border-slate-200 text-slate-700 leading-relaxed space-y-1.5">
+                              <p className="text-slate-800">
+                                <strong className="text-sky-900">Correct Answer Rationale: </strong> 
+                                {q.explanation}
+                              </p>
+
+                              {!isCorrect && !isUnattempted && q.wrongExplanations && (
+                                <div className="mt-2 pt-2 border-t border-slate-100 text-[11px] text-rose-900 bg-rose-50/60 p-2 rounded-md">
+                                  <strong>Why option {String.fromCharCode(65 + userSel)} is incorrect: </strong>
+                                  {q.wrongExplanations[userSel] || "This option does not satisfy the scientific concept."}
+                                </div>
+                              )}
+                            </div>
+                          </div>
+                        );
+                      })
+                    )}
+                  </div>
+                </div>
+
+                {/* Restart Button */}
+                <button
+                  onClick={() => {
+                    setIsSubmitted(false);
+                    setQuizStarted(false);
+                    setCurrentIdx(0);
+                    setUserAnswers({});
+                    setFlaggedQuestions({});
+                    setTimeLeft(75 * 60);
+                  }}
+                  className="w-full bg-sky-600 hover:bg-sky-700 text-white font-bold py-3.5 px-6 rounded-xl shadow-lg shadow-sky-600/25 transition-all flex items-center justify-center gap-2 text-sm no-print"
+                >
+                  <Icon name="rotate-ccw" className="w-5 h-5" />
+                  <span>Restart Chapter 11 Assessment</span>
+                </button>
+
+              </div>
+            </div>
+          </div>
+        );
+      }
+
+      const flaggedCount = Object.values(flaggedQuestions).filter(Boolean).length;
+
+      return (
+        <div className="min-h-screen py-6 px-4 sm:px-6 flex flex-col items-center">
+          
+          {/* Top Header Navigation Card */}
+          <div className="max-w-3xl w-full bg-white rounded-2xl shadow-sm border border-sky-100 p-4 mb-4 space-y-3">
+            
+            {/* Academy Name & Class XI Badge */}
+            <div className="flex justify-between items-center text-xs sm:text-sm font-bold text-sky-900">
+              <span className="flex items-center gap-1.5 text-base sm:text-lg tracking-tight">
+                🏔️ Qashqarian Academy
+              </span>
+              
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={() => setShowNavGrid(!showNavGrid)}
+                  className="px-2.5 py-1 bg-sky-50 hover:bg-sky-100 text-sky-800 rounded-lg text-xs font-semibold flex items-center gap-1.5 border border-sky-200 transition-all"
+                >
+                  <Icon name="grid" className="w-3.5 h-3.5" />
+                  <span>Grid ({Object.keys(userAnswers).length}/{QUESTIONS.length})</span>
+                </button>
+
+                <span className="bg-sky-100 text-sky-800 px-2.5 py-1 rounded-lg font-bold text-xs">
+                  Class: XI
+                </span>
+              </div>
+            </div>
+
+            {/* Question Counter (Q 1 / 75) & 75 Min Timer */}
+            <div className="flex justify-between items-center text-xs font-semibold text-slate-600">
+              <div className="flex items-center gap-3">
+                <span className="text-sky-900 font-extrabold text-sm">Q {currentIdx + 1} / {QUESTIONS.length}</span>
+                {flaggedCount > 0 && (
+                  <span className="text-amber-700 bg-amber-50 border border-amber-200 px-2 py-0.5 rounded text-[11px] font-bold flex items-center gap-1">
+                    <Icon name="flag" className="w-3 h-3 text-amber-600" />
+                    {flaggedCount} Flagged
+                  </span>
+                )}
+              </div>
+
+              <div className={`flex items-center gap-1.5 px-2.5 py-1 rounded-lg font-mono font-bold ${
+                timeLeft < 300 ? 'bg-rose-100 text-rose-700 animate-pulse' : 'bg-sky-50 text-sky-800'
+              }`}>
+                <Icon name="clock" className="w-3.5 h-3.5" />
+                <span>{formatTime(timeLeft)}</span>
+              </div>
+            </div>
+
+            {/* Top Progress Bar */}
+            <div className="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+              <div 
+                className="bg-sky-600 h-full transition-all duration-300"
+                style={{ width: `${((currentIdx + 1) / QUESTIONS.length) * 100}%` }}
+              />
+            </div>
+          </div>
+
+          {/* Quick Navigator Grid Modal */}
+          {showNavGrid && (
+            <div className="max-w-3xl w-full bg-white rounded-2xl shadow-lg border border-sky-200 p-5 mb-4 animate-fadeIn space-y-3">
+              <div className="flex justify-between items-center text-xs font-bold text-slate-800 border-b pb-2">
+                <span>Question Quick Navigator Matrix</span>
+                <button 
+                  onClick={() => setShowNavGrid(false)}
+                  className="text-slate-400 hover:text-slate-600"
+                >
+                  <Icon name="x" className="w-4 h-4" />
+                </button>
+              </div>
+
+              <div className="grid grid-cols-5 sm:grid-cols-10 gap-2 max-h-52 overflow-y-auto p-1 custom-scrollbar">
+                {QUESTIONS.map((_, idx) => {
+                  const isAns = userAnswers.hasOwnProperty(idx);
+                  const isCur = currentIdx === idx;
+                  const isFlg = !!flaggedQuestions[idx];
+
+                  let boxStyle = "bg-slate-100 text-slate-700 hover:bg-slate-200";
+                  if (isCur) boxStyle = "bg-sky-600 text-white font-bold ring-2 ring-sky-500/50";
+                  else if (isAns) boxStyle = "bg-emerald-100 text-emerald-900 font-semibold border border-emerald-300";
+
+                  return (
+                    <button
+                      key={idx}
+                      onClick={() => {
+                        setCurrentIdx(idx);
+                        setShowNavGrid(false);
+                      }}
+                      className={`h-8 rounded-lg text-xs transition-all relative flex items-center justify-center ${boxStyle}`}
+                    >
+                      {idx + 1}
+                      {isFlg && (
+                        <span className="absolute -top-1 -right-1 bg-amber-500 w-2.5 h-2.5 rounded-full border border-white" />
+                      )}
+                    </button>
+                  );
+                })}
+              </div>
+
+              <div className="flex gap-4 text-[10px] text-slate-500 pt-2 border-t justify-center">
+                <span className="flex items-center gap-1"><span className="w-2.5 h-2.5 rounded bg-emerald-300" /> Answered</span>
+                <span className="flex items-center gap-1"><span className="w-2.5 h-2.5 rounded bg-slate-200" /> Unanswered</span>
+                <span className="flex items-center gap-1"><span className="w-2.5 h-2.5 rounded bg-sky-600" /> Current</span>
+                <span className="flex items-center gap-1"><span className="w-2.5 h-2.5 rounded-full bg-amber-500" /> Flagged</span>
+              </div>
+            </div>
+          )}
+
+          {/* Centered Main Question Card */}
+          <div className="max-w-3xl w-full bg-white rounded-2xl shadow-lg border border-sky-100 p-6 sm:p-8 relative overflow-hidden flex flex-col min-h-[460px] justify-between">
+            
+            {/* Watermark in Center Background */}
+            <div className="watermark-bg">
+              <p className="text-5xl sm:text-6xl font-black text-sky-900 tracking-widest">
+                🏔️ QASHQARIAN ACADEMY
+              </p>
+            </div>
+
+            {/* Question Header & Options */}
+            <div className="relative z-10 space-y-5">
+              
+              {/* SLO Tag above Question */}
+              <div className="flex justify-between items-center gap-2">
+                <div className="inline-block bg-sky-50 border border-sky-200 text-sky-900 text-xs font-bold px-3 py-1 rounded-full">
+                  {currentQ.slo}
+                </div>
+
+                <button
+                  onClick={() => toggleFlagQuestion(currentIdx)}
+                  className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 ${
+                    isCurrentFlagged 
+                      ? 'bg-amber-100 text-amber-800 border border-amber-300' 
+                      : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                  }`}
+                  title="Bookmark for review (Key: F)"
+                >
+                  <Icon name="flag" className={`w-3.5 h-3.5 ${isCurrentFlagged ? 'text-amber-600 fill-amber-500' : ''}`} />
+                  <span>{isCurrentFlagged ? 'Flagged' : 'Flag'}</span>
+                </button>
+              </div>
+
+              {/* Question Text */}
+              <h2 className="text-base sm:text-lg font-bold text-slate-900 leading-snug">
+                Q{currentIdx + 1}. {currentQ.question}
+              </h2>
+
+              {/* Multiple Choice Options (A, B, C, D) */}
+              <div className="space-y-3 pt-2">
+                {currentQ.options.map((optionText, optIdx) => {
+                  const isSelected = selectedOption === optIdx;
+                  const isCorrect = currentQ.correct === optIdx;
+
+                  let btnStyle = "border-slate-200 hover:border-sky-300 hover:bg-sky-50/50 text-slate-800 bg-white";
+
+                  if (isAnswered) {
+                    if (quizMode === 'practice') {
+                      if (isCorrect) {
+                        btnStyle = "border-emerald-500 bg-emerald-50 text-emerald-950 font-semibold ring-2 ring-emerald-500/20";
+                      } else if (isSelected) {
+                        btnStyle = "border-rose-500 bg-rose-50 text-rose-950 font-semibold ring-2 ring-rose-500/20";
+                      } else {
+                        btnStyle = "border-slate-200 opacity-60 bg-white text-slate-500";
+                      }
+                    } else {
+                      // Blind Mode
+                      if (isSelected) {
+                        btnStyle = "border-sky-600 bg-sky-50 text-sky-950 font-semibold ring-2 ring-sky-500/20";
+                      } else {
+                        btnStyle = "border-slate-200 opacity-60 bg-white text-slate-500";
+                      }
+                    }
+                  }
+
+                  return (
+                    <button
+                      key={optIdx}
+                      disabled={isAnswered}
+                      onClick={() => handleSelectOption(optIdx)}
+                      className={`w-full p-3.5 sm:p-4 rounded-xl border-2 text-left text-xs sm:text-sm transition-all flex items-center justify-between gap-3 ${btnStyle}`}
+                    >
+                      <div className="flex items-center gap-3">
+                        <span className={`w-7 h-7 rounded-lg flex items-center justify-center font-bold text-xs shrink-0 ${
+                          isSelected ? 'bg-sky-600 text-white' : 'bg-slate-100 text-slate-700'
+                        }`}>
+                          {String.fromCharCode(65 + optIdx)}
+                        </span>
+                        <span>{optionText}</span>
+                      </div>
+
+                      {isAnswered && quizMode === 'practice' && (
+                        <div>
+                          {isCorrect && <Icon name="check" className="w-5 h-5 text-emerald-600" />}
+                          {isSelected && !isCorrect && <Icon name="x" className="w-5 h-5 text-rose-600" />}
+                        </div>
+                      )}
+                    </button>
+                  );
+                })}
+              </div>
+
+              {/* Practice Mode Explanation Box */}
+              {isAnswered && quizMode === 'practice' && (
+                <div className={`mt-4 p-4 rounded-xl text-xs leading-relaxed space-y-1.5 animate-fadeIn border ${
+                  selectedOption === currentQ.correct 
+                    ? 'bg-emerald-50/90 border-emerald-200 text-emerald-950' 
+                    : 'bg-rose-50/90 border-rose-200 text-rose-950'
+                }`}>
+                  <p className="font-bold flex items-center gap-1.5">
+                    <Icon name="info" className="w-4 h-4" />
+                    {selectedOption === currentQ.correct ? 'Correct Answer Rationale:' : 'Incorrect Answer Explanation:'}
+                  </p>
+                  <p className="text-slate-800">{currentQ.explanation}</p>
+                  
+                  {selectedOption !== currentQ.correct && currentQ.wrongExplanations && (
+                    <p className="text-rose-900 font-medium pt-1 border-t border-rose-200/60">
+                      <strong>Why option {String.fromCharCode(65 + selectedOption)} is wrong: </strong>
+                      {currentQ.wrongExplanations[selectedOption]}
+                    </p>
+                  )}
+                </div>
+              )}
+            </div>
+
+            {/* Bottom Nav Controls (Previous / Next / Submit) */}
+            <div className="relative z-10 pt-6 mt-6 border-t border-slate-100 flex justify-between items-center gap-4">
+              <button
+                disabled={currentIdx === 0}
+                onClick={() => setCurrentIdx(prev => prev - 1)}
+                className="px-4 py-2.5 rounded-xl border border-slate-200 text-slate-700 text-xs font-bold hover:bg-slate-50 disabled:opacity-40 disabled:cursor-not-allowed flex items-center gap-1.5"
+              >
+                <Icon name="arrow-left" className="w-4 h-4" />
+                Previous
+              </button>
+
+              <div className="flex gap-2">
+                {currentIdx < QUESTIONS.length - 1 ? (
+                  <button
+                    onClick={() => setCurrentIdx(prev => prev + 1)}
+                    className="px-5 py-2.5 rounded-xl bg-sky-600 hover:bg-sky-700 text-white text-xs font-bold shadow-md shadow-sky-600/20 transition-all flex items-center gap-1.5"
+                  >
+                    Next
+                    <Icon name="arrow-right" className="w-4 h-4" />
+                  </button>
+                ) : (
+                  <button
+                    onClick={() => setIsSubmitted(true)}
+                    className="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold shadow-md shadow-emerald-600/20 transition-all flex items-center gap-1.5"
+                  >
+                    Submit Test
+                    <Icon name="check" className="w-4 h-4" />
+                  </button>
+                )}
+              </div>
+            </div>
+
+          </div>
+        </div>
+      );
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<App />);
+  </script>
+</body>
+</html>

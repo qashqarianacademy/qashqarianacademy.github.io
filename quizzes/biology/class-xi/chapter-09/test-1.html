@@ -1,0 +1,2530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Class XI Biology Chapter 9 Mock Test - Kingdom Plantae</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+          },
+          colors: {
+            sky: {
+              50:'#F0F8F8', 100:'#DFF3F2', 200:'#BFE4E7', 300:'#8FCDD5',
+              400:'#4FA9B9', 500:'#1F869B', 600:'#056C82', 700:'#0A5263',
+              800:'#0B4352', 900:'#0B3340'
+            },
+            science: {
+              50:'#F0F8F8', 100:'#DFF3F2', 200:'#BFE4E7', 300:'#8FCDD5',
+              400:'#4FA9B9', 500:'#1F869B', 600:'#056C82', 700:'#0A5263',
+              800:'#0B4352', 900:'#0B3340'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- React 18 & ReactDOM -->
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+  <!-- Babel for JSX -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #f0f7ff;
+    }
+    .watermark-bg {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(-12deg);
+      pointer-events: none;
+      user-select: none;
+      z-index: 0;
+      opacity: 0.035;
+      text-align: center;
+      white-space: nowrap;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: #f1f5f9;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 4px;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fadeIn {
+      animation: fadeIn 0.25s ease-out forwards;
+    }
+    @media print {
+      .no-print { display: none !important; }
+      body { background: white; color: black; }
+    }
+  </style>
+</head>
+<body class="text-slate-800 antialiased selection:bg-sky-200 selection:text-sky-900 min-h-screen">
+  <header class="sticky top-0 z-50 bg-[#0B132B] border-b border-cyan-900/40 shadow-md">
+    <div class="max-w-5xl mx-auto px-4 py-2.5 flex items-center justify-between">
+      <a href="../../../../index.html" class="flex items-center gap-2">
+        <img src="../../../../images/brand/logo.png" alt="Qashqarian Academy" class="w-10 h-10 object-contain">
+        <div>
+          <div class="text-base md:text-lg font-extrabold text-white tracking-tight leading-none">Qashqarian</div>
+          <div class="text-[10px] md:text-xs text-[#FF9F1C] font-extrabold tracking-[0.2em] mt-1 leading-none">ACADEMY</div>
+        </div>
+      </a>
+      <a href="../../index.html" class="text-[11px] font-semibold text-slate-300 hover:text-white border border-white/20 rounded-lg px-2.5 py-1">
+        ← Biology Quizzes
+      </a>
+    </div>
+  </header>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const { useState, useEffect, useMemo } = React;
+
+    // SVG Icon Component
+    const Icon = ({ name, className = "w-5 h-5" }) => {
+      const props = {
+        className,
+        xmlns: "http://www.w3.org/2000/svg",
+        viewBox: "0 0 24 24",
+        fill: "none",
+        stroke: "currentColor",
+        strokeWidth: "2",
+        strokeLinecap: "round",
+        strokeLinejoin: "round"
+      };
+
+      switch (name) {
+        case "clock":
+          return <svg {...props}><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>;
+        case "award":
+          return <svg {...props}><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 22 12 17 17 22 15.79 13.88"/></svg>;
+        case "check":
+          return <svg {...props}><polyline points="20 6 9 17 4 12"/></svg>;
+        case "x":
+          return <svg {...props}><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>;
+        case "arrow-left":
+          return <svg {...props}><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>;
+        case "arrow-right":
+          return <svg {...props}><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>;
+        case "rotate-ccw":
+          return <svg {...props}><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>;
+        case "book-open":
+          return <svg {...props}><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>;
+        case "shield":
+          return <svg {...props}><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>;
+        case "zap":
+          return <svg {...props}><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>;
+        case "bar-chart":
+          return <svg {...props}><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg>;
+        case "info":
+          return <svg {...props}><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>;
+        case "alert-triangle":
+          return <svg {...props}><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>;
+        case "flag":
+          return <svg {...props}><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>;
+        case "grid":
+          return <svg {...props}><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>;
+        case "search":
+          return <svg {...props}><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>;
+        case "printer":
+          return <svg {...props}><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>;
+        case "key":
+          return <svg {...props}><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg>;
+        default:
+          return <svg {...props}><circle cx="12" cy="12" r="10"/></svg>;
+      }
+    };
+
+    const QUESTIONS = [
+      // SLO 9.1.1: General Characteristics of Plants
+      {
+        id: 1,
+        slo: "SLO 9.1.1: General Characteristics of Plants",
+        question: "Which structural characteristic is shared by all true members of Kingdom Plantae?",
+        options: [
+          "Cell wall composed of chitin",
+          "Multicellular body made of eukaryotic cells with cellulose cell walls",
+          "Heterotrophic nutrition through absorptive hyphae",
+          "Presence of single-stranded RNA genomes without nuclear membranes"
+        ],
+        correct: 1,
+        explanation: "All true members of Kingdom Plantae are multicellular eukaryotic organisms with cell walls predominantly composed of cellulose.",
+        wrongExplanations: [
+          "Chitin cell walls are characteristic of Fungi, not Plantae.",
+          "Correct answer.",
+          "Absorptive hyphae and heterotrophic nutrition are defining features of Kingdom Fungi.",
+          "Prokaryotes lack nuclear membranes, whereas plants are eukaryotes with true double-membrane nuclei."
+        ]
+      },
+      {
+        id: 2,
+        slo: "SLO 9.1.1: General Characteristics of Plants",
+        question: "In what chemical form do green plants primarily store their excess photosynthetic carbohydrates?",
+        options: ["Glycogen", "Glucose", "Starch", "Lactose"],
+        correct: 2,
+        explanation: "Plants store excess carbohydrates produced during photosynthesis primarily as starch granules inside plastids.",
+        wrongExplanations: [
+          "Glycogen is the primary storage carbohydrate in animals and fungi.",
+          "Glucose is synthesized during photosynthesis but converted to insoluble starch for long-term storage.",
+          "Correct answer.",
+          "Lactose is a disaccharide found in mammal milk."
+        ]
+      },
+      {
+        id: 3,
+        slo: "SLO 9.1.1: General Characteristics of Plants",
+        question: "[Real-Life Scenario] A student collects a green, leafy land organism from a garden. Under a lab microscope, she confirms that its photosynthetic cells contain chlorophyll a, chlorophyll b, and carotenoids inside membrane-bound organelles. What kingdom does this organism belong to?",
+        options: ["Kingdom Protista", "Kingdom Fungi", "Kingdom Monera", "Kingdom Plantae"],
+        correct: 3,
+        explanation: "Kingdom Plantae is characterized by multicellular autotrophs containing chlorophyll a, chlorophyll b, and carotenoids within chloroplasts.",
+        wrongExplanations: [
+          "Protists are mostly unicellular or simple colonial/filamentous algae lacking complex terrestrial multicellular tissue organization.",
+          "Fungi lack photosynthetic pigments entirely.",
+          "Monerans are prokaryotic organisms lacking membrane-bound organelles like chloroplasts.",
+          "Correct answer."
+        ]
+      },
+      {
+        id: 4,
+        slo: "SLO 9.1.1: General Characteristics of Plants",
+        question: "What key reproductive feature distinguishes true plants from photosynthetic green algae?",
+        options: [
+          "Plants produce non-motile unicellular spores only",
+          "Plants develop multicellular sex organs protected by an outer layer of sterile jacket cells",
+          "Plants reproduce exclusively through asexual budding",
+          "Plants lack gamete-producing structures"
+        ],
+        correct: 1,
+        explanation: "True plants develop multicellular gametangia (antheridia and archegonia) enveloped by protective sterile jacket cells to prevent desiccation on land.",
+        wrongExplanations: [
+          "Green algae generally lack sterile jackets around their unicellular gametangia.",
+          "Correct answer.",
+          "Plants reproduce sexually via alternation of generations.",
+          "Plants possess highly specialized gamete-producing structures."
+        ]
+      },
+      {
+        id: 5,
+        slo: "SLO 9.1.1: General Characteristics of Plants",
+        question: "During plant development, the diploid zygote retained inside the female reproductive organ divides by mitosis to form a multicellular dependent stage called the:",
+        options: ["Protonema", "Gamete", "Embryo", "Spore"],
+        correct: 2,
+        explanation: "The retention and development of a multicellular diploid embryo inside maternal tissues is why land plants are called embryophytes.",
+        wrongExplanations: [
+          "Protonema is a juvenile filamentous haploid gametophyte stage in mosses.",
+          "Gametes are haploid reproductive cells (sperm and egg).",
+          "Correct answer.",
+          "Spores are haploid unicellular reproductive units produced by meiosis in the sporangium."
+        ]
+      },
+
+      // SLO 9.1.2: Phylogeny of Kingdom Plantae
+      {
+        id: 6,
+        slo: "SLO 9.1.2: Phylogeny of Kingdom Plantae",
+        question: "Based on biochemical, structural, and genetic evidence, which group of organisms is considered the direct evolutionary ancestor of modern land plants?",
+        options: [
+          "Cyanobacteria",
+          "Red algae (Rhodophyta)",
+          "Charophytes (freshwater green algae)",
+          "Brown algae (Phaeophyta)"
+        ],
+        correct: 2,
+        explanation: "Charophytes share structural (phragmoplast), biochemical (chlorophyll a & b, cellulose, starch), and genetic traits with land plants.",
+        wrongExplanations: [
+          "Cyanobacteria are photosynthetic prokaryotes.",
+          "Red algae contain phycobilins and floridean starch, differing biochemically from land plants.",
+          "Correct answer.",
+          "Brown algae belong to Stramenopiles and possess fucoxanthin and laminarin."
+        ]
+      },
+      {
+        id: 7,
+        slo: "SLO 9.1.2: Phylogeny of Kingdom Plantae",
+        question: "Which pair of photosynthetic pigments is shared between ancestral green algae and all land plants?",
+        options: [
+          "Chlorophyll a and Chlorophyll c",
+          "Chlorophyll a and Chlorophyll b",
+          "Chlorophyll b and Fucoxanthin",
+          "Chlorophyll a and Phycoerythrin"
+        ],
+        correct: 1,
+        explanation: "Both ancestral green algae (Charophytes) and land plants contain chlorophyll a and chlorophyll b as principal photosynthetic pigments.",
+        wrongExplanations: [
+          "Chlorophyll c is found in brown algae and diatoms.",
+          "Correct answer.",
+          "Fucoxanthin is the brown accessory pigment of brown algae.",
+          "Phycoerythrin is found in red algae."
+        ]
+      },
+      {
+        id: 8,
+        slo: "SLO 9.1.2: Phylogeny of Kingdom Plantae",
+        question: "What major evolutionary challenge did ancestral plants face when transitioning from an aquatic environment to life on dry land?",
+        options: [
+          "Absence of solar radiation",
+          "Excessive environmental nitrogen gas",
+          "Desiccation (water loss) and structural support against gravity",
+          "Lack of carbon dioxide in the air"
+        ],
+        correct: 2,
+        explanation: "The primary terrestrial hurdles were preventing desiccation (evaporative water loss) and supporting body mass without water buoyancy.",
+        wrongExplanations: [
+          "Solar radiation is abundant on land.",
+          "Nitrogen gas availability was not a limiting obstacle preventing land colonization.",
+          "Correct answer.",
+          "Carbon dioxide is more readily available and diffuses faster in air than in water."
+        ]
+      },
+      {
+        id: 9,
+        slo: "SLO 9.1.2: Phylogeny of Kingdom Plantae",
+        question: "All land plants are collectively referred to as 'embryophytes' because they all:",
+        options: [
+          "Retain and nourish a multicellular diploid embryo within maternal tissues",
+          "Produce true seeds enclosed within fleshy fruit",
+          "Transport water through lignified xylem vessels",
+          "Lack flagellated swimming gametes"
+        ],
+        correct: 0,
+        explanation: "Land plants (bryophytes and tracheophytes) share the synapomorphy of retaining the multicellular embryo inside maternal tissues.",
+        wrongExplanations: [
+          "Correct answer.",
+          "Fleshy fruits and true seeds are restricted to seed plants (angiosperms/gymnosperms), excluding bryophytes and ferns.",
+          "Bryophytes lack lignified xylem vessels.",
+          "Bryophytes and seedless vascular plants still possess flagellated swimming sperm."
+        ]
+      },
+      {
+        id: 10,
+        slo: "SLO 9.1.2: Phylogeny of Kingdom Plantae",
+        question: "During cell division, both charophyte green algae and land plants form a specialized microtubule structure during cytokinesis known as a:",
+        options: ["Cleavage furrow", "Phragmoplast", "Contractile ring", "Centrosome array"],
+        correct: 1,
+        explanation: "A phragmoplast serves as a scaffold for cell plate assembly during cytokinesis in both charophyte green algae and land plants.",
+        wrongExplanations: [
+          "Cleavage furrows occur during cytokinesis in animal cells.",
+          "Correct answer.",
+          "Contractile rings composed of actin/myosin drive cytokinesis in animal cells.",
+          "Centrosomes organize mitotic spindles in animal cells."
+        ]
+      },
+
+      // SLO 9.1.3: Classify Kingdom Plantae
+      {
+        id: 11,
+        slo: "SLO 9.1.3: Classify Kingdom Plantae",
+        question: "Kingdom Plantae is broadly divided into two major groups based on the presence or absence of specialized vascular transport tissues:",
+        options: [
+          "Cryptogams and Phanerogams",
+          "Bryophyta and Tracheophyta",
+          "Gymnospermae and Angiospermae",
+          "Thallophyta and Pteridophyta"
+        ],
+        correct: 1,
+        explanation: "Plantae is split into non-vascular plants (Bryophyta) and vascular plants (Tracheophyta).",
+        wrongExplanations: [
+          "Cryptogams and Phanerogams classify plants based on flower/seed presence.",
+          "Correct answer.",
+          "Gymnosperms and Angiosperms are sub-divisions of seed-bearing tracheophytes.",
+          "Thallophyta is an obsolete grouping including algae and fungi."
+        ]
+      },
+      {
+        id: 12,
+        slo: "SLO 9.1.3: Classify Kingdom Plantae",
+        question: "Tracheophytes (vascular plants) are further sub-classified into seedless vascular plants and seed-bearing vascular plants. Seed plants are known as:",
+        options: ["Bryophytes", "Pteridophytes", "Spermatophytes", "Thallophytes"],
+        correct: 2,
+        explanation: "Seed-bearing vascular plants are botanically designated as Spermatophytes.",
+        wrongExplanations: [
+          "Bryophytes are non-vascular plants.",
+          "Pteridophytes are seedless vascular plants.",
+          "Correct answer.",
+          "Thallophytes lack stem/leaf/root differentiation."
+        ]
+      },
+      {
+        id: 13,
+        slo: "SLO 9.1.3: Classify Kingdom Plantae",
+        question: "[Real-Life Scenario] A biology class on a field trip finds two non-flowering plants. Plant X is small, soft, and lacks xylem and phloem. Plant Y has stiff stems containing vascular bundles and reproduces via spores under its leaves. How are Plant X and Plant Y classified?",
+        options: [
+          "Plant X = Bryophyte; Plant Y = Tracheophyte",
+          "Plant X = Gymnosperm; Plant Y = Angiosperm",
+          "Plant X = Tracheophyte; Plant Y = Bryophyte",
+          "Plant X = Angiosperm; Plant Y = Thallophyte"
+        ],
+        correct: 0,
+        explanation: "Plant X lacks vascular tissue (Bryophyte), while Plant Y possesses vascular bundles (Tracheophyte / Pteridophyte).",
+        wrongExplanations: [
+          "Correct answer.",
+          "Both plants produce spores, not seeds or flowers.",
+          "The classifications are reversed.",
+          "Plant Y has vascular bundles, so it is a tracheophyte."
+        ]
+      },
+      {
+        id: 14,
+        slo: "SLO 9.1.3: Classify Kingdom Plantae",
+        question: "How are seed-bearing vascular plants (spermatophytes) divided based on seed protection?",
+        options: [
+          "Bryophytes (naked seeds) and Pteridophytes (covered seeds)",
+          "Gymnosperms (naked seeds) and Angiosperms (seeds enclosed in fruit)",
+          "Monocots (naked seeds) and Dicots (covered seeds)",
+          "Algae (naked seeds) and Mosses (covered seeds)"
+        ],
+        correct: 1,
+        explanation: "Spermatophytes are divided into Gymnosperms ('naked seeds' on cones) and Angiosperms ('enclosed seeds' inside ovaries/fruits).",
+        wrongExplanations: [
+          "Bryophytes and Pteridophytes do not produce seeds.",
+          "Correct answer.",
+          "Monocots and Dicots are divisions of Angiosperms; both have enclosed seeds.",
+          "Algae and mosses are non-seed plants."
+        ]
+      },
+      {
+        id: 15,
+        slo: "SLO 9.1.3: Classify Kingdom Plantae",
+        question: "Non-flowering seedless plants that reproduce strictly via spores (such as mosses and ferns) are traditionally grouped together as:",
+        options: ["Phanerogams", "Cryptogams", "Angiosperms", "Spermatophytes"],
+        correct: 1,
+        explanation: "Cryptogams ('hidden reproduction') includes non-flowering, seedless plants like bryophytes and pteridophytes that reproduce via spores.",
+        wrongExplanations: [
+          "Phanerogams are seed-bearing plants.",
+          "Correct answer.",
+          "Angiosperms produce flowers and fruits.",
+          "Spermatophytes encompass all seed-bearing vascular plants."
+        ]
+      },
+
+      // SLO 9.2.1: Characteristic Features of Bryophytes
+      {
+        id: 16,
+        slo: "SLO 9.2.1: Characteristic Features of Bryophytes",
+        question: "Why are bryophytes commonly referred to as the 'amphibians of the plant kingdom'?",
+        options: [
+          "They live floating in ocean water like marine animals",
+          "They require a thin film of liquid water for flagellated male gametes to swim to the egg",
+          "They turn into animals during winter seasons",
+          "They possess lungs and stomata for double respiration"
+        ],
+        correct: 1,
+        explanation: "Bryophytes live on land but require external liquid water for flagellated sperm to swim from antheridia to archegonia.",
+        wrongExplanations: [
+          "Bryophytes are terrestrial or freshwater organisms, not marine.",
+          "Correct answer.",
+          "Plants do not transform into animals.",
+          "Plants do not possess lungs."
+        ]
+      },
+      {
+        id: 17,
+        slo: "SLO 9.2.1: Characteristic Features of Bryophytes",
+        question: "Which generation is dominant, free-living, photosynthetic, and persistent in the bryophyte life cycle?",
+        options: [
+          "Diploid sporophyte (2n)",
+          "Triploid endosperm (3n)",
+          "Haploid gametophyte (n)",
+          "Tetraploid prothallus (4n)"
+        ],
+        correct: 2,
+        explanation: "In all bryophytes, the haploid gametophyte (n) is the dominant, independent, photosynthetic stage.",
+        wrongExplanations: [
+          "The diploid sporophyte is short-lived and attached to the gametophyte.",
+          "Endosperm is a nutrient tissue unique to angiosperms.",
+          "Correct answer.",
+          "Prothallus is the haploid gametophyte stage in ferns."
+        ]
+      },
+      {
+        id: 18,
+        slo: "SLO 9.2.1: Characteristic Features of Bryophytes",
+        question: "[Real-Life Scenario] A student examines a green carpet of liverworts growing near a shaded stream. Under the microscope, she notices hair-like structures anchoring the plant body to the soil and absorbing water, but no true xylem or phloem tissues. These anchoring structures are:",
+        options: ["Taproots", "Adventitious roots", "Rhizoids", "Tendrils"],
+        correct: 2,
+        explanation: "Bryophytes lack true vascular roots and instead use unicellular or multicellular hair-like rhizoids for anchorage and water absorption.",
+        wrongExplanations: [
+          "Taproots are complex vascular root structures found in vascular plants.",
+          "Adventitious roots contain vascular tissues.",
+          "Correct answer.",
+          "Tendrils are modified climbing leaf/stem structures in vascular plants."
+        ]
+      },
+      {
+        id: 19,
+        slo: "SLO 9.2.1: Characteristic Features of Bryophytes",
+        question: "In bryophytes, the diploid sporophyte generation is physically attached to and nutritionally dependent on the:",
+        options: ["Soil bacteria", "Haploid gametophyte", "Surrounding water currents", "Fungal mycorrhizae only"],
+        correct: 1,
+        explanation: "The bryophyte sporophyte remains permanently attached via its foot to the dominant female gametophyte, drawing nutrients from it.",
+        wrongExplanations: [
+          "The sporophyte derives organic nutrition directly from maternal gametophyte tissue.",
+          "Correct answer.",
+          "Water currents do not provide organic nutrients to the sporophyte.",
+          "Mycorrhizae may assist, but direct physical and nutritional dependence is on the gametophyte."
+        ]
+      },
+      {
+        id: 20,
+        slo: "SLO 9.2.1: Characteristic Features of Bryophytes",
+        question: "Female sex organs in bryophytes that produce a single non-motile egg cell inside a flask-shaped structure are called:",
+        options: ["Antheridia", "Sporangia", "Archegonia", "Sori"],
+        correct: 2,
+        explanation: "Archegonia are flask-shaped multicellular female reproductive structures containing a single non-motile egg inside the venter.",
+        wrongExplanations: [
+          "Antheridia are male sex organs that produce flagellated sperm.",
+          "Sporangia produce haploid spores via meiosis.",
+          "Correct answer.",
+          "Sori are clusters of sporangia on fern fronds."
+        ]
+      },
+
+      // SLO 9.2.2: Classify Bryophytes (Musci, Hepaticae, Anthocerotae)
+      {
+        id: 21,
+        slo: "SLO 9.2.2: Classify Bryophytes (Musci, Hepaticae, Anthocerotae)",
+        question: "Bryophytes with flattened, lobed, ribbon-like thalloid bodies and unicellular rhizoids (such as Marchantia) belong to the class:",
+        options: ["Musci (Mosses)", "Anthocerotae (Hornworts)", "Hepaticae (Liverworts)", "Lycopsida (Club mosses)"],
+        correct: 2,
+        explanation: "Class Hepaticae (Liverworts) consists of dorsoventrally flattened thalloid or leafy bodies with unbranched unicellular rhizoids.",
+        wrongExplanations: [
+          "Musci (Mosses) have erect leaf-like shoots with multicellular rhizoids.",
+          "Anthocerotae (Hornworts) have horn-like sporophytes.",
+          "Correct answer.",
+          "Lycopsida are vascular plants (Tracheophyta)."
+        ]
+      },
+      {
+        id: 22,
+        slo: "SLO 9.2.2: Classify Bryophytes (Musci, Hepaticae, Anthocerotae)",
+        question: "Hornworts belong to the class Anthocerotae (e.g., Anthoceros). What unique feature characterizes their sporophyte generation?",
+        options: [
+          "A round capsule without a stalk",
+          "An elongated, horn-like capsule with a basal meristematic growing zone",
+          "Complete absence of photosynthetic cells",
+          "Branching vascular leaves"
+        ],
+        correct: 1,
+        explanation: "Anthocerotae sporophytes feature continuous growth from a basal meristem, forming an elongated horn-like sporangium capsule.",
+        wrongExplanations: [
+          "Liverwort capsules are often spherical or oval with a seta.",
+          "Correct answer.",
+          "Hornwort sporophytes are green and photosynthetic.",
+          "Bryophytes lack vascular leaves."
+        ]
+      },
+      {
+        id: 23,
+        slo: "SLO 9.2.2: Classify Bryophytes (Musci, Hepaticae, Anthocerotae)",
+        question: "True mosses (such as Funaria) belong to class Musci. What structural feature distinguishes their gametophyte stage from liverworts?",
+        options: [
+          "An erect stem-like central axis with spirally arranged leaf-like structures and multicellular rhizoids",
+          "A completely flat thallus with single-celled rhizoids",
+          "Wood vessels in their stems",
+          "A leafless creeping runner"
+        ],
+        correct: 0,
+        explanation: "Class Musci (Mosses) gametophytes consist of erect stem-like axis (cauloid) with spirally arranged leaf-like scales (phylloids) and multicellular rhizoids.",
+        wrongExplanations: [
+          "Correct answer.",
+          "Flat thalli with single-celled rhizoids describe thalloid liverworts (Hepaticae).",
+          "Mosses lack true wood vessels (xylem).",
+          "Mosses develop leaf-like structures."
+        ]
+      },
+      {
+        id: 24,
+        slo: "SLO 9.2.2: Classify Bryophytes (Musci, Hepaticae, Anthocerotae)",
+        question: "In liverworts (Hepaticae), specialized sterile, spirally twisted cells found inside the capsule that assist in spore dispersal by twisting as humidity changes are called:",
+        options: ["Pseudoelaters", "Elaters", "Rhizoids", "Peristome teeth"],
+        correct: 1,
+        explanation: "Elaters in liverwort capsules are hygroscopic, spirally thickened cells that twist and uncoil as humidity fluctuates to scatter spores.",
+        wrongExplanations: [
+          "Pseudoelaters are found in hornworts (Anthocerotae).",
+          "Correct answer.",
+          "Rhizoids are anchoring structures.",
+          "Peristome teeth control spore release in true mosses (Musci)."
+        ]
+      },
+      {
+        id: 25,
+        slo: "SLO 9.2.2: Classify Bryophytes (Musci, Hepaticae, Anthocerotae)",
+        question: "When a moss spore germinates in moist soil, it first develops into an intermediate, green, filamentous creeping stage known as a:",
+        options: ["Prothallus", "Protonema", "Sorus", "Sporangium"],
+        correct: 1,
+        explanation: "Germinating moss spores yield a juvenile, branched, algal-like green filament termed a protonema, from which erect leafy gametophores bud.",
+        wrongExplanations: [
+          "Prothallus is the heart-shaped gametophyte of ferns.",
+          "Correct answer.",
+          "Sorus is a cluster of sporangia on fern leaves.",
+          "Sporangium is the spore-producing capsule structure."
+        ]
+      },
+
+      // SLO 9.2.3: Life Cycle of Mosses
+      {
+        id: 26,
+        slo: "SLO 9.2.3: Life Cycle of Mosses",
+        question: "What type of cell division occurs inside the capsule (sporangium) of a mature moss sporophyte to produce haploid spores?",
+        options: ["Mitosis", "Binary fission", "Meiosis", "Budding"],
+        correct: 2,
+        explanation: "Diploid spore mother cells ($2n$) inside the capsule undergo meiosis (reduction division) to generate haploid spores ($n$).",
+        wrongExplanations: [
+          "Mitosis maintains ploidy level and produces identical cells.",
+          "Binary fission is a prokaryotic cell division mechanism.",
+          "Correct answer.",
+          "Budding is an asexual reproduction method."
+        ]
+      },
+      {
+        id: 27,
+        slo: "SLO 9.2.3: Life Cycle of Mosses",
+        question: "In the life cycle of a moss (Funaria), male sex organs called antheridia produce motile, biflagellated gametes known as:",
+        options: ["Oospheres", "Antherozoids (sperm)", "Ascospores", "Pollen grains"],
+        correct: 1,
+        explanation: "Antheridia produce spirally coiled, biflagellated male gametes called antherozoids (sperm cells) that swim through liquid water.",
+        wrongExplanations: [
+          "Oosphere refers to the unfertilized egg cell.",
+          "Correct answer.",
+          "Ascospores are meiotic spores produced by Ascomycete fungi.",
+          "Pollen grains are male microgametophytes of seed plants."
+        ]
+      },
+      {
+        id: 28,
+        slo: "SLO 9.2.3: Life Cycle of Mosses",
+        question: "[Real-Life Scenario] A student isolates a mature moss plant from a moist forest floor. She observes a brown, stalked capsule rising above green leafy shoots. Which parts correspond to the diploid (2n) sporophyte generation?",
+        options: ["Leafy shoot and rhizoids", "Antheridium and archegonium", "Foot, seta, and capsule", "Protonema and spore"],
+        correct: 2,
+        explanation: "The diploid ($2n$) sporophyte generation consists of three structural regions: foot (anchor), seta (stalk), and capsule (sporangium).",
+        wrongExplanations: [
+          "Leafy shoots and rhizoids belong to the haploid gametophyte.",
+          "Antheridia and archegonia are gametangia on the haploid gametophyte.",
+          "Correct answer.",
+          "Protonema and spores are haploid ($n$) gametophytic stages."
+        ]
+      },
+      {
+        id: 29,
+        slo: "SLO 9.2.3: Life Cycle of Mosses",
+        question: "What forms immediately after a biflagellated sperm swims through a water droplet and fuses with the egg cell inside an archegonium?",
+        options: ["Haploid protonema", "Diploid zygote", "Triploid seed", "Multicellular spore"],
+        correct: 1,
+        explanation: "Fertilization (syngamy) of the egg ($n$) by sperm ($n$) inside the archegonium forms a single-celled diploid zygote ($2n$).",
+        wrongExplanations: [
+          "Protonema develops from spore germination.",
+          "Correct answer.",
+          "Seeds are produced only by spermatophytes (gymnosperms/angiosperms).",
+          "Spores are haploid unicellular structures produced by meiosis."
+        ]
+      },
+      {
+        id: 30,
+        slo: "SLO 9.2.3: Life Cycle of Mosses",
+        question: "What is the role of the peristome teeth situated at the opening of a mature moss capsule?",
+        options: [
+          "Absorbing sunlight for photosynthesis",
+          "Regulating gradual spore release depending on atmospheric humidity",
+          "Pumping liquid water from soil to leaves",
+          "Attracting insect pollinators"
+        ],
+        correct: 1,
+        explanation: "Peristome teeth exhibit hygroscopic movements, flexing open in dry weather to release spores into air currents and closing in wet conditions.",
+        wrongExplanations: [
+          "Capsule teeth are non-photosynthetic structures.",
+          "Correct answer.",
+          "Water absorption is performed by rhizoids.",
+          "Mosses are wind-dispersed and do not utilize insect pollinators."
+        ]
+      },
+
+      // SLO 9.2.4: Significance of Alternation of Generations in Bryophytes
+      {
+        id: 31,
+        slo: "SLO 9.2.4: Significance of Alternation of Generations in Bryophytes",
+        question: "Alternation of generations in plants refers to the regular, sequential alternation between:",
+        options: [
+          "Asexual budding and sexual binary fission",
+          "A haploid gamete-producing gametophyte and a diploid spore-producing sporophyte",
+          "Photosynthetic vegetative growth and winter dormancy",
+          "Root development and leaf shedding"
+        ],
+        correct: 1,
+        explanation: "Alternation of generations is the life cycle alternation between a haploid ($n$) gametophyte phase and a diploid ($2n$) sporophyte phase.",
+        wrongExplanations: [
+          "Binary fission does not occur in plant sexual reproduction.",
+          "Correct answer.",
+          "Growth and dormancy relate to physiological plant seasonality.",
+          "Root/leaf growth are developmental vegetative processes."
+        ]
+      },
+      {
+        id: 32,
+        slo: "SLO 9.2.4: Significance of Alternation of Generations in Bryophytes",
+        question: "Why is meiosis during spore formation in the sporophyte generation biologically significant for plant survival?",
+        options: [
+          "It doubles the chromosome number in offspring",
+          "It ensures genetic recombination and variation in resultant spores",
+          "It produces identical clones of the parent gametophyte",
+          "It eliminates the need for water during fertilization"
+        ],
+        correct: 1,
+        explanation: "Meiosis introduces crossing over and independent assortment, generating genetically diverse spores adapted to changing environments.",
+        wrongExplanations: [
+          "Fertilization doubles chromosome numbers; meiosis halves them.",
+          "Correct answer.",
+          "Mitosis produces identical clones, whereas meiosis creates genetic variation.",
+          "Meiosis does not alter fertilization mechanics."
+        ]
+      },
+      {
+        id: 33,
+        slo: "SLO 9.2.4: Significance of Alternation of Generations in Bryophytes",
+        question: "Bryophytes exhibit 'heteromorphic' alternation of generations because:",
+        options: [
+          "The gametophyte and sporophyte generations are morphologically distinct from each other",
+          "Male and female gametes are identical in size and shape",
+          "Spores and gametes are produced by the same cell",
+          "Both generations are microscopic single cells"
+        ],
+        correct: 0,
+        explanation: "Heteromorphic alternation means that the haploid gametophyte and diploid sporophyte generations differ visibly in morphology and anatomy.",
+        wrongExplanations: [
+          "Correct answer.",
+          "Identical gametes define isogamy, not heteromorphic alternation of generations.",
+          "Spores and gametes are produced by distinct structures in separate generations.",
+          "Bryophyte gametophytes and sporophytes are multicellular structures."
+        ]
+      },
+      {
+        id: 34,
+        slo: "SLO 9.2.4: Significance of Alternation of Generations in Bryophytes",
+        question: "What is the primary evolutionary advantage of producing millions of dry airborne spores in the sporophyte capsule?",
+        options: [
+          "Spores attract flying insects for cross-pollination",
+          "Spores allow long-distance dispersal and colonisation of new terrestrial habitats",
+          "Spores absorb water directly from dry air",
+          "Spores bypass the need for nuclear cell division"
+        ],
+        correct: 1,
+        explanation: "Microscopic, light, dry spores are easily carried by wind over vast distances to colonize distant land microhabitats.",
+        wrongExplanations: [
+          "Spores are reproductive cells, not floral structures designed for insect pollination.",
+          "Correct answer.",
+          "Spores require moist substrates to germinate.",
+          "Spore germination involves active mitotic cell division."
+        ]
+      },
+      {
+        id: 35,
+        slo: "SLO 9.2.4: Significance of Alternation of Generations in Bryophytes",
+        question: "How does the female gametophyte protect the developing sporophyte generation in bryophytes?",
+        options: [
+          "By shedding the zygote into dry sand immediately",
+          "By enclosing the young embryo within the archegonium base (venter) and providing nutrients",
+          "By building a thick chitinous shell around the entire plant",
+          "By converting into a protective woody cone"
+        ],
+        correct: 1,
+        explanation: "The female gametophyte retains the zygote inside the protective archegonial venter, forming a calyptra and nourishing the embryo.",
+        wrongExplanations: [
+          "The zygote is retained, never shed immediately into soil.",
+          "Correct answer.",
+          "Plants do not synthesize chitin.",
+          "Woody cones evolved much later in Gymnosperms."
+        ]
+      },
+
+      // SLO 9.2.5: Adaptive Characteristics of Bryophytes in Land Habitat
+      {
+        id: 36,
+        slo: "SLO 9.2.5: Adaptive Characteristics of Bryophytes in Land Habitat",
+        question: "Which waxy outer coating developed on the surface of bryophyte epidermal cells to limit water loss via evaporation in terrestrial environments?",
+        options: ["Suberin layer", "Cuticle", "Lignin wall", "Pectin sheath"],
+        correct: 1,
+        explanation: "A thin hydrophobic waxy layer called the cuticle covers the outer epidermis, preventing rapid desiccation in air.",
+        wrongExplanations: [
+          "Suberin is found in cork cells and Casparian strips of roots.",
+          "Correct answer.",
+          "Lignin provides secondary structural support in vascular tracheophytes.",
+          "Pectin acts as an intercellular cement in cell walls."
+        ]
+      },
+      {
+        id: 37,
+        slo: "SLO 9.2.5: Adaptive Characteristics of Bryophytes in Land Habitat",
+        question: "How do terrestrial bryophytes absorb soil moisture and anchor themselves without true roots?",
+        options: [
+          "Through deep taproot systems",
+          "Through thread-like rhizoids that provide surface anchorage and capillary water absorption",
+          "Through woody bark",
+          "Through vascular xylem tubes"
+        ],
+        correct: 1,
+        explanation: "Rhizoids anchor bryophytes to substrate and absorb moisture via surface capillary action.",
+        wrongExplanations: [
+          "Bryophytes lack deep taproot systems.",
+          "Correct answer.",
+          "Bryophytes do not produce bark.",
+          "Bryophytes lack specialized lignified xylem vessels."
+        ]
+      },
+      {
+        id: 38,
+        slo: "SLO 9.2.5: Adaptive Characteristics of Bryophytes in Land Habitat",
+        question: "[Real-Life Scenario] A gardener attempts to grow mosses on dry sunny rocks in an open desert garden, but they wither quickly. Which limitation prevents bryophytes from flourishing far away from moist, shady microhabitats?",
+        options: [
+          "Inability to synthesize starch",
+          "Absence of true vascular tissues (xylem/phloem) and dependence on liquid water for flagellated sperm motility",
+          "Lack of cell walls in their leaves",
+          "Inability to perform aerobic cellular respiration"
+        ],
+        correct: 1,
+        explanation: "Without xylem/phloem and deep roots, bryophytes cannot draw deep groundwater and require external liquid water for fertilization.",
+        wrongExplanations: [
+          "Mosses readily synthesize and store starch.",
+          "Correct answer.",
+          "Bryophyte cells possess rigid cellulose cell walls.",
+          "Bryophytes carry out normal aerobic cellular respiration."
+        ]
+      },
+      {
+        id: 39,
+        slo: "SLO 9.2.5: Adaptive Characteristics of Bryophytes in Land Habitat",
+        question: "What structural feature of bryophyte sex organs protects delicate developing gametes from drying out in air?",
+        options: [
+          "A sterile outer layer of protective jacket cells surrounding gametes",
+          "Thick silica shells",
+          "Heavy wax coats covering sperm flagella",
+          "Underground bulb reserves"
+        ],
+        correct: 0,
+        explanation: "Multicellular gametangia (antheridia/archegonia) feature a jacket layer of sterile cells shielding gametes from desiccation.",
+        wrongExplanations: [
+          "Correct answer.",
+          "Silica cell walls are found in diatoms and horsetails.",
+          "Sperm flagella are not coated in wax, which would prevent motility.",
+          "Bulbs are subterranean storage shoots of monocots."
+        ]
+      },
+      {
+        id: 40,
+        slo: "SLO 9.2.5: Adaptive Characteristics of Bryophytes in Land Habitat",
+        question: "Compact arrangement of photosynthetic parenchymatous tissue with internal air chambers in bryophytes allows for:",
+        options: [
+          "High-speed water transport across miles",
+          "Efficient gaseous exchange (CO2 and O2) while minimizing interior water evaporation",
+          "Structural support for growing 50 feet tall",
+          "Production of woody timber"
+        ],
+        correct: 1,
+        explanation: "Internal air pores/chambers allow essential gas exchange for photosynthesis while maintaining high internal humidity.",
+        wrongExplanations: [
+          "Air chambers do not function as long-distance vascular transport channels.",
+          "Correct answer.",
+          "Bryophytes are small plants due to lack of lignified support tissues.",
+          "Bryophytes cannot form true secondary wood."
+        ]
+      },
+
+      // SLO 9.3.1: Compare Major Groups of Tracheophyta
+      {
+        id: 41,
+        slo: "SLO 9.3.1: Compare Major Groups of Tracheophyta",
+        question: "Which primitive vascular group (Psilopsida) is characterized by rootless, dichotomously branched green stems bearing sporangia, as seen in Psilotum?",
+        options: ["Sphenopsida", "Psilopsida", "Lycopsida", "Pteropsida"],
+        correct: 1,
+        explanation: "Class Psilopsida includes primitive vascular plants (e.g., Psilotum) featuring leafless, rootless, dichotomously branching stems.",
+        wrongExplanations: [
+          "Sphenopsida possess jointed stems with nodes/internodes.",
+          "Correct answer.",
+          "Lycopsida feature microphyllous leaves and strobili.",
+          "Pteropsida feature large megaphyllous fronds."
+        ]
+      },
+      {
+        id: 42,
+        slo: "SLO 9.3.1: Compare Major Groups of Tracheophyta",
+        question: "Lycopsida members (such as Selaginella and Lycopodium) are commonly known as club mosses because their sporangia are organized into terminal club-like structures called:",
+        options: ["Sori", "Strobili (cones)", "Archegoniophores", "Synangia"],
+        correct: 1,
+        explanation: "Lycopsids bear sporangia clustered on specialized leaves (sporophylls) organized into terminal cones or strobili.",
+        wrongExplanations: [
+          "Sori are clusters of sporangia on the undersides of fern fronds.",
+          "Correct answer.",
+          "Archegoniophores are stalked structures bearing archegonia in liverworts.",
+          "Synangia are fused sporangia found in Psilopsids or Marattiacean ferns."
+        ]
+      },
+      {
+        id: 43,
+        slo: "SLO 9.3.1: Compare Major Groups of Tracheophyta",
+        question: "[Real-Life Scenario] A student finds a fossilized plant specimen featuring jointed stems with distinct nodes and internodes, whorled scale-like leaves, and silica-reinforced ribbed stems. This plant belongs to which tracheophyte group?",
+        options: ["Psilopsida", "Lycopsida", "Sphenopsida (Horsetails)", "Pteropsida"],
+        correct: 2,
+        explanation: "Sphenopsida (horsetails like Equisetum) are defined by jointed, ribbed, silica-rich stems with whorled scale leaves at nodes.",
+        wrongExplanations: [
+          "Psilopsida have smooth dichotomous stems without jointed nodes.",
+          "Lycopsida have spirally arranged microphylls.",
+          "Correct answer.",
+          "Pteropsida feature large fronds (megaphylls)."
+        ]
+      },
+      {
+        id: 44,
+        slo: "SLO 9.3.1: Compare Major Groups of Tracheophyta",
+        question: "Ferns belong to the class Pteropsida. What characteristic unfurling pattern is exhibited by young, coiled fern leaves (fronds)?",
+        options: ["Dichotomous branching", "Circinate vernation", "Parallel venation", "Reticulate network"],
+        correct: 1,
+        explanation: "Young fern fronds are tightly uncoiled from apex to base in a spiral fiddlehead configuration called circinate vernation.",
+        wrongExplanations: [
+          "Dichotomous branching refers to stem splitting into two equal branches.",
+          "Correct answer.",
+          "Parallel venation is typical of monocot angiosperm leaves.",
+          "Reticulate network describes dicot leaf venation."
+        ]
+      },
+      {
+        id: 45,
+        slo: "SLO 9.3.1: Compare Major Groups of Tracheophyta",
+        question: "In ferns (Pteropsida), clusters of sporangia located on the undersides of mature fertile leaves (fronds) are called:",
+        options: ["Sori", "Strobili", "Capsules", "Gemmae"],
+        correct: 0,
+        explanation: "Sori (singular: sorus) are discrete clusters of sporangia born on the abaxial (under) surface of fern fronds.",
+        wrongExplanations: [
+          "Correct answer.",
+          "Strobili are terminal cones found in Lycopsids and Gymnosperms.",
+          "Capsules are bryophyte sporangia.",
+          "Gemmae are asexual multicellular reproductive cups in liverworts."
+        ]
+      },
+
+      // SLO 9.3.2: Evolution of Single-Veined and Multi-Veined Leaves
+      {
+        id: 46,
+        slo: "SLO 9.3.2: Evolution of Single-Veined and Multi-Veined Leaves",
+        question: "A small leaf with a single unbranched vascular vein, characteristic of Lycopsida, is known as a:",
+        options: ["Megaphyll", "Microphyll", "Sporophyll", "Bract"],
+        correct: 1,
+        explanation: "A microphyll is a simple, small leaf containing a single unbranched vascular strand, without leaving a leaf gap in the stem stele.",
+        wrongExplanations: [
+          "Megaphylls are large leaves with complex branched vascular networks.",
+          "Correct answer.",
+          "Sporophylls are specialized leaves that bear sporangia.",
+          "Bracts are modified floral leaves."
+        ]
+      },
+      {
+        id: 47,
+        slo: "SLO 9.3.2: Evolution of Single-Veined and Multi-Veined Leaves",
+        question: "According to Zimmermann's Telome Theory, what was the first step in the evolution of large, multi-veined leaves (megaphylls) from leafless branched stems?",
+        options: [
+          "Webbing (fusion of parenchymatous tissue)",
+          "Planation (flattening of branches into a single plane)",
+          "Overtopping (unequal branching where one main axis grew taller than side branches)",
+          "Curving of sporangia"
+        ],
+        correct: 2,
+        explanation: "Telome Theory step 1: Overtopping occurred when equal dichotomous branches began branching unequally, establishing a dominant main stem.",
+        wrongExplanations: [
+          "Webbing is the 3rd (final) step of Telome Theory.",
+          "Planation is the 2nd step of Telome Theory.",
+          "Correct answer.",
+          "Curving of sporangia is not part of leaf evolution sequence."
+        ]
+      },
+      {
+        id: 48,
+        slo: "SLO 9.3.2: Evolution of Single-Veined and Multi-Veined Leaves",
+        question: "[Real-Life Scenario] A paleobotanist examines evolutionary leaf fossils. She notes the progression: three-dimensional leafless branches -> main upright stem with lateral branches -> lateral branches aligned in one flat plane -> space between flattened branches filled with green photosynthetic tissue. This sequence describes the evolution of a:",
+        options: ["Microphyllous leaf", "Megaphyllous leaf", "Scale leaf", "Conifer needle"],
+        correct: 1,
+        explanation: "The progression (Overtopping -> Planation -> Webbing) outlines Zimmermann's Telome Theory for the origin of megaphylls.",
+        wrongExplanations: [
+          "Microphylls evolved via enation/outgrowth hypothesis or reduction.",
+          "Correct answer.",
+          "Scale leaves are reduced microphylls or modified structures.",
+          "Conifer needles are specialized leaves."
+        ]
+      },
+      {
+        id: 49,
+        slo: "SLO 9.3.2: Evolution of Single-Veined and Multi-Veined Leaves",
+        question: "What structural feature defines a megaphyllous leaf (found in ferns and seed plants)?",
+        options: [
+          "Complete absence of vascular tissue",
+          "A broad leaf blade with a complex, branched network of vascular veins and leaf gaps",
+          "A tiny needle with no stomata",
+          "A single unbranched central vein without leaf gaps"
+        ],
+        correct: 1,
+        explanation: "Megaphylls feature a expanded blade (lamina) supported by complex branched vascular networks associated with leaf gaps in the vascular cylinder.",
+        wrongExplanations: [
+          "Megaphylls are rich in vascular bundles.",
+          "Correct answer.",
+          "Megaphylls possess numerous stomata for gas exchange.",
+          "Single unbranched veins define microphylls."
+        ]
+      },
+      {
+        id: 50,
+        slo: "SLO 9.3.2: Evolution of Single-Veined and Multi-Veined Leaves",
+        question: "What is the correct chronological sequence of the three evolutionary events in Zimmermann's Telome Theory for megaphyll evolution?",
+        options: [
+          "Webbing -> Planation -> Overtopping",
+          "Overtopping -> Planation -> Webbing",
+          "Planation -> Webbing -> Overtopping",
+          "Overtopping -> Webbing -> Planation"
+        ],
+        correct: 1,
+        explanation: "The proper sequential steps of Telome Theory are: 1. Overtopping -> 2. Planation -> 3. Webbing (Parenchymatous infilling).",
+        wrongExplanations: [
+          "Webbing occurs last, not first.",
+          "Correct answer.",
+          "Planation follows overtopping.",
+          "Webbing occurs after planation."
+        ]
+      },
+
+      // SLO 9.3.3: Differentiate Between Homospory and Heterospory
+      {
+        id: 51,
+        slo: "SLO 9.3.3: Differentiate Between Homospory and Heterospory",
+        question: "Plants that produce only one single morphological type of spore, which germinates into a bisexual gametophyte, are termed:",
+        options: ["Heterosporous", "Homosporous", "Seed-bearing", "Dioecious"],
+        correct: 1,
+        explanation: "Homospory is the production of identical spores that yield bisexual gametophytes bearing both antheridia and archegonia.",
+        wrongExplanations: [
+          "Heterosporous plants produce two distinct types of spores (microspores and megaspores).",
+          "Correct answer.",
+          "Seed plants are always heterosporous.",
+          "Dioecious refers to separate male and female individual plants."
+        ]
+      },
+      {
+        id: 52,
+        slo: "SLO 9.3.3: Differentiate Between Homospory and Heterospory",
+        question: "Heterospory is the production of two distinct types of spores differing in size and function. These two types are called:",
+        options: [
+          "Microspores and Megaspores",
+          "Zoospores and Aplanospores",
+          "Ascospores and Basidiospores",
+          "Conidia and Gemmae"
+        ],
+        correct: 0,
+        explanation: "Heterosporous plants produce small microspores (which develop into male gametophytes) and larger megaspores (which develop into female gametophytes).",
+        wrongExplanations: [
+          "Correct answer.",
+          "Zoospores and aplanospores are asexual algal spores.",
+          "Ascospores and basidiospores are fungal meiotic spores.",
+          "Conidia and gemmae are asexual propagules."
+        ]
+      },
+      {
+        id: 53,
+        slo: "SLO 9.3.3: Differentiate Between Homospory and Heterospory",
+        question: "In heterosporous plants like Selaginella, microspores germinate to give rise to:",
+        options: ["Female gametophytes", "Male gametophytes", "Diploid sporophytes", "Photosynthetic prothalli"],
+        correct: 1,
+        explanation: "Microspores develop into microgametophytes (male gametophytes) producing antheridia and sperm.",
+        wrongExplanations: [
+          "Megaspores germinate to give rise to female gametophytes.",
+          "Correct answer.",
+          "Microspores are haploid and produce haploid gametophytes, not diploid sporophytes.",
+          "Prothalli in homosporous ferns are bisexual."
+        ]
+      },
+      {
+        id: 54,
+        slo: "SLO 9.3.3: Differentiate Between Homospory and Heterospory",
+        question: "Why is the evolution of heterospory considered one of the most vital milestones in plant evolutionary history?",
+        options: [
+          "It eliminated the need for photosynthesis",
+          "It led directly to the evolution of the seed habit",
+          "It allowed plants to return to living completely underwater",
+          "It stopped plants from forming cell walls"
+        ],
+        correct: 1,
+        explanation: "Heterospory (differentiation of micro/megaspores and retention of megaspore within megasporangium) is the essential precursor to seed evolution.",
+        wrongExplanations: [
+          "Heterosporous plants remain photosynthetic autotrophs.",
+          "Correct answer.",
+          "Heterospory evolved as an adaptation to terrestrial environments, not aquatic.",
+          "All heterosporous plants maintain cellulose cell walls."
+        ]
+      },
+      {
+        id: 55,
+        slo: "SLO 9.3.3: Differentiate Between Homospory and Heterospory",
+        question: "Which of the following pteridophytes is heterosporous?",
+        options: ["Dryopteris", "Adiantum", "Selaginella", "Psilotum"],
+        correct: 2,
+        explanation: "Selaginella (spike moss) is a classic example of a heterosporous pteridophyte.",
+        wrongExplanations: [
+          "Dryopteris is a homosporous fern.",
+          "Adiantum (maidenhair fern) is homosporous.",
+          "Correct answer.",
+          "Psilotum is homosporous."
+        ]
+      },
+
+      // SLO 9.3.4: Evolution of Seed
+      {
+        id: 56,
+        slo: "SLO 9.3.4: Evolution of Seed",
+        question: "An ovule, the precursor to the seed, is structurally defined as an:",
+        options: [
+          "Unintegumented dehiscent microsporangium",
+          "Integumented, indehiscent megasporangium containing a retained megaspore",
+          "Exogenous spore sac on a leaf stem",
+          "External flagellated egg cell"
+        ],
+        correct: 1,
+        explanation: "An ovule is defined as an indehiscent megasporangium (nucellus) enveloped by protective integuments containing a single functional retained megaspore.",
+        wrongExplanations: [
+          "An ovule is integumented and indehiscent, involving megasporangia.",
+          "Correct answer.",
+          "Ovules are complex internal structures, not simple exogenous sacs.",
+          "An ovule contains an egg cell inside an embryo sac/archegonium."
+        ]
+      },
+      {
+        id: 57,
+        slo: "SLO 9.3.4: Evolution of Seed",
+        question: "During seed evolution, what protective outer layer developed around the megasporangium (nucellus)?",
+        options: ["Seed coat derived from integuments", "Chitinous capsule", "Gelatinous sheath", "Cellulose cell plate"],
+        correct: 0,
+        explanation: "Protective sterile tissue layers called integuments wrapped around the megasporangium, later hardening into the seed coat (testa).",
+        wrongExplanations: [
+          "Correct answer.",
+          "Plants do not form chitinous capsules.",
+          "Gelatinous sheaths are algal coatings.",
+          "Cell plates form during plant cell cytokinesis."
+        ]
+      },
+      {
+        id: 58,
+        slo: "SLO 9.3.4: Evolution of Seed",
+        question: "[Real-Life Scenario] In primitive seedless land plants, megaspores were shed into wet soil. In seed plants, the megaspore is never shed; instead, it is retained inside the megasporangium where it develops into a female gametophyte and receives food from the parent sporophyte. What major survival advantage does this retention provide?",
+        options: [
+          "Enables rapid swimming of female spores",
+          "Protects the developing embryo from desiccation and environmental stress",
+          "Increases water requirements during hot summers",
+          "Prevents plants from undergoing meiosis"
+        ],
+        correct: 1,
+        explanation: "Retention of the megaspore shelters the delicate female gametophyte and developing embryo inside maternal tissues, shielding it from drought and environmental harshness.",
+        wrongExplanations: [
+          "Megaspores are non-motile cells.",
+          "Correct answer.",
+          "Retention lowers vulnerability to drought rather than increasing water dependency.",
+          "Meiosis still occurs within the megasporangium to generate the functional megaspore."
+        ]
+      },
+      {
+        id: 59,
+        slo: "SLO 9.3.4: Evolution of Seed",
+        question: "In seed plants, what structure evolved from the microspore to transfer male gametes to the female ovule via wind or animals without needing swimming water?",
+        options: ["Flagellated sperm", "Pollen grain", "Rhizoid thread", "Sorus stalk"],
+        correct: 1,
+        explanation: "The pollen grain (microgametophyte) transfers male nuclei directly through a pollen tube to the egg, freeing seed plants from reliance on liquid water for fertilization.",
+        wrongExplanations: [
+          "Flagellated sperm require free liquid water to swim to eggs.",
+          "Correct answer.",
+          "Rhizoids are vegetative anchoring structures.",
+          "Sorus stalk supports fern sporangia."
+        ]
+      },
+      {
+        id: 60,
+        slo: "SLO 9.3.4: Evolution of Seed",
+        question: "After successful fertilization inside the ovule, the outer protective integument layer hardens to become the:",
+        options: ["Fruit wall (pericarp)", "Seed coat (testa)", "Endosperm nucleus", "Cotyledon blade"],
+        correct: 1,
+        explanation: "Following fertilization, the integuments of the ovule mature and harden into the protective seed coat (testa).",
+        wrongExplanations: [
+          "The fruit wall (pericarp) develops from the ovary wall.",
+          "Correct answer.",
+          "Endosperm nucleus forms via double fertilization in angiosperms.",
+          "Cotyledons form as embryonic leaves."
+        ]
+      },
+
+      // SLO 9.4.1: General Characteristics of Gymnosperms and Angiosperms
+      {
+        id: 61,
+        slo: "SLO 9.4.1: General Characteristics of Gymnosperms and Angiosperms",
+        question: "What is the fundamental difference between gymnosperms and angiosperms regarding seed location?",
+        options: [
+          "Gymnosperms produce enclosed seeds inside fruits; Angiosperms produce naked seeds on cones",
+          "Gymnosperms produce naked seeds on sporophylls/cones; Angiosperms produce seeds enclosed within fruits",
+          "Gymnosperms lack DNA; Angiosperms have linear DNA",
+          "Gymnosperms reproduce by spores; Angiosperms reproduce by buds"
+        ],
+        correct: 1,
+        explanation: "Gymnosperm means 'naked seed' (seeds exposed on cone scales); Angiosperm means 'vessel seed' (seeds enclosed inside ovaries/fruits).",
+        wrongExplanations: [
+          "The definitions are reversed.",
+          "Correct answer.",
+          "Both groups possess linear nuclear DNA.",
+          "Both gymnosperms and angiosperms reproduce via seeds."
+        ]
+      },
+      {
+        id: 62,
+        slo: "SLO 9.4.1: General Characteristics of Gymnosperms and Angiosperms",
+        question: "With the exception of Gnetales, the xylem wood of most gymnosperms differs from angiosperm wood because gymnosperm xylem lacks:",
+        options: ["Tracheids", "True vessel elements", "Parenchyma cells", "Lignin reinforcement"],
+        correct: 1,
+        explanation: "Gymnosperm wood is considered 'softwood' because it consists almost entirely of tracheids and lacks true xylem vessel elements.",
+        wrongExplanations: [
+          "Tracheids make up over 90% of gymnosperm xylem.",
+          "Correct answer.",
+          "Gymnosperms possess ray parenchyma cells.",
+          "Gymnosperm xylem cells are heavily lignified."
+        ]
+      },
+      {
+        id: 63,
+        slo: "SLO 9.4.1: General Characteristics of Gymnosperms and Angiosperms",
+        question: "[Real-Life Scenario] A carpenter compares two pieces of timber. Wood Sample A contains true water-conducting vessel tubes and comes from an apple tree. Wood Sample B lacks vessel tubes (consisting mostly of tracheids) and comes from a pine tree with reproductive cones. How are these two trees classified?",
+        options: [
+          "Sample A = Gymnosperm; Sample B = Angiosperm",
+          "Sample A = Angiosperm; Sample B = Gymnosperm",
+          "Sample A = Bryophyte; Sample B = Fern",
+          "Sample A = Monocot; Sample B = Alga"
+        ],
+        correct: 1,
+        explanation: "Sample A (apple tree, true vessels) is an Angiosperm. Sample B (pine tree, cones, tracheids only) is a Gymnosperm.",
+        wrongExplanations: [
+          "Classifications are reversed.",
+          "Correct answer.",
+          "Apple and pine trees are both woody seed plants, not bryophytes or ferns.",
+          "Pine is a gymnosperm; apple is a dicot angiosperm."
+        ]
+      },
+      {
+        id: 64,
+        slo: "SLO 9.4.1: General Characteristics of Gymnosperms and Angiosperms",
+        question: "Which unique reproductive process occurs exclusively in angiosperms and is absent in gymnosperms?",
+        options: ["Wind pollination", "Double fertilization", "Alternation of generations", "Meiotic spore formation"],
+        correct: 1,
+        explanation: "Double fertilization (one sperm fertilizes the egg -> 2n zygote; second sperm fertilizes polar nuclei -> 3n endosperm) is unique to angiosperms.",
+        wrongExplanations: [
+          "Wind pollination occurs extensively in gymnosperms (e.g., conifers).",
+          "Correct answer.",
+          "Alternation of generations occurs in all land plants.",
+          "Meiotic spore formation occurs in all land plants."
+        ]
+      },
+      {
+        id: 65,
+        slo: "SLO 9.4.1: General Characteristics of Gymnosperms and Angiosperms",
+        question: "What is the ploidy level of the nutrient-rich endosperm tissue formed in angiosperm seeds following double fertilization?",
+        options: ["Haploid (1n)", "Diploid (2n)", "Triploid (3n)", "Tetraploid (4n)"],
+        correct: 2,
+        explanation: "In angiosperms, triple fusion of one haploid male gamete ($1n$) with two central polar nuclei ($1n + 1n$) forms a triploid ($3n$) endosperm.",
+        wrongExplanations: [
+          "Gymnosperm endosperm is haploid ($1n$), formed before fertilization.",
+          "Zygotes are diploid ($2n$).",
+          "Correct answer.",
+          "Triploid ($3n$) is the standard angiosperm endosperm ploidy level."
+        ]
+      },
+
+      // SLO 9.4.2: Life Cycle of Pinus (Gymnosperm)
+      {
+        id: 66,
+        slo: "SLO 9.4.2: Life Cycle of Pinus (Gymnosperm)",
+        question: "The familiar, tall, evergreen pine tree (Pinus) represents which generation of its life cycle?",
+        options: ["Haploid gametophyte", "Diploid sporophyte", "Triploid endosperm", "Unicellular prothallus"],
+        correct: 1,
+        explanation: "The prominent, leafy pine tree is the independent, long-lived diploid ($2n$) sporophyte generation.",
+        wrongExplanations: [
+          "The gametophytes are microscopic structures enclosed within cones.",
+          "Correct answer.",
+          "Endosperm is seed storage tissue.",
+          "Prothalli occur in ferns."
+        ]
+      },
+      {
+        id: 67,
+        slo: "SLO 9.4.2: Life Cycle of Pinus (Gymnosperm)",
+        question: "In Pinus, female cones are larger than male cones and consist of ovuliferous scales that bear:",
+        options: [
+          "Antheridia with swimming sperm",
+          "Naked ovules containing megasporangia",
+          "Bright colorful petals to attract bees",
+          "Sori containing homospores"
+        ],
+        correct: 1,
+        explanation: "Female pine cones feature ovuliferous scales that carry two naked ovules exposed on their upper surfaces.",
+        wrongExplanations: [
+          "Antheridia are male structures absent in gymnosperms.",
+          "Correct answer.",
+          "Pine cones lack petals and are wind-pollinated.",
+          "Pine ovules are heterosporous and do not form sori."
+        ]
+      },
+      {
+        id: 68,
+        slo: "SLO 9.4.2: Life Cycle of Pinus (Gymnosperm)",
+        question: "[Real-Life Scenario] During spring in a pine forest, a fine yellow dust settles on cars and ground surfaces. Under a microscope, each minute particle displays two lateral air-bladders (wings). What are these particles, and what is their role?",
+        options: [
+          "Microspores/pollen grains designed for wind dispersal",
+          "Seed coats designed for water swimming",
+          "Female megaspores carrying eggs",
+          "Fungal spores causing pine rot"
+        ],
+        correct: 0,
+        explanation: "Yellow pine dust consists of winged pollen grains (microgametophytes) with air bladders that facilitate wind dispersal to female cones.",
+        wrongExplanations: [
+          "Correct answer.",
+          "Pine seeds have flat wings, but yellow dust consists of pollen grains, not seeds.",
+          "Megaspores remain enclosed inside female ovules.",
+          "Pine pollen is produced natively by male pine cones."
+        ]
+      },
+      {
+        id: 69,
+        slo: "SLO 9.4.2: Life Cycle of Pinus (Gymnosperm)",
+        question: "In Pinus, how long is the time delay between initial spring pollination and actual egg fertilization?",
+        options: ["5 minutes", "24 hours", "Approximately 12 to 14 months", "Exactly 10 years"],
+        correct: 2,
+        explanation: "In Pinus, pollen rests after pollination while the female gametophyte and archegonia slowly mature; fertilization occurs ~12–14 months later.",
+        wrongExplanations: [
+          "5 minutes is far too fast; pollen tubes grow extremely slowly in conifers.",
+          "24 hours is typical for some fast-growing angiosperms, not pines.",
+          "Correct answer.",
+          "10 years is excessively long."
+        ]
+      },
+      {
+        id: 70,
+        slo: "SLO 9.4.2: Life Cycle of Pinus (Gymnosperm)",
+        question: "How many functional megaspores survive inside the Pinus megasporangium after meiosis of the megaspore mother cell?",
+        options: [
+          "1 functional megaspore (3 degenerate)",
+          "All 4 functional megaspores",
+          "8 functional megaspores",
+          "0 (all degenerate)"
+        ],
+        correct: 0,
+        explanation: "Meiosis of the megaspore mother cell produces a linear tetrad of 4 haploid megaspores, of which 3 degenerate and 1 remains functional.",
+        wrongExplanations: [
+          "Correct answer.",
+          "Only one megaspore survives to form the female gametophyte.",
+          "8 nuclei form inside embryo sacs later in angiosperms, but only 1 megaspore survives initially.",
+          "If all degenerated, reproduction would fail."
+        ]
+      },
+
+      // SLO 9.4.3: Life Cycle of an Angiosperm
+      {
+        id: 71,
+        slo: "SLO 9.4.3: Life Cycle of an Angiosperm",
+        question: "In flowering plants (angiosperms), the mature female gametophyte contained inside the ovule is known as the:",
+        options: ["Pollen grain", "Embryo sac (7-celled, 8-nucleate structure)", "Stigma", "Anther sac"],
+        correct: 1,
+        explanation: "The angiosperm female gametophyte is the embryo sac, typically composed of 7 cells containing 8 nuclei (3 antipodals, 2 synergids, 1 egg, 1 central cell with 2 polar nuclei).",
+        wrongExplanations: [
+          "Pollen grain is the male gametophyte.",
+          "Correct answer.",
+          "Stigma is the receptive tip of the carpel/pistil.",
+          "Anther sac is the microsporangium where pollen develops."
+        ]
+      },
+      {
+        id: 72,
+        slo: "SLO 9.4.3: Life Cycle of an Angiosperm",
+        question: "During double fertilization in angiosperms, one male gamete fuses with the egg cell to form a diploid zygote (2n). The second male gamete fuses with the:",
+        options: [
+          "Synergid cells to form pollen",
+          "Antipodal cells to form fruit wall",
+          "Two polar nuclei (or diploid secondary nucleus) to form a triploid endosperm nucleus (3n)",
+          "Outer integument to form seed coat"
+        ],
+        correct: 2,
+        explanation: "The 2nd sperm nucleus ($1n$) fuses with the 2 central polar nuclei ($1n + 1n$) via triple fusion, creating the triploid ($3n$) primary endosperm nucleus.",
+        wrongExplanations: [
+          "Synergids help guide the pollen tube and degenerate after fertilization.",
+          "Antipodal cells degenerate and do not form fruit walls.",
+          "Correct answer.",
+          "Integuments develop into the seed coat without fusion with sperm."
+        ]
+      },
+      {
+        id: 73,
+        slo: "SLO 9.4.3: Life Cycle of an Angiosperm",
+        question: "[Real-Life Scenario] A plant researcher tracks fertilization in a lily flower. She notes one sperm cell fertilizing the egg cell (n + n -> 2n) and a second sperm cell fusing with two central polar nuclei (n + n + n -> 3n). What is the primary function of the resulting 3n tissue?",
+        options: [
+          "Forming the protective seed coat",
+          "Providing stored food reserves for the germinating embryo",
+          "Developing into bright flower petals",
+          "Anchoring the root into soil"
+        ],
+        correct: 1,
+        explanation: "The $3n$ endosperm tissue synthesizes and stores starch, proteins, and lipids to nourish the embryonic plant during seed germination.",
+        wrongExplanations: [
+          "Seed coats derive from integuments.",
+          "Correct answer.",
+          "Petals are sterile floral organs.",
+          "Roots anchor plants in soil."
+        ]
+      },
+      {
+        id: 74,
+        slo: "SLO 9.4.3: Life Cycle of an Angiosperm",
+        question: "Following successful double fertilization and seed development in an angiosperm, what do the ovule and ovary transform into?",
+        options: [
+          "Ovule -> Fruit; Ovary -> Seed",
+          "Ovule -> Seed; Ovary -> Fruit",
+          "Ovule -> Petal; Ovary -> Sepal",
+          "Ovule -> Pollen; Ovary -> Stigma"
+        ],
+        correct: 1,
+        explanation: "Upon fertilization, the ovule matures into a seed, while the surrounding ovary wall expands and matures into a fruit.",
+        wrongExplanations: [
+          "The transformations are reversed.",
+          "Correct answer.",
+          "Petals and sepals are floral whorls that usually wither after fertilization.",
+          "Pollen and stigma are pre-fertilization reproductive structures."
+        ]
+      },
+      {
+        id: 75,
+        slo: "SLO 9.4.3: Life Cycle of an Angiosperm",
+        question: "How many microspores (pollen grains) are produced from a single microspore mother cell inside an anther sac following meiosis?",
+        options: ["1", "2", "4", "8"],
+        correct: 2,
+        explanation: "Each diploid microspore mother cell ($2n$) undergoes meiosis to yield 4 functional haploid microspores ($n$), all of which develop into pollen grains.",
+        wrongExplanations: [
+          "Only 1 megaspore survives in female ovules, but all 4 microspores survive in male anthers.",
+          "Meiosis results in 4 daughter cells, not 2.",
+          "Correct answer.",
+          "Mitosis following meiosis can yield 8 nuclei in female embryo sacs, but meiosis produces 4 microspores."
+        ]
+      },
+
+      // SLO 9.4.4: Compare Dicotyledonous and Monocotyledonous Plants
+      {
+        id: 76,
+        slo: "SLO 9.4.4: Compare Dicotyledonous and Monocotyledonous Plants",
+        question: "What primary embryonic feature separates angiosperms into Monocotyledonae and Dicotyledonae?",
+        options: [
+          "Number of petals on flowers",
+          "Number of seed leaves (cotyledons) present in the seed embryo",
+          "Presence or absence of roots",
+          "Height of mature tree stem"
+        ],
+        correct: 1,
+        explanation: "Monocots possess 1 embryonic cotyledon in their seeds, whereas dicots possess 2 embryonic cotyledons.",
+        wrongExplanations: [
+          "Petal numbers correlate with classes, but the primary defining taxonomic feature is cotyledon count.",
+          "Correct answer.",
+          "Both monocots and dicots possess roots.",
+          "Stem height is not a taxonomic criterion."
+        ]
+      },
+      {
+        id: 77,
+        slo: "SLO 9.4.4: Compare Dicotyledonous and Monocotyledonous Plants",
+        question: "What leaf venation pattern typically distinguishes dicot leaves from monocot leaves?",
+        options: [
+          "Monocots have parallel venation; Dicots have reticulate (netted) venation",
+          "Monocots have reticulate venation; Dicots have parallel venation",
+          "Monocots lack veins; Dicots have single central veins",
+          "Both have identical circular veins"
+        ],
+        correct: 0,
+        explanation: "Monocot leaves feature veins running parallel to one another; dicot leaves display a branching reticulate (netted) vein network.",
+        wrongExplanations: [
+          "Correct answer.",
+          "Venation patterns are reversed.",
+          "Both groups possess vascular veins.",
+          "Circular venation is not a standard angiosperm pattern."
+        ]
+      },
+      {
+        id: 78,
+        slo: "SLO 9.4.4: Compare Dicotyledonous and Monocotyledonous Plants",
+        question: "[Real-Life Scenario] A student pulls up two garden weeds. Plant A has a fibrous root system, leaves with parallel veins, and flower petals in multiples of three. Plant B has a taproot system, leaves with branched net venation, and flower petals in multiples of four or five. How are Plant A and Plant B classified?",
+        options: [
+          "Plant A = Dicot; Plant B = Monocot",
+          "Plant A = Monocot; Plant B = Dicot",
+          "Plant A = Gymnosperm; Plant B = Bryophyte",
+          "Plant A = Fern; Plant B = Moss"
+        ],
+        correct: 1,
+        explanation: "Plant A displays classic monocot traits (fibrous roots, parallel venation, trimerous flowers). Plant B displays dicot traits (taproot, reticulate venation, tetramerous/pentamerous flowers).",
+        wrongExplanations: [
+          "Classifications are reversed.",
+          "Correct answer.",
+          "Both weeds are flowering angiosperms.",
+          "Both plants are seed-bearing flowering weeds."
+        ]
+      },
+      {
+        id: 79,
+        slo: "SLO 9.4.4: Compare Dicotyledonous and Monocotyledonous Plants",
+        question: "How are vascular bundles arranged in a cross-section of a monocot stem compared to a dicot stem?",
+        options: [
+          "Monocot = Scattered throughout ground tissue; Dicot = Arranged in a distinct ring",
+          "Monocot = Arranged in a ring; Dicot = Scattered throughout ground tissue",
+          "Monocot = Single central bundle; Dicot = Complete absence of xylem",
+          "Both have vascular bundles concentrated exclusively in outer bark"
+        ],
+        correct: 0,
+        explanation: "In monocot stem cross-sections, vascular bundles are scattered randomly throughout ground tissue (atactostele); in dicot stems, vascular bundles form a ring (eustele).",
+        wrongExplanations: [
+          "Correct answer.",
+          "Arrangements are reversed.",
+          "Dicots contain abundant xylem.",
+          "Vascular bundles are distributed through the stem core, not just outer bark."
+        ]
+      },
+      {
+        id: 80,
+        slo: "SLO 9.4.4: Compare Dicotyledonous and Monocotyledonous Plants",
+        question: "Why do most monocot stems (like corn or wheat) lack true secondary woody growth?",
+        options: [
+          "They lack xylem vessels",
+          "They lack vascular cambium between xylem and phloem",
+          "They cannot perform photosynthesis",
+          "They possess taproots"
+        ],
+        correct: 1,
+        explanation: "Monocot vascular bundles are 'closed' because they lack a secondary meristematic lateral layer (vascular cambium) between xylem and phloem.",
+        wrongExplanations: [
+          "Monocots possess efficient xylem vessels.",
+          "Correct answer.",
+          "Monocots perform photosynthesis actively.",
+          "Monocots possess fibrous roots, not taproots."
+        ]
+      },
+
+      // SLO 9.4.5: Vascular Plants as Most Successful Group of Land Plants
+      {
+        id: 81,
+        slo: "SLO 9.4.5: Vascular Plants as Most Successful Group of Land Plants",
+        question: "Which evolutionary innovation provided tracheophytes with internal mechanical support to grow tall upright stems on land?",
+        options: [
+          "Flexible cell membranes",
+          "Deposition of lignin in secondary cell walls of xylem elements",
+          "Gelatinous coats around stems",
+          "Starch granules stored in roots"
+        ],
+        correct: 1,
+        explanation: "Lignin is a tough, rigid organic polymer deposited in xylem cell walls, providing structural rigidity to resist gravity and wind stress.",
+        wrongExplanations: [
+          "Cell membranes lack mechanical rigidity.",
+          "Correct answer.",
+          "Gelatinous coats do not provide vertical structural strength.",
+          "Starch is an energy storage polymer, not a structural cell wall component."
+        ]
+      },
+      {
+        id: 82,
+        slo: "SLO 9.4.5: Vascular Plants as Most Successful Group of Land Plants",
+        question: "How did the evolution of pollen tubes contribute to making seed plants the dominant land flora?",
+        options: [
+          "It allowed male gametes to reach the egg without requiring liquid water for swimming",
+          "It absorbed mineral salts directly from dry air",
+          "It allowed plants to shed leaves in winter",
+          "It increased oxygen release into atmosphere"
+        ],
+        correct: 0,
+        explanation: "Pollen tubes deliver non-motile sperm directly into the ovule, freeing fertilization from dependence on environmental water droplets.",
+        wrongExplanations: [
+          "Correct answer.",
+          "Pollen tubes do not absorb airborne minerals.",
+          "Leaf shedding is an adaptation related to transpiration and cold stress.",
+          "Oxygen release occurs during photosynthetic light reactions in leaves."
+        ]
+      },
+      {
+        id: 83,
+        slo: "SLO 9.4.5: Vascular Plants as Most Successful Group of Land Plants",
+        question: "[Real-Life Scenario] A giant redwood tree stands 300 feet tall in a terrestrial forest. Which combination of vascular adaptations allows it to transport water hundreds of feet upward while resisting gravity and wind storms?",
+        options: [
+          "Unicellular rhizoids and diffusion",
+          "Lignified xylem vessels/tracheids and extensive taproot systems",
+          "Soft parenchymatous air spaces",
+          "Non-vascular epidermal hairs"
+        ],
+        correct: 1,
+        explanation: "Deep anchoring taproots paired with lignified xylem elements enable high-tension sap ascent and mechanical stability in giant trees.",
+        wrongExplanations: [
+          "Unicellular rhizoids and diffusion are limited to microscopic transport in bryophytes.",
+          "Correct answer.",
+          "Parenchyma lacks the structural strength required for massive trees.",
+          "Epidermal hairs do not transport internal sap streams."
+        ]
+      },
+      {
+        id: 84,
+        slo: "SLO 9.4.5: Vascular Plants as Most Successful Group of Land Plants",
+        question: "Why are seed-bearing vascular plants far more successful at terrestrial survival than seedless vascular plants (like ferns)?",
+        options: [
+          "Seeds contain dormant embryos with stored food and protective coats, enabling survival during harsh droughts",
+          "Ferns lack photosynthetic leaves",
+          "Seeds swim through soil water to find new spots",
+          "Ferns cannot undergo meiosis"
+        ],
+        correct: 0,
+        explanation: "Seeds protect embryonic sporophytes inside a resistant coat with nutrient reserves, allowing them to remain dormant until favorable growth conditions arise.",
+        wrongExplanations: [
+          "Correct answer.",
+          "Ferns possess large green fronds.",
+          "Seeds are dispersed passively by wind, gravity, or animals, not by swimming.",
+          "Ferns undergo meiosis inside sporangia to form spores."
+        ]
+      },
+      {
+        id: 85,
+        slo: "SLO 9.4.5: Vascular Plants as Most Successful Group of Land Plants",
+        question: "The presence of specialized stomata with guard cells on leaf surfaces of vascular plants allows them to:",
+        options: [
+          "Absorb liquid water from deep soil",
+          "Regulate gas exchange for photosynthesis while controlling water vapor loss (transpiration)",
+          "Trap flying insects for nitrogen",
+          "Produce pollen grains internally"
+        ],
+        correct: 1,
+        explanation: "Stomata open to allow CO2 uptake for photosynthesis and close under water stress to prevent excessive transpiration loss.",
+        wrongExplanations: [
+          "Water absorption is performed by roots, not leaf stomata.",
+          "Correct answer.",
+          "Insect trapping is an adaptation restricted to carnivorous plants.",
+          "Pollen is produced in microsporangia/anthers."
+        ]
+      },
+
+      // SLO 9.5.1: Angiospermic Families
+      {
+        id: 86,
+        slo: "SLO 9.5.1: Angiospermic Families",
+        question: "[Real-Life Scenario] A farmer inspects a crop of peas and beans. She notices butterfly-shaped (papilionaceous) flowers with 10 stamens (9 fused + 1 free, diadelphous arrangement) and root nodules. Which family do these crops belong to?",
+        options: ["Rosaceae", "Fabaceae (Papilionaceae)", "Solanaceae", "Poaceae"],
+        correct: 1,
+        explanation: "Fabaceae (pea family) features papilionaceous corollas, diadelphous stamens (9)+1, and nitrogen-fixing Rhizobium root nodules.",
+        wrongExplanations: [
+          "Rosaceae flowers are actinomorphic with numerous stamens.",
+          "Correct answer.",
+          "Solanaceae has epipetalous stamens and persistent calyx.",
+          "Poaceae has spikelet inflorescences and linear leaves."
+        ]
+      },
+      {
+        id: 87,
+        slo: "SLO 9.5.1: Angiospermic Families",
+        question: "Which angiosperm family is known as the Nightshade family, featuring flowers with 5 united sepals (persistent calyx), epipetalous stamens, swollen placentae, and economically important crops like potato, tomato, and eggplant?",
+        options: ["Solanaceae", "Rosaceae", "Poaceae", "Mimosaceae"],
+        correct: 0,
+        explanation: "Solanaceae features persistent calyx, epipetalous stamens, swollen axile placentae, and includes solanaceous crops like potato, tomato, eggplant, and tobacco.",
+        wrongExplanations: [
+          "Correct answer.",
+          "Rosaceae includes apples, roses, and peaches.",
+          "Poaceae is the grass family.",
+          "Mimosaceae includes Acacia and sensitive plants with globose heads."
+        ]
+      },
+      {
+        id: 88,
+        slo: "SLO 9.5.1: Angiospermic Families",
+        question: "[Real-Life Scenario] An agricultural officer presents a report on world staple food crops, emphasizing wheat, rice, maize, barley, and sugarcane. These plants have hollow jointed stems (culms), linear leaves with sheathing bases, and wind-pollinated spikelet inflorescences. Which family do they belong to?",
+        options: ["Caesalpiniaceae", "Poaceae (Gramineae)", "Rosaceae", "Solanaceae"],
+        correct: 1,
+        explanation: "Poaceae (grass family) includes major cereal food crops characterized by hollow culms, sheathing leaf bases, and spikelet inflorescences.",
+        wrongExplanations: [
+          "Caesalpiniaceae includes leguminous trees like Cassia fistula.",
+          "Correct answer.",
+          "Rosaceae includes edible fruits (apple, strawberry, peach).",
+          "Solanaceae includes nightshades."
+        ]
+      },
+      {
+        id: 89,
+        slo: "SLO 9.5.1: Angiospermic Families",
+        question: "Rose, apple, pear, peach, and strawberry belong to Family Rosaceae. What key floral characteristic is typical of this family?",
+        options: [
+          "Polypetalous corolla with numerous prominent stamens attached to a cup-like receptacle (hypanthium)",
+          "Flowers arranged in spikelet heads without petals",
+          "Papilionaceous corolla with standard, wings, and keel",
+          "Epipetalous stamens on a tubular corolla"
+        ],
+        correct: 0,
+        explanation: "Rosaceae flowers are actinomorphic, polypetalous, with numerous stamens inserted on a perigynous cup-like hypanthium.",
+        wrongExplanations: [
+          "Correct answer.",
+          "Spikelets without petals describe Poaceae.",
+          "Papilionaceous corolla describes Fabaceae.",
+          "Epipetalous stamens on tubular corollas describe Solanaceae."
+        ]
+      },
+      {
+        id: 90,
+        slo: "SLO 9.5.1: Angiospermic Families",
+        question: "[Real-Life Scenario] A botanist examines a Kikar tree (Acacia). It features feathery bipinnate compound leaves, small flowers packed in dense globose heads, and numerous long-exserted, showy stamens. To which family does Acacia belong?",
+        options: ["Mimosaceae", "Solanaceae", "Fabaceae", "Poaceae"],
+        correct: 0,
+        explanation: "Mimosaceae (e.g., Acacia, Mimosa) is characterized by bipinnate leaves, compact globose head inflorescences, and numerous long-exserted showy stamens.",
+        wrongExplanations: [
+          "Correct answer.",
+          "Solanaceae flowers have 5 epipetalous stamens.",
+          "Fabaceae flowers have papilionaceous corollas with 10 diadelphous stamens.",
+          "Poaceae features linear leaves and spikelet inflorescences."
+        ]
+      }
+    ];
+
+    function App() {
+      // Quiz State
+      const [quizStarted, setQuizStarted] = useState(false);
+      const [quizMode, setQuizMode] = useState('practice'); // 'practice' or 'blind'
+      const [currentIdx, setCurrentIdx] = useState(0);
+      const [userAnswers, setUserAnswers] = useState({}); // { [qIdx]: selectedOptionIdx }
+      const [flaggedQuestions, setFlaggedQuestions] = useState({}); // { [qIdx]: true/false }
+      const [timeLeft, setTimeLeft] = useState(90 * 60); // 90 minutes timer = 5400 seconds
+      const [isSubmitted, setIsSubmitted] = useState(false);
+      const [showNavGrid, setShowNavGrid] = useState(false);
+
+      // Review Filter and Search States
+      const [reviewFilter, setReviewFilter] = useState('all'); // 'all', 'correct', 'wrong', 'skipped', 'flagged'
+      const [reviewSearch, setReviewSearch] = useState('');
+
+      // 90 Minute Timer Effect
+      useEffect(() => {
+        let timer = null;
+        if (quizStarted && !isSubmitted && timeLeft > 0) {
+          timer = setInterval(() => {
+            setTimeLeft(prev => {
+              if (prev <= 1) {
+                clearInterval(timer);
+                setIsSubmitted(true);
+                return 0;
+              }
+              return prev - 1;
+            });
+          }, 1000);
+        }
+        return () => clearInterval(timer);
+      }, [quizStarted, isSubmitted, timeLeft]);
+
+      // Keyboard Shortcuts Listener
+      useEffect(() => {
+        const handleKeyDown = (e) => {
+          if (!quizStarted || isSubmitted) return;
+          if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+
+          const key = e.key.toUpperCase();
+          if (['1', '2', '3', '4'].includes(key)) {
+            handleSelectOption(parseInt(key, 10) - 1);
+          } else if (['A', 'B', 'C', 'D'].includes(key)) {
+            const charCode = key.charCodeAt(0) - 65;
+            handleSelectOption(charCode);
+          } else if (e.key === 'ArrowRight') {
+            if (currentIdx < QUESTIONS.length - 1) setCurrentIdx(prev => prev + 1);
+          } else if (e.key === 'ArrowLeft') {
+            if (currentIdx > 0) setCurrentIdx(prev => prev - 1);
+          } else if (key === 'F') {
+            toggleFlagQuestion(currentIdx);
+          }
+        };
+
+        window.addEventListener('keydown', handleKeyDown);
+        return () => window.removeEventListener('keydown', handleKeyDown);
+      }, [quizStarted, isSubmitted, currentIdx, userAnswers]);
+
+      // Time formatting helper
+      const formatTime = (secs) => {
+        const mins = Math.floor(secs / 60);
+        const s = secs % 60;
+        return `${mins.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+      };
+
+      // Handle locking of answer once selected
+      const handleSelectOption = (optionIdx) => {
+        if (userAnswers.hasOwnProperty(currentIdx) || isSubmitted) return;
+        setUserAnswers(prev => ({
+          ...prev,
+          [currentIdx]: optionIdx
+        }));
+      };
+
+      // Toggle Bookmark/Flag
+      const toggleFlagQuestion = (qIndex) => {
+        setFlaggedQuestions(prev => ({
+          ...prev,
+          [qIndex]: !prev[qIndex]
+        }));
+      };
+
+      // Scoring Calculations (+1.0 for correct, -0.25 for incorrect)
+      const scoreData = useMemo(() => {
+        let correctCount = 0;
+        let wrongCount = 0;
+        let unattemptedCount = 0;
+
+        QUESTIONS.forEach((q, idx) => {
+          if (!userAnswers.hasOwnProperty(idx)) {
+            unattemptedCount++;
+          } else if (userAnswers[idx] === q.correct) {
+            correctCount++;
+          } else {
+            wrongCount++;
+          }
+        });
+
+        const grossMarks = correctCount * 1.0;
+        const penalty = wrongCount * 0.25;
+        const netMarks = Math.max(0, grossMarks - penalty);
+        const maxMarks = QUESTIONS.length * 1.0;
+        const percentage = Number(((netMarks / maxMarks) * 100).toFixed(1));
+
+        return { correctCount, wrongCount, unattemptedCount, grossMarks, penalty, netMarks, maxMarks, percentage };
+      }, [userAnswers]);
+
+      // Weak Area Analysis per SLO
+      const sloAnalysis = useMemo(() => {
+        const stats = {};
+        QUESTIONS.forEach((q, idx) => {
+          const sloKey = q.slo;
+          if (!stats[sloKey]) {
+            stats[sloKey] = { total: 0, correct: 0, wrong: 0, unattempted: 0 };
+          }
+          stats[sloKey].total++;
+          if (!userAnswers.hasOwnProperty(idx)) {
+            stats[sloKey].unattempted++;
+          } else if (userAnswers[idx] === q.correct) {
+            stats[sloKey].correct++;
+          } else {
+            stats[sloKey].wrong++;
+          }
+        });
+        return stats;
+      }, [userAnswers]);
+
+      // Review questions filter logic
+      const filteredReviewQuestions = useMemo(() => {
+        return QUESTIONS.map((q, idx) => ({ ...q, qIdx: idx })).filter(q => {
+          const isUserAns = userAnswers.hasOwnProperty(q.qIdx);
+          const isCorrect = isUserAns && userAnswers[q.qIdx] === q.correct;
+          const isWrong = isUserAns && userAnswers[q.qIdx] !== q.correct;
+          const isSkipped = !isUserAns;
+          const isFlagged = !!flaggedQuestions[q.qIdx];
+
+          let matchesFilter = true;
+          if (reviewFilter === 'correct') matchesFilter = isCorrect;
+          if (reviewFilter === 'wrong') matchesFilter = isWrong;
+          if (reviewFilter === 'skipped') matchesFilter = isSkipped;
+          if (reviewFilter === 'flagged') matchesFilter = isFlagged;
+
+          let matchesSearch = true;
+          if (reviewSearch.trim() !== '') {
+            const term = reviewSearch.toLowerCase();
+            matchesSearch = q.question.toLowerCase().includes(term) ||
+                            q.slo.toLowerCase().includes(term) ||
+                            q.explanation.toLowerCase().includes(term);
+          }
+
+          return matchesFilter && matchesSearch;
+        });
+      }, [userAnswers, flaggedQuestions, reviewFilter, reviewSearch]);
+
+      const getMotivationalQuote = (pct) => {
+        if (pct >= 85) return { quote: "Exceptional Botanical Mastery! You possess a thorough understanding of plant phylogeny, anatomy, reproduction, and angiospermic families.", author: "Qashqarian Academy Academic Board" };
+        if (pct >= 70) return { quote: "Great Job! You have a solid grasp on Kingdom Plantae. Review your specific weak SLOs to achieve 100% precision.", author: "Qashqarian Biology Faculty" };
+        if (pct >= 50) return { quote: "Good Effort! Go through the explanations for your incorrect answers carefully to master plant evolutionary traits.", author: "Department of Plant Sciences" };
+        return { quote: "Failure is simply the opportunity to begin again more intelligently. Re-read Chapter 9 notes and retake the test!", author: "Qashqarian Mentorship Cell" };
+      };
+
+      const currentQ = QUESTIONS[currentIdx];
+      const isAnswered = userAnswers.hasOwnProperty(currentIdx);
+      const selectedOption = userAnswers[currentIdx];
+      const isCurrentFlagged = !!flaggedQuestions[currentIdx];
+
+      if (!quizStarted) {
+        return (
+          <div className="min-h-screen flex items-center justify-center p-4 sm:p-6">
+            <div className="max-w-2xl w-full bg-white rounded-2xl shadow-xl border border-sky-100 overflow-hidden animate-fadeIn">
+              
+              {/* Top Header Banner */}
+              <div className="bg-gradient-to-r from-sky-800 via-sky-700 to-science-900 p-6 sm:p-8 text-white relative">
+                <div className="flex justify-between items-center mb-3">
+                  <span className="bg-sky-500/30 text-sky-100 text-xs font-bold px-3 py-1 rounded-full backdrop-blur-sm border border-sky-300/20 flex items-center gap-1.5">
+                    🏔️ Qashqarian Academy
+                  </span>
+                  <span className="text-xs font-bold bg-white/10 px-3 py-1 rounded-md border border-white/20">
+                    Class: XI
+                  </span>
+                </div>
+                <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
+                  Chapter 9: Kingdom Plantae
+                </h1>
+                <p className="text-sky-100 text-sm mt-1">
+                  Comprehensive SLO-Based Assessment (90 MCQs)
+                </p>
+              </div>
+
+              {/* Start Setup Content */}
+              <div className="p-6 sm:p-8 space-y-6">
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                  <div className="bg-sky-50 rounded-xl p-3.5 border border-sky-100 flex items-center gap-3">
+                    <div className="p-2 bg-sky-600 text-white rounded-lg shrink-0">
+                      <Icon name="clock" className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <p className="text-[11px] text-slate-500 font-medium">Timer</p>
+                      <p className="text-xs sm:text-sm font-bold text-slate-800">90 Minutes</p>
+                    </div>
+                  </div>
+                  <div className="bg-sky-50 rounded-xl p-3.5 border border-sky-100 flex items-center gap-3">
+                    <div className="p-2 bg-sky-600 text-white rounded-lg shrink-0">
+                      <Icon name="award" className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <p className="text-[11px] text-slate-500 font-medium">Marking Scheme</p>
+                      <p className="text-xs sm:text-sm font-bold text-slate-800">+1.0 / -0.25</p>
+                    </div>
+                  </div>
+                  <div className="col-span-2 sm:col-span-1 bg-sky-50 rounded-xl p-3.5 border border-sky-100 flex items-center gap-3">
+                    <div className="p-2 bg-sky-600 text-white rounded-lg shrink-0">
+                      <Icon name="key" className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <p className="text-[11px] text-slate-500 font-medium">Shortcuts</p>
+                      <p className="text-xs sm:text-sm font-bold text-slate-800">Keys A-D, ← →</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Select Assessment Mode */}
+                <div>
+                  <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2.5">
+                    Select Mode
+                  </label>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <button
+                      type="button"
+                      onClick={() => setQuizMode('practice')}
+                      className={`p-4 rounded-xl text-left border-2 transition-all flex flex-col gap-1.5 ${
+                        quizMode === 'practice'
+                          ? 'border-sky-600 bg-sky-50/80 ring-2 ring-sky-500/20'
+                          : 'border-slate-200 hover:border-sky-300 bg-white'
+                      }`}
+                    >
+                      <div className="flex items-center justify-between">
+                        <span className="font-bold text-sm text-sky-900 flex items-center gap-1.5">
+                          <Icon name="zap" className="w-4 h-4 text-sky-600" />
+                          Practice Mode
+                        </span>
+                        {quizMode === 'practice' && <Icon name="check" className="w-4 h-4 text-sky-600" />}
+                      </div>
+                      <p className="text-xs text-slate-500 leading-relaxed">
+                        Instant right/wrong answer verification with rationale provided immediately after answering each MCQ.
+                      </p>
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => setQuizMode('blind')}
+                      className={`p-4 rounded-xl text-left border-2 transition-all flex flex-col gap-1.5 ${
+                        quizMode === 'blind'
+                          ? 'border-sky-600 bg-sky-50/80 ring-2 ring-sky-500/20'
+                          : 'border-slate-200 hover:border-sky-300 bg-white'
+                      }`}
+                    >
+                      <div className="flex items-center justify-between">
+                        <span className="font-bold text-sm text-sky-900 flex items-center gap-1.5">
+                          <Icon name="shield" className="w-4 h-4 text-sky-600" />
+                          Blind / Exam Mode
+                        </span>
+                        {quizMode === 'blind' && <Icon name="check" className="w-4 h-4 text-sky-600" />}
+                      </div>
+                      <p className="text-xs text-slate-500 leading-relaxed">
+                        Simulate real exam conditions. Correct answers, rationales, and marks revealed only upon test submission.
+                      </p>
+                    </button>
+                  </div>
+                </div>
+
+                {/* Rules & Negative Marking Notice */}
+                <div className="bg-amber-50/80 border border-amber-200 rounded-xl p-4 text-xs text-amber-900 space-y-1.5">
+                  <p className="font-bold text-amber-950 flex items-center gap-1.5">
+                    <Icon name="alert-triangle" className="w-4 h-4 text-amber-600" />
+                    Assessment Rules & Negative Marking:
+                  </p>
+                  <ul className="list-disc list-inside space-y-1 pl-1 text-amber-800">
+                    <li>Once selected, an option is locked permanently for that question.</li>
+                    <li>Incorrect answers incur a <strong>-0.25 mark negative penalty</strong>.</li>
+                    <li>Unattempted questions carry zero penalty.</li>
+                    <li>Use the <strong>Flag (Key F)</strong> button to bookmark items to review later.</li>
+                  </ul>
+                </div>
+
+                <button
+                  onClick={() => setQuizStarted(true)}
+                  className="w-full bg-sky-600 hover:bg-sky-700 text-white font-bold py-3.5 px-6 rounded-xl shadow-lg shadow-sky-600/25 transition-all flex items-center justify-center gap-2 group text-sm"
+                >
+                  <span>Start Chapter 9 Assessment (90 MCQs)</span>
+                  <Icon name="arrow-right" className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                </button>
+              </div>
+            </div>
+          </div>
+        );
+      }
+
+      if (isSubmitted) {
+        const quoteObj = getMotivationalQuote(scoreData.percentage);
+
+        return (
+          <div className="min-h-screen py-8 px-4 sm:px-6 flex justify-center">
+            <div className="max-w-4xl w-full bg-white rounded-2xl shadow-xl border border-sky-100 overflow-hidden animate-fadeIn space-y-6 pb-8">
+              
+              {/* Header Banner */}
+              <div className="bg-gradient-to-r from-sky-800 via-sky-700 to-science-900 p-6 sm:p-8 text-white relative">
+                <div className="flex justify-between items-center mb-2 no-print">
+                  <span className="text-xs font-bold bg-white/20 px-3 py-1 rounded-full flex items-center gap-1.5">
+                    🏔️ Qashqarian Academy
+                  </span>
+                  <span className="text-xs font-bold bg-white/10 px-3 py-1 rounded-md border border-white/20">
+                    Class: XI
+                  </span>
+                  <button 
+                    onClick={() => window.print()} 
+                    className="bg-white/10 hover:bg-white/20 text-white text-xs font-semibold px-3 py-1.5 rounded-lg border border-white/20 transition-all flex items-center gap-1.5"
+                  >
+                    <Icon name="printer" className="w-4 h-4" />
+                    Print Results
+                  </button>
+                </div>
+                <h1 className="text-2xl sm:text-3xl font-extrabold">
+                  Performance Evaluation Summary
+                </h1>
+                <p className="text-sky-100 text-xs sm:text-sm mt-1">
+                  Chapter 9: Kingdom Plantae Mock Assessment
+                </p>
+              </div>
+
+              <div className="p-6 sm:p-8 space-y-8">
+                
+                {/* Motivational Quote Banner */}
+                <div className="bg-sky-50/80 border-l-4 border-sky-600 p-4 rounded-r-xl space-y-1">
+                  <p className="text-sm font-semibold text-sky-950 italic">
+                    "{quoteObj.quote}"
+                  </p>
+                  <p className="text-xs text-sky-700 font-bold">— {quoteObj.author}</p>
+                </div>
+
+                {/* Performance Metrics */}
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                  <div className="bg-sky-50 border border-sky-100 rounded-xl p-4 text-center">
+                    <p className="text-xs text-slate-500 font-semibold mb-1">Net Percentage</p>
+                    <p className="text-3xl font-black text-sky-600">{scoreData.percentage}%</p>
+                  </div>
+                  <div className="bg-emerald-50 border border-emerald-100 rounded-xl p-4 text-center">
+                    <p className="text-xs text-emerald-700 font-semibold mb-1">Correct Answers</p>
+                    <p className="text-3xl font-black text-emerald-600">{scoreData.correctCount}</p>
+                    <p className="text-[10px] text-emerald-600 font-medium">+{scoreData.grossMarks} Marks</p>
+                  </div>
+                  <div className="bg-rose-50 border border-rose-100 rounded-xl p-4 text-center">
+                    <p className="text-xs text-rose-700 font-semibold mb-1">Wrong Answers</p>
+                    <p className="text-3xl font-black text-rose-600">{scoreData.wrongCount}</p>
+                    <p className="text-[10px] text-rose-600 font-medium">-{scoreData.penalty} Penalty</p>
+                  </div>
+                  <div className="bg-amber-50 border border-amber-100 rounded-xl p-4 text-center">
+                    <p className="text-xs text-amber-700 font-semibold mb-1">Unattempted</p>
+                    <p className="text-3xl font-black text-amber-600">{scoreData.unattemptedCount}</p>
+                    <p className="text-[10px] text-amber-600 font-medium">0 Penalty</p>
+                  </div>
+                </div>
+
+                {/* Net Score Bar */}
+                <div className="bg-slate-900 text-white rounded-xl p-4 flex justify-between items-center text-sm">
+                  <span>Final Score (after -0.25 negative marking):</span>
+                  <span className="font-extrabold text-sky-400 text-base">
+                    {scoreData.netMarks} / {scoreData.maxMarks} Marks
+                  </span>
+                </div>
+
+                {/* Weak Area SLO Breakdown */}
+                <div className="space-y-3">
+                  <h3 className="text-base font-bold text-slate-800 flex items-center gap-2">
+                    <Icon name="bar-chart" className="w-5 h-5 text-sky-600" />
+                    SLO Performance & Weak Area Analysis
+                  </h3>
+
+                  <div className="space-y-3 max-h-80 overflow-y-auto pr-2 custom-scrollbar">
+                    {Object.entries(sloAnalysis).map(([slo, stats], idx) => {
+                      const sloPct = stats.total > 0 ? Math.round((stats.correct / stats.total) * 100) : 0;
+                      return (
+                        <div key={idx} className="bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs space-y-2">
+                          <div className="flex justify-between items-start gap-2">
+                            <span className="font-semibold text-slate-800">{slo}</span>
+                            <span className={`font-bold px-2 py-0.5 rounded text-[11px] ${
+                              sloPct >= 80 ? 'bg-emerald-100 text-emerald-800' :
+                              sloPct >= 50 ? 'bg-amber-100 text-amber-800' : 'bg-rose-100 text-rose-800'
+                            }`}>
+                              {sloPct}% Mastery
+                            </span>
+                          </div>
+                          <div className="w-full bg-slate-200 h-2 rounded-full overflow-hidden">
+                            <div 
+                              className={`h-full transition-all duration-500 ${
+                                sloPct >= 80 ? 'bg-emerald-500' : sloPct >= 50 ? 'bg-amber-500' : 'bg-rose-500'
+                              }`}
+                              style={{ width: `${sloPct}%` }}
+                            />
+                          </div>
+                          <div className="flex gap-4 text-[11px] text-slate-500">
+                            <span>Correct: {stats.correct}</span>
+                            <span>Wrong: {stats.wrong}</span>
+                            <span>Skipped: {stats.unattempted}</span>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                {/* Question Review Section with Filter & Search */}
+                <div className="space-y-4 no-print">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-2">
+                    <h3 className="text-base font-bold text-slate-800 flex items-center gap-2">
+                      <Icon name="book-open" className="w-5 h-5 text-sky-600" />
+                      Detailed Explanations & Wrong Answer Analysis
+                    </h3>
+
+                    {/* Filter Pills */}
+                    <div className="flex flex-wrap gap-1.5 text-xs">
+                      {[
+                        { id: 'all', label: 'All' },
+                        { id: 'correct', label: 'Correct' },
+                        { id: 'wrong', label: 'Wrong' },
+                        { id: 'skipped', label: 'Skipped' },
+                        { id: 'flagged', label: 'Flagged' },
+                      ].map(tab => (
+                        <button
+                          key={tab.id}
+                          onClick={() => setReviewFilter(tab.id)}
+                          className={`px-3 py-1.5 rounded-lg font-semibold transition-all ${
+                            reviewFilter === tab.id
+                              ? 'bg-sky-600 text-white shadow-sm'
+                              : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                          }`}
+                        >
+                          {tab.label}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Search Bar */}
+                  <div className="relative">
+                    <input
+                      type="text"
+                      placeholder="Search question text, SLO, or explanation rationale..."
+                      value={reviewSearch}
+                      onChange={(e) => setReviewSearch(e.target.value)}
+                      className="w-full pl-9 pr-4 py-2.5 rounded-xl border border-slate-200 text-xs focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent bg-slate-50/50"
+                    />
+                    <div className="absolute left-3 top-3 text-slate-400">
+                      <Icon name="search" className="w-4 h-4" />
+                    </div>
+                  </div>
+
+                  {/* Question Cards */}
+                  <div className="space-y-4 max-h-[500px] overflow-y-auto pr-2 custom-scrollbar">
+                    {filteredReviewQuestions.length === 0 ? (
+                      <div className="p-8 text-center text-xs text-slate-500 bg-slate-50 rounded-xl border border-dashed border-slate-200">
+                        No questions match the current search or filter.
+                      </div>
+                    ) : (
+                      filteredReviewQuestions.map((q) => {
+                        const qIdx = q.qIdx;
+                        const userSel = userAnswers[qIdx];
+                        const isCorrect = userSel === q.correct;
+                        const isUnattempted = !userAnswers.hasOwnProperty(qIdx);
+                        const isFlagged = flaggedQuestions[qIdx];
+
+                        return (
+                          <div 
+                            key={q.id}
+                            className={`p-4 rounded-xl border text-xs space-y-2.5 transition-all ${
+                              isCorrect ? 'bg-emerald-50/50 border-emerald-200' :
+                              isUnattempted ? 'bg-amber-50/50 border-amber-200' : 'bg-rose-50/50 border-rose-200'
+                            }`}
+                          >
+                            <div className="flex justify-between items-start gap-2">
+                              <span className="font-bold text-slate-900 flex items-center gap-2">
+                                <span>Q{qIdx + 1}. {q.question}</span>
+                                {isFlagged && (
+                                  <span className="bg-amber-100 text-amber-800 text-[10px] px-2 py-0.5 rounded font-bold flex items-center gap-1">
+                                    <Icon name="flag" className="w-3 h-3 text-amber-600" /> Flagged
+                                  </span>
+                                )}
+                              </span>
+                              <span className={`px-2 py-0.5 rounded font-bold text-[10px] whitespace-nowrap shrink-0 ${
+                                isCorrect ? 'bg-emerald-600 text-white' :
+                                isUnattempted ? 'bg-amber-500 text-white' : 'bg-rose-600 text-white'
+                              }`}>
+                                {isCorrect ? 'CORRECT (+1.0)' : isUnattempted ? 'SKIPPED (0.0)' : 'WRONG (-0.25)'}
+                              </span>
+                            </div>
+
+                            <p className="text-[11px] text-slate-500 font-medium">{q.slo}</p>
+
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                              {q.options.map((opt, oIdx) => {
+                                const isOptCorrect = oIdx === q.correct;
+                                const isOptUserChoice = oIdx === userSel;
+
+                                return (
+                                  <div 
+                                    key={oIdx}
+                                    className={`p-2 rounded-lg border font-medium flex items-center justify-between ${
+                                      isOptCorrect ? 'bg-emerald-100 border-emerald-300 text-emerald-900 font-bold' :
+                                      isOptUserChoice ? 'bg-rose-100 border-rose-300 text-rose-900' : 'bg-white border-slate-200 text-slate-600'
+                                    }`}
+                                  >
+                                    <span>{String.fromCharCode(65 + oIdx)}. {opt}</span>
+                                    {isOptCorrect && <Icon name="check" className="w-3.5 h-3.5 text-emerald-700" />}
+                                    {isOptUserChoice && !isOptCorrect && <Icon name="x" className="w-3.5 h-3.5 text-rose-700" />}
+                                  </div>
+                                );
+                              })}
+                            </div>
+
+                            {/* Detailed Explanation & Why Incorrect Options are Wrong */}
+                            <div className="bg-white/90 p-3 rounded-lg border border-slate-200 text-slate-700 leading-relaxed space-y-1.5">
+                              <p className="text-slate-800">
+                                <strong className="text-sky-900">Correct Answer Rationale: </strong> 
+                                {q.explanation}
+                              </p>
+
+                              {!isCorrect && !isUnattempted && q.wrongExplanations && (
+                                <div className="mt-2 pt-2 border-t border-slate-100 text-[11px] text-rose-900 bg-rose-50/60 p-2 rounded-md">
+                                  <strong>Why option {String.fromCharCode(65 + userSel)} is incorrect: </strong>
+                                  {q.wrongExplanations[userSel] || "This choice does not satisfy the scientific concept."}
+                                </div>
+                              )}
+                            </div>
+                          </div>
+                        );
+                      })
+                    )}
+                  </div>
+                </div>
+
+                {/* Restart Button */}
+                <button
+                  onClick={() => {
+                    setIsSubmitted(false);
+                    setQuizStarted(false);
+                    setCurrentIdx(0);
+                    setUserAnswers({});
+                    setFlaggedQuestions({});
+                    setTimeLeft(90 * 60);
+                  }}
+                  className="w-full bg-sky-600 hover:bg-sky-700 text-white font-bold py-3.5 px-6 rounded-xl shadow-lg shadow-sky-600/25 transition-all flex items-center justify-center gap-2 text-sm no-print"
+                >
+                  <Icon name="rotate-ccw" className="w-5 h-5" />
+                  <span>Restart Chapter 9 Assessment</span>
+                </button>
+
+              </div>
+            </div>
+          </div>
+        );
+      }
+
+      const flaggedCount = Object.values(flaggedQuestions).filter(Boolean).length;
+
+      return (
+        <div className="min-h-screen py-6 px-4 sm:px-6 flex flex-col items-center">
+          
+          {/* Top Header Navigation Card */}
+          <div className="max-w-3xl w-full bg-white rounded-2xl shadow-sm border border-sky-100 p-4 mb-4 space-y-3">
+            
+            {/* Academy Name & Class XI Badge */}
+            <div className="flex justify-between items-center text-xs sm:text-sm font-bold text-sky-900">
+              <span className="flex items-center gap-1.5 text-base sm:text-lg tracking-tight">
+                🏔️ Qashqarian Academy
+              </span>
+              
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={() => setShowNavGrid(!showNavGrid)}
+                  className="px-2.5 py-1 bg-sky-50 hover:bg-sky-100 text-sky-800 rounded-lg text-xs font-semibold flex items-center gap-1.5 border border-sky-200 transition-all"
+                >
+                  <Icon name="grid" className="w-3.5 h-3.5" />
+                  <span>Grid ({Object.keys(userAnswers).length}/{QUESTIONS.length})</span>
+                </button>
+
+                <span className="bg-sky-100 text-sky-800 px-2.5 py-1 rounded-lg font-bold text-xs">
+                  Class: XI
+                </span>
+              </div>
+            </div>
+
+            {/* Question Counter (Q 1 / 90) & 90 Min Timer */}
+            <div className="flex justify-between items-center text-xs font-semibold text-slate-600">
+              <div className="flex items-center gap-3">
+                <span className="text-sky-900 font-extrabold text-sm">Q {currentIdx + 1} / {QUESTIONS.length}</span>
+                {flaggedCount > 0 && (
+                  <span className="text-amber-700 bg-amber-50 border border-amber-200 px-2 py-0.5 rounded text-[11px] font-bold flex items-center gap-1">
+                    <Icon name="flag" className="w-3 h-3 text-amber-600" />
+                    {flaggedCount} Flagged
+                  </span>
+                )}
+              </div>
+
+              <div className={`flex items-center gap-1.5 px-2.5 py-1 rounded-lg font-mono font-bold ${
+                timeLeft < 300 ? 'bg-rose-100 text-rose-700 animate-pulse' : 'bg-sky-50 text-sky-800'
+              }`}>
+                <Icon name="clock" className="w-3.5 h-3.5" />
+                <span>{formatTime(timeLeft)}</span>
+              </div>
+            </div>
+
+            {/* Top Progress Bar */}
+            <div className="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+              <div 
+                className="bg-sky-600 h-full transition-all duration-300"
+                style={{ width: `${((currentIdx + 1) / QUESTIONS.length) * 100}%` }}
+              />
+            </div>
+          </div>
+
+          {/* Quick Navigator Grid Modal */}
+          {showNavGrid && (
+            <div className="max-w-3xl w-full bg-white rounded-2xl shadow-lg border border-sky-200 p-5 mb-4 animate-fadeIn space-y-3">
+              <div className="flex justify-between items-center text-xs font-bold text-slate-800 border-b pb-2">
+                <span>Question Quick Navigator Matrix</span>
+                <button 
+                  onClick={() => setShowNavGrid(false)}
+                  className="text-slate-400 hover:text-slate-600"
+                >
+                  <Icon name="x" className="w-4 h-4" />
+                </button>
+              </div>
+
+              <div className="grid grid-cols-5 sm:grid-cols-10 gap-2 max-h-60 overflow-y-auto p-1 custom-scrollbar">
+                {QUESTIONS.map((_, idx) => {
+                  const isAns = userAnswers.hasOwnProperty(idx);
+                  const isCur = currentIdx === idx;
+                  const isFlg = !!flaggedQuestions[idx];
+
+                  let boxStyle = "bg-slate-100 text-slate-700 hover:bg-slate-200";
+                  if (isCur) boxStyle = "bg-sky-600 text-white font-bold ring-2 ring-sky-500/50";
+                  else if (isAns) boxStyle = "bg-emerald-100 text-emerald-900 font-semibold border border-emerald-300";
+
+                  return (
+                    <button
+                      key={idx}
+                      onClick={() => {
+                        setCurrentIdx(idx);
+                        setShowNavGrid(false);
+                      }}
+                      className={`h-8 rounded-lg text-xs transition-all relative flex items-center justify-center ${boxStyle}`}
+                    >
+                      {idx + 1}
+                      {isFlg && (
+                        <span className="absolute -top-1 -right-1 bg-amber-500 w-2.5 h-2.5 rounded-full border border-white" />
+                      )}
+                    </button>
+                  );
+                })}
+              </div>
+
+              <div className="flex gap-4 text-[10px] text-slate-500 pt-2 border-t justify-center">
+                <span className="flex items-center gap-1"><span className="w-2.5 h-2.5 rounded bg-emerald-300" /> Answered</span>
+                <span className="flex items-center gap-1"><span className="w-2.5 h-2.5 rounded bg-slate-200" /> Unanswered</span>
+                <span className="flex items-center gap-1"><span className="w-2.5 h-2.5 rounded bg-sky-600" /> Current</span>
+                <span className="flex items-center gap-1"><span className="w-2.5 h-2.5 rounded-full bg-amber-500" /> Flagged</span>
+              </div>
+            </div>
+          )}
+
+          {/* Centered Main Question Card */}
+          <div className="max-w-3xl w-full bg-white rounded-2xl shadow-lg border border-sky-100 p-6 sm:p-8 relative overflow-hidden flex flex-col min-h-[460px] justify-between">
+            
+            {/* Watermark in Center Background */}
+            <div className="watermark-bg">
+              <p className="text-5xl sm:text-6xl font-black text-sky-900 tracking-widest">
+                🏔️ QASHQARIAN ACADEMY
+              </p>
+            </div>
+
+            {/* Question Header & Options */}
+            <div className="relative z-10 space-y-5">
+              
+              {/* SLO Tag above Question */}
+              <div className="flex justify-between items-center gap-2">
+                <div className="inline-block bg-sky-50 border border-sky-200 text-sky-900 text-xs font-bold px-3 py-1 rounded-full">
+                  {currentQ.slo}
+                </div>
+
+                <button
+                  onClick={() => toggleFlagQuestion(currentIdx)}
+                  className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 ${
+                    isCurrentFlagged 
+                      ? 'bg-amber-100 text-amber-800 border border-amber-300' 
+                      : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                  }`}
+                  title="Bookmark for review (Key: F)"
+                >
+                  <Icon name="flag" className={`w-3.5 h-3.5 ${isCurrentFlagged ? 'text-amber-600 fill-amber-500' : ''}`} />
+                  <span>{isCurrentFlagged ? 'Flagged' : 'Flag'}</span>
+                </button>
+              </div>
+
+              {/* Question Text */}
+              <h2 className="text-base sm:text-lg font-bold text-slate-900 leading-snug">
+                Q{currentIdx + 1}. {currentQ.question}
+              </h2>
+
+              {/* Multiple Choice Options (A, B, C, D) */}
+              <div className="space-y-3 pt-2">
+                {currentQ.options.map((optionText, optIdx) => {
+                  const isSelected = selectedOption === optIdx;
+                  const isCorrect = currentQ.correct === optIdx;
+
+                  let btnStyle = "border-slate-200 hover:border-sky-300 hover:bg-sky-50/50 text-slate-800 bg-white";
+
+                  if (isAnswered) {
+                    if (quizMode === 'practice') {
+                      if (isCorrect) {
+                        btnStyle = "border-emerald-500 bg-emerald-50 text-emerald-950 font-semibold ring-2 ring-emerald-500/20";
+                      } else if (isSelected) {
+                        btnStyle = "border-rose-500 bg-rose-50 text-rose-950 font-semibold ring-2 ring-rose-500/20";
+                      } else {
+                        btnStyle = "border-slate-200 opacity-60 bg-white text-slate-500";
+                      }
+                    } else {
+                      // Blind Mode
+                      if (isSelected) {
+                        btnStyle = "border-sky-600 bg-sky-50 text-sky-950 font-semibold ring-2 ring-sky-500/20";
+                      } else {
+                        btnStyle = "border-slate-200 opacity-60 bg-white text-slate-500";
+                      }
+                    }
+                  }
+
+                  return (
+                    <button
+                      key={optIdx}
+                      disabled={isAnswered}
+                      onClick={() => handleSelectOption(optIdx)}
+                      className={`w-full p-3.5 sm:p-4 rounded-xl border-2 text-left text-xs sm:text-sm transition-all flex items-center justify-between gap-3 ${btnStyle}`}
+                    >
+                      <div className="flex items-center gap-3">
+                        <span className={`w-7 h-7 rounded-lg flex items-center justify-center font-bold text-xs shrink-0 ${
+                          isSelected ? 'bg-sky-600 text-white' : 'bg-slate-100 text-slate-700'
+                        }`}>
+                          {String.fromCharCode(65 + optIdx)}
+                        </span>
+                        <span>{optionText}</span>
+                      </div>
+
+                      {isAnswered && quizMode === 'practice' && (
+                        <div>
+                          {isCorrect && <Icon name="check" className="w-5 h-5 text-emerald-600" />}
+                          {isSelected && !isCorrect && <Icon name="x" className="w-5 h-5 text-rose-600" />}
+                        </div>
+                      )}
+                    </button>
+                  );
+                })}
+              </div>
+
+              {/* Practice Mode Explanation Box */}
+              {isAnswered && quizMode === 'practice' && (
+                <div className={`mt-4 p-4 rounded-xl text-xs leading-relaxed space-y-1.5 animate-fadeIn border ${
+                  selectedOption === currentQ.correct 
+                    ? 'bg-emerald-50/90 border-emerald-200 text-emerald-950' 
+                    : 'bg-rose-50/90 border-rose-200 text-rose-950'
+                }`}>
+                  <p className="font-bold flex items-center gap-1.5">
+                    <Icon name="info" className="w-4 h-4" />
+                    {selectedOption === currentQ.correct ? 'Correct Answer Rationale:' : 'Incorrect Answer Explanation:'}
+                  </p>
+                  <p className="text-slate-800">{currentQ.explanation}</p>
+                  
+                  {selectedOption !== currentQ.correct && currentQ.wrongExplanations && (
+                    <p className="text-rose-900 font-medium pt-1 border-t border-rose-200/60">
+                      <strong>Why option {String.fromCharCode(65 + selectedOption)} is wrong: </strong>
+                      {currentQ.wrongExplanations[selectedOption]}
+                    </p>
+                  )}
+                </div>
+              )}
+            </div>
+
+            {/* Bottom Nav Controls (Previous / Next / Submit) */}
+            <div className="relative z-10 pt-6 mt-6 border-t border-slate-100 flex justify-between items-center gap-4">
+              <button
+                disabled={currentIdx === 0}
+                onClick={() => setCurrentIdx(prev => prev - 1)}
+                className="px-4 py-2.5 rounded-xl border border-slate-200 text-slate-700 text-xs font-bold hover:bg-slate-50 disabled:opacity-40 disabled:cursor-not-allowed flex items-center gap-1.5"
+              >
+                <Icon name="arrow-left" className="w-4 h-4" />
+                Previous
+              </button>
+
+              <div className="flex gap-2">
+                {currentIdx < QUESTIONS.length - 1 ? (
+                  <button
+                    onClick={() => setCurrentIdx(prev => prev + 1)}
+                    className="px-5 py-2.5 rounded-xl bg-sky-600 hover:bg-sky-700 text-white text-xs font-bold shadow-md shadow-sky-600/20 transition-all flex items-center gap-1.5"
+                  >
+                    Next
+                    <Icon name="arrow-right" className="w-4 h-4" />
+                  </button>
+                ) : (
+                  <button
+                    onClick={() => setIsSubmitted(true)}
+                    className="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold shadow-md shadow-emerald-600/20 transition-all flex items-center gap-1.5"
+                  >
+                    Submit Test
+                    <Icon name="check" className="w-4 h-4" />
+                  </button>
+                )}
+              </div>
+            </div>
+
+          </div>
+        </div>
+      );
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<App />);
+  </script>
+</body>
+</html>

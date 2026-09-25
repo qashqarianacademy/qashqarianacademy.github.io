@@ -1,0 +1,2149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Class XI Biology Chapter 5 Mock Test - Qashqarian Academy</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+          },
+          colors: {
+            sky: {
+              50:'#F0F8F8', 100:'#DFF3F2', 200:'#BFE4E7', 300:'#8FCDD5',
+              400:'#4FA9B9', 500:'#1F869B', 600:'#056C82', 700:'#0A5263',
+              800:'#0B4352', 900:'#0B3340'
+            },
+            science: {
+              50:'#F0F8F8', 100:'#DFF3F2', 200:'#BFE4E7', 300:'#8FCDD5',
+              400:'#4FA9B9', 500:'#1F869B', 600:'#056C82', 700:'#0A5263',
+              800:'#0B4352', 900:'#0B3340'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- React 18 & ReactDOM -->
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+  <!-- Babel for JSX -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <!-- Custom Styles for Watermark and Animations -->
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #f0f7ff;
+    }
+    .watermark-bg {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(-12deg);
+      pointer-events: none;
+      user-select: none;
+      z-index: 0;
+      opacity: 0.04;
+      text-align: center;
+      white-space: nowrap;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: #f1f5f9;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 4px;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fadeIn {
+      animation: fadeIn 0.25s ease-out forwards;
+    }
+    @media print {
+      .no-print { display: none !important; }
+      body { background: white; color: black; }
+    }
+  </style>
+</head>
+<body class="text-slate-800 antialiased selection:bg-sky-200 selection:text-sky-900 min-h-screen">
+<header class="sticky top-0 z-50 bg-[#0B132B] border-b border-cyan-900/40 shadow-md">
+    <div class="max-w-5xl mx-auto px-4 py-2.5 flex items-center justify-between">
+      <a href="../../../../index.html" class="flex items-center gap-2">
+        <img src="../../../../images/brand/logo.png" alt="Qashqarian Academy" class="w-10 h-10 object-contain">
+        <div>
+          <div class="text-base md:text-lg font-extrabold text-white tracking-tight leading-none">Qashqarian</div>
+          <div class="text-[10px] md:text-xs text-[#FF9F1C] font-extrabold tracking-[0.2em] mt-1 leading-none">ACADEMY</div>
+        </div>
+      </a>
+      <a href="../../index.html" class="text-[11px] font-semibold text-slate-300 hover:text-white border border-white/20 rounded-lg px-2.5 py-1">
+        ← Biology Quizzes
+      </a>
+    </div>
+  </header>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const { useState, useEffect, useMemo } = React;
+
+    const Icon = ({ name, className = "w-5 h-5" }) => {
+      const props = {
+        className,
+        xmlns: "http://www.w3.org/2000/svg",
+        viewBox: "0 0 24 24",
+        fill: "none",
+        stroke: "currentColor",
+        strokeWidth: "2",
+        strokeLinecap: "round",
+        strokeLinejoin: "round"
+      };
+
+      switch (name) {
+        case "clock":
+          return <svg {...props}><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>;
+        case "award":
+          return <svg {...props}><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 22 12 17 17 22 15.79 13.88"/></svg>;
+        case "check":
+          return <svg {...props}><polyline points="20 6 9 17 4 12"/></svg>;
+        case "x":
+          return <svg {...props}><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>;
+        case "arrow-left":
+          return <svg {...props}><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>;
+        case "arrow-right":
+          return <svg {...props}><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>;
+        case "rotate-ccw":
+          return <svg {...props}><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>;
+        case "book-open":
+          return <svg {...props}><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>;
+        case "shield":
+          return <svg {...props}><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>;
+        case "zap":
+          return <svg {...props}><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>;
+        case "bar-chart":
+          return <svg {...props}><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg>;
+        case "info":
+          return <svg {...props}><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>;
+        case "alert-triangle":
+          return <svg {...props}><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>;
+        case "flag":
+          return <svg {...props}><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>;
+        case "grid":
+          return <svg {...props}><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>;
+        case "search":
+          return <svg {...props}><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>;
+        case "printer":
+          return <svg {...props}><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>;
+        default:
+          return <svg {...props}><circle cx="12" cy="12" r="10"/></svg>;
+      }
+    };
+
+    const QUESTIONS = [
+      // SLO 5.1.1: Basis of Classification of Living Organisms
+      {
+        id: 1,
+        slo: "SLO 5.1.1: Basis of Classification of Living Organisms",
+        question: "[Real-Life Scenario] A scientist compares the limb bones of a bat's wing, a whale's flipper, and a human's arm, finding the same basic anatomical arrangement despite different functions. This basis of classification is known as:",
+        options: ["Cytology", "Homology", "Biochemistry", "Genetics"],
+        correct: 1,
+        explanation: "Homology refers to anatomical structures sharing a common evolutionary origin and structural plan, despite serving different functional adaptations.",
+        wrongExplanations: [
+          "Cytology investigates cellular organelles and microscopic details.",
+          "Biochemistry analyzes biological molecules like proteins and DNA.",
+          "Genetics compares genes, alleles, and nucleotide sequences."
+        ]
+      },
+      {
+        id: 2,
+        slo: "SLO 5.1.1: Basis of Classification of Living Organisms",
+        question: "Which branch of science provides evidence for biological classification by comparing amino acid sequences of respiratory enzymes across species?",
+        options: ["Cytology", "Homology", "Genetics", "Biochemistry"],
+        correct: 3,
+        explanation: "Biochemistry studies metabolic chemicals and proteins like Cytochrome c to measure evolutionary divergence.",
+        wrongExplanations: [
+          "Cytology analyzes cellular structure under microscopes.",
+          "Homology examines skeletal and anatomical structures.",
+          "Genetics focuses directly on gene sequences and heredity."
+        ]
+      },
+      {
+        id: 3,
+        slo: "SLO 5.1.1: Basis of Classification of Living Organisms",
+        question: "Classifying organisms based on microscopic cellular features, such as prokaryotic vs eukaryotic cell organization, relies on:",
+        options: ["Cytology", "Homology", "Genetics", "Ecology"],
+        correct: 0,
+        explanation: "Cytology is the microscopic study of cells, their organelles, membrane arrangement, and internal organization.",
+        wrongExplanations: [
+          "Homology deals with structural and skeletal modifications.",
+          "Genetics compares nucleic acid sequences.",
+          "Ecology examines environmental interactions and ecosystems."
+        ]
+      },
+      {
+        id: 4,
+        slo: "SLO 5.1.1: Basis of Classification of Living Organisms",
+        question: "The most precise modern method used by taxonomists to establish evolutionary relationships between two species is comparing their:",
+        options: ["Body size and weight", "Habitat preferences", "DNA base sequences", "External coloration"],
+        correct: 2,
+        explanation: "DNA base sequencing directly reflects the genetic blueprint and provides the most precise measure of evolutionary relationships.",
+        wrongExplanations: [
+          "Body size and weight vary dynamically due to environmental factors.",
+          "Habitat preferences can lead to convergent evolution without true genetic relatedness.",
+          "External coloration can change adaptively for camouflage or mimicry."
+        ]
+      },
+      {
+        id: 5,
+        slo: "SLO 5.1.1: Basis of Classification of Living Organisms",
+        question: "Homologous structures differ from analogous structures because homologous structures share a:",
+        options: ["Different internal structure", "Common evolutionary origin", "Completely identical adult function", "Non-genetic origin"],
+        correct: 1,
+        explanation: "Homologous structures develop from the same embryonic origin and common ancestor, whereas analogous structures only share superficial functions.",
+        wrongExplanations: [
+          "Homologous structures share similar internal skeletal arrangements.",
+          "Adult functions often differ greatly (e.g., swimming vs flying).",
+          "Homologous features are inherited genetically from common ancestors."
+        ]
+      },
+
+      // SLO 5.1.2: Hierarchy of Biological Classification
+      {
+        id: 6,
+        slo: "SLO 5.1.2: Hierarchy of Biological Classification",
+        question: "What is the fundamental, basic unit of biological classification consisting of organisms that can interbreed in nature?",
+        options: ["Genus", "Family", "Species", "Order"],
+        correct: 2,
+        explanation: "Species is the primary fundamental unit of biological classification, defined as a group of naturally interbreeding organisms producing fertile offspring.",
+        wrongExplanations: [
+          "Genus is a rank above species comprising related species.",
+          "Family groups together related genera.",
+          "Order is a broader rank comprising multiple related families."
+        ]
+      },
+      {
+        id: 7,
+        slo: "SLO 5.1.2: Hierarchy of Biological Classification",
+        question: "Which sequence correctly lists the hierarchy of biological classification from broadest to narrowest rank?",
+        options: [
+          "Kingdom → Phylum → Class → Order → Family → Genus → Species",
+          "Species → Genus → Family → Order → Class → Phylum → Kingdom",
+          "Kingdom → Class → Phylum → Order → Genus → Family → Species",
+          "Phylum → Kingdom → Order → Class → Family → Species → Genus"
+        ],
+        correct: 0,
+        explanation: "The standard taxonomic hierarchy from broadest to narrowest is: Kingdom, Phylum, Class, Order, Family, Genus, Species.",
+        wrongExplanations: [
+          "Option B lists ranks from narrowest to broadest.",
+          "Option C incorrectly swaps Phylum and Class.",
+          "Option D misplaces Kingdom and Phylum."
+        ]
+      },
+      {
+        id: 8,
+        slo: "SLO 5.1.2: Hierarchy of Biological Classification",
+        question: "Organisms that belong to the same taxonomic Order must also belong to the same:",
+        options: ["Genus", "Family", "Species", "Class"],
+        correct: 3,
+        explanation: "In taxonomic hierarchy, higher ranks encompass all lower ranks. Therefore, organisms sharing an Order must belong to the same Class, Phylum, and Kingdom.",
+        wrongExplanations: [
+          "Organisms in the same Order may belong to different Genera.",
+          "They may belong to different Families within that Order.",
+          "They can belong to completely distinct Species."
+        ]
+      },
+      {
+        id: 9,
+        slo: "SLO 5.1.2: Hierarchy of Biological Classification",
+        question: "In biological hierarchy, a collection of closely related genera is grouped together into a single:",
+        options: ["Family", "Order", "Phylum", "Species"],
+        correct: 0,
+        explanation: "A Family is a taxonomic rank composed of one or more closely related genera.",
+        wrongExplanations: [
+          "An Order is a higher category containing multiple related families.",
+          "A Phylum is a large taxon containing related classes.",
+          "A Species is a sub-category within a genus."
+        ]
+      },
+      {
+        id: 10,
+        slo: "SLO 5.1.2: Hierarchy of Biological Classification",
+        question: "[Real-Life Scenario] A botanist studies three plants—potato (Solanum tuberosum), brinjal (Solanum melongena), and tomato (Solanum lycopersicum). What taxonomic rank do these three plants share under the name Solanum?",
+        options: ["Family", "Genus", "Order", "Class"],
+        correct: 1,
+        explanation: "Solanum is the Genus name shared by potato, brinjal, and tomato in binomial nomenclature.",
+        wrongExplanations: [
+          "The family is Solanaceae.",
+          "The order is Solanales.",
+          "The class is Magnoliopsida (Dicotyledons)."
+        ]
+      },
+
+      // SLO 5.2.1: Binomial Nomenclature
+      {
+        id: 11,
+        slo: "SLO 5.2.1: Binomial Nomenclature",
+        question: "Who introduced the universal system of naming living organisms using two Latinized words known as binomial nomenclature?",
+        options: ["Ernst Haeckel", "Robert Whittaker", "Carolus Linnaeus", "Aristotle"],
+        correct: 2,
+        explanation: "Swedish taxonomist Carolus Linnaeus developed binomial nomenclature in the 18th century.",
+        wrongExplanations: [
+          "Ernst Haeckel proposed Kingdom Protista.",
+          "Robert Whittaker introduced the five-kingdom system.",
+          "Aristotle devised the early two-kingdom system based on habitat and movement."
+        ]
+      },
+      {
+        id: 12,
+        slo: "SLO 5.2.1: Binomial Nomenclature",
+        question: "In the scientific name Homo sapiens, the first word (Homo) represents the organism's:",
+        options: ["Genus", "Species", "Family", "Order"],
+        correct: 0,
+        explanation: "In binomial nomenclature, the first word denotes the Genus and is always capitalized.",
+        wrongExplanations: [
+          "sapiens represents the specific epithet (species).",
+          "The family for humans is Hominidae.",
+          "The order for humans is Primates."
+        ]
+      },
+      {
+        id: 13,
+        slo: "SLO 5.2.1: Binomial Nomenclature",
+        question: "According to standard rules of binomial nomenclature, how should scientific names be formatted when printed in text?",
+        options: [
+          "Bolded in local language",
+          "ALL UPPERCASE",
+          "Underlined with lowercase genus",
+          "Italicized with Genus capitalized and species in lowercase"
+        ],
+        correct: 3,
+        explanation: "In printed text, scientific names must be italicized, with the Genus capitalized and the specific epithet in lowercase.",
+        wrongExplanations: [
+          "Scientific names are Latinized, not in local languages.",
+          "Only the first letter of the Genus is capitalized.",
+          "Underlining is used when handwritten; the Genus must always start with a capital letter."
+        ]
+      },
+      {
+        id: 14,
+        slo: "SLO 5.2.1: Binomial Nomenclature",
+        question: "Which language is universally used to formulate scientific names under binomial nomenclature?",
+        options: ["Greek", "English", "Latin", "French"],
+        correct: 2,
+        explanation: "Latin is a dead language that does not evolve or change regional meanings, making it ideal for worldwide standardization.",
+        wrongExplanations: [
+          "Greek root words are sometimes Latinized, but the official language framework is Latin.",
+          "English changes with regional dialects and colloquial usage.",
+          "French is a modern living language with regional linguistic variations."
+        ]
+      },
+      {
+        id: 15,
+        slo: "SLO 5.2.1: Binomial Nomenclature",
+        question: "[Real-Life Scenario] A biology student writes the scientific name of the onion plant in an examination paper. Which option demonstrates the correct scientific format?",
+        options: ["Allium cepa", "allium Cepa", "ALLIUM CEPA", "Allium Cepa"],
+        correct: 0,
+        explanation: "Allium cepa correctly capitalizes the Genus ('Allium') and keeps the species epithet ('cepa') in lowercase.",
+        wrongExplanations: [
+          "Option B incorrectly keeps the Genus in lowercase and capitalizes species.",
+          "Option C uses all uppercase letters.",
+          "Option D incorrectly capitalizes both Genus and species."
+        ]
+      },
+
+      // SLO 5.2.2: Significance of Binomial Nomenclature
+      {
+        id: 16,
+        slo: "SLO 5.2.2: Significance of Binomial Nomenclature",
+        question: "What is the primary advantage of using scientific names over local common names?",
+        options: [
+          "Common names are written in Latin",
+          "Common names change every year",
+          "Scientific names are always shorter",
+          "Scientific names eliminate confusion caused by regional language differences"
+        ],
+        correct: 3,
+        explanation: "Binomial nomenclature ensures that every species has a single unique name recognized universally by scientists regardless of language.",
+        wrongExplanations: [
+          "Common names are in local dialects, not Latin.",
+          "Common names do not systematically change yearly, but vary by location.",
+          "Scientific names can be lengthy, but their primary value is universal accuracy."
+        ]
+      },
+      {
+        id: 17,
+        slo: "SLO 5.2.2: Significance of Binomial Nomenclature",
+        question: "[Real-Life Scenario] A student learns that 'jellyfish', 'starfish', and 'cuttlefish' are not actual fish species. How does binomial nomenclature solve this confusion?",
+        options: [
+          "It classifies all aquatic animals as fish",
+          "It replaces common names with local dialects",
+          "It assigns every species a unique, standardized two-part name",
+          "It translates all names into English"
+        ],
+        correct: 2,
+        explanation: "Misleading common names are avoided by giving each distinct organism an unambiguous two-part Latin scientific name based on actual evolutionary lineage.",
+        wrongExplanations: [
+          "Taxonomy separates CNidaria, Echinodermata, and Mollusca from Pisces.",
+          "Local dialects increase confusion.",
+          "Scientific names use Latin, not English."
+        ]
+      },
+      {
+        id: 18,
+        slo: "SLO 5.2.2: Significance of Binomial Nomenclature",
+        question: "Binomial nomenclature is universally accepted across international scientific communities because it:",
+        options: [
+          "Is governed by international taxonomic codes",
+          "Allows anyone to create informal names without rules",
+          "Names organisms based only on their physical color",
+          "Changes whenever a new country is formed"
+        ],
+        correct: 0,
+        explanation: "Strict international codes (ICZN for animals, ICN for plants) regulate binomial nomenclature across the globe.",
+        wrongExplanations: [
+          "Rules are strictly regulated by taxonomic codes, preventing informal naming.",
+          "Naming incorporates evolutionary, structural, and molecular features.",
+          "Names remain stable across political and geographical boundary changes."
+        ]
+      },
+      {
+        id: 19,
+        slo: "SLO 5.2.2: Significance of Binomial Nomenclature",
+        question: "How does binomial nomenclature assist evolutionary biologists in organizing living organisms?",
+        options: [
+          "It shows the exact age of fossils",
+          "It describes the physical weight of organisms",
+          "Sharing a genus name indicates a close evolutionary relationship",
+          "It guarantees organisms can cross-breed across families"
+        ],
+        correct: 2,
+        explanation: "Organisms placed in the same Genus share a recent common ancestor and close genetic affinities.",
+        wrongExplanations: [
+          "Fossil age requires radiometric isotope dating.",
+          "Scientific names do not indicate physical mass.",
+          "Organisms across different families cannot produce viable offspring."
+        ]
+      },
+      {
+        id: 20,
+        slo: "SLO 5.2.2: Significance of Binomial Nomenclature",
+        question: "Why are common names unreliable for precise scientific communication?",
+        options: [
+          "They are identical across all global languages",
+          "One common name may refer to multiple different species in different regions",
+          "They are always written in Latin",
+          "They describe exact genetic sequences"
+        ],
+        correct: 1,
+        explanation: "Common names vary widely by region and language; e.g., 'bluebell' refers to completely different plant species in England and Scotland.",
+        wrongExplanations: [
+          "Common names vary drastically across regions.",
+          "Common names are in vernacular languages, not Latin.",
+          "Common names are informal and do not convey genetic data."
+        ]
+      },
+
+      // SLO 5.3.1: Compare Kingdoms of Living Organisms
+      {
+        id: 21,
+        slo: "SLO 5.3.1: Compare Kingdoms of Living Organisms",
+        question: "What was a major limitation of Aristotle's two-kingdom classification system (Plantae and Animalia)?",
+        options: [
+          "It grouped bacteria and fungi together with photosynthetic plants",
+          "It recognized microscopic unicellular organisms correctly",
+          "It placed birds and fish in separate kingdoms",
+          "It classified all green algae as animals"
+        ],
+        correct: 0,
+        explanation: "Aristotle's system grouped heterotrophic non-photosynthetic fungi and unicellular bacteria together with autotrophic plants purely because they lacked locomotion.",
+        wrongExplanations: [
+          "Aristotle lacked microscopes and failed to properly classify unicellular microbes.",
+          "Placing birds and fish in Animalia was actually anatomically valid.",
+          "Green algae were grouped under plants, not animals."
+        ]
+      },
+      {
+        id: 22,
+        slo: "SLO 5.3.1: Compare Kingdoms of Living Organisms",
+        question: "Robert Whittaker proposed the five-kingdom classification system based mainly on cellular organization and:",
+        options: ["Chromosome number", "Geographic location", "Body length", "Mode of nutrition"],
+        correct: 3,
+        explanation: "Whittaker's 1969 system evaluated cellular structure (prokaryote vs eukaryote), body organization, and mode of nutrition (ingestion, absorption, photosynthesis).",
+        wrongExplanations: [
+          "Chromosome count varies widely within taxa and was not a primary kingdom criterion.",
+          "Geographic location is ecological, not taxonomic.",
+          "Body size is irrelevant to fundamental kingdom organization."
+        ]
+      },
+      {
+        id: 23,
+        slo: "SLO 5.3.1: Compare Kingdoms of Living Organisms",
+        question: "How did Lynn Margulis and Karlene Schwartz modify Whittaker's five-kingdom classification system?",
+        options: [
+          "They eliminated Kingdom Monera",
+          "They incorporated genetics, cellular ultrastructure, and nucleic acid details",
+          "They created a ten-kingdom classification system",
+          "They re-classified all fungi as true plants"
+        ],
+        correct: 1,
+        explanation: "Margulis and Schwartz refined the 5 kingdoms by adding molecular genetics, organelle ultrastructure, and nucleic acid sequence criteria.",
+        wrongExplanations: [
+          "Monera was retained and renamed Prokaryotae.",
+          "They maintained five kingdoms rather than ten.",
+          "Fungi remained distinct from plants due to chitinous walls and absorptive nutrition."
+        ]
+      },
+      {
+        id: 24,
+        slo: "SLO 5.3.1: Compare Kingdoms of Living Organisms",
+        question: "Prokaryotic organisms like bacteria that lack a true membrane-bound nucleus are classified under Kingdom:",
+        options: ["Monera", "Protista", "Fungi", "Plantae"],
+        correct: 0,
+        explanation: "Kingdom Monera (or Prokaryotae) contains all single-celled prokaryotic organisms lacking membrane-enclosed organelles and true nuclei.",
+        wrongExplanations: [
+          "Protista comprises eukaryotic unicellular or simple multicellular organisms.",
+          "Fungi consists of eukaryotic heterotrophic decomposers.",
+          "Plantae includes eukaryotic multicellular autotrophs."
+        ]
+      },
+      {
+        id: 25,
+        slo: "SLO 5.3.1: Compare Kingdoms of Living Organisms",
+        question: "[Real-Life Scenario] A lab technician isolates a non-motile, multicellular heterotrophic organism with chitinous cell walls that absorbs nutrients from decomposing wood. Into which kingdom should it be placed?",
+        options: ["Animalia", "Protista", "Fungi", "Plantae"],
+        correct: 2,
+        explanation: "Fungi are multicellular, eukaryotic, non-photosynthetic heterotrophs with chitin in their cell walls that absorb nutrients from organic matter.",
+        wrongExplanations: [
+          "Animalia lack cell walls and ingest food.",
+          "Protista are primarily unicellular or simple colony formers.",
+          "Plantae have cellulose cell walls and perform photosynthesis."
+        ]
+      },
+
+      // SLO 5.4.1: Trace the Discovery of Viruses
+      {
+        id: 26,
+        slo: "SLO 5.4.1: Trace the Discovery of Viruses",
+        question: "Which scientist in 1892 demonstrated that the cause of tobacco mosaic disease passed through porcelain filters that trap bacteria?",
+        options: ["Dmitri Ivanovsky", "Louis Pasteur", "Wendell Stanley", "Edward Jenner"],
+        correct: 0,
+        explanation: "Russian botanist Dmitri Ivanovsky discovered in 1892 that the TMV agent passed through Chamberland porcelain bacterial filters.",
+        wrongExplanations: [
+          "Louis Pasteur developed rabies vaccines and germ theory.",
+          "Wendell Stanley crystallized TMV in 1935.",
+          "Edward Jenner developed the smallpox vaccine in 1796."
+        ]
+      },
+      {
+        id: 27,
+        slo: "SLO 5.4.1: Trace the Discovery of Viruses",
+        question: "Who coined the term 'virus' (meaning poisonous fluid) and described the infectious agent as Contagium vivum fluidum?",
+        options: ["Alexander Fleming", "Robert Koch", "Robert Hooke", "Martinus Beijerinck"],
+        correct: 3,
+        explanation: "Dutch microbiologist Martinus Beijerinck (1898) coined 'virus' and coined 'Contagium vivum fluidum' (contagious living fluid).",
+        wrongExplanations: [
+          "Alexander Fleming discovered penicillin.",
+          "Robert Koch formulated Koch's postulates for bacterial pathogens.",
+          "Robert Hooke coined the term 'cell' in 1665."
+        ]
+      },
+      {
+        id: 28,
+        slo: "SLO 5.4.1: Trace the Discovery of Viruses",
+        question: "In 1935, Wendell Stanley achieved a major milestone in virology by:",
+        options: [
+          "Culturing viruses on nutrient agar plates",
+          "Crystallizing the Tobacco Mosaic Virus (TMV)",
+          "Inventing the first antibiotic against viruses",
+          "Observing viruses under a light microscope"
+        ],
+        correct: 1,
+        explanation: "Wendell Stanley crystallized TMV, proving viruses consist of regular molecular nucleoprotein assemblies.",
+        wrongExplanations: [
+          "Viruses cannot grow on non-living nutrient agar.",
+          "Antibiotics kill bacteria, not viruses.",
+          "Viruses are ultra-microscopic and require electron microscopes."
+        ]
+      },
+      {
+        id: 29,
+        slo: "SLO 5.4.1: Trace the Discovery of Viruses",
+        question: "[Real-Life Scenario] In an experiment, fluid extracted from diseased tobacco leaves was passed through a filter fine enough to trap all bacteria. The filtered fluid still infected healthy leaves. What did this historically prove?",
+        options: [
+          "Bacteria can shrink to pass through porcelain",
+          "Fungi secrete liquid toxins",
+          "The infectious agent is smaller than bacteria",
+          "Tobacco disease is caused by nutrient deficiency"
+        ],
+        correct: 2,
+        explanation: "The experiment proved the existence of infectious sub-microscopic agents smaller than bacteria, later identified as viruses.",
+        wrongExplanations: [
+          "Bacteria cannot squeeze through ultra-fine porcelain pores.",
+          "The infectious agent replicated inside living tissue, ruling out non-replicating toxins.",
+          "Transmissibility confirmed an infectious biological agent, not a soil deficiency."
+        ]
+      },
+      {
+        id: 30,
+        slo: "SLO 5.4.1: Trace the Discovery of Viruses",
+        question: "Who developed the world's first successful vaccine against smallpox in 1796, prior to the official discovery of viruses?",
+        options: ["Edward Jenner", "Louis Pasteur", "Robert Hooke", "Jonas Salk"],
+        correct: 0,
+        explanation: "Edward Jenner used cowpox pus to inoculate humans against smallpox in 1796.",
+        wrongExplanations: [
+          "Louis Pasteur developed rabies and anthrax vaccines decades later.",
+          "Robert Hooke described cork cells.",
+          "Jonas Salk developed the injectable polio vaccine in 1955."
+        ]
+      },
+
+      // SLO 5.4.2: Characteristic Features of Viruses
+      {
+        id: 31,
+        slo: "SLO 5.4.2: Characteristic Features of Viruses",
+        question: "Viruses are characterized as 'acellular' biological entities because they:",
+        options: [
+          "Contain chitin cell walls",
+          "Have multiple distinct nuclei",
+          "Perform binary fission",
+          "Lack cytoplasm, cell membranes, and metabolic organelles"
+        ],
+        correct: 3,
+        explanation: "Viruses are non-cellular (acellular) entities lacking cytoplasm, organelles, metabolic enzymes, and plasma membranes.",
+        wrongExplanations: [
+          "Fungi contain chitin walls; viruses lack walls.",
+          "Viruses do not possess nuclei.",
+          "Bacteria perform binary fission; viruses replicate by host-directed assembly."
+        ]
+      },
+      {
+        id: 32,
+        slo: "SLO 5.4.2: Characteristic Features of Viruses",
+        question: "Outside a living host cell, an intact, non-replicating viral particle is referred to as a:",
+        options: ["Virion", "Viroid", "Prion", "Plasmid"],
+        correct: 0,
+        explanation: "A virion is a structurally complete, inert extracellular viral particle capable of infecting a host.",
+        wrongExplanations: [
+          "A viroid is a small naked circular RNA fragment infecting plants.",
+          "A prion is an infectious misfolded protein lacking nucleic acid.",
+          "A plasmid is a circular piece of bacterial DNA."
+        ]
+      },
+      {
+        id: 33,
+        slo: "SLO 5.4.2: Characteristic Features of Viruses",
+        question: "What two essential components are present in all simple viral particles?",
+        options: [
+          "Cell wall and DNA",
+          "Cytoplasm and RNA",
+          "Nucleic acid genome and protein coat (capsid)",
+          "Flagella and lipid bilayer"
+        ],
+        correct: 2,
+        explanation: "Every virus consists minimally of a central core of nucleic acid genome (DNA or RNA) enclosed by a protective protein shell called a capsid.",
+        wrongExplanations: [
+          "Viruses lack peptidoglycan or cellulose cell walls.",
+          "Viruses lack cytoplasm.",
+          "Naked viruses lack lipid bilayers and none possess flagella."
+        ]
+      },
+      {
+        id: 34,
+        slo: "SLO 5.4.2: Characteristic Features of Viruses",
+        question: "Viruses are classified as obligate intracellular parasites because they:",
+        options: [
+          "Photosynthesize inside plant cells",
+          "Can only replicate inside a living host cell",
+          "Absorb dissolved nutrients from water",
+          "Decompose dead organic matter independently"
+        ],
+        correct: 1,
+        explanation: "Viruses lack independent metabolic machinery and ribosomes; they must enter host cells to replicate.",
+        wrongExplanations: [
+          "Viruses cannot perform photosynthesis.",
+          "Viruses do not feed on dissolved organic solutes.",
+          "Viruses cannot metabolize or replicate in dead matter without living host cells."
+        ]
+      },
+      {
+        id: 35,
+        slo: "SLO 5.4.2: Characteristic Features of Viruses",
+        question: "A unique genetic property of viruses compared to cellular life forms is that a single virus contains:",
+        options: [
+          "Both DNA and RNA together",
+          "Either DNA or RNA, but never both",
+          "Neither DNA nor RNA",
+          "Triple-stranded DNA only"
+        ],
+        correct: 1,
+        explanation: "Unlike cellular organisms containing both DNA and RNA, a specific virus contains strictly either DNA or RNA as its genome.",
+        wrongExplanations: [
+          "Cellular organisms contain both DNA and RNA; viruses never contain both together.",
+          "Viruses must possess a nucleic acid genome.",
+          "Triple-stranded DNA is not a functional viral genome type."
+        ]
+      },
+
+      // SLO 5.4.3: How Viruses Survive Inside a Host Cell
+      {
+        id: 36,
+        slo: "SLO 5.4.3: How Viruses Survive Inside a Host Cell",
+        question: "How does a virus force an infected host cell to synthesize new viral components?",
+        options: [
+          "By hijacking the host cell's ribosomes and metabolic machinery",
+          "By producing its own cellular ATP",
+          "By destroying host cell ribosomes instantly",
+          "By absorbing host cellulose"
+        ],
+        correct: 0,
+        explanation: "Viral mRNA directs host ribosomes, tRNA, and enzymes to synthesize viral capsids and replicate viral nucleic acids.",
+        wrongExplanations: [
+          "Viruses cannot synthesize ATP.",
+          "Viruses require host ribosomes intact to translate viral proteins.",
+          "Viruses do not consume structural plant cellulose."
+        ]
+      },
+      {
+        id: 37,
+        slo: "SLO 5.4.3: How Viruses Survive Inside a Host Cell",
+        question: "The initial step of viral infection where viral surface proteins bind to specific receptors on the host cell membrane is called:",
+        options: ["Penetration", "Attachment or Adsorption", "Lysis", "Assembly"],
+        correct: 1,
+        explanation: "Adsorption/Attachment is the highly specific binding of viral surface ligands to matching host cell membrane receptors.",
+        wrongExplanations: [
+          "Penetration is the subsequent entry of the virus or its genome into host cytoplasm.",
+          "Lysis is the final rupture of the host cell.",
+          "Assembly is the packaging of genome into capsids."
+        ]
+      },
+      {
+        id: 38,
+        slo: "SLO 5.4.3: How Viruses Survive Inside a Host Cell",
+        question: "During the uncoating step inside a host cell, the virus:",
+        options: [
+          "Builds a thick peptidoglycan cell wall",
+          "Forms a flagellum for locomotion",
+          "Removes its protein capsid to release its genetic genome",
+          "Synthesizes host proteins"
+        ],
+        correct: 2,
+        explanation: "Uncoating involves degradation of the viral protein capsid by enzymes, releasing the naked viral genome into host cytoplasm.",
+        wrongExplanations: [
+          "Viruses do not construct peptidoglycan cell walls.",
+          "Viruses lack locomotion flagella.",
+          "Uncoating releases the genome so the virus can hijack protein synthesis."
+        ]
+      },
+      {
+        id: 39,
+        slo: "SLO 5.4.3: How Viruses Survive Inside a Host Cell",
+        question: "[Real-Life Scenario] A patient suffering from the flu demands a penicillin prescription. The doctor explains that penicillin inhibits bacterial cell wall synthesis and cannot cure flu. Why are viruses immune to penicillin?",
+        options: [
+          "Viruses have thick chitin walls",
+          "Viruses lack cell walls and cellular metabolic targets",
+          "Viruses break down penicillin molecules",
+          "Antibiotics only function at freezing temperatures"
+        ],
+        correct: 1,
+        explanation: "Antibiotics like penicillin target bacterial biochemical structures (e.g. peptidoglycan cell walls). Viruses lack cell walls and metabolic machinery.",
+        wrongExplanations: [
+          "Viruses do not have chitin walls.",
+          "Viruses do not enzymatically destroy penicillin; they simply lack peptidoglycan.",
+          "Antibiotic activity is governed by biochemistry, not freezing temperatures."
+        ]
+      },
+      {
+        id: 40,
+        slo: "SLO 5.4.3: How Viruses Survive Inside a Host Cell",
+        question: "Newly synthesized viral nucleic acids and capsid proteins aggregate inside the host cell to form complete virions during:",
+        options: ["Adsorption", "Lysis", "Penetration", "Assembly"],
+        correct: 3,
+        explanation: "Assembly (maturation) is the stage where replicated viral genomes and newly translated capsomeres combine into mature infectious virions.",
+        wrongExplanations: [
+          "Adsorption is the initial binding to host surface.",
+          "Lysis is host cell breakdown and viral release.",
+          "Penetration is host cell entry."
+        ]
+      },
+
+      // SLO 5.5.1: Classify Viruses (Structure, Nucleic Acid, and Host)
+      {
+        id: 41,
+        slo: "SLO 5.5.1: Classify Viruses (Structure, Nucleic Acid, and Host)",
+        question: "Bacteriophages are specialized viruses that exclusively infect and replicate within:",
+        options: ["Fungi", "Plants", "Bacteria", "Animals"],
+        correct: 2,
+        explanation: "Bacteriophages (meaning 'bacteria eaters') are complex viruses that specifically infect bacterial cells.",
+        wrongExplanations: [
+          "Fungal viruses are called mycoviruses.",
+          "Plant viruses infect plant cells (e.g., TMV).",
+          "Animal viruses infect human or animal tissues."
+        ]
+      },
+      {
+        id: 42,
+        slo: "SLO 5.5.1: Classify Viruses (Structure, Nucleic Acid, and Host)",
+        question: "Plant viruses most commonly possess which type of nucleic acid genome?",
+        options: ["Double-stranded DNA", "Single-stranded RNA", "Circular double-stranded RNA", "Triple-stranded DNA"],
+        correct: 1,
+        explanation: "The vast majority of known plant viruses (including TMV) possess a single-stranded RNA (ssRNA) genome.",
+        wrongExplanations: [
+          "Double-stranded DNA genomes are more typical of animal viruses and bacteriophages.",
+          "Circular dsRNA is extremely rare in plant viruses.",
+          "Triple-stranded DNA is not a natural viral genome structure."
+        ]
+      },
+      {
+        id: 43,
+        slo: "SLO 5.5.1: Classify Viruses (Structure, Nucleic Acid, and Host)",
+        question: "The protective protein shell (capsid) surrounding a viral genome is constructed from repeating protein subunits called:",
+        options: ["Capsomeres", "Peptidoglycans", "Liposomes", "Microtubules"],
+        correct: 0,
+        explanation: "Capsomeres are the individual protein capsidal subunits that self-assemble into helical or icosahedral viral capsids.",
+        wrongExplanations: [
+          "Peptidoglycan forms bacterial cell walls.",
+          "Liposomes are synthetic lipid vesicles.",
+          "Microtubules form cellular cytoskeleton elements."
+        ]
+      },
+      {
+        id: 44,
+        slo: "SLO 5.5.1: Classify Viruses (Structure, Nucleic Acid, and Host)",
+        question: "Animal viruses that acquire an outer lipid membrane from the host cell membrane during budding are termed:",
+        options: ["Naked viruses", "Enveloped viruses", "Complex bacteriophages", "Viroids"],
+        correct: 1,
+        explanation: "Enveloped viruses acquire an outer phospholipid bilayer membrane embedded with viral glycoproteins as they bud from host membranes.",
+        wrongExplanations: [
+          "Naked viruses consist strictly of a protein capsid without a lipid membrane.",
+          "Bacteriophages possess complex head-tail structures without envelopes.",
+          "Viroids are naked RNA fragments lacking capsids and envelopes."
+        ]
+      },
+      {
+        id: 45,
+        slo: "SLO 5.5.1: Classify Viruses (Structure, Nucleic Acid, and Host)",
+        question: "[Real-Life Scenario] A virus isolated from a patient contains single-stranded RNA molecules surrounded by a protein coat and a lipid membrane derived from the host cell. How is this virus classified?",
+        options: ["Enveloped RNA virus", "Naked DNA virus", "Complex bacteriophage", "Non-enveloped plant virus"],
+        correct: 0,
+        explanation: "An RNA genome surrounded by a protein coat and host-derived lipid membrane defines an enveloped RNA virus (such as Influenza, HIV, or Coronavirus).",
+        wrongExplanations: [
+          "Naked DNA viruses lack lipid membranes and have DNA genomes.",
+          "Complex bacteriophages infect bacteria and lack host lipid envelopes.",
+          "Plant viruses rarely have lipid envelopes and infect plant tissues."
+        ]
+      },
+
+      // SLO 5.5.2: Diseases Caused by Viruses in Animals and Plants
+      {
+        id: 46,
+        slo: "SLO 5.5.2: Diseases Caused by Viruses in Animals and Plants",
+        question: "Which of the following plant diseases is caused by a virus leading to leaf discoloration and stunted growth?",
+        options: ["Ring rot", "Mosaic disease", "Late blight", "Powdery mildew"],
+        correct: 1,
+        explanation: "Tobacco Mosaic Virus (TMV) causes mosaic pattern discoloration, leaf wrinkling, and growth stunting in plants.",
+        wrongExplanations: [
+          "Ring rot is caused by bacteria (Clavibacter).",
+          "Late blight of potato is caused by an oomycete fungus (Phytophthora infestans).",
+          "Powdery mildew is caused by fungal pathogens."
+        ]
+      },
+      {
+        id: 47,
+        slo: "SLO 5.5.2: Diseases Caused by Viruses in Animals and Plants",
+        question: "Rabies is a fatal viral infection of the central nervous system transmitted to humans primarily through:",
+        options: [
+          "Drinking contaminated water",
+          "Inhaling fungal spores",
+          "Bites of infected rabid animals",
+          "Mosquito vectors"
+        ],
+        correct: 2,
+        explanation: "Rabies virus (Lyssavirus) is transmitted via saliva from the bite of an infected rabid mammal (dogs, bats, foxes).",
+        wrongExplanations: [
+          "Contaminated water transmits enteric viruses like Hepatitis A, not rabies.",
+          "Inhaling fungal spores causes respiratory mycoses.",
+          "Mosquitoes transmit Zika, Dengue, and Malaria."
+        ]
+      },
+      {
+        id: 48,
+        slo: "SLO 5.5.2: Diseases Caused by Viruses in Animals and Plants",
+        question: "Foot and Mouth Disease is a highly contagious viral illness that primarily affects:",
+        options: [
+          "Domestic poultry birds",
+          "Livestock like cattle, sheep, and pigs",
+          "Cereal crops like wheat",
+          "Freshwater fish species"
+        ],
+        correct: 1,
+        explanation: "Foot and Mouth Disease Virus (Aphthovirus) affects cloven-hooved livestock including cattle, sheep, goats, and pigs.",
+        wrongExplanations: [
+          "Poultry are affected by Newcastle disease or Bird Flu.",
+          "Cereal crops are infected by plant viruses like Wheat Streak Mosaic.",
+          "Fish are affected by aquatic viral hemorrhagic septicemia."
+        ]
+      },
+      {
+        id: 49,
+        slo: "SLO 5.5.2: Diseases Caused by Viruses in Animals and Plants",
+        question: "[Real-Life Scenario] A farmer notices fluid-filled blisters on the tongue, mouth, and hooves of his cows, alongside high fever and reduced milk production. What is the most likely cause?",
+        options: [
+          "Bacterial mastitis",
+          "Foot and Mouth Disease Virus",
+          "Fungal ringworm infection",
+          "Prion encephalopathy"
+        ],
+        correct: 1,
+        explanation: "Vesicles (blisters) on the oral mucosa and feet of cattle accompanied by high fever are hallmark clinical symptoms of Foot and Mouth Disease Virus.",
+        wrongExplanations: [
+          "Bacterial mastitis affects the udder tissue without hoof/mouth vesicles.",
+          "Fungal ringworm causes circular skin lesions without fever or mouth blisters.",
+          "Prion encephalopathy (BSE) presents with neurological deterioration without acute mucosal blisters."
+        ]
+      },
+      {
+        id: 50,
+        slo: "SLO 5.5.2: Diseases Caused by Viruses in Animals and Plants",
+        question: "Which viral disease causes severe respiratory symptoms and a sudden drop in egg production in poultry flocks?",
+        options: ["Polio", "Hepatitis B", "Tobacco Mosaic Disease", "Avian Influenza (Bird Flu)"],
+        correct: 3,
+        explanation: "Avian Influenza (Bird Flu, H5N1) causes acute respiratory distress, severe mortality, and drastic drop in egg yield in avian species.",
+        wrongExplanations: [
+          "Polio infects human motor neurons.",
+          "Hepatitis B infects human liver cells.",
+          "TMV affects solanaceous plants."
+        ]
+      },
+
+      // SLO 5.6.1: Compare Lytic and Lysogenic Life Cycles of a Bacteriophage
+      {
+        id: 51,
+        slo: "SLO 5.6.1: Compare Lytic and Lysogenic Life Cycles of a Bacteriophage",
+        question: "What is the definitive outcome of the lytic cycle in bacteriophage infection?",
+        options: [
+          "Lysis and destruction of the host bacterial cell",
+          "Integration of viral DNA without harming the host",
+          "Formation of bacterial endospores",
+          "Transformation of bacteria into eukaryotic cells"
+        ],
+        correct: 0,
+        explanation: "The lytic cycle culminates in viral lysozyme synthesis, rupturing (lysis) the host bacterial cell wall and releasing progeny phages.",
+        wrongExplanations: [
+          "Integration of viral DNA without lysis describes the lysogenic cycle.",
+          "Endospore formation is a bacterial survival mechanism under nutrient stress.",
+          "Viruses cannot transform prokaryotes into eukaryotic cells."
+        ]
+      },
+      {
+        id: 52,
+        slo: "SLO 5.6.1: Compare Lytic and Lysogenic Life Cycles of a Bacteriophage",
+        question: "In the lysogenic cycle, viral DNA integrated into the host bacterial chromosome is called a:",
+        options: ["Capsid", "Prophage", "Plasmid", "Virion"],
+        correct: 1,
+        explanation: "A prophage is phage DNA covalently integrated into the host bacterial chromosome during lysogeny.",
+        wrongExplanations: [
+          "A capsid is the outer protein shell.",
+          "A plasmid is an autonomous extrachromosomal bacterial DNA ring.",
+          "A virion is an intact extracellular virus particle."
+        ]
+      },
+      {
+        id: 53,
+        slo: "SLO 5.6.1: Compare Lytic and Lysogenic Life Cycles of a Bacteriophage",
+        question: "What event triggers a dormant prophage to exit the lysogenic cycle and enter the lytic cycle?",
+        options: [
+          "Abundant food supply",
+          "Treatment with penicillin",
+          "Induction caused by environmental stress or UV radiation",
+          "Bacterial binary fission"
+        ],
+        correct: 2,
+        explanation: "Induction by environmental stressors like UV light or DNA-damaging chemicals causes the repressor protein to degrade, releasing the prophage into the lytic pathway.",
+        wrongExplanations: [
+          "Nutrient abundance maintains healthy bacterial division, promoting lysogeny.",
+          "Penicillin inhibits cell wall synthesis, not prophage repression.",
+          "Binary fission replicates the prophage silently across daughter cells."
+        ]
+      },
+      {
+        id: 54,
+        slo: "SLO 5.6.1: Compare Lytic and Lysogenic Life Cycles of a Bacteriophage",
+        question: "Bacteriophages capable of undergoing both lytic and lysogenic pathways are called:",
+        options: ["Virulent phages", "Temperate phages", "Naked phages", "Prions"],
+        correct: 1,
+        explanation: "Temperate phages (such as Phage Lambda) can choose between the lytic pathway or integrating as a prophage in the lysogenic pathway.",
+        wrongExplanations: [
+          "Virulent phages (e.g., T4 phage) undergo ONLY the lytic cycle.",
+          "Naked phages lack lipid envelopes.",
+          "Prions are infectious proteins."
+        ]
+      },
+      {
+        id: 55,
+        slo: "SLO 5.6.1: Compare Lytic and Lysogenic Life Cycles of a Bacteriophage",
+        question: "[Real-Life Scenario] A culture of E. coli bacteria carries viral DNA incorporated into its genome and reproduces normally for many generations. After exposure to UV light, the bacterial cells burst and release phage particles. Which process occurred after UV exposure?",
+        options: [
+          "Permanent lysogeny",
+          "Induction into the lytic cycle",
+          "Bacterial conjugation",
+          "Halt of DNA replication"
+        ],
+        correct: 1,
+        explanation: "UV light triggers DNA damage response, leading to prophage excision and induction of the destructive lytic cycle.",
+        wrongExplanations: [
+          "The lysogenic state was ended by UV exposure.",
+          "Conjugation is horizontal gene transfer via pilus.",
+          "DNA replication and viral protein synthesis accelerated during the lytic cycle."
+        ]
+      },
+
+      // SLO 5.6.2: Use of Bacteriophage in Genetic Engineering
+      {
+        id: 56,
+        slo: "SLO 5.6.2: Use of Bacteriophage in Genetic Engineering",
+        question: "The transfer of bacterial DNA from one host bacterium to another using a bacteriophage vector is called:",
+        options: ["Transformation", "Conjugation", "Translation", "Transduction"],
+        correct: 3,
+        explanation: "Transduction is the process where a bacteriophage carries bacterial host DNA fragments from a donor cell into a recipient bacterial cell.",
+        wrongExplanations: [
+          "Transformation is uptake of free naked DNA from the surroundings.",
+          "Conjugation is direct cell-to-cell DNA transfer via a sex pilus.",
+          "Translation is protein synthesis from mRNA at ribosomes."
+        ]
+      },
+      {
+        id: 57,
+        slo: "SLO 5.6.2: Use of Bacteriophage in Genetic Engineering",
+        question: "Why are modified bacteriophages useful tools in recombinant DNA technology?",
+        options: [
+          "They produce human insulin without host cells",
+          "They deliver foreign genes into bacterial host cells efficiently",
+          "They destroy target mammalian tissue",
+          "They replace cellular ribosomes"
+        ],
+        correct: 1,
+        explanation: "Bacteriophages naturally inject nucleic acids into bacteria with high efficiency, making them excellent cloning vectors in biotechnology.",
+        wrongExplanations: [
+          "Viruses require host cells to translate recombinant insulin.",
+          "Bacteriophages target bacteria, not mammalian tissue.",
+          "Phages do not replace cellular ribosomes."
+        ]
+      },
+      {
+        id: 58,
+        slo: "SLO 5.6.2: Use of Bacteriophage in Genetic Engineering",
+        question: "[Real-Life Scenario] A bio-engineer uses a modified bacteriophage as a vector to insert a human gene into a bacterial colony. What advantage does the phage vector provide in this genetic engineering process?",
+        options: [
+          "High gene transfer efficiency into host bacterial cells",
+          "Complete destruction of host cell DNA",
+          "Ability to replicate without living cells",
+          "Inhibition of host protein synthesis"
+        ],
+        correct: 0,
+        explanation: "Phage vectors possess natural high-affinity injection mechanisms that transduce foreign recombinant genes into host bacteria far more efficiently than standard plasmid transformation.",
+        wrongExplanations: [
+          "Destroying host DNA completely prevents host expression of the target protein.",
+          "Phages cannot replicate in non-living cell-free media.",
+          "Host protein synthesis machinery is required to produce recombinant proteins."
+        ]
+      },
+      {
+        id: 59,
+        slo: "SLO 5.6.2: Use of Bacteriophage in Genetic Engineering",
+        question: "How does 'phage therapy' utilize bacteriophages in clinical medicine?",
+        options: [
+          "As vaccines against viral hepatitis",
+          "To selectively target and destroy antibiotic-resistant bacterial infections",
+          "To destroy cancerous blood cells",
+          "To increase human viral replication rates"
+        ],
+        correct: 1,
+        explanation: "Phage therapy uses lytic bacteriophages to selectively infect and lyse multi-drug resistant bacterial pathogens in patients.",
+        wrongExplanations: [
+          "Phages infect bacteria, not human liver hepatitis viruses.",
+          "Phages do not target eukaryotic human cancer cells.",
+          "Phage therapy destroys bacterial pathogens, not human cells."
+        ]
+      },
+      {
+        id: 60,
+        slo: "SLO 5.6.2: Use of Bacteriophage in Genetic Engineering",
+        question: "Bacteria naturally defend themselves against bacteriophage infections using specialized enzymes that cut foreign viral DNA, known as:",
+        options: ["DNA ligases", "RNA polymerases", "Restriction endonucleases", "Amylases"],
+        correct: 2,
+        explanation: "Restriction endonucleases cut incoming unmethylated viral DNA at specific target recognition sites, protecting host bacterial genomes.",
+        wrongExplanations: [
+          "DNA ligase joins DNA fragments together.",
+          "RNA polymerase synthesizes RNA transcripts from DNA.",
+          "Amylases digest starch into maltose."
+        ]
+      },
+
+      // SLO 5.7.1: Causative Agent, Symptoms, Treatment, and Prevention of Viral Diseases
+      {
+        id: 61,
+        slo: "SLO 5.7.1: Causative Agent, Symptoms, Treatment, and Prevention of Viral Diseases",
+        question: "Hepatitis B virus primarily infects and causes acute or chronic inflammation in which human organ?",
+        options: ["Lungs", "Liver", "Kidneys", "Brain"],
+        correct: 1,
+        explanation: "Hepatitis B virus (HBV) specifically targets hepatocytes in the liver, causing jaundice, cirrhosis, and potentially liver cancer.",
+        wrongExplanations: [
+          "Lungs are targeted by respiratory viruses like Influenza or SARS-CoV-2.",
+          "Kidneys are secondarily affected in systemic disease, not primary HBV target.",
+          "Brain tissue is infected by neurotropic viruses like Rabies or Polio."
+        ]
+      },
+      {
+        id: 62,
+        slo: "SLO 5.7.1: Causative Agent, Symptoms, Treatment, and Prevention of Viral Diseases",
+        question: "Human Immunodeficiency Virus (HIV) causes AIDS by selectively attacking and destroying:",
+        options: [
+          "Red blood cells",
+          "Helper T lymphocytes (CD4+ T cells)",
+          "Blood platelets",
+          "Epithelial skin cells"
+        ],
+        correct: 1,
+        explanation: "HIV surface glycoprotein gp120 binds to CD4 receptors on Helper T lymphocytes, destroying adaptive immune coordination.",
+        wrongExplanations: [
+          "Red blood cells are destroyed in Plasmodium (malaria) infection.",
+          "Platelets are depleted in Dengue fever.",
+          "Skin epithelial cells are targeted by Papillomavirus or Herpes simplex."
+        ]
+      },
+      {
+        id: 63,
+        slo: "SLO 5.7.1: Causative Agent, Symptoms, Treatment, and Prevention of Viral Diseases",
+        question: "Avian Influenza (Bird Flu) in poultry and humans is caused by which viral subtype?",
+        options: ["H5N1", "H1N1", "HCV", "HBV"],
+        correct: 0,
+        explanation: "H5N1 is the highly pathogenic avian influenza A subtype causing severe bird flu outbreaks in poultry and zoonotic spillover in humans.",
+        wrongExplanations: [
+          "H1N1 causes Swine Flu or seasonal human influenza.",
+          "HCV is Hepatitis C Virus.",
+          "HBV is Hepatitis B Virus."
+        ]
+      },
+      {
+        id: 64,
+        slo: "SLO 5.7.1: Causative Agent, Symptoms, Treatment, and Prevention of Viral Diseases",
+        question: "[Real-Life Scenario] A child in an under-vaccinated community develops fever, stiff neck, and flaccid paralysis in his leg. Health workers administer oral drops to local children. Which disease is this?",
+        options: ["Hepatitis A", "Poliomyelitis (Polio)", "Bird Flu", "AIDS"],
+        correct: 1,
+        explanation: "Poliovirus destroys anterior horn motor neurons in the spinal cord, leading to asymmetric flaccid paralysis. It is prevented by Oral Polio Vaccine (OPV) drops.",
+        wrongExplanations: [
+          "Hepatitis A causes liver inflammation and jaundice without leg paralysis.",
+          "Bird flu causes severe pneumonitis and high fever without motor neuron paralysis.",
+          "AIDS causes immunodeficiency, leading to opportunistic infections."
+        ]
+      },
+      {
+        id: 65,
+        slo: "SLO 5.7.1: Causative Agent, Symptoms, Treatment, and Prevention of Viral Diseases",
+        question: "[Real-Life Scenario] A farmer notices leaf mottling and stunting in his tobacco crop due to TMV. To prevent the virus from spreading across the farm, what is the best management strategy?",
+        options: [
+          "Spraying penicillin",
+          "Uprooting and burning infected plants",
+          "Excess nitrogen fertilization",
+          "Continuous overhead watering"
+        ],
+        correct: 1,
+        explanation: "Because viral plant infections cannot be cured with chemical sprays, destroying and burning infected plants eliminates viral reservoirs and stops mechanical transmission.",
+        wrongExplanations: [
+          "Penicillin acts on bacterial peptidoglycan and has zero effect on plant viruses.",
+          "Nitrogen fertilizer promotes succulent growth but does not stop viral spread.",
+          "Overhead watering spreads TMV mechanically through water drops and tools."
+        ]
+      },
+
+      // SLO 5.8.1: Differentiate Between Prions and Viroids
+      {
+        id: 66,
+        slo: "SLO 5.8.1: Differentiate Between Prions and Viroids",
+        question: "Unlike conventional viruses, prions are unique infectious agents composed entirely of:",
+        options: [
+          "Single-stranded RNA",
+          "Double-stranded DNA",
+          "Phospholipid bilayers",
+          "Misfolded infectious proteins without nucleic acids"
+        ],
+        correct: 3,
+        explanation: "Prions (proteinaceous infectious particles) consist exclusively of misfolded PrP proteins and contain no DNA or RNA genome.",
+        wrongExplanations: [
+          "Single-stranded RNA forms the genome of viroids or RNA viruses.",
+          "Double-stranded DNA is present in DNA viruses and cells.",
+          "Phospholipid bilayers form viral envelopes or cellular membranes."
+        ]
+      },
+      {
+        id: 67,
+        slo: "SLO 5.8.1: Differentiate Between Prions and Viroids",
+        question: "Viroids differ from viruses because viroids consist exclusively of:",
+        options: [
+          "Small, naked circular single-stranded RNA molecules without a protein coat",
+          "Double-stranded DNA wrapped in lipid envelopes",
+          "Misfolded structural proteins",
+          "Complex protein capsids"
+        ],
+        correct: 0,
+        explanation: "Viroids are small, circular, single-stranded infectious RNA molecules that completely lack a protein capsid coat.",
+        wrongExplanations: [
+          "Enveloped dsDNA describes complex animal viruses like Herpesvirus.",
+          "Misfolded proteins describe prions.",
+          "Complex capsids enclose viruses, whereas viroids are naked."
+        ]
+      },
+      {
+        id: 68,
+        slo: "SLO 5.8.1: Differentiate Between Prions and Viroids",
+        question: "Which statement accurately compares prions and viroids?",
+        options: [
+          "Prions contain RNA, while viroids contain DNA",
+          "Prions lack nucleic acids, while viroids lack a protein coat",
+          "Both prions and viroids have thick protein capsids",
+          "Viroids cause brain degeneration in cattle, while prions infect plants"
+        ],
+        correct: 1,
+        explanation: "Prions are purely proteinaceous (no nucleic acids), whereas viroids are purely naked RNA molecules (no protein coat).",
+        wrongExplanations: [
+          "Prions have no RNA/DNA, and viroids contain RNA, not DNA.",
+          "Neither prions nor viroids have capsids.",
+          "Prions cause brain spongiform encephalopathy in mammals; viroids infect plants."
+        ]
+      },
+      {
+        id: 69,
+        slo: "SLO 5.8.1: Differentiate Between Prions and Viroids",
+        question: "Viroids are primarily known to infect and cause diseases in which group of organisms?",
+        options: ["Mammals", "Bacteria", "Plants", "Fungi"],
+        correct: 2,
+        explanation: "Viroids exclusively target plant hosts, interfering with plant gene regulation and causing agricultural crop diseases.",
+        wrongExplanations: [
+          "Prions and animal viruses infect mammals.",
+          "Bacteriophages infect bacteria.",
+          "Mycoviruses infect fungi."
+        ]
+      },
+      {
+        id: 70,
+        slo: "SLO 5.8.1: Differentiate Between Prions and Viroids",
+        question: "Prions cause fatal neurodegenerative diseases by inducing normal brain proteins to:",
+        options: [
+          "Turn into viral DNA",
+          "Refold into abnormal, disease-causing shapes",
+          "Dissolve into free amino acids",
+          "Synthesize plant RNA"
+        ],
+        correct: 1,
+        explanation: "Infectious prion proteins ($PrP^{Sc}$) template and induce normal cellular prion proteins ($PrP^C$) to refold into beta-sheet misfolded neurotoxic conformations.",
+        wrongExplanations: [
+          "Prions lack nucleic acids and cannot produce DNA.",
+          "Prions cause protein aggregation and amyloid plaque formation, not dissolution into free amino acids.",
+          "Prions have no RNA polymerase activity."
+        ]
+      },
+
+      // SLO 5.8.2: List Diseases Caused by Prions and Viroids
+      {
+        id: 71,
+        slo: "SLO 5.8.2: List Diseases Caused by Prions and Viroids",
+        question: "Bovine Spongiform Encephalopathy (BSE), commonly called 'Mad Cow Disease', is caused by:",
+        options: ["Prions", "Viroids", "Bacteriophages", "Retroviruses"],
+        correct: 0,
+        explanation: "BSE is a progressive neurodegenerative brain disorder in cattle caused by infectious prions.",
+        wrongExplanations: [
+          "Viroids infect plants (e.g., potato spindle tuber).",
+          "Bacteriophages infect bacteria.",
+          "Retroviruses cause infections like HIV or animal leukemias."
+        ]
+      },
+      {
+        id: 72,
+        slo: "SLO 5.8.2: List Diseases Caused by Prions and Viroids",
+        question: "Which of the following agricultural plant diseases is caused by a viroid?",
+        options: ["Potato Spindle Tuber disease", "Tobacco Mosaic disease", "Tomato Leaf Curl", "Wheat Rust"],
+        correct: 0,
+        explanation: "Potato Spindle Tuber Viroid (PSTVd) was the first discovered viroid disease in plants.",
+        wrongExplanations: [
+          "Tobacco Mosaic is caused by TMV (virus).",
+          "Tomato Leaf Curl is caused by Gemini virus.",
+          "Wheat rust is caused by a fungus (Puccinia graminis)."
+        ]
+      },
+      {
+        id: 73,
+        slo: "SLO 5.8.2: List Diseases Caused by Prions and Viroids",
+        question: "Creutzfeldt-Jakob Disease (CJD) is a fatal degenerative brain disorder in humans caused by:",
+        options: ["Viroids", "Prions", "Poliovirus", "Hepatitis B virus"],
+        correct: 1,
+        explanation: "CJD is a human spongiform encephalopathy caused by prions resulting in rapid neurodegeneration.",
+        wrongExplanations: [
+          "Viroids only infect plant hosts.",
+          "Poliovirus causes motor paralysis.",
+          "Hepatitis B causes chronic liver infection."
+        ]
+      },
+      {
+        id: 74,
+        slo: "SLO 5.8.2: List Diseases Caused by Prions and Viroids",
+        question: "[Real-Life Scenario] A veterinarian examines sheep exhibiting severe scraping against fences, unsteady gait, and brain tissue showing spongy holes. What is the causative agent of this disease (Scrapie)?",
+        options: ["Viroid", "Virus", "Bacteriophage", "Prion"],
+        correct: 3,
+        explanation: "Scrapie in sheep and goats is a classic transmissible spongiform encephalopathy caused by prions.",
+        wrongExplanations: [
+          "Viroids infect plants.",
+          "Viruses possess nucleic acid genomes and capsids.",
+          "Bacteriophages infect bacteria."
+        ]
+      },
+      {
+        id: 75,
+        slo: "SLO 5.8.2: List Diseases Caused by Prions and Viroids",
+        question: "Coconut Cadang-Cadang disease, which destroyed millions of palm trees in Southeast Asia, is caused by a:",
+        options: ["Viroid", "Prion", "Bacteriophage", "Fungus"],
+        correct: 0,
+        explanation: "Coconut Cadang-Cadang Viroid (CCCVd) is a lethal plant viroid affecting coconut palms.",
+        wrongExplanations: [
+          "Prions only infect animals and humans.",
+          "Bacteriophages exclusively infect bacteria.",
+          "Fungi cause palm wilt or rot, but Cadang-Cadang is specifically viroid-induced."
+        ]
+      },
+
+      // SLO 5.9.1: Loss of Economic and Human Resources Caused by Viral Epidemics (Zika and Ebola)
+      {
+        id: 76,
+        slo: "SLO 5.9.1: Loss of Economic and Human Resources Caused by Viral Epidemics (Zika and Ebola)",
+        question: "The Zika virus is primarily transmitted to humans through the bite of infected:",
+        options: ["Anopheles mosquitoes", "Aedes mosquitoes", "Tsetse flies", "Fleas"],
+        correct: 1,
+        explanation: "Zika virus is a flavivirus transmitted primarily by daytime-biting Aedes mosquitoes (Aedes aegypti and Aedes albopictus).",
+        wrongExplanations: [
+          "Anopheles mosquitoes transmit Malaria (Plasmodium).",
+          "Tsetse flies transmit African Sleeping Sickness (Trypanosoma).",
+          "Fleas transmit Yersinia pestis (Plague)."
+        ]
+      },
+      {
+        id: 77,
+        slo: "SLO 5.9.1: Loss of Economic and Human Resources Caused by Viral Epidemics (Zika and Ebola)",
+        question: "Pregnant women infected with Zika virus face a major risk of delivering infants with which congenital defect?",
+        options: ["Hydrocephalus", "Anencephaly", "Microcephaly", "Spina bifida"],
+        correct: 2,
+        explanation: "Zika virus crosses the placenta, destroying fetal neural progenitor cells and leading to Congenital Zika Syndrome, prominently characterized by microcephaly (abnormally small head/brain).",
+        wrongExplanations: [
+          "Hydrocephalus is fluid accumulation in cerebral ventricles.",
+          "Anencephaly is complete absence of brain tissue during early neural tube closure.",
+          "Spina bifida is incomplete closure of the embryonic spine."
+        ]
+      },
+      {
+        id: 78,
+        slo: "SLO 5.9.1: Loss of Economic and Human Resources Caused by Viral Epidemics (Zika and Ebola)",
+        question: "The Ebola virus causes severe human disease characterized by:",
+        options: [
+          "Mild skin rash",
+          "High fever and internal and external hemorrhagic bleeding",
+          "Chronic joint swelling",
+          "Lower limb paralysis"
+        ],
+        correct: 1,
+        explanation: "Ebola virus causes severe hemorrhagic fever characterized by vascular disruption, coagulation failure, and internal and external bleeding.",
+        wrongExplanations: [
+          "Ebola is a life-threatening systemic infection, far beyond a mild rash.",
+          "Chronic joint swelling is typical of autoimmune arthritis or Chikungunya.",
+          "Lower limb paralysis is characteristic of Polio."
+        ]
+      },
+      {
+        id: 79,
+        slo: "SLO 5.9.1: Loss of Economic and Human Resources Caused by Viral Epidemics (Zika and Ebola)",
+        question: "[Real-Life Scenario] During the West Africa Ebola outbreak, affected countries experienced severe declines in trade, agricultural collapse, and healthcare system strain. What primary impact does this highlight?",
+        options: [
+          "Rapid evolution of viroids",
+          "Massive loss of economic and human resources",
+          "Benefits of viral gene vectors",
+          "Total elimination of human pathogens"
+        ],
+        correct: 1,
+        explanation: "Major viral epidemics cripple workforce productivity, halt trade and tourism, overwhelm healthcare systems, and cause severe loss of human lives and economic resources.",
+        wrongExplanations: [
+          "Ebola is a filovirus, unrelated to plant viroids.",
+          "Epidemic outbreaks represent public health crises, not recombinant biotechnology benefits.",
+          "Epidemics reflect pathogen escalation rather than elimination."
+        ]
+      },
+      {
+        id: 80,
+        slo: "SLO 5.9.1: Loss of Economic and Human Resources Caused by Viral Epidemics (Zika and Ebola)",
+        question: "[Real-Life Scenario] During a Zika outbreak, health authorities issued travel warnings for pregnant women and conducted mosquito elimination campaigns. What was the main objective of these measures?",
+        options: [
+          "Preventing viral lysogeny in soil bacteria",
+          "Eliminating plant mosaic diseases",
+          "Increasing agricultural exports",
+          "Protecting public health and reducing healthcare and economic burdens"
+        ],
+        correct: 3,
+        explanation: "Epidemic control strategies aim to break vector transmission chains, safeguard vulnerable populations, and mitigate massive socioeconomic and healthcare strains.",
+        wrongExplanations: [
+          "Zika infects humans via mosquitoes and does not undergo lysogeny in soil bacteria.",
+          "Zika affects humans, not plant crops like tobacco or tomatoes.",
+          "Vector control focuses on disease prevention rather than boosting farm exports."
+        ]
+      }
+    ];
+
+    const MOTIVATIONAL_QUOTES = {
+      excellent: [
+        "Outstanding Mastery! 'An investment in knowledge pays the best interest.' – Benjamin Franklin",
+        "Exceptional Performance! You have demonstrated thorough understanding of classification and virology.",
+        "Brilliant! Your precision reflects dedicated preparation. Keep striving for top ranks!"
+      ],
+      good: [
+        "Great Effort! 'Success is the sum of small efforts repeated day in and day out.' – Robert Collier",
+        "Solid Foundation! A little more targeted review on missed SLOs will push you to perfection.",
+        "Well done! You are very close to complete mastery of Chapter 5."
+      ],
+      needsWork: [
+        "Keep Pushing! 'Failure is simply the opportunity to begin again, this time more intelligently.' – Henry Ford",
+        "Don't give up! Review the weak area breakdown below to master the concepts step-by-step.",
+        "Every mistake is a stepping stone to understanding. Re-read the detailed explanations and try again!"
+      ]
+    };
+
+    function App() {
+      // Quiz States: 'start', 'quiz', 'results'
+      const [screen, setScreen] = useState('start');
+      const [mode, setMode] = useState('practice'); // 'practice' or 'blind'
+      const [currentIndex, setCurrentIndex] = useState(0);
+      const [userAnswers, setUserAnswers] = useState({}); // { questionId: selectedOptionIndex }
+      const [timeLeft, setTimeLeft] = useState(80 * 60); // 80 minutes in seconds
+      const [isTimerRunning, setIsTimerRunning] = useState(false);
+      const [filterReview, setFilterReview] = useState('all'); // 'all', 'wrong', 'correct', 'unanswered'
+
+      // Timer Effect
+      useEffect(() => {
+        let interval = null;
+        if (isTimerRunning && timeLeft > 0) {
+          interval = setInterval(() => {
+            setTimeLeft(prev => {
+              if (prev <= 1) {
+                clearInterval(interval);
+                handleFinishQuiz();
+                return 0;
+              }
+              return prev - 1;
+            });
+          }, 1000);
+        }
+        return () => clearInterval(interval);
+      }, [isTimerRunning, timeLeft]);
+
+      // Format time helper (MM:SS)
+      const formatTime = (seconds) => {
+        const mins = Math.floor(seconds / 60);
+        const secs = seconds % 60;
+        return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+      };
+
+      const handleStartQuiz = (selectedMode) => {
+        setMode(selectedMode);
+        setUserAnswers({});
+        setCurrentIndex(0);
+        setTimeLeft(80 * 60);
+        setScreen('quiz');
+        setIsTimerRunning(true);
+      };
+
+      const handleOptionSelect = (optionIndex) => {
+        // Lock answer once selected for the current question
+        if (userAnswers[QUESTIONS[currentIndex].id] !== undefined) return;
+        
+        setUserAnswers(prev => ({
+          ...prev,
+          [QUESTIONS[currentIndex].id]: optionIndex
+        }));
+      };
+
+      const handleNext = () => {
+        if (currentIndex < QUESTIONS.length - 1) {
+          setCurrentIndex(prev => prev + 1);
+        }
+      };
+
+      const handlePrev = () => {
+        if (currentIndex > 0) {
+          setCurrentIndex(prev => prev - 1);
+        }
+      };
+
+      const handleFinishQuiz = () => {
+        setIsTimerRunning(false);
+        setScreen('results');
+      };
+
+      const handleRestart = () => {
+        setScreen('start');
+      };
+
+      // Score Calculations
+      const scoreData = useMemo(() => {
+        let correctCount = 0;
+        let wrongCount = 0;
+        let unansweredCount = 0;
+
+        // SLO breakdown tracking
+        const sloStats = {};
+
+        QUESTIONS.forEach(q => {
+          if (!sloStats[q.slo]) {
+            sloStats[q.slo] = { total: 0, correct: 0, wrong: 0, unanswered: 0 };
+          }
+          sloStats[q.slo].total += 1;
+
+          const selected = userAnswers[q.id];
+          if (selected === undefined) {
+            unansweredCount += 1;
+            sloStats[q.slo].unanswered += 1;
+          } else if (selected === q.correct) {
+            correctCount += 1;
+            sloStats[q.slo].correct += 1;
+          } else {
+            wrongCount += 1;
+            sloStats[q.slo].wrong += 1;
+          }
+        });
+
+        const rawMarks = (correctCount * 1.0) - (wrongCount * 0.25);
+        const maxMarks = QUESTIONS.length * 1.0;
+        const netPercentage = Math.max(0, ((rawMarks / maxMarks) * 100)).toFixed(2);
+
+        return {
+          correctCount,
+          wrongCount,
+          unansweredCount,
+          rawMarks: rawMarks.toFixed(2),
+          maxMarks,
+          netPercentage,
+          sloStats
+        };
+      }, [userAnswers]);
+
+      // Motivational Quote Selector
+      const motivationalQuote = useMemo(() => {
+        const pct = parseFloat(scoreData.netPercentage);
+        if (pct >= 80) {
+          return MOTIVATIONAL_QUOTES.excellent[Math.floor(Math.random() * MOTIVATIONAL_QUOTES.excellent.length)];
+        } else if (pct >= 50) {
+          return MOTIVATIONAL_QUOTES.good[Math.floor(Math.random() * MOTIVATIONAL_QUOTES.good.length)];
+        } else {
+          return MOTIVATIONAL_QUOTES.needsWork[Math.floor(Math.random() * MOTIVATIONAL_QUOTES.needsWork.length)];
+        }
+      }, [scoreData.netPercentage]);
+
+      const currentQ = QUESTIONS[currentIndex];
+      const selectedOption = userAnswers[currentQ.id];
+      const isAnswered = selectedOption !== undefined;
+
+      return (
+        <div className="min-h-screen flex flex-col justify-between bg-slate-50 relative overflow-x-hidden selection:bg-sky-200 selection:text-sky-900">
+          
+          {/* Global Centered Mountain Watermark */}
+          <div className="watermark-bg select-none pointer-events-none fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center opacity-[0.035] z-0">
+            <div className="text-[120px] md:text-[180px] font-black tracking-widest text-sky-900 uppercase">
+              🏔️ QASHQARIAN ACADEMY
+            </div>
+            <div className="text-3xl md:text-5xl font-extrabold tracking-wider text-sky-800 mt-2">
+              EXCELLENCE IN SCIENCE & BIOLOGY
+            </div>
+          </div>
+
+          {/* TOP BAR / HEADER */}
+          <header className="no-print bg-white/90 backdrop-blur-md border-b border-sky-100 sticky top-0 z-30 shadow-sm">
+            <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+              
+              {/* Left: Academy Brand */}
+              <div className="flex items-center space-x-3">
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-sky-600 to-cyan-500 text-white flex items-center justify-center font-bold text-xl shadow-md shadow-sky-200">
+                  🏔️
+                </div>
+                <div>
+                  <h1 className="font-extrabold text-sky-950 tracking-tight text-lg leading-tight">
+                    Qashqarian Academy
+                  </h1>
+                  <p className="text-xs font-semibold text-sky-600 flex items-center gap-1">
+                    <span>Chapter 5: Classification & Acellular Life</span>
+                  </p>
+                </div>
+              </div>
+
+              {/* Center/Right: Timer & Class tag */}
+              <div className="flex items-center space-x-4">
+                {screen === 'quiz' && (
+                  <div className={`flex items-center space-x-2 px-3 py-1.5 rounded-lg border font-mono text-sm font-bold transition-all ${
+                    timeLeft < 300 ? 'bg-red-50 text-red-600 border-red-200 animate-pulse' : 'bg-sky-50 text-sky-700 border-sky-200'
+                  }`}>
+                    <Icon name="clock" className="w-4 h-4" />
+                    <span>{formatTime(timeLeft)}</span>
+                  </div>
+                )}
+                <span className="bg-sky-100 text-sky-800 text-xs font-bold px-3 py-1.5 rounded-full border border-sky-200">
+                  Class: XI
+                </span>
+              </div>
+            </div>
+
+            {/* Top Progress Bar during Quiz */}
+            {screen === 'quiz' && (
+              <div className="w-full bg-slate-100 h-2 relative overflow-hidden">
+                <div 
+                  className="bg-gradient-to-r from-sky-500 to-cyan-500 h-2 transition-all duration-300 ease-out"
+                  style={{ width: `${((currentIndex + 1) / QUESTIONS.length) * 100}%` }}
+                ></div>
+              </div>
+            )}
+          </header>
+
+          {/* MAIN CONTAINER */}
+          <main className="flex-1 max-w-4xl w-full mx-auto p-4 md:p-6 z-10 my-auto">
+            
+            {/* 1. START SCREEN */}
+            {screen === 'start' && (
+              <div className="bg-white rounded-2xl p-6 md:p-10 shadow-xl border border-sky-100 text-center animate-fadeIn max-w-2xl mx-auto my-8">
+                <div className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-sky-50 text-sky-600 text-4xl mb-4 border border-sky-100 shadow-inner">
+                  🏔️
+                </div>
+                <h2 className="text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight">
+                  Class XI Biology Mock Examination
+                </h2>
+                <p className="text-sky-700 font-semibold text-sm mt-1">
+                  Chapter 5: Classification and Acellular Life
+                </p>
+                <div className="mt-4 p-4 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-600 text-left space-y-2">
+                  <div className="flex items-center justify-between border-b border-slate-200 pb-2">
+                    <span className="font-semibold text-slate-700">Total Questions:</span>
+                    <span className="font-bold text-sky-700">80 MCQs</span>
+                  </div>
+                  <div className="flex items-center justify-between border-b border-slate-200 pb-2">
+                    <span className="font-semibold text-slate-700">Time Allowed:</span>
+                    <span className="font-bold text-sky-700">80 Minutes</span>
+                  </div>
+                  <div className="flex items-center justify-between border-b border-slate-200 pb-2">
+                    <span className="font-semibold text-slate-700">Marking Scheme:</span>
+                    <span className="font-bold text-emerald-600">+1.0 Correct</span>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="font-semibold text-slate-700">Negative Penalty:</span>
+                    <span className="font-bold text-rose-600">-0.25 Wrong</span>
+                  </div>
+                </div>
+
+                {/* Mode Selection Cards */}
+                <div className="mt-8 text-left">
+                  <h3 className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3 text-center">
+                    Select Your Assessment Mode
+                  </h3>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    
+                    {/* Practice Mode */}
+                    <button
+                      onClick={() => handleStartQuiz('practice')}
+                      className="p-5 rounded-2xl border-2 border-sky-200 hover:border-sky-500 bg-sky-50/40 hover:bg-sky-50 text-left transition-all group shadow-sm hover:shadow-md flex flex-col justify-between"
+                    >
+                      <div>
+                        <div className="flex items-center justify-between mb-2">
+                          <span className="p-2 rounded-lg bg-sky-500 text-white font-bold text-xs">
+                            PRACTICE MODE
+                          </span>
+                          <Icon name="book-open" className="w-5 h-5 text-sky-600 group-hover:scale-110 transition-transform" />
+                        </div>
+                        <h4 className="font-bold text-slate-800 text-base group-hover:text-sky-700">
+                          Instant Rationales
+                        </h4>
+                        <p className="text-xs text-slate-500 mt-1 leading-relaxed">
+                          Receive immediate feedback and detailed explanation right after picking each answer. Ideal for learning!
+                        </p>
+                      </div>
+                      <span className="mt-4 text-xs font-bold text-sky-600 flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                        Start Practice <Icon name="arrow-right" className="w-4 h-4" />
+                      </span>
+                    </button>
+
+                    {/* Blind / Exam Mode */}
+                    <button
+                      onClick={() => handleStartQuiz('blind')}
+                      className="p-5 rounded-2xl border-2 border-slate-200 hover:border-slate-800 bg-slate-50/60 hover:bg-slate-100 text-left transition-all group shadow-sm hover:shadow-md flex flex-col justify-between"
+                    >
+                      <div>
+                        <div className="flex items-center justify-between mb-2">
+                          <span className="p-2 rounded-lg bg-slate-800 text-white font-bold text-xs">
+                            BLIND / EXAM MODE
+                          </span>
+                          <Icon name="shield" className="w-5 h-5 text-slate-700 group-hover:scale-110 transition-transform" />
+                        </div>
+                        <h4 className="font-bold text-slate-800 text-base group-hover:text-slate-900">
+                          Real Test Simulation
+                        </h4>
+                        <p className="text-xs text-slate-500 mt-1 leading-relaxed">
+                          Answers locked quietly. Final score, answer review, and explanations revealed upon submission!
+                        </p>
+                      </div>
+                      <span className="mt-4 text-xs font-bold text-slate-700 flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                        Start Examination <Icon name="arrow-right" className="w-4 h-4" />
+                      </span>
+                    </button>
+
+                  </div>
+                </div>
+
+                <div className="mt-8 text-xs text-slate-400 border-t border-slate-100 pt-4">
+                  Curated & Conducted by <strong className="text-sky-800">Qashqarian Academy 🏔️</strong>
+                </div>
+              </div>
+            )}
+
+            {/* 2. QUIZ QUESTION SCREEN */}
+            {screen === 'quiz' && (
+              <div className="animate-fadeIn">
+                
+                {/* Question Header Status */}
+                <div className="flex items-center justify-between mb-3 text-xs font-semibold text-slate-500 px-1">
+                  <span className="bg-sky-100 text-sky-800 px-3 py-1 rounded-md font-bold">
+                    Q {currentIndex + 1} / {QUESTIONS.length}
+                  </span>
+                  <span className="text-slate-400">
+                    Mode: <strong className="text-slate-600 capitalize">{mode}</strong>
+                  </span>
+                </div>
+
+                {/* Main Card */}
+                <div className="bg-white rounded-2xl p-6 md:p-8 shadow-xl border border-sky-100 relative overflow-hidden">
+                  
+                  {/* SLO Badge */}
+                  <div className="mb-4 inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-sky-50 text-sky-700 border border-sky-200 text-xs font-bold">
+                    <Icon name="zap" className="w-3.5 h-3.5 text-sky-500" />
+                    <span>{currentQ.slo}</span>
+                  </div>
+
+                  {/* Question Text */}
+                  <h3 className="text-lg md:text-xl font-bold text-slate-900 leading-snug mb-6">
+                    {currentQ.question}
+                  </h3>
+
+                  {/* Options Grid */}
+                  <div className="space-y-3">
+                    {currentQ.options.map((opt, idx) => {
+                      const letter = String.fromCharCode(65 + idx);
+                      const isSelected = selectedOption === idx;
+                      const isCorrect = idx === currentQ.correct;
+
+                      let btnStyle = "border-slate-200 bg-white hover:border-sky-300 hover:bg-sky-50/50 text-slate-700";
+                      let badgeStyle = "bg-slate-100 text-slate-600 group-hover:bg-sky-100 group-hover:text-sky-700";
+
+                      if (isAnswered) {
+                        if (mode === 'practice') {
+                          if (isCorrect) {
+                            btnStyle = "border-emerald-500 bg-emerald-50 text-emerald-950 font-semibold ring-2 ring-emerald-400/20";
+                            badgeStyle = "bg-emerald-600 text-white";
+                          } else if (isSelected) {
+                            btnStyle = "border-rose-400 bg-rose-50 text-rose-950 ring-2 ring-rose-400/20";
+                            badgeStyle = "bg-rose-600 text-white";
+                          } else {
+                            btnStyle = "border-slate-200 opacity-50 bg-slate-50 text-slate-500";
+                            badgeStyle = "bg-slate-200 text-slate-400";
+                          }
+                        } else {
+                          // Blind mode: just highlight selected
+                          if (isSelected) {
+                            btnStyle = "border-sky-600 bg-sky-50 text-sky-950 font-semibold ring-2 ring-sky-500/20";
+                            badgeStyle = "bg-sky-600 text-white";
+                          } else {
+                            btnStyle = "border-slate-200 opacity-60 bg-white text-slate-600";
+                            badgeStyle = "bg-slate-100 text-slate-500";
+                          }
+                        }
+                      }
+
+                      return (
+                        <button
+                          key={idx}
+                          onClick={() => handleOptionSelect(idx)}
+                          disabled={isAnswered}
+                          className={`w-full p-4 rounded-xl border-2 text-left transition-all duration-150 flex items-center justify-between group ${btnStyle}`}
+                        >
+                          <div className="flex items-center space-x-3.5 pr-2">
+                            <span className={`w-8 h-8 rounded-lg text-xs font-bold flex items-center justify-center shrink-0 transition-colors ${badgeStyle}`}>
+                              {letter}
+                            </span>
+                            <span className="text-sm md:text-base leading-relaxed">
+                              {opt}
+                            </span>
+                          </div>
+
+                          {/* Status Icons for Practice Mode */}
+                          {mode === 'practice' && isAnswered && (
+                            <div className="shrink-0 ml-2">
+                              {isCorrect && (
+                                <span className="w-6 h-6 rounded-full bg-emerald-500 text-white flex items-center justify-center shadow-sm">
+                                  <Icon name="check" className="w-4 h-4" />
+                                </span>
+                              )}
+                              {isSelected && !isCorrect && (
+                                <span className="w-6 h-6 rounded-full bg-rose-500 text-white flex items-center justify-center shadow-sm">
+                                  <Icon name="x" className="w-4 h-4" />
+                                </span>
+                              )}
+                            </div>
+                          )}
+                        </button>
+                      );
+                    })}
+                  </div>
+
+                  {/* PRACTICE MODE EXPLANATION BOX */}
+                  {mode === 'practice' && isAnswered && (
+                    <div className="mt-6 p-4 rounded-xl bg-slate-50 border border-slate-200 text-xs md:text-sm animate-fadeIn">
+                      <div className="flex items-center gap-2 mb-2 font-bold text-slate-800">
+                        <Icon name="info" className="w-4 h-4 text-sky-600" />
+                        <span>Explanation Rationale:</span>
+                      </div>
+                      <p className="text-slate-700 leading-relaxed mb-3">
+                        <strong className="text-emerald-700">Correct Choice: </strong>
+                        {currentQ.explanation}
+                      </p>
+
+                      {selectedOption !== currentQ.correct && (
+                        <div className="p-3 rounded-lg bg-rose-50/80 border border-rose-200 text-rose-900 mt-2">
+                          <span className="font-bold text-rose-700">Why option {String.fromCharCode(65 + selectedOption)} is incorrect: </span>
+                          <span>{currentQ.wrongExplanations[selectedOption > currentQ.correct ? selectedOption - 1 : selectedOption]}</span>
+                        </div>
+                      )}
+                    </div>
+                  )}
+
+                  {/* NAV CONTROLS */}
+                  <div className="mt-8 pt-4 border-t border-slate-100 flex items-center justify-between">
+                    <button
+                      onClick={handlePrev}
+                      disabled={currentIndex === 0}
+                      className={`px-4 py-2.5 rounded-xl border font-bold text-xs md:text-sm flex items-center gap-2 transition-all ${
+                        currentIndex === 0
+                          ? 'border-slate-200 text-slate-300 cursor-not-allowed'
+                          : 'border-slate-300 text-slate-700 hover:bg-slate-50 hover:border-slate-400'
+                      }`}
+                    >
+                      <Icon name="arrow-left" className="w-4 h-4" /> Previous
+                    </button>
+
+                    <div className="flex items-center gap-2">
+                      {currentIndex === QUESTIONS.length - 1 ? (
+                        <button
+                          onClick={handleFinishQuiz}
+                          className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-bold text-xs md:text-sm shadow-md hover:shadow-lg transition-all flex items-center gap-2"
+                        >
+                          <Icon name="award" className="w-4 h-4" /> Submit Test
+                        </button>
+                      ) : (
+                        <button
+                          onClick={handleNext}
+                          className="px-6 py-2.5 rounded-xl bg-sky-600 hover:bg-sky-700 text-white font-bold text-xs md:text-sm shadow-md hover:shadow-lg transition-all flex items-center gap-2"
+                        >
+                          Next <Icon name="arrow-right" className="w-4 h-4" />
+                        </button>
+                      )}
+                    </div>
+                  </div>
+
+                </div>
+
+                {/* Quick Question Jump Grid */}
+                <div className="mt-6 bg-white rounded-2xl p-4 shadow-sm border border-slate-200">
+                  <div className="flex items-center justify-between mb-3 text-xs font-bold text-slate-600">
+                    <span className="flex items-center gap-1.5">
+                      <Icon name="grid" className="w-4 h-4 text-sky-600" /> Palette Navigation
+                    </span>
+                    <span>{Object.keys(userAnswers).length} / {QUESTIONS.length} Answered</span>
+                  </div>
+                  <div className="grid grid-cols-10 sm:grid-cols-16 md:grid-cols-20 gap-1.5 max-h-36 overflow-y-auto custom-scrollbar p-1">
+                    {QUESTIONS.map((q, idx) => {
+                      const ans = userAnswers[q.id];
+                      const isCurrent = idx === currentIndex;
+                      let bg = "bg-slate-100 text-slate-600 border-slate-200";
+
+                      if (ans !== undefined) {
+                        bg = "bg-sky-600 text-white border-sky-600";
+                      }
+
+                      return (
+                        <button
+                          key={q.id}
+                          onClick={() => setCurrentIndex(idx)}
+                          className={`h-7 rounded text-[11px] font-bold border transition-all ${bg} ${
+                            isCurrent ? 'ring-2 ring-sky-400 ring-offset-1 font-black scale-105' : ''
+                          }`}
+                        >
+                          {idx + 1}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+
+              </div>
+            )}
+
+            {/* 3. FINAL RESULTS SCREEN */}
+            {screen === 'results' && (
+              <div className="space-y-6 animate-fadeIn pb-12">
+                
+                {/* Result Hero Header */}
+                <div className="bg-white rounded-2xl p-6 md:p-8 shadow-xl border border-sky-100 text-center relative overflow-hidden">
+                  <div className="absolute top-0 left-0 w-full h-3 bg-gradient-to-r from-sky-500 via-teal-500 to-indigo-500"></div>
+
+                  <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-sky-50 text-sky-600 text-3xl mb-3 shadow-inner">
+                    🏔️
+                  </div>
+                  <h2 className="text-2xl md:text-3xl font-black text-slate-900">
+                    Evaluation & Diagnostic Summary
+                  </h2>
+                  <p className="text-xs font-bold text-sky-700 tracking-wider uppercase mt-1">
+                    Qashqarian Academy • Class XI Biology Chapter 5
+                  </p>
+
+                  {/* Motivational Quote Banner */}
+                  <div className="mt-4 p-4 rounded-xl bg-sky-50/80 border border-sky-200 text-sky-900 text-xs md:text-sm font-medium italic max-w-2xl mx-auto">
+                    "{motivationalQuote}"
+                  </div>
+
+                  {/* Primary Score Grid */}
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 md:gap-4 mt-6">
+                    
+                    <div className="p-4 rounded-xl bg-slate-50 border border-slate-200">
+                      <span className="text-xs font-bold text-slate-400 uppercase">Net Score</span>
+                      <div className="text-2xl md:text-3xl font-black text-slate-800 mt-1">
+                        {scoreData.rawMarks} <span className="text-xs text-slate-400 font-normal">/ {scoreData.maxMarks}</span>
+                      </div>
+                    </div>
+
+                    <div className="p-4 rounded-xl bg-sky-50 border border-sky-200">
+                      <span className="text-xs font-bold text-sky-600 uppercase">Percentage</span>
+                      <div className="text-2xl md:text-3xl font-black text-sky-700 mt-1">
+                        {scoreData.netPercentage}%
+                      </div>
+                    </div>
+
+                    <div className="p-4 rounded-xl bg-emerald-50 border border-emerald-200">
+                      <span className="text-xs font-bold text-emerald-600 uppercase">Correct (+1)</span>
+                      <div className="text-2xl md:text-3xl font-black text-emerald-700 mt-1">
+                        {scoreData.correctCount}
+                      </div>
+                    </div>
+
+                    <div className="p-4 rounded-xl bg-rose-50 border border-rose-200">
+                      <span className="text-xs font-bold text-rose-600 uppercase">Wrong (-0.25)</span>
+                      <div className="text-2xl md:text-3xl font-black text-rose-700 mt-1">
+                        {scoreData.wrongCount}
+                      </div>
+                    </div>
+
+                  </div>
+
+                  {/* Actions */}
+                  <div className="mt-6 flex flex-wrap items-center justify-center gap-3 no-print">
+                    <button
+                      onClick={handleRestart}
+                      className="px-5 py-2.5 rounded-xl bg-sky-600 hover:bg-sky-700 text-white font-bold text-xs md:text-sm shadow-md transition-all flex items-center gap-2"
+                    >
+                      <Icon name="rotate-ccw" className="w-4 h-4" /> Retake Test
+                    </button>
+                    <button
+                      onClick={() => window.print()}
+                      className="px-5 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-900 text-white font-bold text-xs md:text-sm shadow-md transition-all flex items-center gap-2"
+                    >
+                      <Icon name="printer" className="w-4 h-4" /> Print Report
+                    </button>
+                  </div>
+                </div>
+
+                {/* SLO WEAK AREA ANALYSIS */}
+                <div className="bg-white rounded-2xl p-6 shadow-xl border border-sky-100">
+                  <h3 className="text-base md:text-lg font-extrabold text-slate-900 mb-1 flex items-center gap-2">
+                    <Icon name="bar-chart" className="w-5 h-5 text-sky-600" /> SLO Performance & Weak Area Analysis
+                  </h3>
+                  <p className="text-xs text-slate-500 mb-4">
+                    Detailed diagnostic breakdown by Student Learning Outcomes (SLOs) to pinpoint topics needing further revision.
+                  </p>
+
+                  <div className="space-y-4">
+                    {Object.entries(scoreData.sloStats).map(([sloName, stats]) => {
+                      const sloPct = stats.total > 0 ? ((stats.correct / stats.total) * 100).toFixed(0) : 0;
+                      let barColor = "bg-emerald-500";
+                      let textColor = "text-emerald-700";
+
+                      if (sloPct < 50) {
+                        barColor = "bg-rose-500";
+                        textColor = "text-rose-700";
+                      } else if (sloPct < 75) {
+                        barColor = "bg-amber-500";
+                        textColor = "text-amber-700";
+                      }
+
+                      return (
+                        <div key={sloName} className="p-3.5 rounded-xl bg-slate-50 border border-slate-200">
+                          <div className="flex flex-col sm:flex-row sm:items-center justify-between text-xs font-bold gap-1 mb-2">
+                            <span className="text-slate-800">{sloName}</span>
+                            <span className={`${textColor} font-mono`}>
+                              {stats.correct} / {stats.total} Correct ({sloPct}%)
+                            </span>
+                          </div>
+                          <div className="w-full bg-slate-200 rounded-full h-2 overflow-hidden">
+                            <div className={`h-2 rounded-full transition-all duration-500 ${barColor}`} style={{ width: `${sloPct}%` }}></div>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                {/* QUESTION REVIEW SECTION */}
+                <div className="bg-white rounded-2xl p-6 shadow-xl border border-sky-100">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-slate-100 pb-4 mb-6 gap-3">
+                    <div>
+                      <h3 className="text-base md:text-lg font-extrabold text-slate-900 flex items-center gap-2">
+                        <Icon name="book-open" className="w-5 h-5 text-sky-600" /> Question-by-Question Review
+                      </h3>
+                      <p className="text-xs text-slate-500">
+                        Review your answers, correct options, and comprehensive rationales.
+                      </p>
+                    </div>
+
+                    {/* Filter Tabs */}
+                    <div className="flex items-center gap-1 bg-slate-100 p-1 rounded-xl text-xs font-bold self-start no-print">
+                      {['all', 'wrong', 'correct', 'unanswered'].map(f => (
+                        <button
+                          key={f}
+                          onClick={() => setFilterReview(f)}
+                          className={`px-3 py-1.5 rounded-lg capitalize transition-all ${
+                            filterReview === f ? 'bg-white text-sky-700 shadow-sm' : 'text-slate-500 hover:text-slate-800'
+                          }`}
+                        >
+                          {f}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Questions List */}
+                  <div className="space-y-6">
+                    {QUESTIONS.filter(q => {
+                      const userAns = userAnswers[q.id];
+                      if (filterReview === 'wrong') return userAns !== undefined && userAns !== q.correct;
+                      if (filterReview === 'correct') return userAns === q.correct;
+                      if (filterReview === 'unanswered') return userAns === undefined;
+                      return true;
+                    }).map((q) => {
+                      const userAns = userAnswers[q.id];
+                      const isUnanswered = userAns === undefined;
+                      const isCorrect = userAns === q.correct;
+
+                      return (
+                        <div key={q.id} className="p-4 md:p-5 rounded-xl border border-slate-200 bg-slate-50/50 space-y-3">
+                          
+                          {/* Top Tag & Status */}
+                          <div className="flex items-center justify-between text-xs">
+                            <span className="font-bold text-sky-800 bg-sky-100 px-2.5 py-1 rounded-md">
+                              Q{q.id} • {q.slo}
+                            </span>
+                            <div>
+                              {isUnanswered && <span className="bg-amber-100 text-amber-800 px-2.5 py-1 rounded-md font-bold">Unanswered</span>}
+                              {!isUnanswered && isCorrect && <span className="bg-emerald-100 text-emerald-800 px-2.5 py-1 rounded-md font-bold">Correct (+1.0)</span>}
+                              {!isUnanswered && !isCorrect && <span className="bg-rose-100 text-rose-800 px-2.5 py-1 rounded-md font-bold">Incorrect (-0.25)</span>}
+                            </div>
+                          </div>
+
+                          {/* Question Text */}
+                          <h4 className="font-bold text-slate-900 text-sm md:text-base">
+                            {q.question}
+                          </h4>
+
+                          {/* Options Grid */}
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs font-medium">
+                            {q.options.map((opt, oIdx) => {
+                              const letter = String.fromCharCode(65 + oIdx);
+                              const isThisCorrect = oIdx === q.correct;
+                              const isThisUserSel = oIdx === userAns;
+
+                              let optClass = "border-slate-200 bg-white text-slate-700";
+                              if (isThisCorrect) {
+                                optClass = "border-emerald-400 bg-emerald-50 text-emerald-900 font-bold";
+                              } else if (isThisUserSel && !isThisCorrect) {
+                                optClass = "border-rose-400 bg-rose-50 text-rose-900 font-bold";
+                              }
+
+                              return (
+                                <div key={oIdx} className={`p-2.5 rounded-lg border flex items-center justify-between ${optClass}`}>
+                                  <span><strong>{letter}.</strong> {opt}</span>
+                                  {isThisCorrect && <Icon name="check" className="w-4 h-4 text-emerald-600 shrink-0" />}
+                                  {isThisUserSel && !isThisCorrect && <Icon name="x" className="w-4 h-4 text-rose-600 shrink-0" />}
+                                </div>
+                              );
+                            })}
+                          </div>
+
+                          {/* Detailed Explanation */}
+                          <div className="p-3 rounded-lg bg-white border border-slate-200 text-xs space-y-2 mt-2">
+                            <div>
+                              <strong className="text-emerald-700">Correct Answer Explanation: </strong>
+                              <span className="text-slate-700">{q.explanation}</span>
+                            </div>
+                            {!isCorrect && userAns !== undefined && (
+                              <div className="pt-2 border-t border-slate-100 text-rose-900">
+                                <strong className="text-rose-700">Why selected Option {String.fromCharCode(65 + userAns)} was incorrect: </strong>
+                                <span>{q.wrongExplanations[userAns > q.correct ? userAns - 1 : userAns]}</span>
+                              </div>
+                            )}
+                          </div>
+
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+
+              </div>
+            )}
+
+          </main>
+
+          {/* FOOTER */}
+          <footer className="no-print bg-white border-t border-slate-200 py-4 px-6 text-center text-xs text-slate-500 font-medium">
+            <p>Class XI Biology Chapter 5 Interactive Evaluation System • <strong className="text-sky-800">Qashqarian Academy 🏔️</strong></p>
+          </footer>
+
+        </div>
+      );
+    }
+
+    const rootElement = document.getElementById('root');
+    const root = ReactDOM.createRoot(rootElement);
+    root.render(<App />);
+  </script>
+</body>
+</html>

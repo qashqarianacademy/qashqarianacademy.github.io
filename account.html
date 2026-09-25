@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Student Account | Qashqarian Academy</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f5f7fb;
+            color: #172033;
+        }
+
+        .account-page {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 30px 20px;
+        }
+
+        .account-card {
+            width: 100%;
+            max-width: 430px;
+            background: white;
+            padding: 35px;
+            border-radius: 18px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+        }
+
+        .account-card h1 {
+            margin: 0 0 8px;
+        }
+
+        .account-card p {
+            color: #667085;
+            margin-bottom: 25px;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 7px;
+            font-weight: 600;
+        }
+
+        input {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #d8dee9;
+            border-radius: 10px;
+            font-size: 15px;
+        }
+
+        button {
+            width: 100%;
+            padding: 13px;
+            border: 0;
+            border-radius: 10px;
+            background: #172033;
+            color: white;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 8px;
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+
+        .switch {
+            margin-top: 18px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .switch a {
+            color: #172033;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .message {
+            margin-top: 15px;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .back {
+            display: block;
+            margin-top: 20px;
+            text-align: center;
+            color: #667085;
+            text-decoration: none;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="account-page">
+
+    <div class="account-card">
+
+        <h1 id="formTitle">Student Login</h1>
+
+        <p id="formDescription">
+            Login to access your Qashqarian Academy account.
+        </p>
+
+        <form id="accountForm">
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="Enter your email"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input
+                    type="password"
+                    id="password"
+                    placeholder="Enter your password"
+                    minlength="6"
+                    required
+                >
+            </div>
+
+            <button type="submit" id="submitButton">
+                Login
+            </button>
+
+        </form>
+
+        <div class="switch">
+            <span id="switchText">Don't have an account?</span>
+            <a id="switchMode">Create one</a>
+        </div>
+
+        <div id="message" class="message"></div>
+
+        <a href="index.html" class="back">
+            ← Back to Qashqarian Academy
+        </a>
+
+    </div>
+
+</div>
+
+<script type="module">
+
+    import {
+        registerUser,
+        loginUser
+    } from "./js/auth.js";
+
+    const form = document.getElementById("accountForm");
+    const formTitle = document.getElementById("formTitle");
+    const formDescription = document.getElementById("formDescription");
+    const submitButton = document.getElementById("submitButton");
+    const switchText = document.getElementById("switchText");
+    const switchMode = document.getElementById("switchMode");
+    const message = document.getElementById("message");
+
+    let isLogin = true;
+
+    switchMode.addEventListener("click", function () {
+
+        isLogin = !isLogin;
+
+        if (isLogin) {
+
+            formTitle.textContent = "Student Login";
+            formDescription.textContent =
+                "Login to access your Qashqarian Academy account.";
+            submitButton.textContent = "Login";
+            switchText.textContent = "Don't have an account?";
+            switchMode.textContent = "Create one";
+
+        } else {
+
+            formTitle.textContent = "Create Account";
+            formDescription.textContent =
+                "Create your student account to get started.";
+            submitButton.textContent = "Create Account";
+            switchText.textContent = "Already have an account?";
+            switchMode.textContent = "Login";
+
+        }
+
+        message.textContent = "";
+
+    });
+
+    form.addEventListener("submit", async function (event) {
+
+        event.preventDefault();
+
+        const email = document.getElementById("email").value.trim();
+        const password = document.getElementById("password").value;
+
+        message.textContent = "Please wait...";
+
+        try {
+
+            if (isLogin) {
+
+                await loginUser(email, password);
+
+                message.textContent = "Login successful!";
+
+            } else {
+
+                await registerUser(email, password);
+
+                message.textContent =
+                    "Account created successfully!";
+
+            }
+
+            form.reset();
+
+        } catch (error) {
+
+            console.error(error);
+
+            message.textContent =
+                error.message.replace("Firebase: ", "");
+
+        }
+
+    });
+
+</script>
+
+</body>
+</html>

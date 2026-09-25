@@ -1,0 +1,1190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Qashqarian Academy - Class XI Biology Assessment</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+   <script>
+     tailwind.config = {
+       theme: {
+         extend: {
+           colors: {
+             sky: {
+               50:'#F0F8F8', 100:'#DFF3F2', 200:'#BFE4E7', 300:'#8FCDD5',
+               400:'#4FA9B9', 500:'#1F869B', 600:'#056C82', 700:'#0A5263',
+               800:'#0B4352', 900:'#0B3340', 950:'#0B132B'
+             },
+             blue: {
+               500:'#1F869B', 600:'#056C82', 700:'#0A5263'
+             }
+           }
+         }
+       }
+     }
+   </script>
+
+  <!-- React 18 & ReactDOM 18 CDNs -->
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+  
+  <!-- Babel Standalone for JSX Execution -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <!-- Google Fonts: Inter & Merriweather -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Merriweather:ital,wght@0,400;0,700;0,900;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+    .font-serif {
+      font-family: 'Merriweather', serif;
+    }
+    /* Custom scrollbar styling */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f1f5f9;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #0284c7;
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col relative overflow-x-hidden">
+
+  <!-- React Mounting Container -->
+  <div id="root" class="flex-1 flex flex-col"></div>
+
+  <script type="text/babel">
+    const { useState, useEffect, useMemo } = React;
+
+    // ==========================================
+    // COMPLETE QUIZ DATASET (24 MCQs ACROSS 4 SLOs)
+    // ==========================================
+    const QUIZ_DATA = [
+      // --- SLO 1 ---
+      {
+        id: 1,
+        sloCode: "SLO 1",
+        sloDesc: "1.1.1 Differentiate among the branches of biology (fresh water biology, marine biology, sociobiology, veterinary science, bioclimatology)",
+        question: "Which branch of biology focuses specifically on the study of organisms living in seas, oceans, and saline coastal waters?",
+        options: ["Fresh water biology", "Marine biology", "Bioclimatology", "Limnology"],
+        correctAnswer: 1,
+        explanation: "Marine biology specifically investigates organisms inhabitating saltwater environments like seas, oceans, and saline estuaries.",
+        wrongExplanations: [
+          "Fresh water biology is incorrect because it deals exclusively with inland non-saline aquatic ecosystems such as lakes, ponds, and rivers.",
+          "Incorrect selection. Marine biology is the correct answer.",
+          "Bioclimatology is incorrect because it studies the relationship between climatic factors and living organisms, not saltwater species.",
+          "Limnology is incorrect because it is the scientific study of inland freshwater bodies (lakes and streams)."
+        ]
+      },
+      {
+        id: 2,
+        sloCode: "SLO 1",
+        sloDesc: "1.1.1 Differentiate among the branches of biology (fresh water biology, marine biology, sociobiology, veterinary science, bioclimatology)",
+        question: "A professional treating and preventing illnesses in domestic livestock and farm animals works in which field?",
+        options: ["Sociobiology", "Biotechnology", "Veterinary science", "Parasitology"],
+        correctAnswer: 2,
+        explanation: "Veterinary science is the medical branch devoted to health care, disease diagnosis, and treatment in domestic animals and livestock.",
+        wrongExplanations: [
+          "Sociobiology is incorrect because it examines the biological basis of social behavior in animals.",
+          "Biotechnology is incorrect because it utilizes living systems and organisms to develop commercial products or technology.",
+          "Incorrect selection. Veterinary science is the correct answer.",
+          "Parasitology is incorrect because it focuses solely on host-parasite relationships rather than holistic animal healthcare."
+        ]
+      },
+      {
+        id: 3,
+        sloCode: "SLO 1",
+        sloDesc: "1.1.1 Differentiate among the branches of biology (fresh water biology, marine biology, sociobiology, veterinary science, bioclimatology)",
+        question: "Which branch of biology investigates the evolutionary basis of social behaviors and group dynamics in animals?",
+        options: ["Sociobiology", "Bioclimatology", "Parasitology", "Environmental biology"],
+        correctAnswer: 0,
+        explanation: "Sociobiology investigates how natural selection shapes social behaviors such as altruism, pack dynamics, and hierarchy in animal societies.",
+        wrongExplanations: [
+          "Incorrect selection. Sociobiology is the correct answer.",
+          "Bioclimatology is incorrect because it deals with weather and climate impacts on life.",
+          "Parasitology is incorrect because it deals with parasites, not social interactions among conspecifics.",
+          "Environmental biology is incorrect because it studies broader ecological interactions between organisms and physical habitats."
+        ]
+      },
+      {
+        id: 4,
+        sloCode: "SLO 1",
+        sloDesc: "1.1.1 Differentiate among the branches of biology (fresh water biology, marine biology, sociobiology, veterinary science, bioclimatology)",
+        question: "A study measuring how seasonal humidity and rainfall shifts influence mosquito breeding patterns belongs to:",
+        options: ["Marine biology", "Fresh water biology", "Sociobiology", "Bioclimatology"],
+        correctAnswer: 3,
+        explanation: "Bioclimatology examines the interactions between living organisms and climate variables like precipitation, temperature, and atmospheric humidity.",
+        wrongExplanations: [
+          "Marine biology is incorrect because mosquitoes inhabit land and freshwater micro-habitats, not ocean water.",
+          "Fresh water biology is incorrect because the primary variable studied here is atmospheric climate (rainfall/humidity), not river dynamics.",
+          "Sociobiology is incorrect because mosquito breeding patterns depend on weather abiotic factors rather than social group behavior.",
+          "Incorrect selection. Bioclimatology is the correct answer."
+        ]
+      },
+      {
+        id: 5,
+        sloCode: "SLO 1",
+        sloDesc: "1.1.1 Differentiate among the branches of biology (fresh water biology, marine biology, sociobiology, veterinary science, bioclimatology)",
+        question: "An ecologist comparing aquatic plants in the River Indus with seaweed in the Arabian Sea combines which two fields?",
+        options: ["Fresh water biology and Marine biology", "Bioclimatology and Marine biology", "Fresh water biology and Bioclimatology", "Sociobiology and Fresh water biology"],
+        correctAnswer: 0,
+        explanation: "The River Indus is a non-saline river system (Fresh water biology), while the Arabian Sea is a saltwater marine system (Marine biology).",
+        wrongExplanations: [
+          "Incorrect selection. Fresh water biology and Marine biology is the correct answer.",
+          "Bioclimatology is not involved here because weather parameters are not the direct subjects of comparison.",
+          "Bioclimatology is incorrect as this study contrasts freshwater flora against saltwater flora.",
+          "Sociobiology is incorrect as aquatic plant ecology does not involve animal social behaviors."
+        ]
+      },
+      {
+        id: 6,
+        sloCode: "SLO 1",
+        sloDesc: "1.1.1 Differentiate among the branches of biology (fresh water biology, marine biology, sociobiology, veterinary science, bioclimatology)",
+        question: "Investigating how cooperative hunting in a wolf pack increases the overall survival of offspring is an application of:",
+        options: ["Veterinary science", "Bioclimatology", "Environmental biology", "Sociobiology"],
+        correctAnswer: 3,
+        explanation: "Wolf pack cooperation and group defense are classic examples of social evolutionary dynamics, which fall under Sociobiology.",
+        wrongExplanations: [
+          "Veterinary science is incorrect because it pertains to medical diagnosis and animal pathology, not wild pack ethology.",
+          "Bioclimatology is incorrect because weather patterns are not driving wolf social pack structures here.",
+          "Environmental biology is too broad; the specific study of cooperative social group hunting belongs to sociobiology.",
+          "Incorrect selection. Sociobiology is the correct answer."
+        ]
+      },
+
+      // --- SLO 2 ---
+      {
+        id: 7,
+        sloCode: "SLO 2",
+        sloDesc: "1.2.1 Differentiate among the levels of biological organisation from subatomic particles to biosphere",
+        question: "Which level of biological organization represents the basic structural and functional unit of life?",
+        options: ["Organelle", "Tissue", "Cell", "Organ"],
+        correctAnswer: 2,
+        explanation: "The cell is the fundamental structural and functional unit capable of independent life processes and emergent biological properties.",
+        wrongExplanations: [
+          "Organelles are sub-cellular structural components (like mitochondria) and cannot function as independent living units on their own.",
+          "Tissues are complex groups of similar cells working together, so they are higher in structural hierarchy than the basic unit.",
+          "Incorrect selection. Cell is the correct answer.",
+          "Organs are higher-level structures composed of multiple tissues working together."
+        ]
+      },
+      {
+        id: 8,
+        sloCode: "SLO 2",
+        sloDesc: "1.2.1 Differentiate among the levels of biological organisation from subatomic particles to biosphere",
+        question: "All the individual wild olive trees (Olea europaea) growing in a specific valley at a given time constitute a:",
+        options: ["Community", "Ecosystem", "Biosphere", "Population"],
+        correctAnswer: 3,
+        explanation: "A population is defined as a group of individuals of the same species living in a specific geographical region at a given time.",
+        wrongExplanations: [
+          "A community consists of multiple populations of different species living together in an area.",
+          "An ecosystem includes all living communities plus non-living physical abiotic environmental factors.",
+          "The biosphere is the global sum of all ecosystems on Earth.",
+          "Incorrect selection. Population is the correct answer."
+        ]
+      },
+      {
+        id: 9,
+        sloCode: "SLO 2",
+        sloDesc: "1.2.1 Differentiate among the levels of biological organisation from subatomic particles to biosphere",
+        question: "Which sequence correctly represents biological organization arranged from the simplest to the most complex level?",
+        options: ["Molecule → Cell → Tissue → Organ", "Tissue → Cell → Organ → Molecule", "Cell → Molecule → Organ → Tissue", "Organ → Tissue → Cell → Molecule"],
+        correctAnswer: 0,
+        explanation: "Molecules assemble into cellular structures/cells, cells organize into tissues, and tissues combine to form functional organs.",
+        wrongExplanations: [
+          "Incorrect selection. Molecule → Cell → Tissue → Organ is the correct answer.",
+          "This sequence incorrectly places Tissue before Cell and Organ before Molecule.",
+          "Molecules are sub-cellular, so Molecule must precede Cell.",
+          "This sequence represents a backwards arrangement from complex to simple."
+        ]
+      },
+      {
+        id: 10,
+        sloCode: "SLO 2",
+        sloDesc: "1.2.1 Differentiate among the levels of biological organisation from subatomic particles to biosphere",
+        question: "Which biological level is the first to incorporate both living biological communities and non-living physical factors?",
+        options: ["Community", "Ecosystem", "Population", "Biosphere"],
+        correctAnswer: 1,
+        explanation: "An ecosystem is the lowest hierarchical level that integrates biotic communities with abiotic physical variables (water, air, sunlight, soil).",
+        wrongExplanations: [
+          "A community includes only the living (biotic) organisms of different populations, omitting abiotic factors.",
+          "Incorrect selection. Ecosystem is the correct answer.",
+          "A population consists only of individuals of a single species and does not encompass physical factors.",
+          "The biosphere includes abiotic factors but is the highest global level, not the first level in ascending complexity."
+        ]
+      },
+      {
+        id: 11,
+        sloCode: "SLO 2",
+        sloDesc: "1.2.1 Differentiate among the levels of biological organisation from subatomic particles to biosphere",
+        question: "A toxin disrupts energy production inside mitochondria within cardiac muscle cells. Which hierarchy traces the impact upward?",
+        options: ["Tissue → Cell → Organelle → Organ", "Cell → Organelle → Organ → Tissue", "Organelle → Cell → Tissue → Organ", "Organ → Organelle → Cell → Tissue"],
+        correctAnswer: 2,
+        explanation: "The toxin acts on the organelle (mitochondria) -> affecting the cell (cardiac cell) -> damaging cardiac tissue -> compromising the heart (organ).",
+        wrongExplanations: [
+          "This hierarchy erroneously starts at Tissue instead of the sub-cellular organelle.",
+          "This hierarchy incorrectly places Cell before Organelle and Organ before Tissue.",
+          "Incorrect selection. Organelle → Cell → Tissue → Organ is the correct answer.",
+          "This hierarchy starts at the organ level instead of tracing upward from organelle."
+        ]
+      },
+      {
+        id: 12,
+        sloCode: "SLO 2",
+        sloDesc: "1.2.1 Differentiate among the levels of biological organisation from subatomic particles to biosphere",
+        question: "A forest area containing pine trees, wild mushrooms, hawks, and field mice interacting together represents a(n):",
+        options: ["Population", "Community", "Organism", "Biosphere"],
+        correctAnswer: 1,
+        explanation: "A community represents an assemblage of differing species populations (pines, fungi, hawks, mice) coexisting in a shared habitat.",
+        wrongExplanations: [
+          "Population is incorrect because multiple distinct species are present, not just one.",
+          "Incorrect selection. Community is the correct answer.",
+          "Organism refers to a single living individual.",
+          "Biosphere refers to the entire zone of life across Earth."
+        ]
+      },
+
+      // --- SLO 3 ---
+      {
+        id: 13,
+        sloCode: "SLO 3",
+        sloDesc: "1.3.1 & 1.3.2 Exemplify deductive and inductive reasoning; differentiate among hypothesis, theory and scientific law",
+        question: "A tentative, testable explanation for a set of scientific observations is known as a:",
+        options: ["Hypothesis", "Scientific Law", "Theory", "Deduction"],
+        correctAnswer: 0,
+        explanation: "A hypothesis is a tentative, scientifically testable, and falsifiable proposed solution to an observed phenomenon.",
+        wrongExplanations: [
+          "Incorrect selection. Hypothesis is the correct answer.",
+          "A scientific law is a concise description of a natural phenomenon supported by vast mathematical and empirical evidence.",
+          "A scientific theory is a thoroughly tested, widely accepted comprehensive explanation of natural mechanisms.",
+          "A deduction is a specific logical prediction derived from a general premise."
+        ]
+      },
+      {
+        id: 14,
+        sloCode: "SLO 3",
+        sloDesc: "1.3.1 & 1.3.2 Exemplify deductive and inductive reasoning; differentiate among hypothesis, theory and scientific law",
+        question: "Deriving a broad, general scientific principle based on repeated specific observations is called:",
+        options: ["Deductive reasoning", "Experimental logic", "Mathematical deduction", "Inductive reasoning"],
+        correctAnswer: 3,
+        explanation: "Inductive reasoning moves from specific individual observations to construct general scientific rules or generalizations.",
+        wrongExplanations: [
+          "Deductive reasoning moves in the opposite direction: from general premises to specific logical conclusions.",
+          "Experimental logic refers to experimental design rather than the reasoning form of generalizing from instances.",
+          "Mathematical deduction applies general axioms to arrive at specific proofs.",
+          "Incorrect selection. Inductive reasoning is the correct answer."
+        ]
+      },
+      {
+        id: 15,
+        sloCode: "SLO 3",
+        sloDesc: "1.3.1 & 1.3.2 Exemplify deductive and inductive reasoning; differentiate among hypothesis, theory and scientific law",
+        question: "Which scientific concept provides an undeniable, concise description of how a natural phenomenon behaves under specific conditions?",
+        options: ["Hypothesis", "Scientific Law", "Theory", "Prediction"],
+        correctAnswer: 1,
+        explanation: "A scientific law describes what nature does under specified physical conditions, often expressed mathematically.",
+        wrongExplanations: [
+          "A hypothesis is an unproven tentative explanation.",
+          "Incorrect selection. Scientific Law is the correct answer.",
+          "A theory explains why or how a phenomenon occurs, whereas a law states what consistently happens.",
+          "A prediction is an expected outcome of a single experiment."
+        ]
+      },
+      {
+        id: 16,
+        sloCode: "SLO 3",
+        sloDesc: "1.3.1 & 1.3.2 Exemplify deductive and inductive reasoning; differentiate among hypothesis, theory and scientific law",
+        question: "\"If all birds have feathers, and an eagle is a bird, then an eagle must have feathers.\" This statement exemplifies:",
+        options: ["Inductive reasoning from specific to general", "Formulating a scientific law", "Deductive reasoning from general to specific", "Developing a scientific theory"],
+        correctAnswer: 2,
+        explanation: "Deductive reasoning uses general IF-THEN logic premises ('All birds have feathers') to infer a specific conclusion about an eagle.",
+        wrongExplanations: [
+          "This logic flows from general premise to specific conclusion, which is deductive, not inductive.",
+          "This is an application of formal logic, not the formulation of a physical scientific law.",
+          "Incorrect selection. Deductive reasoning from general to specific is the correct answer.",
+          "This is a syllogistic deduction, not a complex explanatory theory."
+        ]
+      },
+      {
+        id: 17,
+        sloCode: "SLO 3",
+        sloDesc: "1.3.1 & 1.3.2 Exemplify deductive and inductive reasoning; differentiate among hypothesis, theory and scientific law",
+        question: "Why is a scientific theory considered far more reliable than a standalone scientific hypothesis?",
+        options: [
+          "A theory is absolute truth that can never be altered or modified.",
+          "A theory is proven mathematically without requiring empirical observation.",
+          "A theory is formulated before performing any experimental procedures.",
+          "A theory is supported by extensive, repeated experimental evidence and testing."
+        ],
+        correctAnswer: 3,
+        explanation: "A scientific theory has withstood rigorous empirical scrutiny, predictive testing, and extensive experimental validation across time.",
+        wrongExplanations: [
+          "Scientific theories are open to modification if new reliable evidence contradicts them.",
+          "Biological theories rely heavily on empirical observation and experimental testing.",
+          "Theories are developed after exhaustive experimentation, not before.",
+          "Incorrect selection. A theory is supported by extensive evidence and testing."
+        ]
+      },
+      {
+        id: 18,
+        sloCode: "SLO 3",
+        sloDesc: "1.3.1 & 1.3.2 Exemplify deductive and inductive reasoning; differentiate among hypothesis, theory and scientific law",
+        question: "A researcher examines 50 different insect species and notices every single one has six legs, concluding \"all insects have six legs.\" This is:",
+        options: ["Inductive reasoning", "Deductive reasoning", "Testing a scientific law", "Controlled experimentation"],
+        correctAnswer: 0,
+        explanation: "Formulating a universal conclusion ('all insects have six legs') based on specific individual sample observations (50 species) is inductive logic.",
+        wrongExplanations: [
+          "Incorrect selection. Inductive reasoning is the correct answer.",
+          "Deductive reasoning would start with 'All insects have six legs' and deduce that a newly discovered bug must have six legs.",
+          "This is an inductive inference, not a formal physical law statement.",
+          "Observing species in nature is descriptive field observation, not a controlled laboratory experiment."
+        ]
+      },
+
+      // --- SLO 4 ---
+      {
+        id: 19,
+        sloCode: "SLO 4",
+        sloDesc: "1.4.1 Discuss the role of biology with respect to disease control in plants and animals",
+        question: "Controlling crop pests by introducing their natural predators or parasites without using synthetic chemicals is called:",
+        options: ["Chemical control", "Integrated pest management", "Biological control", "Antibiotic therapy"],
+        correctAnswer: 2,
+        explanation: "Biological control uses natural living bio-agents (predators, parasites, pathogens) to regulate pest populations safely.",
+        wrongExplanations: [
+          "Chemical control relies on synthetic chemical pesticides, which this scenario explicitly avoids.",
+          "Integrated pest management involves combining biological, cultural, and chemical controls; using only predators is biological control.",
+          "Incorrect selection. Biological control is the correct answer.",
+          "Antibiotic therapy targets bacterial infections in organisms, not pest insects in crops."
+        ]
+      },
+      {
+        id: 20,
+        sloCode: "SLO 4",
+        sloDesc: "1.4.1 Discuss the role of biology with respect to disease control in plants and animals",
+        question: "Administering a weakened pathogen to stimulate immune memory against a target infection is an example of:",
+        options: ["Chemotherapy", "Drug treatment", "Biological control", "Immunisation"],
+        correctAnswer: 3,
+        explanation: "Immunisation (vaccination) introduces attenuated or dead pathogens to prime host adaptive immunity and produce memory lymphocytes.",
+        wrongExplanations: [
+          "Chemotherapy uses chemical synthetic compounds to destroy pathogen or tumor cells directly inside the body.",
+          "Drug treatment involves administering therapeutic drugs to cure an existing active disease state.",
+          "Biological control refers to ecological pest management, not host medical immunity.",
+          "Incorrect selection. Immunisation is the correct answer."
+        ]
+      },
+      {
+        id: 21,
+        sloCode: "SLO 4",
+        sloDesc: "1.4.1 Discuss the role of biology with respect to disease control in plants and animals",
+        question: "Installing window screens and draining standing water around homes to reduce dengue transmission are examples of:",
+        options: ["Preventive measures", "Drug treatment", "Immunisation", "Biological control"],
+        correctAnswer: 0,
+        explanation: "Preventive measures eliminate vector habitats and physical contact before infection can occur in host populations.",
+        wrongExplanations: [
+          "Incorrect selection. Preventive measures is the correct answer.",
+          "Drug treatment is curative therapy administered after a patient is infected.",
+          "Immunisation involves biological vaccines to stimulate host antibodies.",
+          "Biological control involves releasing living natural predators like larvicidal fish into ponds."
+        ]
+      },
+      {
+        id: 22,
+        sloCode: "SLO 4",
+        sloDesc: "1.4.1 Discuss the role of biology with respect to disease control in plants and animals",
+        question: "Why is Integrated Pest Management (IPM) preferred over using chemical pesticides alone?",
+        options: [
+          "IPM completely eradicates all target insect populations permanently.",
+          "IPM combines multiple control methods to minimize environmental toxicity and pest resistance.",
+          "IPM uses only synthetic chemicals to guarantee immediate crop yield results.",
+          "IPM relies exclusively on genetic modification of host plant species."
+        ],
+        correctAnswer: 1,
+        explanation: "IPM synthesizes biological, physical, cultural, and minimal chemical strategies to suppress pests ecologically without causing pesticide resistance.",
+        wrongExplanations: [
+          "IPM aims for pest management below economic damage thresholds, not total species eradication.",
+          "Incorrect selection. IPM combines multiple control methods to minimize toxicity and resistance.",
+          "IPM minimizes synthetic chemical reliance rather than using them exclusively.",
+          "IPM incorporates diverse practices beyond genetic modification alone."
+        ]
+      },
+      {
+        id: 23,
+        sloCode: "SLO 4",
+        sloDesc: "1.4.1 Discuss the role of biology with respect to disease control in plants and animals",
+        question: "Applying the soil bacterium Bacillus thuringiensis to crop leaves to selectively destroy caterpillar larvae is an example of:",
+        options: ["Chemical control", "Immunisation", "Biological control", "Preventive sanitation"],
+        correctAnswer: 2,
+        explanation: "Using living bacterial bio-pesticides (Bacillus thuringiensis) to infect target insect pests is a direct biological control method.",
+        wrongExplanations: [
+          "Bacillus thuringiensis is a living biological organism, not a synthetic chemical compound.",
+          "Immunisation protects animal or human hosts through vaccine antibody induction, not crop pest eradication.",
+          "Incorrect selection. Biological control is the correct answer.",
+          "Preventive sanitation involves cleaning and field hygiene rather than applying biological pathogens."
+        ]
+      },
+      {
+        id: 24,
+        sloCode: "SLO 4",
+        sloDesc: "1.4.1 Discuss the role of biology with respect to disease control in plants and animals",
+        question: "A physician prescribes a targeted course of ampicillin to cure an active urinary tract infection. This intervention is:",
+        options: ["Immunisation", "Drug treatment", "Preventive measure", "Integrated disease management"],
+        correctAnswer: 1,
+        explanation: "Prescribing antimicrobial pharmaceutical compounds (ampicillin) to cure an active bacterial infection is classified as drug treatment.",
+        wrongExplanations: [
+          "Immunisation is a prophylactic measure taken before infection occurs.",
+          "Incorrect selection. Drug treatment is the correct answer.",
+          "Preventive measures focus on avoiding exposure before getting sick.",
+          "Integrated disease management is an agricultural crop management framework."
+        ]
+      }
+    ];
+
+    const MOTIVATIONAL_QUOTES = {
+      high: [
+        "“An investment in knowledge pays the best interest.” – Benjamin Franklin",
+        "“Science is a way of thinking much more than it is a body of knowledge.” – Carl Sagan",
+        "“Excellence is not an act, but a habit. Outstanding mastery of Biology SLOs!”"
+      ],
+      medium: [
+        "“Success is the sum of small efforts, repeated day in and day out.” – Robert Collier",
+        "“The important thing is not to stop questioning. Curiosity has its own reason for existing.” – Albert Einstein",
+        "“Good performance! Review your weak SLO areas below to achieve perfect mastery.”"
+      ],
+      low: [
+        "“Failure is simply the opportunity to begin again, this time more intelligently.” – Henry Ford",
+        "“Every expert was once a beginner. Study the scientific explanations carefully!”",
+        "“You don't have to be great to start, but you have to start to be great.” – Les Brown"
+      ]
+    };
+
+    function App() {
+      const [screen, setScreen] = useState('welcome'); // 'welcome' | 'quiz' | 'results'
+      const [quizMode, setQuizMode] = useState('practice'); // 'practice' | 'blind'
+      const [currentIndex, setCurrentIndex] = useState(0);
+      
+      // Track user answers (null if unanswered)
+      const [userAnswers, setUserAnswers] = useState(Array(QUIZ_DATA.length).fill(null));
+      
+      // Timer: 24 minutes = 1440 seconds
+      const TOTAL_TIME = 24 * 60;
+      const [timeLeft, setTimeLeft] = useState(TOTAL_TIME);
+      const [timerActive, setTimerActive] = useState(false);
+      
+      // Results view filter
+      const [filterReview, setFilterReview] = useState('all'); // 'all' | 'wrong' | 'correct' | 'unanswered'
+
+      useEffect(() => {
+        let timer = null;
+        if (timerActive && timeLeft > 0) {
+          timer = setInterval(() => {
+            setTimeLeft((prev) => {
+              if (prev <= 1) {
+                clearInterval(timer);
+                handleFinishQuiz();
+                return 0;
+              }
+              return prev - 1;
+            });
+          }, 1000);
+        }
+        return () => {
+          if (timer) clearInterval(timer);
+        };
+      }, [timerActive, timeLeft]);
+
+      const formatTime = (seconds) => {
+        const m = Math.floor(seconds / 60);
+        const s = seconds % 60;
+        return `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+      };
+
+      const handleStartQuiz = (mode) => {
+        setQuizMode(mode);
+        setScreen('quiz');
+        setCurrentIndex(0);
+        setUserAnswers(Array(QUIZ_DATA.length).fill(null));
+        setTimeLeft(TOTAL_TIME);
+        setTimerActive(true);
+      };
+
+      // Locked selection logic
+      const handleOptionSelect = (optionIdx) => {
+        if (userAnswers[currentIndex] !== null) return; // Answer locked!
+        const updated = [...userAnswers];
+        updated[currentIndex] = optionIdx;
+        setUserAnswers(updated);
+      };
+
+      const handleFinishQuiz = () => {
+        setTimerActive(false);
+        setScreen('results');
+      };
+
+      const analytics = useMemo(() => {
+        let correctCount = 0;
+        let wrongCount = 0;
+        let unansweredCount = 0;
+
+        const sloStats = {};
+
+        QUIZ_DATA.forEach((q, idx) => {
+          const uAns = userAnswers[idx];
+          
+          if (!sloStats[q.sloCode]) {
+            sloStats[q.sloCode] = { desc: q.sloDesc, total: 0, correct: 0, wrong: 0 };
+          }
+          sloStats[q.sloCode].total += 1;
+
+          if (uAns === null) {
+            unansweredCount += 1;
+          } else if (uAns === q.correctAnswer) {
+            correctCount += 1;
+            sloStats[q.sloCode].correct += 1;
+          } else {
+            wrongCount += 1;
+            sloStats[q.sloCode].wrong += 1;
+          }
+        });
+
+        // -0.25 negative marking calculation
+        const rawScore = correctCount * 1.0 - wrongCount * 0.25;
+        const maxScore = QUIZ_DATA.length * 1.0;
+        const netScore = Math.max(0, rawScore);
+        const percentage = Math.max(0, Math.round((netScore / maxScore) * 100));
+
+        const timeSpentSeconds = TOTAL_TIME - timeLeft;
+
+        let quoteList = MOTIVATIONAL_QUOTES.medium;
+        if (percentage >= 80) quoteList = MOTIVATIONAL_QUOTES.high;
+        else if (percentage < 50) quoteList = MOTIVATIONAL_QUOTES.low;
+        const randomQuote = quoteList[Math.floor(Math.random() * quoteList.length)];
+
+        return {
+          correctCount,
+          wrongCount,
+          unansweredCount,
+          rawScore: netScore.toFixed(2),
+          maxScore,
+          percentage,
+          timeSpentSeconds,
+          sloStats,
+          randomQuote
+        };
+      }, [userAnswers, timeLeft]);
+
+      return (
+        <div className="min-h-screen bg-slate-50 text-slate-800 flex flex-col font-sans relative overflow-x-hidden select-none">
+          
+          {/* 3D REALISTIC WATERMARK BACKGROUND EMBLEM */}
+          <div className="fixed inset-0 pointer-events-none z-0 flex items-center justify-center opacity-[0.06]">
+            <div className="text-center transform -rotate-12 scale-125 md:scale-150">
+              <div className="text-8xl md:text-9xl mb-2 drop-shadow-2xl">🏔️</div>
+              <h1 className="text-6xl md:text-8xl font-black text-sky-900 font-serif tracking-widest uppercase">
+                Qashqarian Academy
+              </h1>
+              <p className="text-xl md:text-3xl font-bold text-sky-700 tracking-widest uppercase mt-1">
+                Class XI Biological Sciences
+              </p>
+            </div>
+          </div>
+
+          {/* STICKY TOP HEADER WITH PROGRESS BAR */}
+        <header className="sticky top-0 z-30 bg-[#0B132B] border-b border-cyan-900/40 shadow-md">
+            
+            {/* TOP ACADEMY BAR */}
+            <div className="max-w-5xl mx-auto px-4 py-2.5 flex justify-between items-center">
+              
+              {/* Academy Name with Mountain Emoji */}
+              <div className="flex items-center space-x-3">
+  <a href="../../../../index.html" className="flex items-center space-x-2">
+    <img src="../../../../images/brand/logo.png" alt="Qashqarian Academy" className="w-10 h-10 object-contain" />
+    <div>
+      <h1 className="text-base md:text-lg font-extrabold text-white tracking-tight leading-none">
+        Qashqarian
+      </h1>
+      <p className="text-[10px] md:text-xs text-[#FF9F1C] font-extrabold tracking-[0.2em] mt-1 leading-none">
+        ACADEMY
+      </p>
+    </div>
+  </a>
+  <a href="../../index.html" className="hidden sm:inline-block text-[11px] font-semibold text-slate-300 hover:text-white border border-white/20 rounded-lg px-2.5 py-1">
+    ← Biology Quizzes
+  </a>
+</div>
+
+              {/* Right Header Status Badges */}
+              <div className="flex items-center space-x-3">
+                {screen === 'quiz' && (
+                  <>
+                    {/* 24-Min Timer */}
+                    <div className="flex items-center bg-sky-50 border border-sky-200 px-2.5 py-1 rounded-lg">
+                      <span className="text-xs mr-1">⏱️</span>
+                      <span className={`font-mono text-xs md:text-sm font-bold ${timeLeft < 300 ? 'text-rose-600 animate-pulse' : 'text-sky-900'}`}>
+                        {formatTime(timeLeft)}
+                      </span>
+                    </div>
+
+                    {/* Question Counter */}
+                    <div className="bg-sky-100 text-sky-900 px-2.5 py-1 rounded-lg text-xs font-bold font-mono border border-sky-200">
+                      Q {currentIndex + 1} / {QUIZ_DATA.length}
+                    </div>
+                  </>
+                )}
+
+                {/* MANDATORY CLASS BADGE TOP RIGHT */}
+                <span className="px-3 py-1 rounded-full text-xs font-black bg-gradient-to-r from-sky-600 to-blue-600 text-white shadow-sm tracking-wider">
+                  Class: XI
+                </span>
+              </div>
+
+            </div>
+
+            {/* TOP PROGRESS BAR */}
+            {screen === 'quiz' && (
+              <div className="w-full bg-sky-100 h-1.5 overflow-hidden">
+                <div 
+                  className="bg-gradient-to-r from-sky-500 via-blue-500 to-indigo-600 h-full transition-all duration-300 ease-out"
+                  style={{ width: `${((currentIndex + 1) / QUIZ_DATA.length) * 100}%` }}
+                />
+              </div>
+            )}
+          </header>
+
+          {/* MAIN CONTENT AREA */}
+          <main className="flex-1 max-w-3xl w-full mx-auto p-4 md:p-6 z-10 flex flex-col justify-center">
+
+            {/* ================= 1. STARTING SCREEN (MODE SELECTION) ================= */}
+            {screen === 'welcome' && (
+              <div className="bg-white/95 backdrop-blur-md border border-sky-100 rounded-3xl p-6 md:p-8 shadow-xl text-center space-y-6 my-auto">
+                
+                <div className="inline-flex items-center justify-center p-4 bg-sky-50 border border-sky-100 rounded-2xl text-4xl shadow-inner">
+                  🏔️ 🧬 🔬
+                </div>
+
+                <div>
+                  <span className="bg-sky-100 text-sky-800 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider border border-sky-200">
+                    Evaluation Engine • Class XI
+                  </span>
+                  <h2 className="text-2xl md:text-3xl font-black text-slate-900 mt-2 font-serif">
+                    Qashqarian Academy Biology Quiz
+                  </h2>
+                  <p className="text-slate-600 text-xs md:text-sm mt-1 max-w-md mx-auto">
+                    Chapter 1: Introduction to Biology (SLO 1, SLO 2, SLO 3, SLO 4)
+                  </p>
+                </div>
+
+                {/* Test Rules Matrix */}
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 text-center">
+                  <div className="bg-sky-50/80 border border-sky-100 p-2.5 rounded-xl">
+                    <span className="text-[10px] text-sky-700 font-bold uppercase block">Questions</span>
+                    <span className="text-base font-extrabold text-slate-800">24 MCQs</span>
+                  </div>
+                  <div className="bg-sky-50/80 border border-sky-100 p-2.5 rounded-xl">
+                    <span className="text-[10px] text-sky-700 font-bold uppercase block">Time Limit</span>
+                    <span className="text-base font-extrabold text-slate-800">24 Mins</span>
+                  </div>
+                  <div className="bg-emerald-50/80 border border-emerald-100 p-2.5 rounded-xl">
+                    <span className="text-[10px] text-emerald-700 font-bold uppercase block">Correct</span>
+                    <span className="text-base font-extrabold text-emerald-600">+1.0 Mark</span>
+                  </div>
+                  <div className="bg-rose-50/80 border border-rose-100 p-2.5 rounded-xl">
+                    <span className="text-[10px] text-rose-700 font-bold uppercase block">Negative</span>
+                    <span className="text-base font-extrabold text-rose-600">-0.25 Mark</span>
+                  </div>
+                </div>
+
+                {/* Mode Selection Buttons */}
+                <div className="space-y-3 pt-2">
+                  <h3 className="text-xs font-bold uppercase tracking-wider text-sky-900">
+                    Select Assessment Mode
+                  </h3>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    
+                    {/* Practice Mode */}
+                    <button
+                      onClick={() => handleStartQuiz('practice')}
+                      className="group p-4 bg-gradient-to-br from-white to-sky-50 hover:to-sky-100 border-2 border-sky-200 hover:border-sky-500 rounded-2xl text-left transition-all duration-200 shadow-sm hover:shadow-md transform hover:-translate-y-0.5"
+                    >
+                      <div className="flex items-center justify-between mb-1">
+                        <span className="text-[10px] font-extrabold text-sky-800 uppercase bg-sky-200 px-2 py-0.5 rounded">
+                          Interactive
+                        </span>
+                        <span className="text-xl">💡</span>
+                      </div>
+                      <h4 className="text-base font-bold text-slate-900 group-hover:text-sky-700">
+                        Practice Mode
+                      </h4>
+                      <p className="text-xs text-slate-500 mt-1 leading-snug">
+                        Instant answer checking and explanation with locked selection on each question.
+                      </p>
+                    </button>
+
+                    {/* Blind Mode */}
+                    <button
+                      onClick={() => handleStartQuiz('blind')}
+                      className="group p-4 bg-gradient-to-br from-white to-indigo-50 hover:to-indigo-100 border-2 border-indigo-200 hover:border-indigo-500 rounded-2xl text-left transition-all duration-200 shadow-sm hover:shadow-md transform hover:-translate-y-0.5"
+                    >
+                      <div className="flex items-center justify-between mb-1">
+                        <span className="text-[10px] font-extrabold text-indigo-800 uppercase bg-indigo-200 px-2 py-0.5 rounded">
+                          Exam Style
+                        </span>
+                        <span className="text-xl">🔒</span>
+                      </div>
+                      <h4 className="text-base font-bold text-slate-900 group-hover:text-indigo-700">
+                        Blind Mode
+                      </h4>
+                      <p className="text-xs text-slate-500 mt-1 leading-snug">
+                        Standard exam experience. Complete score, answers, and explanations revealed at the end.
+                      </p>
+                    </button>
+
+                  </div>
+                </div>
+
+                <p className="text-[11px] text-slate-400 italic">
+                  Official Assessment Portal • Qashqarian Academy
+                </p>
+              </div>
+            )}
+
+            {/* ================= 2. ACTIVE QUIZ INTERFACE ================= */}
+            {screen === 'quiz' && (
+              <div className="space-y-4">
+                
+                {/* QUESTION CARD */}
+                <div className="bg-white/95 border border-sky-100 rounded-3xl p-5 md:p-7 shadow-lg relative overflow-hidden">
+                  
+                  {/* MANDATORY SLO HEADER ABOVE EACH MCQ */}
+                  <div className="mb-4 bg-sky-50/90 border border-sky-200/80 p-2.5 rounded-xl flex items-start space-x-2">
+                    <span className="text-[11px] font-black uppercase text-sky-800 bg-sky-200/80 px-2 py-0.5 rounded flex-shrink-0">
+                      {QUIZ_DATA[currentIndex].sloCode}
+                    </span>
+                    <p className="text-xs text-sky-950 font-medium leading-tight pt-0.5">
+                      {QUIZ_DATA[currentIndex].sloDesc}
+                    </p>
+                  </div>
+
+                  {/* Question Text */}
+                  <h3 className="text-base md:text-lg font-bold text-slate-900 leading-relaxed mb-5">
+                    <span className="text-sky-600 font-mono mr-1.5">{currentIndex + 1}.</span>
+                    {QUIZ_DATA[currentIndex].question}
+                  </h3>
+
+                  {/* OPTIONS LIST WITH ANSWER LOCKING */}
+                  <div className="space-y-2.5">
+                    {QUIZ_DATA[currentIndex].options.map((option, optIdx) => {
+                      const userAns = userAnswers[currentIndex];
+                      const isSelected = userAns === optIdx;
+                      const isLocked = userAns !== null;
+                      const isCorrect = QUIZ_DATA[currentIndex].correctAnswer === optIdx;
+                      
+                      let buttonStyle = "bg-white text-slate-700 border-slate-200 hover:border-sky-300 hover:bg-sky-50/40";
+                      let badgeStyle = "bg-slate-100 text-slate-600 border-slate-200";
+
+                      if (isLocked) {
+                        if (quizMode === 'practice') {
+                          if (isCorrect) {
+                            buttonStyle = "bg-emerald-50 text-emerald-950 border-emerald-400 font-semibold";
+                            badgeStyle = "bg-emerald-500 text-white font-bold border-emerald-500";
+                          } else if (isSelected) {
+                            buttonStyle = "bg-rose-50 text-rose-950 border-rose-400 font-semibold";
+                            badgeStyle = "bg-rose-500 text-white font-bold border-rose-500";
+                          } else {
+                            buttonStyle = "bg-slate-50 text-slate-400 border-slate-200 opacity-60";
+                          }
+                        } else {
+                          // Blind mode locked styling
+                          if (isSelected) {
+                            buttonStyle = "bg-sky-100 text-sky-950 border-sky-500 font-semibold ring-1 ring-sky-400";
+                            badgeStyle = "bg-sky-600 text-white font-bold border-sky-600";
+                          } else {
+                            buttonStyle = "bg-slate-50 text-slate-400 border-slate-200 opacity-50";
+                          }
+                        }
+                      }
+
+                      const letterLabel = String.fromCharCode(65 + optIdx);
+
+                      return (
+                        <button
+                          key={optIdx}
+                          onClick={() => handleOptionSelect(optIdx)}
+                          disabled={isLocked}
+                          className={`w-full p-3.5 rounded-2xl border text-left flex items-start space-x-3 transition-all duration-150 ${buttonStyle} ${isLocked ? 'cursor-not-allowed' : 'active:scale-[0.99]'}`}
+                        >
+                          <span className={`flex-shrink-0 w-6 h-6 rounded-lg border text-xs font-mono flex items-center justify-center transition-colors ${badgeStyle}`}>
+                            {letterLabel}
+                          </span>
+                          <span className="text-xs md:text-sm pt-0.5 leading-snug">
+                            {option}
+                          </span>
+                        </button>
+                      );
+                    })}
+                  </div>
+
+                  {/* PRACTICE MODE INSTANT EVALUATION & EXPLANATION BANNER */}
+                  {quizMode === 'practice' && userAnswers[currentIndex] !== null && (
+                    <div className={`mt-5 p-4 rounded-2xl border transition-all duration-200 ${
+                      userAnswers[currentIndex] === QUIZ_DATA[currentIndex].correctAnswer
+                        ? 'bg-emerald-50 border-emerald-200 text-emerald-950'
+                        : 'bg-rose-50 border-rose-200 text-rose-950'
+                    }`}>
+                      <div className="flex items-center space-x-2 mb-1.5 font-bold text-xs uppercase tracking-wider">
+                        {userAnswers[currentIndex] === QUIZ_DATA[currentIndex].correctAnswer ? (
+                          <>
+                            <span className="text-emerald-600 text-base">✓</span>
+                            <span className="text-emerald-800">Correct Answer (+1.0 Mark)</span>
+                          </>
+                        ) : (
+                          <>
+                            <span className="text-rose-600 text-base">✗</span>
+                            <span className="text-rose-800">Incorrect Selection (-0.25 Mark)</span>
+                          </>
+                        )}
+                      </div>
+
+                      <p className="text-xs text-slate-700 leading-relaxed">
+                        <strong className="text-slate-900 block mb-0.5">Scientific Rationale:</strong>
+                        {QUIZ_DATA[currentIndex].explanation}
+                      </p>
+
+                      {/* Why wrong explanation if user picked incorrect */}
+                      {userAnswers[currentIndex] !== QUIZ_DATA[currentIndex].correctAnswer && (
+                        <div className="mt-2 pt-2 border-t border-rose-200/60 text-xs text-rose-900 leading-relaxed">
+                          <strong className="text-rose-950 block mb-0.5">Why your option is wrong:</strong>
+                          {QUIZ_DATA[currentIndex].wrongExplanations[userAnswers[currentIndex]]}
+                        </div>
+                      )}
+                    </div>
+                  )}
+
+                  {/* LOCKED STATUS INDICATOR FOR BLIND MODE */}
+                  {quizMode === 'blind' && userAnswers[currentIndex] !== null && (
+                    <div className="mt-4 p-2.5 bg-sky-50 border border-sky-200 rounded-xl text-xs text-sky-800 flex items-center justify-between font-medium">
+                      <span>🔒 Answer locked for Q{currentIndex + 1}.</span>
+                      <span className="text-[10px] text-sky-600 uppercase font-bold">Results revealed at end</span>
+                    </div>
+                  )}
+
+                </div>
+
+                {/* PREVIOUS / NEXT CONTROL BUTTONS */}
+                <div className="flex items-center justify-between gap-3">
+                  <button
+                    onClick={() => setCurrentIndex((prev) => Math.max(0, prev - 1))}
+                    disabled={currentIndex === 0}
+                    className="px-4 py-2.5 rounded-xl border border-sky-200 bg-white text-slate-700 font-semibold text-xs md:text-sm disabled:opacity-40 disabled:cursor-not-allowed hover:bg-sky-50 transition shadow-sm"
+                  >
+                    ← Previous
+                  </button>
+
+                  <div className="flex items-center space-x-2">
+                    {currentIndex === QUIZ_DATA.length - 1 ? (
+                      <button
+                        onClick={handleFinishQuiz}
+                        className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-bold text-xs md:text-sm shadow-md transition transform hover:scale-[1.02]"
+                      >
+                        Finish & Submit Assessment
+                      </button>
+                    ) : (
+                      <button
+                        onClick={() => setCurrentIndex((prev) => Math.min(QUIZ_DATA.length - 1, prev + 1))}
+                        className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-sky-600 to-blue-600 hover:from-sky-700 hover:to-blue-700 text-white font-bold text-xs md:text-sm shadow-md transition transform hover:scale-[1.02]"
+                      >
+                        Next Question →
+                      </button>
+                    )}
+                  </div>
+                </div>
+
+                {/* QUESTION JUMP PALETTE */}
+                <div className="bg-white/80 border border-sky-100 p-3.5 rounded-2xl shadow-sm">
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-[11px] font-bold text-sky-900 uppercase tracking-wider">
+                      Question Palette
+                    </span>
+                    <span className="text-[11px] text-slate-500 font-mono">
+                      {userAnswers.filter((a) => a !== null).length} / {QUIZ_DATA.length} Answered
+                    </span>
+                  </div>
+                  <div className="grid grid-cols-6 sm:grid-cols-12 gap-1.5">
+                    {QUIZ_DATA.map((_, idx) => {
+                      const isAns = userAnswers[idx] !== null;
+                      const isCurr = idx === currentIndex;
+
+                      let gridStyle = "bg-slate-100 text-slate-500 border-slate-200";
+                      if (isCurr) gridStyle = "ring-2 ring-sky-500 bg-sky-600 text-white font-bold border-sky-600";
+                      else if (isAns) gridStyle = "bg-sky-100 text-sky-800 border-sky-300 font-bold";
+
+                      return (
+                        <button
+                          key={idx}
+                          onClick={() => setCurrentIndex(idx)}
+                          className={`h-7 rounded-lg text-xs font-mono font-bold transition flex items-center justify-center border ${gridStyle}`}
+                        >
+                          {idx + 1}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+
+              </div>
+            )}
+
+            {/* ================= 3. FINAL RESULTS SCREEN ================= */}
+            {screen === 'results' && (
+              <div className="space-y-6 my-2">
+                
+                {/* SCORE SUMMARY CARD */}
+                <div className="bg-white/95 border border-sky-100 rounded-3xl p-6 md:p-8 shadow-xl text-center relative overflow-hidden">
+                  <span className="px-3 py-1 bg-sky-100 border border-sky-200 rounded-full text-sky-800 text-xs font-bold uppercase tracking-wider">
+                    Assessment Results • Qashqarian Academy
+                  </span>
+
+                  <h2 className="text-4xl md:text-5xl font-black text-slate-900 mt-4 font-serif">
+                    {analytics.percentage}% Overall Score
+                  </h2>
+
+                  <p className="text-slate-600 font-medium text-xs md:text-sm mt-1">
+                    Net Score: <span className="text-sky-700 font-mono font-bold text-base">{analytics.rawScore}</span> / {analytics.maxScore}.00 Marks
+                    <span className="text-[11px] text-slate-400 block mt-0.5">(Calculated after -0.25 negative marking deduction per wrong answer)</span>
+                  </p>
+
+                  {/* MOTIVATIONAL QUOTE BANNER */}
+                  <div className="mt-4 p-3.5 rounded-2xl bg-sky-50 border border-sky-200 text-sky-900 italic text-xs md:text-sm max-w-lg mx-auto shadow-inner">
+                    {analytics.randomQuote}
+                  </div>
+
+                  {/* Metrics Grid */}
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5 mt-5">
+                    <div className="bg-emerald-50 border border-emerald-200 p-3 rounded-2xl">
+                      <span className="text-[10px] text-emerald-800 font-bold uppercase block">Correct (+1.0)</span>
+                      <span className="text-2xl font-black text-emerald-700">{analytics.correctCount}</span>
+                    </div>
+                    <div className="bg-rose-50 border border-rose-200 p-3 rounded-2xl">
+                      <span className="text-[10px] text-rose-800 font-bold uppercase block">Wrong (-0.25)</span>
+                      <span className="text-2xl font-black text-rose-700">{analytics.wrongCount}</span>
+                    </div>
+                    <div className="bg-amber-50 border border-amber-200 p-3 rounded-2xl">
+                      <span className="text-[10px] text-amber-800 font-bold uppercase block">Unanswered</span>
+                      <span className="text-2xl font-black text-amber-700">{analytics.unansweredCount}</span>
+                    </div>
+                    <div className="bg-sky-50 border border-sky-200 p-3 rounded-2xl">
+                      <span className="text-[10px] text-sky-800 font-bold uppercase block">Time Used</span>
+                      <span className="text-lg font-black text-sky-900 font-mono">
+                        {formatTime(analytics.timeSpentSeconds)}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Restart Button */}
+                  <div className="mt-5">
+                    <button
+                      onClick={() => setScreen('welcome')}
+                      className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-sky-600 to-blue-600 hover:from-sky-700 hover:to-blue-700 text-white font-bold text-xs md:text-sm shadow-md transition transform hover:scale-105"
+                    >
+                      🔄 Restart Quiz
+                    </button>
+                  </div>
+                </div>
+
+                {/* DETAILED WEAK AREA ANALYSIS BY SLO */}
+                <div className="bg-white/95 border border-sky-100 rounded-3xl p-5 md:p-6 shadow-md">
+                  <h3 className="text-sm md:text-base font-bold text-slate-900 mb-3 flex items-center space-x-2 font-serif">
+                    <span>🎯</span>
+                    <span>Analysis of Weak Areas (SLO Breakdown)</span>
+                  </h3>
+
+                  <div className="space-y-3">
+                    {Object.entries(analytics.sloStats).map(([sloCode, stat]) => {
+                      const topicPercent = Math.round((stat.correct / stat.total) * 100);
+                      const isWeak = topicPercent < 60;
+
+                      return (
+                        <div key={sloCode} className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200">
+                          <div className="flex flex-wrap justify-between items-center gap-1.5 mb-1.5">
+                            <div className="flex items-center space-x-2">
+                              <span className="text-[10px] font-black text-sky-800 uppercase bg-sky-100 px-2 py-0.5 rounded border border-sky-200">
+                                {sloCode}
+                              </span>
+                              <span className="text-xs font-bold text-slate-800">{stat.desc}</span>
+                            </div>
+                            <div className="flex items-center space-x-2 text-xs font-mono">
+                              <span className="text-slate-600">{stat.correct}/{stat.total} Correct</span>
+                              <span className={`font-bold px-2 py-0.5 rounded text-[11px] ${isWeak ? 'bg-rose-100 text-rose-800' : 'bg-emerald-100 text-emerald-800'}`}>
+                                {topicPercent}%
+                              </span>
+                            </div>
+                          </div>
+
+                          <div className="w-full bg-slate-200 h-1.5 rounded-full overflow-hidden">
+                            <div
+                              className={`h-full transition-all duration-500 ${isWeak ? 'bg-rose-500' : 'bg-emerald-500'}`}
+                              style={{ width: `${topicPercent}%` }}
+                            />
+                          </div>
+
+                          {isWeak && (
+                            <p className="text-[11px] text-rose-700 mt-1.5 font-medium flex items-center space-x-1">
+                              <span>⚠️</span>
+                              <span><strong>Needs Improvement:</strong> Review textbook notes on {sloCode}.</span>
+                            </p>
+                          )}
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                {/* DETAILED ANALYSIS OF WRONG ANSWERS & REVIEW */}
+                <div className="bg-white/95 border border-sky-100 rounded-3xl p-5 md:p-6 shadow-md space-y-4">
+                  
+                  <div className="flex flex-wrap justify-between items-center gap-2">
+                    <h3 className="text-sm md:text-base font-bold text-slate-900 font-serif">
+                      Detailed Answer Analysis
+                    </h3>
+
+                    {/* Filter Tabs */}
+                    <div className="flex items-center space-x-1 bg-slate-100 p-1 rounded-xl border border-slate-200 text-xs font-semibold">
+                      {['all', 'wrong', 'correct', 'unanswered'].map((f) => (
+                        <button
+                          key={f}
+                          onClick={() => setFilterReview(f)}
+                          className={`px-2.5 py-1 rounded-lg capitalize transition text-[11px] ${
+                            filterReview === f
+                              ? 'bg-sky-600 text-white shadow-sm'
+                              : 'text-slate-600 hover:text-slate-900'
+                          }`}
+                        >
+                          {f}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Question Review List */}
+                  <div className="space-y-3.5">
+                    {QUIZ_DATA.filter((q, idx) => {
+                      const uAns = userAnswers[idx];
+                      if (filterReview === 'wrong') return uAns !== null && uAns !== q.correctAnswer;
+                      if (filterReview === 'correct') return uAns === q.correctAnswer;
+                      if (filterReview === 'unanswered') return uAns === null;
+                      return true;
+                    }).map((q) => {
+                      const originalIdx = QUIZ_DATA.findIndex((item) => item.id === q.id);
+                      const uAns = userAnswers[originalIdx];
+                      const isCorrect = uAns === q.correctAnswer;
+                      const isUnanswered = uAns === null;
+
+                      return (
+                        <div
+                          key={q.id}
+                          className={`p-4 rounded-2xl border transition ${
+                            isCorrect
+                              ? 'bg-emerald-50/40 border-emerald-200'
+                              : isUnanswered
+                              ? 'bg-amber-50/40 border-amber-200'
+                              : 'bg-rose-50/40 border-rose-200'
+                          }`}
+                        >
+                          <div className="flex items-center justify-between gap-2 mb-2">
+                            <span className="text-[10px] font-bold text-sky-800 uppercase bg-sky-100 px-2 py-0.5 rounded border border-sky-200">
+                              Q{originalIdx + 1} • {q.sloCode}
+                            </span>
+
+                            <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider ${
+                              isCorrect
+                                ? 'bg-emerald-100 text-emerald-800 border border-emerald-300'
+                                : isUnanswered
+                                ? 'bg-amber-100 text-amber-800 border border-amber-300'
+                                : 'bg-rose-100 text-rose-800 border border-rose-300'
+                            }`}>
+                              {isCorrect ? '✓ Correct (+1.0)' : isUnanswered ? '⚪ Skipped (0.0)' : '✗ Incorrect (-0.25)'}
+                            </span>
+                          </div>
+
+                          <h4 className="text-xs md:text-sm font-bold text-slate-900 mb-2">
+                            {q.question}
+                          </h4>
+
+                          {/* Options Grid */}
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5 text-xs mb-2.5">
+                            {q.options.map((opt, oIdx) => {
+                              const isCorrectOpt = oIdx === q.correctAnswer;
+                              const isUserPick = uAns === oIdx;
+
+                              let optStyle = "bg-white border-slate-200 text-slate-700";
+                              if (isCorrectOpt) optStyle = "bg-emerald-100 border-emerald-400 text-emerald-950 font-bold";
+                              else if (isUserPick) optStyle = "bg-rose-100 border-rose-400 text-rose-950 font-bold";
+
+                              return (
+                                <div key={oIdx} className={`p-2 rounded-xl border flex items-start space-x-1.5 ${optStyle}`}>
+                                  <span className="font-mono font-bold text-[11px]">{String.fromCharCode(65 + oIdx)}.</span>
+                                  <span className="text-[11px] leading-tight">{opt}</span>
+                                </div>
+                              );
+                            })}
+                          </div>
+
+                          {/* Explanation Box */}
+                          <div className="p-3 bg-white rounded-xl border border-slate-200 text-xs text-slate-700 leading-relaxed space-y-1">
+                            <div>
+                              <strong className="text-sky-900 block font-bold">Scientific Rationale:</strong>
+                              {q.explanation}
+                            </div>
+
+                            {!isCorrect && !isUnanswered && (
+                              <div className="pt-1.5 border-t border-slate-100 text-rose-900">
+                                <strong className="text-rose-950 block font-bold">Why Option {String.fromCharCode(65 + uAns)} is wrong:</strong>
+                                {q.wrongExplanations[uAns]}
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+
+                </div>
+
+              </div>
+            )}
+
+          </main>
+
+          {/* FOOTER */}
+          <footer className="border-t border-sky-100 bg-white/70 py-3 text-center text-xs text-slate-500 z-10">
+            <p>© Qashqarian Academy • Class XI Biology Assessment Engine</p>
+          </footer>
+
+        </div>
+      );
+    }
+
+    // Mount React Root
+    const rootElement = document.getElementById('root');
+    const root = ReactDOM.createRoot(rootElement);
+    root.render(<App />);
+  </script>
+</body>
+</html>

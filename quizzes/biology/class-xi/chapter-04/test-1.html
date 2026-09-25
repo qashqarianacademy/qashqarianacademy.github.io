@@ -1,0 +1,1391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Class XI Biology Chapter 4 Mock Test - Qashqarian Academy</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+          },
+          colors: {
+            sky: {
+              50:'#F0F8F8', 100:'#DFF3F2', 200:'#BFE4E7', 300:'#8FCDD5',
+              400:'#4FA9B9', 500:'#1F869B', 600:'#056C82', 700:'#0A5263',
+              800:'#0B4352', 900:'#0B3340'
+            },
+            science: {
+              50:'#F0F8F8', 100:'#DFF3F2', 200:'#BFE4E7', 300:'#8FCDD5',
+              400:'#4FA9B9', 500:'#1F869B', 600:'#056C82', 700:'#0A5263',
+              800:'#0B4352', 900:'#0B3340'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- React 18 & ReactDOM -->
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+  <!-- Babel for JSX -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #f0f7ff;
+    }
+    .watermark-bg {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(-12deg);
+      pointer-events: none;
+      user-select: none;
+      z-index: 0;
+      opacity: 0.035;
+      text-align: center;
+      white-space: nowrap;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: #f1f5f9;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 4px;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fadeIn {
+      animation: fadeIn 0.25s ease-out forwards;
+    }
+    @media print {
+      .no-print { display: none !important; }
+      body { background: white; color: black; }
+    }
+  </style>
+</head>
+<body class="text-slate-800 antialiased selection:bg-sky-200 selection:text-sky-900 min-h-screen">
+<header class="sticky top-0 z-50 bg-[#0B132B] border-b border-cyan-900/40 shadow-md">
+    <div class="max-w-5xl mx-auto px-4 py-2.5 flex items-center justify-between">
+      <a href="../../../../index.html" class="flex items-center gap-2">
+        <img src="../../../../images/brand/logo.png" alt="Qashqarian Academy" class="w-10 h-10 object-contain">
+        <div>
+          <div class="text-base md:text-lg font-extrabold text-white tracking-tight leading-none">Qashqarian</div>
+          <div class="text-[10px] md:text-xs text-[#FF9F1C] font-extrabold tracking-[0.2em] mt-1 leading-none">ACADEMY</div>
+        </div>
+      </a>
+      <a href="../../index.html" class="text-[11px] font-semibold text-slate-300 hover:text-white border border-white/20 rounded-lg px-2.5 py-1">
+        ← Biology Quizzes
+      </a>
+    </div>
+  </header>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const { useState, useEffect, useMemo } = React;
+
+    // SVG Icon Component
+    const Icon = ({ name, className = "w-5 h-5" }) => {
+      const props = {
+        className,
+        xmlns: "http://www.w3.org/2000/svg",
+        viewBox: "0 0 24 24",
+        fill: "none",
+        stroke: "currentColor",
+        strokeWidth: "2",
+        strokeLinecap: "round",
+        strokeLinejoin: "round"
+      };
+
+      switch (name) {
+        case "clock":
+          return <svg {...props}><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>;
+        case "award":
+          return <svg {...props}><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 22 12 17 17 22 15.79 13.88"/></svg>;
+        case "check":
+          return <svg {...props}><polyline points="20 6 9 17 4 12"/></svg>;
+        case "x":
+          return <svg {...props}><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>;
+        case "arrow-left":
+          return <svg {...props}><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>;
+        case "arrow-right":
+          return <svg {...props}><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>;
+        case "rotate-ccw":
+          return <svg {...props}><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>;
+        case "book-open":
+          return <svg {...props}><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>;
+        case "shield":
+          return <svg {...props}><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>;
+        case "zap":
+          return <svg {...props}><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>;
+        case "bar-chart":
+          return <svg {...props}><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg>;
+        case "info":
+          return <svg {...props}><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>;
+        case "alert-triangle":
+          return <svg {...props}><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>;
+        case "flag":
+          return <svg {...props}><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>;
+        case "grid":
+          return <svg {...props}><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>;
+        case "search":
+          return <svg {...props}><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>;
+        case "printer":
+          return <svg {...props}><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>;
+        case "key":
+          return <svg {...props}><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg>;
+        default:
+          return <svg {...props}><circle cx="12" cy="12" r="10"/></svg>;
+      }
+    };
+
+    const QUESTIONS = [
+      // SLO 4.1.1: Contributions of Scientists in the Discovery of Cell
+      {
+        id: 1,
+        slo: "SLO 4.1.1: Contributions of Scientists in the Discovery of Cell",
+        question: "Who was the first scientist to observe dead cell walls in a slice of cork under a primitive microscope in 1665?",
+        options: ["Anton van Leeuwenhoek", "Robert Brown", "Robert Hooke", "Theodor Schwann"],
+        correct: 2,
+        explanation: "Robert Hooke observed honeycomb-like empty compartments in cork slices in 1665 and coined the term 'cell' (cellulae).",
+        wrongExplanations: [
+          "Anton van Leeuwenhoek observed living micro-organisms first, not cork walls.",
+          "Robert Brown discovered the cell nucleus in 1831.",
+          "Theodor Schwann co-formulated the cell theory for animal tissue in 1839."
+        ]
+      },
+      {
+        id: 2,
+        slo: "SLO 4.1.1: Contributions of Scientists in the Discovery of Cell",
+        question: "Anton van Leeuwenhoek made major contributions to cell discovery by observing:",
+        options: ["Living microscopic organisms in water droplets", "The nucleus inside plant cells", "Double-membrane mitochondria", "The cell wall of fungal hyphae"],
+        correct: 0,
+        explanation: "Leeuwenhoek crafted high-quality single lenses to observe living 'animalcules' (bacteria and protozoa) in pond water.",
+        wrongExplanations: [
+          "Correct answer is A. The nucleus was discovered much later by Robert Brown.",
+          "Mitochondria require electron microscopy to be observed.",
+          "Fungal hyphae cell wall structure was elucidated later."
+        ]
+      },
+      {
+        id: 3,
+        slo: "SLO 4.1.1: Contributions of Scientists in the Discovery of Cell",
+        question: "In 1831, Robert Brown significantly advanced cell biology by discovering which organelle inside plant cells?",
+        options: ["Chloroplast", "Endoplasmic reticulum", "Lysosome", "Nucleus"],
+        correct: 3,
+        explanation: "Robert Brown observed a distinct dark spherical structure within orchid epidermal cells in 1831 and named it the nucleus.",
+        wrongExplanations: [
+          "Chloroplasts were described later by Schimper.",
+          "The Endoplasmic Reticulum was discovered by Keith Porter in 1945.",
+          "Lysosomes were discovered by Christian de Duve in 1955."
+        ]
+      },
+      {
+        id: 4,
+        slo: "SLO 4.1.1: Contributions of Scientists in the Discovery of Cell",
+        question: "The Cell Theory was formally proposed in 1838–1839 through the combined work of:",
+        options: ["Hooke and Leeuwenhoek", "Schleiden and Schwann", "Virchow and Weismann", "Brown and Fischer"],
+        correct: 1,
+        explanation: "Matthias Schleiden (botanist, 1838) and Theodor Schwann (zoologist, 1839) unified their findings to formulate the Cell Theory.",
+        wrongExplanations: [
+          "Hooke and Leeuwenhoek made early microscopy observations individually.",
+          "Virchow extended cell theory in 1855; Weismann worked on germplasm theory.",
+          "Brown discovered the nucleus; Fischer worked on protein chemistry."
+        ]
+      },
+      {
+        id: 5,
+        slo: "SLO 4.1.1: Contributions of Scientists in the Discovery of Cell",
+        question: "Rudolf Virchow contributed the famous aphorism 'Omnis cellula e cellula' in 1855, which means:",
+        options: ["All new cells arise from pre-existing living cells", "Non-living matter spontaneously generates cells", "All cells possess a double-layered membrane", "Plant and animal cells have identical structures"],
+        correct: 0,
+        explanation: "Virchow's principle established biogenesis: all living cells originate solely through division from pre-existing parent cells.",
+        wrongExplanations: [
+          "Virchow disproved spontaneous generation (abiogenesis).",
+          "Membrane bilayer structure was proposed by Gorter and Grendel in 1925.",
+          "Plant and animal cells differ in cell walls, plastids, and centrioles."
+        ]
+      },
+
+      // SLO 4.2.1: Concept of Resolution versus Magnification
+      {
+        id: 6,
+        slo: "SLO 4.2.1: Concept of Resolution versus Magnification",
+        question: "The term 'magnification' of a microscope is defined as the:",
+        options: ["Ability to distinguish two closely placed points as separate", "Wavelength of light passing through the condenser lens", "Brightness level adjusted by the iris diaphragm", "Ratio of an image's observed size to its actual real size"],
+        correct: 3,
+        explanation: "Magnification is the factor by which an optical system enlarges the apparent linear size of an object relative to its true dimensions.",
+        wrongExplanations: [
+          "Distinguishing close points as separate defines resolving power, not magnification.",
+          "Wavelength dictates resolution limits, not magnification.",
+          "Iris diaphragm adjusts illumination intensity and contrast."
+        ]
+      },
+      {
+        id: 7,
+        slo: "SLO 4.2.1: Concept of Resolution versus Magnification",
+        question: "What property determines the clarity and detail of an image viewed under a microscope?",
+        options: ["Focal length", "Resolution power", "Stage size", "Ocular tube length"],
+        correct: 1,
+        explanation: "Resolving power is the minimum distance between two points at which they can still be distinguished as distinct entities.",
+        wrongExplanations: [
+          "Focal length affects lens magnification, not ultimate fine detail resolution.",
+          "Stage size is a physical support structure without optical impact.",
+          "Ocular tube length is a structural dimension of the microscope frame."
+        ]
+      },
+      {
+        id: 8,
+        slo: "SLO 4.2.1: Concept of Resolution versus Magnification",
+        question: "[Real-Life Scenario] A student wants to observe the ultra-structure of a ribosome (≈ 20 nm). Why can this NOT be seen under a standard compound light microscope?",
+        options: ["Light microscopes lack objective lenses", "Ribosomes disintegrate when exposed to visible light", "The resolution limit of light is too large (≈ 200 nm)", "Ribosomes are transparent and reject all stains"],
+        correct: 2,
+        explanation: "The resolution limit of light microscopy is ~200 nm (half the wavelength of blue light). Ribosomes (20 nm) require electron microscopy (resolution ~0.2 nm).",
+        wrongExplanations: [
+          "Light microscopes possess objective lenses.",
+          "Ribosomes do not disintegrate under light photons.",
+          "Ribosomes can be stained using heavy metals in electron microscopy."
+        ]
+      },
+      {
+        id: 9,
+        slo: "SLO 4.2.1: Concept of Resolution versus Magnification",
+        question: "The minimum distance between two points that the human unaided eye can distinguish as separate is approximately:",
+        options: ["0.1 millimeter (100 µm)", "1.0 nanometer", "10 millimeters", "0.01 nanometer"],
+        correct: 0,
+        explanation: "The human eye has a resolution limit of approximately 0.1 mm (100 micrometers) at standard viewing distances.",
+        wrongExplanations: [
+          "1.0 nm is achievable only with transmission electron microscopes.",
+          "10 mm is far too coarse; human eyes distinguish objects 100 times smaller.",
+          "0.01 nm is smaller than atomic bond lengths."
+        ]
+      },
+      {
+        id: 10,
+        slo: "SLO 4.2.1: Concept of Resolution versus Magnification",
+        question: "[Real-Life Scenario] A lab technician views a human blood smear using a 10× eyepiece lens and a 40× objective lens. What is the total magnification of the red blood cells being observed?",
+        options: ["50×", "100×", "300×", "400×"],
+        correct: 3,
+        explanation: "Total Magnification = Eyepiece Magnification × Objective Lens Magnification = 10 × 40 = 400×.",
+        wrongExplanations: [
+          "50× comes from addition (10 + 40), which is incorrect. Lens magnifications multiply.",
+          "100× would require a 10× objective.",
+          "300× is mathematically incorrect."
+        ]
+      },
+
+      // SLO 4.3.1: Techniques Used in Cell Biology
+      {
+        id: 11,
+        slo: "SLO 4.3.1: Techniques Used in Cell Biology",
+        question: "The primary purpose of cell fractionation in cell biology is to:",
+        options: ["Mutate cellular DNA", "Isolate specific cellular organelles for functional analysis", "Synthesize new protein molecules", "Freeze whole tissues for long-term storage"],
+        correct: 1,
+        explanation: "Cell fractionation uses homogenisation and differential centrifugation to separate pure organelle fractions for biochemical study.",
+        wrongExplanations: [
+          "DNA mutation is performed via mutagenesis, not cell fractionation.",
+          "Protein synthesis is a biochemical biological process, not an isolation technique.",
+          "Tissue freezing is cryopreservation."
+        ]
+      },
+      {
+        id: 12,
+        slo: "SLO 4.3.1: Techniques Used in Cell Biology",
+        question: "When a homogenized cell mixture is centrifuged at a low speed, which heavy organelle settles first at the bottom as a pellet?",
+        options: ["Nucleus", "Ribosome", "Lysosome", "Endoplasmic reticulum"],
+        correct: 0,
+        explanation: "Nuclei are the largest and densest organelles, sedimenting into the pellet at low speeds (~1,000 g for 10 min).",
+        wrongExplanations: [
+          "Ribosomes require ultracentrifugation (~150,000 g).",
+          "Lysosomes require intermediate speeds (~20,000 g).",
+          "Endoplasmic reticulum fragments (microsomes) pellet at high speeds (~100,000 g)."
+        ]
+      },
+      {
+        id: 13,
+        slo: "SLO 4.3.1: Techniques Used in Cell Biology",
+        question: "[Real-Life Scenario] A student prepares a wet mount of human cheek cells and applies a drop of methylene blue dye. Why is differential staining used in this experiment?",
+        options: ["To kill bacteria on the slide", "To dissolve the cell membrane", "To color specific cell parts like the nucleus for easier distinction", "To make the cells swim faster"],
+        correct: 2,
+        explanation: "Methylene blue is a basic dye that binds negatively charged nucleic acids in the nucleus, providing optical contrast under light microscopy.",
+        wrongExplanations: [
+          "Staining is used for optical contrast, not sterilization.",
+          "Stains should preserve cellular structures, not dissolve membranes.",
+          "Cheek cells are stationary epithelial cells and do not move."
+        ]
+      },
+      {
+        id: 14,
+        slo: "SLO 4.3.1: Techniques Used in Cell Biology",
+        question: "High-speed centrifugation used to separate lightweight cellular structures like ribosomes is called:",
+        options: ["Chromatography", "Electrophoresis", "Filtration", "Ultracentrifugation"],
+        correct: 3,
+        explanation: "Ultracentrifuges spin at speeds up to 100,000+ RPM (generating over 500,000 g) to isolate macromolecular complexes and ribosomes.",
+        wrongExplanations: [
+          "Chromatography separates molecules based on solubility/charge/size in solvents.",
+          "Electrophoresis separates macromolecules using an electric gel gradient.",
+          "Filtration uses physical pore barriers for liquid separation."
+        ]
+      },
+      {
+        id: 15,
+        slo: "SLO 4.3.1: Techniques Used in Cell Biology",
+        question: "Before separating organelles using centrifugation, tissues are blended in an isotonic buffer solution primarily to:",
+        options: ["Destroy all cell enzymes", "Break open cell membranes while keeping organelles intact", "Convert lipids into proteins", "Freeze the cytoplasm instantly"],
+        correct: 1,
+        explanation: "Isotonic buffers maintain osmotic equilibrium, preventing organelles from bursting (osmotic lysis) or shrinking (crenation) during membrane disruption.",
+        wrongExplanations: [
+          "Buffers aim to maintain enzymatic stability, not destroy them.",
+          "Interconversion of lipids to proteins is biochemically impossible.",
+          "Freezing creates ice crystals that damage organelle membranes."
+        ]
+      },
+
+      // SLO 4.4.1: Structure, Chemical Composition, and Functions of Organelles
+      {
+        id: 16,
+        slo: "SLO 4.4.1: Structure, Chemical Composition, and Functions of Organelles",
+        question: "According to the Fluid Mosaic Model, the cell membrane is composed of a dynamic fluid layer of:",
+        options: ["Phospholipids with embedded floating proteins", "Cellulose fibers lined with carbohydrate chains", "Solid cholesterol plates with nucleic acids", "Fixed protein sheets with outer starch layers"],
+        correct: 0,
+        explanation: "Proposed by Singer and Nicolson in 1972, the fluid mosaic model features a phospholipid bilayer with fluid-floating integral/peripheral proteins.",
+        wrongExplanations: [
+          "Cellulose forms plant cell walls, not plasma membranes.",
+          "Membranes contain lipid cholesterol, but not nucleic acid plates.",
+          "Proteins are dynamic and floating, not fixed rigid sheets."
+        ]
+      },
+      {
+        id: 17,
+        slo: "SLO 4.4.1: Structure, Chemical Composition, and Functions of Organelles",
+        question: "Which organelle contains inner membrane folds called cristae and functions as the primary site of ATP generation?",
+        options: ["Golgi body", "Peroxisome", "Mitochondrion", "Vacuole"],
+        correct: 2,
+        explanation: "Mitochondria possess folded inner membranes (cristae) housing the electron transport chain and ATP synthase for aerobic respiration.",
+        wrongExplanations: [
+          "Golgi bodies process, package, and route proteins.",
+          "Peroxisomes neutralize harmful peroxides and breakdown fatty acids.",
+          "Vacuoles store water, ions, and waste products."
+        ]
+      },
+      {
+        id: 18,
+        slo: "SLO 4.4.1: Structure, Chemical Composition, and Functions of Organelles",
+        question: "[Real-Life Scenario] Pancreatic beta cells continuously produce and secrete the protein hormone insulin. Which pathway correctly traces the organelles involved in synthesizing and packaging insulin?",
+        options: ["Smooth ER → Lysosome → Nucleus", "Ribosome → Mitochondria → Cell Wall", "Nucleus → Centriole → Cytoplasm", "Rough ER → Golgi apparatus → Secretory vesicle"],
+        correct: 3,
+        explanation: "Secretory proteins are translated on Rough ER ribosomes, transported to Golgi bodies for processing/glycosylation, and packed into vesicles for exocytosis.",
+        wrongExplanations: [
+          "Smooth ER synthesizes lipids; lysosomes digest waste.",
+          "Cell walls are absent in human pancreatic beta cells.",
+          "Centrioles organize spindle fibers during mitosis, not protein pathways."
+        ]
+      },
+      {
+        id: 19,
+        slo: "SLO 4.4.1: Structure, Chemical Composition, and Functions of Organelles",
+        question: "Which organelle contains acidic hydrolytic enzymes capable of digesting cellular waste and foreign pathogens?",
+        options: ["Chloroplast", "Lysosome", "Centrosome", "Glyoxysome"],
+        correct: 1,
+        explanation: "Lysosomes contain ~50 acid hydrolases (active at pH ~4.5–5.0) that digest macromolecules, senescent organelles, and engulfed microbes.",
+        wrongExplanations: [
+          "Chloroplasts execute photosynthesis.",
+          "Centrosomes organize microtubules during cell division.",
+          "Glyoxysomes convert fats to carbohydrates in germinating seeds."
+        ]
+      },
+      {
+        id: 20,
+        slo: "SLO 4.4.1: Structure, Chemical Composition, and Functions of Organelles",
+        question: "The network of microfilaments and microtubules that maintains cell shape and enables organelle movement is the:",
+        options: ["Cytoskeleton", "Cell wall", "Middle lamella", "Nucleolus"],
+        correct: 0,
+        explanation: "The cytoskeleton consists of actin microfilaments, intermediate filaments, and tubulin microtubules extending throughout the cytoplasm.",
+        wrongExplanations: [
+          "Cell wall is an extracellular rigid non-living layer.",
+          "Middle lamella is a pectin layer gluing adjacent plant cell walls.",
+          "Nucleolus is a nuclear sub-region synthesizing rRNA."
+        ]
+      },
+
+      // SLO 4.4.2: Storage Diseases Reference to Malfunctioning Lysosomes
+      {
+        id: 21,
+        slo: "SLO 4.4.2: Storage Diseases Reference to Malfunctioning Lysosomes",
+        question: "Lysosomal storage diseases are genetic disorders caused primarily by the:",
+        options: ["Absence of nuclear DNA", "Excess production of ATP", "Overgrowth of cell membrane proteins", "Deficiency of specific hydrolytic enzymes within lysosomes"],
+        correct: 3,
+        explanation: "Mutation in genes coding for specific lysosomal acid hydrolases prevents breakdown of specific substrates, leading to toxic intracellular accumulation.",
+        wrongExplanations: [
+          "Nuclear DNA is present, but carries a mutated gene.",
+          "ATP production is unimpaired initially.",
+          "Membrane proteins are unaffected directly."
+        ]
+      },
+      {
+        id: 22,
+        slo: "SLO 4.4.2: Storage Diseases Reference to Malfunctioning Lysosomes",
+        question: "[Real-Life Scenario] An infant presents with progressive neurological damage due to the accumulation of ganglioside lipids in brain cells caused by a missing lysosomal enzyme (Hexosaminidase A). What condition is this?",
+        options: ["Diabetes mellitus", "Tay-Sachs disease", "Scurvy", "Rickets"],
+        correct: 1,
+        explanation: "Tay-Sachs disease is a fatal autosomal recessive lysosomal storage disease caused by Hexosaminidase A deficiency, resulting in GM2 ganglioside toxicity in neurons.",
+        wrongExplanations: [
+          "Diabetes mellitus involves insulin deficiency/resistance.",
+          "Scurvy is caused by Vitamin C dietary deficiency.",
+          "Rickets is caused by Vitamin D / calcium deficiency."
+        ]
+      },
+      {
+        id: 23,
+        slo: "SLO 4.4.2: Storage Diseases Reference to Malfunctioning Lysosomes",
+        question: "[Real-Life Scenario] In Pompe's disease, an individual lacks a key lysosomal enzyme needed to break down complex carbohydrates. As a result, which substance dangerously accumulates in liver and muscle cells?",
+        options: ["Cholesterol", "Cellulose", "Glycogen", "Hemoglobin"],
+        correct: 2,
+        explanation: "Pompe's disease (Type II glycogen storage disease) is caused by acid alpha-glucosidase deficiency, leading to glycogen buildup in lysosomal vacuoles.",
+        wrongExplanations: [
+          "Cholesterol accumulates in atherosclerosis or Niemann-Pick disease.",
+          "Human cells do not store or synthesize indigestible plant cellulose.",
+          "Hemoglobin is an oxygen-transport protein inside erythrocytes."
+        ]
+      },
+      {
+        id: 24,
+        slo: "SLO 4.4.2: Storage Diseases Reference to Malfunctioning Lysosomes",
+        question: "What immediately happens inside a lysosome when its internal digestive enzymes fail to function properly?",
+        options: ["Undigested targeted molecules accumulate and swell the organelle", "The lysosome turns into a mitochondrion", "The cell divides at an abnormally high speed", "The lysosome releases oxygen gas"],
+        correct: 0,
+        explanation: "Failure of catalytic enzymes leaves targeted metabolic substrate undegraded, causing lysosomes to swell, crowd cytoplasm, and destroy cellular tissue.",
+        wrongExplanations: [
+          "Lysosomes cannot convert into mitochondria.",
+          "Enzyme deficiencies impair cellular metabolism rather than increasing mitosis.",
+          "Lysosomes do not generate oxygen gas."
+        ]
+      },
+      {
+        id: 25,
+        slo: "SLO 4.4.2: Storage Diseases Reference to Malfunctioning Lysosomes",
+        question: "Most lysosomal storage disorders are inherited as:",
+        options: ["Y-linked dominant traits", "Non-genetic infections", "Mitochondrial gene defects", "Autosomal recessive genetic conditions"],
+        correct: 3,
+        explanation: "Most lysosomal storage disorders (e.g., Tay-Sachs, Pompe's, Gaucher's) follow autosomal recessive inheritance, requiring two mutant alleles.",
+        wrongExplanations: [
+          "They are not Y-linked traits; both males and females inherit them equally.",
+          "They are genetic in origin, not infectious diseases.",
+          "The deficient enzymes are encoded by nuclear genes, not mitochondrial DNA."
+        ]
+      },
+
+      // SLO 4.4.3: Comparative Study of Cellular Components and Cell Types
+      {
+        id: 26,
+        slo: "SLO 4.4.3: Comparative Study of Cellular Components and Cell Types",
+        question: "[Real-Life Scenario] During the germination of oil-rich seeds like castor beans, stored fats are rapidly converted into carbohydrates. Which specialized microbody carries out this conversion via the glyoxylate cycle?",
+        options: ["Peroxisome", "Glyoxysome", "Ribosome", "Lysosome"],
+        correct: 1,
+        explanation: "Glyoxysomes are specialized plant peroxisomes containing enzymes for the glyoxylate cycle, converting stored seed fatty acids into gluconeogenic sugars.",
+        wrongExplanations: [
+          "Peroxisomes metabolize hydrogen peroxide and photorespiration intermediates.",
+          "Ribosomes translate mRNA into polypeptide chains.",
+          "Lysosomes execute cellular waste digestion."
+        ]
+      },
+      {
+        id: 27,
+        slo: "SLO 4.4.3: Comparative Study of Cellular Components and Cell Types",
+        question: "Unlike green chloroplasts that synthesize sugars, chromoplasts function mainly to:",
+        options: ["Produce ATP during aerobic respiration", "Store water and mineral ions", "Provide bright red, yellow, or orange colors to flowers and fruits", "Synthesize ribosomal RNA"],
+        correct: 2,
+        explanation: "Chromoplasts accumulate carotenoid pigments (carotenes, xanthophylls) to give bright coloration to petals and fruits to attract animal pollinators and seed dispersers.",
+        wrongExplanations: [
+          "ATP production in respiration occurs in mitochondria.",
+          "Water and mineral storage occurs in central vacuoles.",
+          "rRNA synthesis occurs inside the nucleolus."
+        ]
+      },
+      {
+        id: 28,
+        slo: "SLO 4.4.3: Comparative Study of Cellular Components and Cell Types",
+        question: "Which structural feature distinguishes a prokaryotic cell from a eukaryotic cell?",
+        options: ["Absence of a membrane-bound nucleus in prokaryotes", "Presence of 80S ribosomes in prokaryotes", "Absence of a cell wall in all prokaryotes", "Presence of linear chromosomes in prokaryotes"],
+        correct: 0,
+        explanation: "Prokaryotes lack a nuclear envelope around their genetic material (nucleoid region), whereas eukaryotes possess a true double-membrane nucleus.",
+        wrongExplanations: [
+          "Prokaryotes possess smaller 70S ribosomes (80S are eukaryotic).",
+          "Most prokaryotes have a cell wall made of peptidoglycan.",
+          "Prokaryotes possess circular DNA, whereas eukaryotes have linear chromosomes."
+        ]
+      },
+      {
+        id: 29,
+        slo: "SLO 4.4.3: Comparative Study of Cellular Components and Cell Types",
+        question: "[Real-Life Scenario] A biology student examines two unknown cell slides under a microscope. Slide X shows a large central vacuole, cell wall, and plastids. Slide Y shows centrioles and lacks a cell wall. What are slides X and Y?",
+        options: ["Slide X is a bacterium; Slide Y is a fungus", "Slide X is an animal cell; Slide Y is a plant cell", "Slide X is a protozoan; Slide Y is a virus", "Slide X is a plant cell; Slide Y is an animal cell"],
+        correct: 3,
+        explanation: "Slide X represents a classic plant cell (cellulose cell wall, plastids, central vacuole). Slide Y represents an animal cell (centrioles, no cell wall).",
+        wrongExplanations: [
+          "Bacteria lack large vacuoles and plastids.",
+          "Animal cells lack cell walls and large vacuoles.",
+          "Viruses are acellular and lack organelles."
+        ]
+      },
+      {
+        id: 30,
+        slo: "SLO 4.4.3: Comparative Study of Cellular Components and Cell Types",
+        question: "How does the cell wall differ structurally and functionally from the cell membrane?",
+        options: ["The cell wall is selectively permeable, while the cell membrane is fully permeable", "The cell wall is a rigid, non-living outer layer, while the cell membrane is a living, selectively permeable barrier", "The cell wall is composed of phospholipids, while the cell membrane is made of chitin", "The cell wall exists only in animal cells, while the cell membrane exists only in plant cells"],
+        correct: 1,
+        explanation: "The cell wall is a non-living, rigid, permeable protective matrix outside the plasma membrane, whereas the cell membrane is a living, flexible, selectively permeable phospholipid bilayer.",
+        wrongExplanations: [
+          "The cell wall is freely permeable to small molecules, while the plasma membrane is selectively permeable.",
+          "Cell walls consist of cellulose/peptidoglycan/chitin, while membranes consist of phospholipids.",
+          "Animal cells lack cell walls entirely."
+        ]
+      }
+    ];
+
+    function App() {
+      // Quiz State
+      const [quizStarted, setQuizStarted] = useState(false);
+      const [quizMode, setQuizMode] = useState('practice'); // 'practice' or 'blind'
+      const [currentIdx, setCurrentIdx] = useState(0);
+      const [userAnswers, setUserAnswers] = useState({}); // { [qIdx]: selectedOptionIdx }
+      const [flaggedQuestions, setFlaggedQuestions] = useState({}); // { [qIdx]: true/false }
+      const [timeLeft, setTimeLeft] = useState(30 * 60); // 30 minutes timer = 1800 seconds
+      const [isSubmitted, setIsSubmitted] = useState(false);
+      const [showNavGrid, setShowNavGrid] = useState(false);
+
+      // Review Filter and Search States
+      const [reviewFilter, setReviewFilter] = useState('all'); // 'all', 'correct', 'wrong', 'skipped', 'flagged'
+      const [reviewSearch, setReviewSearch] = useState('');
+
+      // 30 Minute Timer Effect
+      useEffect(() => {
+        let timer = null;
+        if (quizStarted && !isSubmitted && timeLeft > 0) {
+          timer = setInterval(() => {
+            setTimeLeft(prev => {
+              if (prev <= 1) {
+                clearInterval(timer);
+                setIsSubmitted(true);
+                return 0;
+              }
+              return prev - 1;
+            });
+          }, 1000);
+        }
+        return () => clearInterval(timer);
+      }, [quizStarted, isSubmitted, timeLeft]);
+
+      // Keyboard Shortcuts Listener
+      useEffect(() => {
+        const handleKeyDown = (e) => {
+          if (!quizStarted || isSubmitted) return;
+          if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+
+          const key = e.key.toUpperCase();
+          if (['1', '2', '3', '4'].includes(key)) {
+            handleSelectOption(parseInt(key, 10) - 1);
+          } else if (['A', 'B', 'C', 'D'].includes(key)) {
+            const charCode = key.charCodeAt(0) - 65;
+            handleSelectOption(charCode);
+          } else if (e.key === 'ArrowRight') {
+            if (currentIdx < QUESTIONS.length - 1) setCurrentIdx(prev => prev + 1);
+          } else if (e.key === 'ArrowLeft') {
+            if (currentIdx > 0) setCurrentIdx(prev => prev - 1);
+          } else if (key === 'F') {
+            toggleFlagQuestion(currentIdx);
+          }
+        };
+
+        window.addEventListener('keydown', handleKeyDown);
+        return () => window.removeEventListener('keydown', handleKeyDown);
+      }, [quizStarted, isSubmitted, currentIdx, userAnswers]);
+
+      // Time formatting helper
+      const formatTime = (secs) => {
+        const mins = Math.floor(secs / 60);
+        const s = secs % 60;
+        return `${mins.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+      };
+
+      // Handle locking of answer once selected
+      const handleSelectOption = (optionIdx) => {
+        if (userAnswers.hasOwnProperty(currentIdx) || isSubmitted) return;
+        setUserAnswers(prev => ({
+          ...prev,
+          [currentIdx]: optionIdx
+        }));
+      };
+
+      // Toggle Bookmark/Flag
+      const toggleFlagQuestion = (qIndex) => {
+        setFlaggedQuestions(prev => ({
+          ...prev,
+          [qIndex]: !prev[qIndex]
+        }));
+      };
+
+      // Scoring Calculations (+1.0 for correct, -0.25 for incorrect)
+      const scoreData = useMemo(() => {
+        let correctCount = 0;
+        let wrongCount = 0;
+        let unattemptedCount = 0;
+
+        QUESTIONS.forEach((q, idx) => {
+          if (!userAnswers.hasOwnProperty(idx)) {
+            unattemptedCount++;
+          } else if (userAnswers[idx] === q.correct) {
+            correctCount++;
+          } else {
+            wrongCount++;
+          }
+        });
+
+        const grossMarks = correctCount * 1.0;
+        const penalty = wrongCount * 0.25;
+        const netMarks = Math.max(0, grossMarks - penalty);
+        const maxMarks = QUESTIONS.length * 1.0;
+        const percentage = Number(((netMarks / maxMarks) * 100).toFixed(1));
+
+        return { correctCount, wrongCount, unattemptedCount, grossMarks, penalty, netMarks, maxMarks, percentage };
+      }, [userAnswers]);
+
+      // Weak Area Analysis per SLO
+      const sloAnalysis = useMemo(() => {
+        const stats = {};
+        QUESTIONS.forEach((q, idx) => {
+          const sloKey = q.slo;
+          if (!stats[sloKey]) {
+            stats[sloKey] = { total: 0, correct: 0, wrong: 0, unattempted: 0 };
+          }
+          stats[sloKey].total++;
+          if (!userAnswers.hasOwnProperty(idx)) {
+            stats[sloKey].unattempted++;
+          } else if (userAnswers[idx] === q.correct) {
+            stats[sloKey].correct++;
+          } else {
+            stats[sloKey].wrong++;
+          }
+        });
+        return stats;
+      }, [userAnswers]);
+
+      // Review questions filter logic
+      const filteredReviewQuestions = useMemo(() => {
+        return QUESTIONS.map((q, idx) => ({ ...q, qIdx: idx })).filter(q => {
+          const isUserAns = userAnswers.hasOwnProperty(q.qIdx);
+          const isCorrect = isUserAns && userAnswers[q.qIdx] === q.correct;
+          const isWrong = isUserAns && userAnswers[q.qIdx] !== q.correct;
+          const isSkipped = !isUserAns;
+          const isFlagged = !!flaggedQuestions[q.qIdx];
+
+          let matchesFilter = true;
+          if (reviewFilter === 'correct') matchesFilter = isCorrect;
+          if (reviewFilter === 'wrong') matchesFilter = isWrong;
+          if (reviewFilter === 'skipped') matchesFilter = isSkipped;
+          if (reviewFilter === 'flagged') matchesFilter = isFlagged;
+
+          let matchesSearch = true;
+          if (reviewSearch.trim() !== '') {
+            const term = reviewSearch.toLowerCase();
+            matchesSearch = q.question.toLowerCase().includes(term) ||
+                            q.slo.toLowerCase().includes(term) ||
+                            q.explanation.toLowerCase().includes(term);
+          }
+
+          return matchesFilter && matchesSearch;
+        });
+      }, [userAnswers, flaggedQuestions, reviewFilter, reviewSearch]);
+
+      const getMotivationalQuote = (pct) => {
+        if (pct >= 85) return { quote: "Exceptional Cytological Mastery! You possess a clear understanding of organelle structures, techniques, and cell theory.", author: "Qashqarian Academy Academic Board" };
+        if (pct >= 70) return { quote: "Great Job! You have a strong hold on Chapter 4. Review your specific weak SLOs to achieve 100% precision.", author: "Qashqarian Biology Faculty" };
+        if (pct >= 50) return { quote: "Good Effort! Go through the explanations for your incorrect answers carefully to master cellular biology.", author: "Department of Cell Biology" };
+        return { quote: "Failure is simply the opportunity to begin again more intelligently. Re-read Chapter 4 notes and retake the test!", author: "Qashqarian Mentorship Cell" };
+      };
+
+      const currentQ = QUESTIONS[currentIdx];
+      const isAnswered = userAnswers.hasOwnProperty(currentIdx);
+      const selectedOption = userAnswers[currentIdx];
+      const isCurrentFlagged = !!flaggedQuestions[currentIdx];
+
+      if (!quizStarted) {
+        return (
+          <div className="min-h-screen flex items-center justify-center p-4 sm:p-6">
+            <div className="max-w-2xl w-full bg-white rounded-2xl shadow-xl border border-sky-100 overflow-hidden animate-fadeIn">
+              
+              {/* Top Header Banner */}
+              <div className="bg-gradient-to-r from-sky-800 via-sky-700 to-science-900 p-6 sm:p-8 text-white relative">
+                <div className="flex justify-between items-center mb-3">
+                  <span className="bg-sky-500/30 text-sky-100 text-xs font-bold px-3 py-1 rounded-full backdrop-blur-sm border border-sky-300/20 flex items-center gap-1.5">
+                    🏔️ Qashqarian Academy
+                  </span>
+                  <span className="text-xs font-bold bg-white/10 px-3 py-1 rounded-md border border-white/20">
+                    Class: XI
+                  </span>
+                </div>
+                <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
+                  Chapter 4: The Cell (Test 1)
+                </h1>
+                <p className="text-sky-100 text-sm mt-1">
+                  SLO-Based Biology Mock Assessment (30 MCQs)
+                </p>
+              </div>
+
+              {/* Start Setup Content */}
+              <div className="p-6 sm:p-8 space-y-6">
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                  <div className="bg-sky-50 rounded-xl p-3.5 border border-sky-100 flex items-center gap-3">
+                    <div className="p-2 bg-sky-600 text-white rounded-lg shrink-0">
+                      <Icon name="clock" className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <p className="text-[11px] text-slate-500 font-medium">Timer</p>
+                      <p className="text-xs sm:text-sm font-bold text-slate-800">30 Minutes</p>
+                    </div>
+                  </div>
+                  <div className="bg-sky-50 rounded-xl p-3.5 border border-sky-100 flex items-center gap-3">
+                    <div className="p-2 bg-sky-600 text-white rounded-lg shrink-0">
+                      <Icon name="award" className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <p className="text-[11px] text-slate-500 font-medium">Marking Scheme</p>
+                      <p className="text-xs sm:text-sm font-bold text-slate-800">+1.0 / -0.25</p>
+                    </div>
+                  </div>
+                  <div className="col-span-2 sm:col-span-1 bg-sky-50 rounded-xl p-3.5 border border-sky-100 flex items-center gap-3">
+                    <div className="p-2 bg-sky-600 text-white rounded-lg shrink-0">
+                      <Icon name="key" className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <p className="text-[11px] text-slate-500 font-medium">Shortcuts</p>
+                      <p className="text-xs sm:text-sm font-bold text-slate-800">Keys A-D, ← →</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Select Assessment Mode */}
+                <div>
+                  <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2.5">
+                    Select Mode
+                  </label>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <button
+                      type="button"
+                      onClick={() => setQuizMode('practice')}
+                      className={`p-4 rounded-xl text-left border-2 transition-all flex flex-col gap-1.5 ${
+                        quizMode === 'practice'
+                          ? 'border-sky-600 bg-sky-50/80 ring-2 ring-sky-500/20'
+                          : 'border-slate-200 hover:border-sky-300 bg-white'
+                      }`}
+                    >
+                      <div className="flex items-center justify-between">
+                        <span className="font-bold text-sm text-sky-900 flex items-center gap-1.5">
+                          <Icon name="zap" className="w-4 h-4 text-sky-600" />
+                          Practice Mode
+                        </span>
+                        {quizMode === 'practice' && <Icon name="check" className="w-4 h-4 text-sky-600" />}
+                      </div>
+                      <p className="text-xs text-slate-500 leading-relaxed">
+                        Instant right/wrong answer verification with rationale provided immediately after answering each MCQ.
+                      </p>
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => setQuizMode('blind')}
+                      className={`p-4 rounded-xl text-left border-2 transition-all flex flex-col gap-1.5 ${
+                        quizMode === 'blind'
+                          ? 'border-sky-600 bg-sky-50/80 ring-2 ring-sky-500/20'
+                          : 'border-slate-200 hover:border-sky-300 bg-white'
+                      }`}
+                    >
+                      <div className="flex items-center justify-between">
+                        <span className="font-bold text-sm text-sky-900 flex items-center gap-1.5">
+                          <Icon name="shield" className="w-4 h-4 text-sky-600" />
+                          Blind / Exam Mode
+                        </span>
+                        {quizMode === 'blind' && <Icon name="check" className="w-4 h-4 text-sky-600" />}
+                      </div>
+                      <p className="text-xs text-slate-500 leading-relaxed">
+                        Simulate real exam conditions. Correct answers, rationales, and marks revealed only upon test submission.
+                      </p>
+                    </button>
+                  </div>
+                </div>
+
+                {/* Rules & Negative Marking Notice */}
+                <div className="bg-amber-50/80 border border-amber-200 rounded-xl p-4 text-xs text-amber-900 space-y-1.5">
+                  <p className="font-bold text-amber-950 flex items-center gap-1.5">
+                    <Icon name="alert-triangle" className="w-4 h-4 text-amber-600" />
+                    Assessment Rules & Negative Marking:
+                  </p>
+                  <ul className="list-disc list-inside space-y-1 pl-1 text-amber-800">
+                    <li>Once selected, an option is locked permanently for that question.</li>
+                    <li>Incorrect answers incur a <strong>-0.25 mark negative penalty</strong>.</li>
+                    <li>Unattempted questions carry zero penalty.</li>
+                    <li>Use the <strong>Flag (Key F)</strong> button to bookmark items to review later.</li>
+                  </ul>
+                </div>
+
+                <button
+                  onClick={() => setQuizStarted(true)}
+                  className="w-full bg-sky-600 hover:bg-sky-700 text-white font-bold py-3.5 px-6 rounded-xl shadow-lg shadow-sky-600/25 transition-all flex items-center justify-center gap-2 group text-sm"
+                >
+                  <span>Start Chapter 4 Assessment</span>
+                  <Icon name="arrow-right" className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                </button>
+              </div>
+            </div>
+          </div>
+        );
+      }
+
+      if (isSubmitted) {
+        const quoteObj = getMotivationalQuote(scoreData.percentage);
+
+        return (
+          <div className="min-h-screen py-8 px-4 sm:px-6 flex justify-center">
+            <div className="max-w-4xl w-full bg-white rounded-2xl shadow-xl border border-sky-100 overflow-hidden animate-fadeIn space-y-6 pb-8">
+              
+              {/* Header Banner */}
+              <div className="bg-gradient-to-r from-sky-800 via-sky-700 to-science-900 p-6 sm:p-8 text-white relative">
+                <div className="flex justify-between items-center mb-2 no-print">
+                  <span className="text-xs font-bold bg-white/20 px-3 py-1 rounded-full flex items-center gap-1.5">
+                    🏔️ Qashqarian Academy
+                  </span>
+                  <span className="text-xs font-bold bg-white/10 px-3 py-1 rounded-md border border-white/20">
+                    Class: XI
+                  </span>
+                  <button 
+                    onClick={() => window.print()} 
+                    className="bg-white/10 hover:bg-white/20 text-white text-xs font-semibold px-3 py-1.5 rounded-lg border border-white/20 transition-all flex items-center gap-1.5"
+                  >
+                    <Icon name="printer" className="w-4 h-4" />
+                    Print Results
+                  </button>
+                </div>
+                <h1 className="text-2xl sm:text-3xl font-extrabold">
+                  Performance Evaluation Summary
+                </h1>
+                <p className="text-sky-100 text-xs sm:text-sm mt-1">
+                  Chapter 4: The Cell (Test 1) Mock Assessment
+                </p>
+              </div>
+
+              <div className="p-6 sm:p-8 space-y-8">
+                
+                {/* Motivational Quote Banner */}
+                <div className="bg-sky-50/80 border-l-4 border-sky-600 p-4 rounded-r-xl space-y-1">
+                  <p className="text-sm font-semibold text-sky-950 italic">
+                    "{quoteObj.quote}"
+                  </p>
+                  <p className="text-xs text-sky-700 font-bold">— {quoteObj.author}</p>
+                </div>
+
+                {/* Performance Metrics */}
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                  <div className="bg-sky-50 border border-sky-100 rounded-xl p-4 text-center">
+                    <p className="text-xs text-slate-500 font-semibold mb-1">Net Percentage</p>
+                    <p className="text-3xl font-black text-sky-600">{scoreData.percentage}%</p>
+                  </div>
+                  <div className="bg-emerald-50 border border-emerald-100 rounded-xl p-4 text-center">
+                    <p className="text-xs text-emerald-700 font-semibold mb-1">Correct Answers</p>
+                    <p className="text-3xl font-black text-emerald-600">{scoreData.correctCount}</p>
+                    <p className="text-[10px] text-emerald-600 font-medium">+{scoreData.grossMarks} Marks</p>
+                  </div>
+                  <div className="bg-rose-50 border border-rose-100 rounded-xl p-4 text-center">
+                    <p className="text-xs text-rose-700 font-semibold mb-1">Wrong Answers</p>
+                    <p className="text-3xl font-black text-rose-600">{scoreData.wrongCount}</p>
+                    <p className="text-[10px] text-rose-600 font-medium">-{scoreData.penalty} Penalty</p>
+                  </div>
+                  <div className="bg-amber-50 border border-amber-100 rounded-xl p-4 text-center">
+                    <p className="text-xs text-amber-700 font-semibold mb-1">Unattempted</p>
+                    <p className="text-3xl font-black text-amber-600">{scoreData.unattemptedCount}</p>
+                    <p className="text-[10px] text-amber-600 font-medium">0 Penalty</p>
+                  </div>
+                </div>
+
+                {/* Net Score Bar */}
+                <div className="bg-slate-900 text-white rounded-xl p-4 flex justify-between items-center text-sm">
+                  <span>Final Score (after -0.25 negative marking):</span>
+                  <span className="font-extrabold text-sky-400 text-base">
+                    {scoreData.netMarks} / {scoreData.maxMarks} Marks
+                  </span>
+                </div>
+
+                {/* Weak Area SLO Breakdown */}
+                <div className="space-y-3">
+                  <h3 className="text-base font-bold text-slate-800 flex items-center gap-2">
+                    <Icon name="bar-chart" className="w-5 h-5 text-sky-600" />
+                    SLO Performance & Weak Area Analysis
+                  </h3>
+
+                  <div className="space-y-3 max-h-80 overflow-y-auto pr-2 custom-scrollbar">
+                    {Object.entries(sloAnalysis).map(([slo, stats], idx) => {
+                      const sloPct = stats.total > 0 ? Math.round((stats.correct / stats.total) * 100) : 0;
+                      return (
+                        <div key={idx} className="bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs space-y-2">
+                          <div className="flex justify-between items-start gap-2">
+                            <span className="font-semibold text-slate-800">{slo}</span>
+                            <span className={`font-bold px-2 py-0.5 rounded text-[11px] ${
+                              sloPct >= 80 ? 'bg-emerald-100 text-emerald-800' :
+                              sloPct >= 50 ? 'bg-amber-100 text-amber-800' : 'bg-rose-100 text-rose-800'
+                            }`}>
+                              {sloPct}% Mastery
+                            </span>
+                          </div>
+                          <div className="w-full bg-slate-200 h-2 rounded-full overflow-hidden">
+                            <div 
+                              className={`h-full transition-all duration-500 ${
+                                sloPct >= 80 ? 'bg-emerald-500' : sloPct >= 50 ? 'bg-amber-500' : 'bg-rose-500'
+                              }`}
+                              style={{ width: `${sloPct}%` }}
+                            />
+                          </div>
+                          <div className="flex gap-4 text-[11px] text-slate-500">
+                            <span>Correct: {stats.correct}</span>
+                            <span>Wrong: {stats.wrong}</span>
+                            <span>Skipped: {stats.unattempted}</span>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                {/* Question Review Section with Filter & Search */}
+                <div className="space-y-4 no-print">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-2">
+                    <h3 className="text-base font-bold text-slate-800 flex items-center gap-2">
+                      <Icon name="book-open" className="w-5 h-5 text-sky-600" />
+                      Detailed Explanations & Wrong Answer Analysis
+                    </h3>
+
+                    {/* Filter Pills */}
+                    <div className="flex flex-wrap gap-1.5 text-xs">
+                      {[
+                        { id: 'all', label: 'All' },
+                        { id: 'correct', label: 'Correct' },
+                        { id: 'wrong', label: 'Wrong' },
+                        { id: 'skipped', label: 'Skipped' },
+                        { id: 'flagged', label: 'Flagged' },
+                      ].map(tab => (
+                        <button
+                          key={tab.id}
+                          onClick={() => setReviewFilter(tab.id)}
+                          className={`px-3 py-1.5 rounded-lg font-semibold transition-all ${
+                            reviewFilter === tab.id
+                              ? 'bg-sky-600 text-white shadow-sm'
+                              : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                          }`}
+                        >
+                          {tab.label}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Search Bar */}
+                  <div className="relative">
+                    <input
+                      type="text"
+                      placeholder="Search question text, SLO, or explanation rationale..."
+                      value={reviewSearch}
+                      onChange={(e) => setReviewSearch(e.target.value)}
+                      className="w-full pl-9 pr-4 py-2.5 rounded-xl border border-slate-200 text-xs focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-transparent bg-slate-50/50"
+                    />
+                    <div className="absolute left-3 top-3 text-slate-400">
+                      <Icon name="search" className="w-4 h-4" />
+                    </div>
+                  </div>
+
+                  {/* Question Cards */}
+                  <div className="space-y-4 max-h-[500px] overflow-y-auto pr-2 custom-scrollbar">
+                    {filteredReviewQuestions.length === 0 ? (
+                      <div className="p-8 text-center text-xs text-slate-500 bg-slate-50 rounded-xl border border-dashed border-slate-200">
+                        No questions match the current search or filter.
+                      </div>
+                    ) : (
+                      filteredReviewQuestions.map((q) => {
+                        const qIdx = q.qIdx;
+                        const userSel = userAnswers[qIdx];
+                        const isCorrect = userSel === q.correct;
+                        const isUnattempted = !userAnswers.hasOwnProperty(qIdx);
+                        const isFlagged = flaggedQuestions[qIdx];
+
+                        return (
+                          <div 
+                            key={q.id}
+                            className={`p-4 rounded-xl border text-xs space-y-2.5 transition-all ${
+                              isCorrect ? 'bg-emerald-50/50 border-emerald-200' :
+                              isUnattempted ? 'bg-amber-50/50 border-amber-200' : 'bg-rose-50/50 border-rose-200'
+                            }`}
+                          >
+                            <div className="flex justify-between items-start gap-2">
+                              <span className="font-bold text-slate-900 flex items-center gap-2">
+                                <span>Q{qIdx + 1}. {q.question}</span>
+                                {isFlagged && (
+                                  <span className="bg-amber-100 text-amber-800 text-[10px] px-2 py-0.5 rounded font-bold flex items-center gap-1">
+                                    <Icon name="flag" className="w-3 h-3 text-amber-600" /> Flagged
+                                  </span>
+                                )}
+                              </span>
+                              <span className={`px-2 py-0.5 rounded font-bold text-[10px] whitespace-nowrap shrink-0 ${
+                                isCorrect ? 'bg-emerald-600 text-white' :
+                                isUnattempted ? 'bg-amber-500 text-white' : 'bg-rose-600 text-white'
+                              }`}>
+                                {isCorrect ? 'CORRECT (+1.0)' : isUnattempted ? 'SKIPPED (0.0)' : 'WRONG (-0.25)'}
+                              </span>
+                            </div>
+
+                            <p className="text-[11px] text-slate-500 font-medium">{q.slo}</p>
+
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                              {q.options.map((opt, oIdx) => {
+                                const isOptCorrect = oIdx === q.correct;
+                                const isOptUserChoice = oIdx === userSel;
+
+                                return (
+                                  <div 
+                                    key={oIdx}
+                                    className={`p-2 rounded-lg border font-medium flex items-center justify-between ${
+                                      isOptCorrect ? 'bg-emerald-100 border-emerald-300 text-emerald-900 font-bold' :
+                                      isOptUserChoice ? 'bg-rose-100 border-rose-300 text-rose-900' : 'bg-white border-slate-200 text-slate-600'
+                                    }`}
+                                  >
+                                    <span>{String.fromCharCode(65 + oIdx)}. {opt}</span>
+                                    {isOptCorrect && <Icon name="check" className="w-3.5 h-3.5 text-emerald-700" />}
+                                    {isOptUserChoice && !isOptCorrect && <Icon name="x" className="w-3.5 h-3.5 text-rose-700" />}
+                                  </div>
+                                );
+                              })}
+                            </div>
+
+                            {/* Detailed Explanation & Why Incorrect Options are Wrong */}
+                            <div className="bg-white/90 p-3 rounded-lg border border-slate-200 text-slate-700 leading-relaxed space-y-1.5">
+                              <p className="text-slate-800">
+                                <strong className="text-sky-900">Correct Answer Rationale: </strong> 
+                                {q.explanation}
+                              </p>
+
+                              {!isCorrect && !isUnattempted && q.wrongExplanations && (
+                                <div className="mt-2 pt-2 border-t border-slate-100 text-[11px] text-rose-900 bg-rose-50/60 p-2 rounded-md">
+                                  <strong>Why option {String.fromCharCode(65 + userSel)} is incorrect: </strong>
+                                  {q.wrongExplanations[userSel] || "This choice does not satisfy the scientific concept."}
+                                </div>
+                              )}
+                            </div>
+                          </div>
+                        );
+                      })
+                    )}
+                  </div>
+                </div>
+
+                {/* Restart Button */}
+                <button
+                  onClick={() => {
+                    setIsSubmitted(false);
+                    setQuizStarted(false);
+                    setCurrentIdx(0);
+                    setUserAnswers({});
+                    setFlaggedQuestions({});
+                    setTimeLeft(30 * 60);
+                  }}
+                  className="w-full bg-sky-600 hover:bg-sky-700 text-white font-bold py-3.5 px-6 rounded-xl shadow-lg shadow-sky-600/25 transition-all flex items-center justify-center gap-2 text-sm no-print"
+                >
+                  <Icon name="rotate-ccw" className="w-5 h-5" />
+                  <span>Restart Chapter 4 Assessment</span>
+                </button>
+
+              </div>
+            </div>
+          </div>
+        );
+      }
+
+      const flaggedCount = Object.values(flaggedQuestions).filter(Boolean).length;
+
+      return (
+        <div className="min-h-screen py-6 px-4 sm:px-6 flex flex-col items-center">
+          
+          {/* Top Header Navigation Card */}
+          <div className="max-w-3xl w-full bg-white rounded-2xl shadow-sm border border-sky-100 p-4 mb-4 space-y-3">
+            
+            {/* Academy Name & Class XI Badge */}
+            <div className="flex justify-between items-center text-xs sm:text-sm font-bold text-sky-900">
+              <span className="flex items-center gap-1.5 text-base sm:text-lg tracking-tight">
+                🏔️ Qashqarian Academy
+              </span>
+              
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={() => setShowNavGrid(!showNavGrid)}
+                  className="px-2.5 py-1 bg-sky-50 hover:bg-sky-100 text-sky-800 rounded-lg text-xs font-semibold flex items-center gap-1.5 border border-sky-200 transition-all"
+                >
+                  <Icon name="grid" className="w-3.5 h-3.5" />
+                  <span>Grid ({Object.keys(userAnswers).length}/{QUESTIONS.length})</span>
+                </button>
+
+                <span className="bg-sky-100 text-sky-800 px-2.5 py-1 rounded-lg font-bold text-xs">
+                  Class: XI
+                </span>
+              </div>
+            </div>
+
+            {/* Question Counter (Q 1 / 30) & 30 Min Timer */}
+            <div className="flex justify-between items-center text-xs font-semibold text-slate-600">
+              <div className="flex items-center gap-3">
+                <span className="text-sky-900 font-extrabold text-sm">Q {currentIdx + 1} / {QUESTIONS.length}</span>
+                {flaggedCount > 0 && (
+                  <span className="text-amber-700 bg-amber-50 border border-amber-200 px-2 py-0.5 rounded text-[11px] font-bold flex items-center gap-1">
+                    <Icon name="flag" className="w-3 h-3 text-amber-600" />
+                    {flaggedCount} Flagged
+                  </span>
+                )}
+              </div>
+
+              <div className={`flex items-center gap-1.5 px-2.5 py-1 rounded-lg font-mono font-bold ${
+                timeLeft < 300 ? 'bg-rose-100 text-rose-700 animate-pulse' : 'bg-sky-50 text-sky-800'
+              }`}>
+                <Icon name="clock" className="w-3.5 h-3.5" />
+                <span>{formatTime(timeLeft)}</span>
+              </div>
+            </div>
+
+            {/* Top Progress Bar */}
+            <div className="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+              <div 
+                className="bg-sky-600 h-full transition-all duration-300"
+                style={{ width: `${((currentIdx + 1) / QUESTIONS.length) * 100}%` }}
+              />
+            </div>
+          </div>
+
+          {/* Quick Navigator Grid Modal */}
+          {showNavGrid && (
+            <div className="max-w-3xl w-full bg-white rounded-2xl shadow-lg border border-sky-200 p-5 mb-4 animate-fadeIn space-y-3">
+              <div className="flex justify-between items-center text-xs font-bold text-slate-800 border-b pb-2">
+                <span>Question Quick Navigator Matrix</span>
+                <button 
+                  onClick={() => setShowNavGrid(false)}
+                  className="text-slate-400 hover:text-slate-600"
+                >
+                  <Icon name="x" className="w-4 h-4" />
+                </button>
+              </div>
+
+              <div className="grid grid-cols-5 sm:grid-cols-10 gap-2 max-h-52 overflow-y-auto p-1 custom-scrollbar">
+                {QUESTIONS.map((_, idx) => {
+                  const isAns = userAnswers.hasOwnProperty(idx);
+                  const isCur = currentIdx === idx;
+                  const isFlg = !!flaggedQuestions[idx];
+
+                  let boxStyle = "bg-slate-100 text-slate-700 hover:bg-slate-200";
+                  if (isCur) boxStyle = "bg-sky-600 text-white font-bold ring-2 ring-sky-500/50";
+                  else if (isAns) boxStyle = "bg-emerald-100 text-emerald-900 font-semibold border border-emerald-300";
+
+                  return (
+                    <button
+                      key={idx}
+                      onClick={() => {
+                        setCurrentIdx(idx);
+                        setShowNavGrid(false);
+                      }}
+                      className={`h-8 rounded-lg text-xs transition-all relative flex items-center justify-center ${boxStyle}`}
+                    >
+                      {idx + 1}
+                      {isFlg && (
+                        <span className="absolute -top-1 -right-1 bg-amber-500 w-2.5 h-2.5 rounded-full border border-white" />
+                      )}
+                    </button>
+                  );
+                })}
+              </div>
+
+              <div className="flex gap-4 text-[10px] text-slate-500 pt-2 border-t justify-center">
+                <span className="flex items-center gap-1"><span className="w-2.5 h-2.5 rounded bg-emerald-300" /> Answered</span>
+                <span className="flex items-center gap-1"><span className="w-2.5 h-2.5 rounded bg-slate-200" /> Unanswered</span>
+                <span className="flex items-center gap-1"><span className="w-2.5 h-2.5 rounded bg-sky-600" /> Current</span>
+                <span className="flex items-center gap-1"><span className="w-2.5 h-2.5 rounded-full bg-amber-500" /> Flagged</span>
+              </div>
+            </div>
+          )}
+
+          {/* Centered Main Question Card */}
+          <div className="max-w-3xl w-full bg-white rounded-2xl shadow-lg border border-sky-100 p-6 sm:p-8 relative overflow-hidden flex flex-col min-h-[460px] justify-between">
+            
+            {/* Watermark in Center Background */}
+            <div className="watermark-bg">
+              <p className="text-5xl sm:text-6xl font-black text-sky-900 tracking-widest">
+                🏔️ QASHQARIAN ACADEMY
+              </p>
+            </div>
+
+            {/* Question Header & Options */}
+            <div className="relative z-10 space-y-5">
+              
+              {/* SLO Tag above Question */}
+              <div className="flex justify-between items-center gap-2">
+                <div className="inline-block bg-sky-50 border border-sky-200 text-sky-900 text-xs font-bold px-3 py-1 rounded-full">
+                  {currentQ.slo}
+                </div>
+
+                <button
+                  onClick={() => toggleFlagQuestion(currentIdx)}
+                  className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 ${
+                    isCurrentFlagged 
+                      ? 'bg-amber-100 text-amber-800 border border-amber-300' 
+                      : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                  }`}
+                  title="Bookmark for review (Key: F)"
+                >
+                  <Icon name="flag" className={`w-3.5 h-3.5 ${isCurrentFlagged ? 'text-amber-600 fill-amber-500' : ''}`} />
+                  <span>{isCurrentFlagged ? 'Flagged' : 'Flag'}</span>
+                </button>
+              </div>
+
+              {/* Question Text */}
+              <h2 className="text-base sm:text-lg font-bold text-slate-900 leading-snug">
+                Q{currentIdx + 1}. {currentQ.question}
+              </h2>
+
+              {/* Multiple Choice Options (A, B, C, D) */}
+              <div className="space-y-3 pt-2">
+                {currentQ.options.map((optionText, optIdx) => {
+                  const isSelected = selectedOption === optIdx;
+                  const isCorrect = currentQ.correct === optIdx;
+
+                  let btnStyle = "border-slate-200 hover:border-sky-300 hover:bg-sky-50/50 text-slate-800 bg-white";
+
+                  if (isAnswered) {
+                    if (quizMode === 'practice') {
+                      if (isCorrect) {
+                        btnStyle = "border-emerald-500 bg-emerald-50 text-emerald-950 font-semibold ring-2 ring-emerald-500/20";
+                      } else if (isSelected) {
+                        btnStyle = "border-rose-500 bg-rose-50 text-rose-950 font-semibold ring-2 ring-rose-500/20";
+                      } else {
+                        btnStyle = "border-slate-200 opacity-60 bg-white text-slate-500";
+                      }
+                    } else {
+                      // Blind Mode
+                      if (isSelected) {
+                        btnStyle = "border-sky-600 bg-sky-50 text-sky-950 font-semibold ring-2 ring-sky-500/20";
+                      } else {
+                        btnStyle = "border-slate-200 opacity-60 bg-white text-slate-500";
+                      }
+                    }
+                  }
+
+                  return (
+                    <button
+                      key={optIdx}
+                      disabled={isAnswered}
+                      onClick={() => handleSelectOption(optIdx)}
+                      className={`w-full p-3.5 sm:p-4 rounded-xl border-2 text-left text-xs sm:text-sm transition-all flex items-center justify-between gap-3 ${btnStyle}`}
+                    >
+                      <div className="flex items-center gap-3">
+                        <span className={`w-7 h-7 rounded-lg flex items-center justify-center font-bold text-xs shrink-0 ${
+                          isSelected ? 'bg-sky-600 text-white' : 'bg-slate-100 text-slate-700'
+                        }`}>
+                          {String.fromCharCode(65 + optIdx)}
+                        </span>
+                        <span>{optionText}</span>
+                      </div>
+
+                      {isAnswered && quizMode === 'practice' && (
+                        <div>
+                          {isCorrect && <Icon name="check" className="w-5 h-5 text-emerald-600" />}
+                          {isSelected && !isCorrect && <Icon name="x" className="w-5 h-5 text-rose-600" />}
+                        </div>
+                      )}
+                    </button>
+                  );
+                })}
+              </div>
+
+              {/* Practice Mode Explanation Box */}
+              {isAnswered && quizMode === 'practice' && (
+                <div className={`mt-4 p-4 rounded-xl text-xs leading-relaxed space-y-1.5 animate-fadeIn border ${
+                  selectedOption === currentQ.correct 
+                    ? 'bg-emerald-50/90 border-emerald-200 text-emerald-950' 
+                    : 'bg-rose-50/90 border-rose-200 text-rose-950'
+                }`}>
+                  <p className="font-bold flex items-center gap-1.5">
+                    <Icon name="info" className="w-4 h-4" />
+                    {selectedOption === currentQ.correct ? 'Correct Answer Rationale:' : 'Incorrect Answer Explanation:'}
+                  </p>
+                  <p className="text-slate-800">{currentQ.explanation}</p>
+                  
+                  {selectedOption !== currentQ.correct && currentQ.wrongExplanations && (
+                    <p className="text-rose-900 font-medium pt-1 border-t border-rose-200/60">
+                      <strong>Why option {String.fromCharCode(65 + selectedOption)} is wrong: </strong>
+                      {currentQ.wrongExplanations[selectedOption]}
+                    </p>
+                  )}
+                </div>
+              )}
+            </div>
+
+            {/* Bottom Nav Controls (Previous / Next / Submit) */}
+            <div className="relative z-10 pt-6 mt-6 border-t border-slate-100 flex justify-between items-center gap-4">
+              <button
+                disabled={currentIdx === 0}
+                onClick={() => setCurrentIdx(prev => prev - 1)}
+                className="px-4 py-2.5 rounded-xl border border-slate-200 text-slate-700 text-xs font-bold hover:bg-slate-50 disabled:opacity-40 disabled:cursor-not-allowed flex items-center gap-1.5"
+              >
+                <Icon name="arrow-left" className="w-4 h-4" />
+                Previous
+              </button>
+
+              <div className="flex gap-2">
+                {currentIdx < QUESTIONS.length - 1 ? (
+                  <button
+                    onClick={() => setCurrentIdx(prev => prev + 1)}
+                    className="px-5 py-2.5 rounded-xl bg-sky-600 hover:bg-sky-700 text-white text-xs font-bold shadow-md shadow-sky-600/20 transition-all flex items-center gap-1.5"
+                  >
+                    Next
+                    <Icon name="arrow-right" className="w-4 h-4" />
+                  </button>
+                ) : (
+                  <button
+                    onClick={() => setIsSubmitted(true)}
+                    className="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold shadow-md shadow-emerald-600/20 transition-all flex items-center gap-1.5"
+                  >
+                    Submit Test
+                    <Icon name="check" className="w-4 h-4" />
+                  </button>
+                )}
+              </div>
+            </div>
+
+          </div>
+        </div>
+      );
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<App />);
+  </script>
+</body>
+</html>

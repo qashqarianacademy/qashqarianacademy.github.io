@@ -1,0 +1,1445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Class XI Biology - Kingdom Animalia (Part-1) Mock Test | Qashqarian Academy</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+          },
+          colors: {
+            sky: {
+              50:'#F0F8F8', 100:'#DFF3F2', 200:'#BFE4E7', 300:'#8FCDD5',
+              400:'#4FA9B9', 500:'#1F869B', 600:'#056C82', 700:'#0A5263',
+              800:'#0B4352', 900:'#0B3340'
+            },
+            science: {
+              50:'#F0F8F8', 100:'#DFF3F2', 200:'#BFE4E7', 300:'#8FCDD5',
+              400:'#4FA9B9', 500:'#1F869B', 600:'#056C82', 700:'#0A5263',
+              800:'#0B4352', 900:'#0B3340'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- React 18 & ReactDOM -->
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+  <!-- Babel for JSX -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #f0f7ff;
+    }
+    .watermark-bg {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(-12deg);
+      pointer-events: none;
+      user-select: none;
+      z-index: 0;
+      opacity: 0.04;
+      text-align: center;
+      white-space: nowrap;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: #f1f5f9;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body class="text-slate-800 antialiased selection:bg-sky-200 selection:text-sky-900 min-h-screen">
+  <header class="sticky top-0 z-50 bg-[#0B132B] border-b border-cyan-900/40 shadow-md">
+    <div class="max-w-5xl mx-auto px-4 py-2.5 flex items-center justify-between">
+      <a href="../../../../index.html" class="flex items-center gap-2">
+        <img src="../../../../images/brand/logo.png" alt="Qashqarian Academy" class="w-10 h-10 object-contain">
+        <div>
+          <div class="text-base md:text-lg font-extrabold text-white tracking-tight leading-none">Qashqarian</div>
+          <div class="text-[10px] md:text-xs text-[#FF9F1C] font-extrabold tracking-[0.2em] mt-1 leading-none">ACADEMY</div>
+        </div>
+      </a>
+      <a href="../../index.html" class="text-[11px] font-semibold text-slate-300 hover:text-white border border-white/20 rounded-lg px-2.5 py-1">
+        ← Biology Quizzes
+      </a>
+    </div>
+  </header>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    const { useState, useEffect, useMemo } = React;
+
+    // Pure React SVG Icon Component
+    const Icon = ({ name, className = "w-5 h-5" }) => {
+      const props = {
+        className,
+        xmlns: "http://www.w3.org/2000/svg",
+        viewBox: "0 0 24 24",
+        fill: "none",
+        stroke: "currentColor",
+        strokeWidth: "2",
+        strokeLinecap: "round",
+        strokeLinejoin: "round"
+      };
+
+      switch (name) {
+        case "clock":
+          return <svg {...props}><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>;
+        case "award":
+          return <svg {...props}><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 22 12 17 17 22 15.79 13.88"/></svg>;
+        case "check":
+          return <svg {...props}><polyline points="20 6 9 17 4 12"/></svg>;
+        case "x":
+          return <svg {...props}><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>;
+        case "arrow-left":
+          return <svg {...props}><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>;
+        case "arrow-right":
+          return <svg {...props}><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>;
+        case "rotate-ccw":
+          return <svg {...props}><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>;
+        case "book-open":
+          return <svg {...props}><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>;
+        case "shield":
+          return <svg {...props}><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>;
+        case "zap":
+          return <svg {...props}><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>;
+        case "bar-chart":
+          return <svg {...props}><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg>;
+        case "info":
+          return <svg {...props}><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>;
+        case "alert-triangle":
+          return <svg {...props}><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>;
+        default:
+          return <svg {...props}><circle cx="12" cy="12" r="10"/></svg>;
+      }
+    };
+
+    // Full Question Bank for Kingdom Animalia (Part-1) - 85 MCQs across 17 SLOs
+    const QUESTIONS = [
+      // SLO 10.1.1
+      {
+        id: 1,
+        slo: "SLO 10.1.1: General Characteristics & Body Plans",
+        question: "Which type of body symmetry allows an organism to be divided into equal halves along any vertical plane passing through the central axis?",
+        options: ["Bilateral symmetry", "Radial symmetry", "Asymmetry", "Biradial symmetry"],
+        correct: 1,
+        explanation: "Radial symmetry enables an organism to be divided into equal halves along any vertical plane passing through its central axis, typical of sessile or free-floating animals like sea anemones and jellyfish."
+      },
+      {
+        id: 2,
+        slo: "SLO 10.1.1: General Characteristics & Body Plans",
+        question: "Triploblastic animals develop from three primary germ layers. Which layer gives rise to the inner epithelial lining of the digestive tract?",
+        options: ["Ectoderm", "Mesoderm", "Endoderm", "Mesoglea"],
+        correct: 2,
+        explanation: "The endoderm is the innermost germ layer that gives rise to the epithelial lining of the digestive canal, respiratory tract, and associated digestive glands."
+      },
+      {
+        id: 3,
+        slo: "SLO 10.1.1: General Characteristics & Body Plans",
+        question: "An animal whose body cavity is fluid-filled and only partially lined by mesoderm is classified as a:",
+        options: ["Acoelomate", "Coelomate", "Pseudocoelomate", "Hemicoelomate"],
+        correct: 2,
+        explanation: "Pseudocoelomates possess a body cavity derived from the embryonic blastocoel that is lined by mesoderm on the outer wall and endoderm on the inner wall."
+      },
+      {
+        id: 4,
+        slo: "SLO 10.1.1: General Characteristics & Body Plans",
+        question: "(Scenario 1) While examining an unknown invertebrate embryo under a microscope, a biology student observes spiral cleavage where the blastopore develops into the mouth first. How should this organism be classified?",
+        options: ["Protostome", "Deuterostome", "Echinoderm", "Chordate"],
+        correct: 0,
+        explanation: "In protostomes, embryonic cleavage is spiral and determinate, and the blastopore develops directly into the mouth before the anus forms."
+      },
+      {
+        id: 5,
+        slo: "SLO 10.1.1: General Characteristics & Body Plans",
+        question: "Which phylum contains triploblastic organisms that completely lack a body cavity (acoelomates)?",
+        options: ["Porifera", "Platyhelminthes", "Nematoda", "Annelida"],
+        correct: 1,
+        explanation: "Platyhelminthes (flatworms) are triploblastic acoelomates; the space between the body wall and gut is filled with solid mesodermal parenchyma tissue."
+      },
+
+      // SLO 10.3.1
+      {
+        id: 6,
+        slo: "SLO 10.3.1: Poriferans (Characteristics & Economic Importance)",
+        question: "Sponges filter food particles from water passing through their inner body cavity using specialized collared flagellated cells called:",
+        options: ["Pinacocytes", "Choanocytes", "Amoebocytes", "Cnidocytes"],
+        correct: 1,
+        explanation: "Choanocytes (collar cells) have flagella surrounded by a collar of microvilli that beat continuously to drive water currents and capture microscopic food particles."
+      },
+      {
+        id: 7,
+        slo: "SLO 10.3.1: Poriferans (Characteristics & Economic Importance)",
+        question: "Water enters a sponge's central body through microscopic inlet pores called ______ and exits through a large main opening called the ______.",
+        options: ["Osculum; Ostia", "Ostia; Osculum", "Tentacles; Mouth", "Spiracles; Stoma"],
+        correct: 1,
+        explanation: "Water flows into the central body (spongocoel) through tiny incurrent pores called ostia and leaves through a large main excurrent opening called the osculum."
+      },
+      {
+        id: 8,
+        slo: "SLO 10.3.1: Poriferans (Characteristics & Economic Importance)",
+        question: "(Scenario 2) A commercial cosmetic company harvests natural bath sponges for skin exfoliation. Which structural protein matrix gives these dried sponges their soft, flexible texture?",
+        options: ["Calcium carbonate", "Silica spicules", "Spongin fibers", "Chitinous plates"],
+        correct: 2,
+        explanation: "Commercial bath sponges (e.g., Spongia) possess a fibrous endoskeleton composed of spongin, a flexible structural collagenous protein matrix."
+      },
+      {
+        id: 9,
+        slo: "SLO 10.3.1: Poriferans (Characteristics & Economic Importance)",
+        question: "Which phylum exhibits a cellular level of body organization without true tissues or organs?",
+        options: ["Porifera", "Coelenterata", "Platyhelminthes", "Nematoda"],
+        correct: 0,
+        explanation: "Porifera (sponges) are primitive multicellular animals characterized by a cellular level of organization lacking true tissue layers, nerves, or organs."
+      },
+      {
+        id: 10,
+        slo: "SLO 10.3.1: Poriferans (Characteristics & Economic Importance)",
+        question: "(Scenario 3) Biomedical researchers study deep-sea glass sponges (Euplectella) because their skeletal spicules consist of pure silica. Which human industry draws technological inspiration from this structure?",
+        options: ["Synthetic bone replacement", "Natural fiber-optic cable design", "Organic nitrogen fertilizer", "Commercial cement production"],
+        correct: 1,
+        explanation: "Glass sponges produce bio-silica spicules with superior light-conducting and structural properties, inspiring advance biomimetic fiber-optic cable design."
+      },
+
+      // SLO 10.4.1
+      {
+        id: 11,
+        slo: "SLO 10.4.1: Coelenterates (General Characteristics & Body Features)",
+        question: "Coelenterates are diploblastic organisms consisting of an outer ectoderm and inner endoderm separated by a non-cellular layer called:",
+        options: ["Mesoderm", "Endoderm", "Mesoglea", "Parenchyma"],
+        correct: 2,
+        explanation: "Cnidarians are diploblastic, featuring an outer ectoderm and inner endoderm separated by a gelatinous, non-cellular matrix called mesoglea."
+      },
+      {
+        id: 12,
+        slo: "SLO 10.4.1: Coelenterates (General Characteristics & Body Features)",
+        question: "Polymorphism in hydrozoans like Obelia refers to the presence of two structurally distinct body forms:",
+        options: ["Polyp and Medusa", "Larva and Pupa", "Male and Female", "Cilia and Flagella"],
+        correct: 0,
+        explanation: "Polymorphism in cnidarians is the presence of two structural body forms: a sessile cylindrical polyp and a free-swimming umbrella-shaped medusa."
+      },
+      {
+        id: 13,
+        slo: "SLO 10.4.1: Coelenterates (General Characteristics & Body Features)",
+        question: "What type of body symmetry is characteristic of adult coelenterates (cnidarians)?",
+        options: ["Bilateral symmetry", "Asymmetry", "Spherical symmetry", "Radial symmetry"],
+        correct: 3,
+        explanation: "Adult cnidarians exhibit radial symmetry around a central mouth-anus axis, permitting food capture and environmental sensing from all directions."
+      },
+      {
+        id: 14,
+        slo: "SLO 10.4.1: Coelenterates (General Characteristics & Body Features)",
+        question: "(Scenario 4) Environmental conservationists build artificial barriers near tropical islands to protect shorelines from heavy waves, mimicking natural coral reefs. What substance do living corals deposit to construct these reefs?",
+        options: ["Silica dioxide", "Calcium carbonate", "Chitin", "Sodium chloride"],
+        correct: 1,
+        explanation: "Scleractinian coral polyps absorb calcium and bicarbonate ions from seawater to secrete hard skeletons of calcium carbonate (CaCO3)."
+      },
+      {
+        id: 15,
+        slo: "SLO 10.4.1: Coelenterates (General Characteristics & Body Features)",
+        question: "Specialized stinging cells containing capsule-like organelles (nematocysts) used by cnidarians for defense and prey capture are known as:",
+        options: ["Choanocytes", "Flame cells", "Cnidocytes", "Amoebocytes"],
+        correct: 2,
+        explanation: "Cnidocytes are specialized explosive cells containing stinging nematocysts filled with toxins used for capturing prey and repelling predators."
+      },
+
+      // SLO 10.4.2
+      {
+        id: 16,
+        slo: "SLO 10.4.2: Economic Importance of Coelenterates",
+        question: "Marine coral reefs are ecologically and economically important primarily because they:",
+        options: ["Purify industrial wastewater in ocean estuaries", "Provide habitats and breeding grounds for diverse marine life", "Supply fresh drinking water to coastal towns", "Serve as primary sources for forest timber"],
+        correct: 1,
+        explanation: "Coral reefs support over 25% of all marine species, acting as vital nurseries, feeding grounds, and biodiversity hotspots in ocean ecosystems."
+      },
+      {
+        id: 17,
+        slo: "SLO 10.4.2: Economic Importance of Coelenterates",
+        question: "(Scenario 5) A tropical island relies heavily on eco-tourism for scuba diving around coral reefs. If ocean warming causes severe coral bleaching and reef death, what will be the immediate economic impact on the island?",
+        options: ["Loss of tourism revenue and increased coastal storm erosion", "Increased agricultural crop yields along the shore", "Reduction in local atmospheric nitrogen levels", "Expansion of commercial freshwater fish farming"],
+        correct: 0,
+        explanation: "Reef death severely harms scuba eco-tourism and destroys natural wave-breaking barriers, exposing island shorelines to storm erosion."
+      },
+      {
+        id: 18,
+        slo: "SLO 10.4.2: Economic Importance of Coelenterates",
+        question: "Certain non-venomous jellyfish species are harvested in East Asian countries for use as:",
+        options: ["Textile dyes", "Synthetic rubber substitutes", "Edible food delicacies", "Bio-fuel sources"],
+        correct: 2,
+        explanation: "Edible jellyfish (e.g., Stomolophus species) are processed, salted, and consumed as high-protein, low-calorie culinary delicacies."
+      },
+      {
+        id: 19,
+        slo: "SLO 10.4.2: Economic Importance of Coelenterates",
+        question: "Precious red coral (Corallium rubrum) is harvested commercially mainly for manufacturing:",
+        options: ["High-value jewelry and decorative ornaments", "Surgical bone implants", "Architectural construction bricks", "Agricultural chemical fertilizers"],
+        correct: 0,
+        explanation: "Red coral (Corallium rubrum) produces a dense, durable, intensely pigmented skeleton used in high-value jewelry and ornamental art."
+      },
+      {
+        id: 20,
+        slo: "SLO 10.4.2: Economic Importance of Coelenterates",
+        question: "Bioactive compounds isolated from sea anemones and soft corals are studied in pharmaceutical laboratories for their potential as:",
+        options: ["Fuel additives", "Anti-inflammatory and pain-relieving medicines", "Plant growth regulators", "Biodegradable plastics"],
+        correct: 1,
+        explanation: "Cnidarian toxins and secondary metabolites contain novel peptide channels used in pharmacology to design potent analgesics and anti-inflammatory drugs."
+      },
+
+      // SLO 10.5.1
+      {
+        id: 21,
+        slo: "SLO 10.5.1: Platyhelminthes (General Characteristics)",
+        question: "Flatworms belong to Phylum Platyhelminthes and exhibit which body cavity condition?",
+        options: ["Pseudocoelomate", "Coelomate", "Acoelomate", "Hemicoelomate"],
+        correct: 2,
+        explanation: "Platyhelminthes are acoelomate animals; their embryonic blastocoel is completely filled with mesodermal parenchyma tissue."
+      },
+      {
+        id: 22,
+        slo: "SLO 10.5.1: Platyhelminthes (General Characteristics)",
+        question: "Excretion and osmoregulation in free-living flatworms like Planaria are performed by specialized excretory units known as:",
+        options: ["Flame cells (protonephridia)", "Choanocytes", "Nephridia", "Malpighian tubules"],
+        correct: 0,
+        explanation: "Flame cells (protonephridia) contain beating cilia that propel liquid waste and maintain osmoregulatory balance in flatworms."
+      },
+      {
+        id: 23,
+        slo: "SLO 10.5.1: Platyhelminthes (General Characteristics)",
+        question: "What type of body symmetry is present in flatworms?",
+        options: ["Radial symmetry", "Bilateral symmetry", "Asymmetry", "Biradial symmetry"],
+        correct: 1,
+        explanation: "Flatworms display bilateral symmetry with distinct dorsal-ventral orientation and cephalization at the anterior end."
+      },
+      {
+        id: 24,
+        slo: "SLO 10.5.1: Platyhelminthes (General Characteristics)",
+        question: "Triploblastic tissue organization first appeared in which animal phylum?",
+        options: ["Porifera", "Coelenterata", "Platyhelminthes", "Nematoda"],
+        correct: 2,
+        explanation: "Platyhelminthes is the simplest animal phylum to evolve three true embryonic germ layers (ectoderm, mesoderm, endoderm)."
+      },
+      {
+        id: 25,
+        slo: "SLO 10.5.1: Platyhelminthes (General Characteristics)",
+        question: "Flatworms lack a specialized respiratory system because:",
+        options: ["They live exclusively in deep oxygen-deprived soil", "Their flattened body shape enables direct gas exchange by diffusion", "They absorb oxygen through external gills", "Their outer skeleton traps atmospheric air"],
+        correct: 1,
+        explanation: "Dorsoventrally flattened body plans maximize surface area to volume ratio, allowing oxygen and carbon dioxide to diffuse directly across external cells."
+      },
+
+      // SLO 10.5.2
+      {
+        id: 26,
+        slo: "SLO 10.5.2: Parasitic Adaptations in Platyhelminthes",
+        question: "Adult parasitic tapeworms lack a digestive system primarily because:",
+        options: ["Food is stored inside specialized internal bladders", "Pre-digested food is absorbed directly through their outer body wall (tegument)", "They carry out internal chemical synthesis", "They feed exclusively on air inside the intestine"],
+        correct: 1,
+        explanation: "Endoparasitic tapeworms live immersed in host digestive fluid and absorb simple, pre-digested nutrients directly through their highly absorptive tegument."
+      },
+      {
+        id: 27,
+        slo: "SLO 10.5.2: Parasitic Adaptations in Platyhelminthes",
+        question: "What specialized organs assist parasitic flatworms in remaining firmly attached to host internal tissue?",
+        options: ["Suckers and hooks", "Cilia and flagella", "Tentacles and cnidocytes", "Parapodia and setae"],
+        correct: 0,
+        explanation: "Parasitic flatworms possess specialized anterior attachment mechanisms, including muscular suckers, acetabula, and chitinous hooks on the scolex."
+      },
+      {
+        id: 28,
+        slo: "SLO 10.5.2: Parasitic Adaptations in Platyhelminthes",
+        question: "(Scenario 6) A veterinary pathologist finds that a liver fluke (Fasciola) devotes over 80% of its body space to reproductive organs. What evolutionary advantage does this adaptation offer?",
+        options: ["Enables rapid swimming through host bile ducts", "Produces massive egg quantities to counter high mortality rates during host transmission", "Secretes digestive enzymes to break down host blood", "Neutralizes host antibodies on contact"],
+        correct: 1,
+        explanation: "Massive egg production ensures that at least a few offspring survive the hazards of complex multi-host lifecycles and environmental transmission."
+      },
+      {
+        id: 29,
+        slo: "SLO 10.5.2: Parasitic Adaptations in Platyhelminthes",
+        question: "Parasitic flatworms protect themselves against host digestive enzymes inside the intestine by developing a tough outer covering called a:",
+        options: ["Chitin shell", "Mesogleic layer", "Cuticle or tegument", "Calcareous test"],
+        correct: 2,
+        explanation: "The syncytial tegument produces protective mucus and anti-enzymes that neutralize host digestive juices and immune host responses."
+      },
+      {
+        id: 30,
+        slo: "SLO 10.5.2: Parasitic Adaptations in Platyhelminthes",
+        question: "Compared to free-living flatworms like Planaria, adult endoparasitic flatworms typically show extreme reduction in their:",
+        options: ["Reproductive organ capacity", "Attachment suckers", "Sensory organs and locomotion structures", "Outer protective tegument"],
+        correct: 2,
+        explanation: "Living inside host tissues eliminates the need for active swimming or complex sensing, leading to secondary reduction/loss of eyespots, cilia, and brain organs."
+      },
+
+      // SLO 10.5.3
+      {
+        id: 31,
+        slo: "SLO 10.5.3: Infestation & Disinfestation of Tapeworms",
+        question: "Humans contract pork tapeworm (Taenia solium) infestation primarily by eating:",
+        options: ["Contaminated raw vegetables", "Under-cooked pork containing encysted bladder worms (cysticerci)", "Unboiled canal water", "Food exposed to houseflies"],
+        correct: 1,
+        explanation: "Taenia solium infection occurs when humans consume undercooked or raw pork infested with encysted larval bladder worms (cysticerci)."
+      },
+      {
+        id: 32,
+        slo: "SLO 10.5.3: Infestation & Disinfestation of Tapeworms",
+        question: "(Scenario 7) A patient visits a clinic reporting abdominal discomfort. Stool analysis reveals egg-containing segments called proglottids. Which preventative measure protects farm communities from this cycle?",
+        options: ["Thorough meat cooking and proper sanitary sewage disposal", "Spraying chemical pesticides on cattle pastures", "Boiling drinking water for farm livestock", "Vaccinating farm animals against soil bacteria"],
+        correct: 0,
+        explanation: "Thoroughly cooking meat destroys cysticerci, while sanitary human sewage management prevents swine from ingesting egg-laden proglottids."
+      },
+      {
+        id: 33,
+        slo: "SLO 10.5.3: Infestation & Disinfestation of Tapeworms",
+        question: "The larval form of a tapeworm encysted within the muscular tissue of an intermediate host is known as a:",
+        options: ["Trochophore", "Planula", "Cysticercus (bladder worm)", "Miracidium"],
+        correct: 2,
+        explanation: "A cysticercus (bladder worm) is the encysted larval stage of Taenia consisting of an invaginated scolex contained in a fluid-filled sac."
+      },
+      {
+        id: 34,
+        slo: "SLO 10.5.3: Infestation & Disinfestation of Tapeworms",
+        question: "Disinfestation or medical elimination of tapeworm infections in humans involves administering:",
+        options: ["Penicillin antibiotics", "Anthelmintic drugs like praziquantel", "Antiviral medications", "Antifungal ointments"],
+        correct: 1,
+        explanation: "Anthelmintic medications such as praziquantel or niclosamide paralyze tapeworm musculature and disintegrate their protective tegument."
+      },
+      {
+        id: 35,
+        slo: "SLO 10.5.3: Infestation & Disinfestation of Tapeworms",
+        question: "To successfully disinfest a patient and prevent tapeworm regrowing in the gut, treatment must remove the parasite's:",
+        options: ["Terminal proglottids", "Scolex (head) attached to the intestinal wall", "Outer tegument layer", "Flame cells"],
+        correct: 1,
+        explanation: "The scolex anchors the tapeworm to the gut lining and contains germinal neck tissue; if it remains intact, it will continually regenerate new proglottids."
+      },
+
+      // SLO 10.6.1
+      {
+        id: 36,
+        slo: "SLO 10.6.1: Nematodes (Characteristics & Parasitic Adaptations)",
+        question: "Roundworms (Phylum Nematoda) possess a fluid-filled body cavity between mesoderm and endoderm classified as a:",
+        options: ["True coelom", "Acoelom", "Pseudocoelom", "Hemocoel"],
+        correct: 2,
+        explanation: "Nematodes are pseudocoelomates; their fluid-filled cavity is bounded externally by mesodermal body wall muscles and internally by endodermal intestine."
+      },
+      {
+        id: 37,
+        slo: "SLO 10.6.1: Nematodes (Characteristics & Parasitic Adaptations)",
+        question: "Nematodes possess a complete digestive tract, meaning it features:",
+        options: ["A single opening functioning as both mouth and anus", "Two distinct openings (a mouth at the front and an anus at the rear)", "No mouth or intestine", "A branched gastrovascular sac"],
+        correct: 1,
+        explanation: "A complete digestive tract is a tube-within-a-tube arrangement featuring two separate openings: an anterior mouth for ingestion and a posterior anus for egestion."
+      },
+      {
+        id: 38,
+        slo: "SLO 10.6.1: Nematodes (Characteristics & Parasitic Adaptations)",
+        question: "The body of a parasitic nematode like Ascaris is covered by a non-living, tough outer layer that resists host digestive juices, termed the:",
+        options: ["Calcareous shell", "Thick cuticle", "Chitinous exoskeleton", "Mucilaginous capsule"],
+        correct: 1,
+        explanation: "A non-cellular, collagenous cuticle covers the outer surface of roundworms, offering chemical protection against host digestive enzymes and acidic juices."
+      },
+      {
+        id: 39,
+        slo: "SLO 10.6.1: Nematodes (Characteristics & Parasitic Adaptations)",
+        question: "(Scenario 8) A child in a rural village presents with malnutrition and stomach pain. Diagnostic tests reveal unsegmented, cylindrical worms with pointed ends living in the small intestine. Which worm is present?",
+        options: ["Earthworm", "Tapeworm", "Ascaris lumbricoides", "Planaria"],
+        correct: 2,
+        explanation: "Ascaris lumbricoides is a human intestinal roundworm characterized by cylindrical, unsegmented bodies tapered at both anterior and posterior ends."
+      },
+      {
+        id: 40,
+        slo: "SLO 10.6.1: Nematodes (Characteristics & Parasitic Adaptations)",
+        question: "Sexual dimorphism in nematodes commonly means that:",
+        options: ["Male and female organs exist in the same worm", "Male and female individuals are distinct, with females usually being larger", "Worms reproduce only by asexual fission", "Gender changes with environmental temperature"],
+        correct: 1,
+        explanation: "Nematodes display distinct sexual dimorphism: males and females are separate, with females being visibly longer and thicker than males, which have curved posterior ends."
+      },
+
+      // SLO 10.6.2
+      {
+        id: 41,
+        slo: "SLO 10.6.2: Importance of Nematodes",
+        question: "(Scenario 9) An agricultural inspector finds root-knot nematodes attacking tomato crops, resulting in stunted growth and root galls. In this context, how do these nematodes affect agriculture?",
+        options: ["Beneficial decomposers", "Destructive agricultural pests", "Plant pollinators", "Soil nitrogen fixers"],
+        correct: 1,
+        explanation: "Root-knot nematodes (Meloidogyne species) are destructive agricultural pests that infect crop roots, causing galls, wilting, and heavy economic loss."
+      },
+      {
+        id: 42,
+        slo: "SLO 10.6.2: Importance of Nematodes",
+        question: "Beneficial free-living soil nematodes contribute positively to natural agricultural ecosystems by:",
+        options: ["Decomposing organic matter and recycling nutrients", "Digging large burrows for plant root expansion", "Neutralizing soil acidity with lime", "Photosynthesizing organic food in topsoil"],
+        correct: 0,
+        explanation: "Free-living soil roundworms consume bacteria, fungi, and decaying matter, accelerating organic decomposition and recycling essential plant nutrients."
+      },
+      {
+        id: 43,
+        slo: "SLO 10.6.2: Importance of Nematodes",
+        question: "Caenorhabditis elegans is a microscopic nematode widely used in research laboratories as a model organism for:",
+        options: ["Silk production", "Genetics and developmental biology research", "Dairy fermentation", "Water purification"],
+        correct: 1,
+        explanation: "Caenorhabditis elegans is an essential genetic model organism because of its rapid lifecycle, simple transparent cell lineage, and fully mapped neural wiring."
+      },
+      {
+        id: 44,
+        slo: "SLO 10.6.2: Importance of Nematodes",
+        question: "(Scenario 10) A resident in a tropical coastal region develops severe leg swelling (Elephantiasis). This condition occurs when microscopic filarial nematodes block which human body system?",
+        options: ["Digestive system", "Lymphatic system", "Respiratory system", "Nervous system"],
+        correct: 1,
+        explanation: "Filarial worms (Wuchereria bancrofti) lodge in human lymphatic vessels, obstructing fluid drainage and triggering severe tissue inflammation known as elephantiasis."
+      },
+      {
+        id: 45,
+        slo: "SLO 10.6.2: Importance of Nematodes",
+        question: "Entomopathogenic nematodes are used commercially in eco-friendly farming because they act as:",
+        options: ["Bio-pesticides that infect and kill crop insect pests", "Synthetic chemical fertilizers", "Selective weed destroyers", "Fungal growth stimulants"],
+        correct: 0,
+        explanation: "Entomopathogenic nematodes seek out and enter soil-dwelling insect pests, releasing lethal symbiotic bacteria that serve as non-toxic bio-pesticides."
+      },
+
+      // SLO 10.7.1
+      {
+        id: 46,
+        slo: "SLO 10.7.1: Annelids (Characteristics, Segmentation & Coelom)",
+        question: "Phylum Annelida is characterized by true body segmentation, also termed:",
+        options: ["Metamerism", "Polymorphism", "Cephalization", "Metamorphosis"],
+        correct: 0,
+        explanation: "Metamerism refers to true linear body segmentation where internal organs, nerve ganglia, and excretory units are repeated across consecutive segments."
+      },
+      {
+        id: 47,
+        slo: "SLO 10.7.1: Annelids (Characteristics, Segmentation & Coelom)",
+        question: "What type of body cavity is found in annelids?",
+        options: ["Acoelom", "Pseudocoelom", "Hemocoel", "True coelom (eucoelom)"],
+        correct: 3,
+        explanation: "Annelids possess a fluid-filled true coelom (eucoelom) entirely bounded by mesodermal peritoneum linings."
+      },
+      {
+        id: 48,
+        slo: "SLO 10.7.1: Annelids (Characteristics, Segmentation & Coelom)",
+        question: "Fluid within the coelom of an annelid presses against surrounding body wall muscles to form a supportive structure called a:",
+        options: ["Chitinous exoskeleton", "Hydrostatic skeleton", "Bony endoskeleton", "Calcium shell"],
+        correct: 1,
+        explanation: "Incompressible coelomic fluid under hydraulic pressure functions as a hydrostatic skeleton against which circular and longitudinal body muscles contract."
+      },
+      {
+        id: 49,
+        slo: "SLO 10.7.1: Annelids (Characteristics, Segmentation & Coelom)",
+        question: "(Scenario 11) A student observes an earthworm crawling across damp soil. As it moves, specific body segments shorten and swell independently of neighboring segments. What structural feature allows localized muscle contraction?",
+        options: ["Internal transverse septa dividing the coelom into isolated fluid compartments", "Complete absence of body wall muscles", "A continuous unsegmented outer shell", "Free-flowing fluid across the body length"],
+        correct: 0,
+        explanation: "Transverse septa divide the coelom into isolated fluid compartments, allowing independent localized hydrostatic changes and peristaltic locomotion per segment."
+      },
+      {
+        id: 50,
+        slo: "SLO 10.7.1: Annelids (Characteristics, Segmentation & Coelom)",
+        question: "What major evolutionary advantage does metameric body segmentation give to annelids?",
+        options: ["Loss of half the body without injury", "Absence of a central nervous system", "Independent muscle control for precise locomotion", "Zero energy requirement during digestion"],
+        correct: 2,
+        explanation: "Metameric segmentation permits localized hydraulic pressure adjustments, providing precise independent muscle control during swimming and subterranean burrowing."
+      },
+
+      // SLO 10.7.2
+      {
+        id: 51,
+        slo: "SLO 10.7.2: Classification of Annelids",
+        question: "Which class of Phylum Annelida consists mainly of marine worms (like Nereis) possessing numerous setae borne on paddle-like parapodia?",
+        options: ["Oligochaeta", "Polychaeta", "Hirudinea", "Crustacea"],
+        correct: 1,
+        explanation: "Class Polychaeta contains mostly marine worms featuring well-developed heads, lateral paddle-like parapodia, and numerous bristles (setae)."
+      },
+      {
+        id: 52,
+        slo: "SLO 10.7.2: Classification of Annelids",
+        question: "Earthworms (Lumbricus) belong to Class Oligochaeta, which is characterized by having:",
+        options: ["Few setae per segment and no parapodia", "Numerous parapodia and long head tentacles", "Sucking discs at both ends and no setae", "Jointed legs and a chitin shell"],
+        correct: 0,
+        explanation: "Class Oligochaeta ('few bristles') includes terrestrial earthworms possessing few setae per segment, no parapodia, and simplified head structures."
+      },
+      {
+        id: 53,
+        slo: "SLO 10.7.2: Classification of Annelids",
+        question: "Leeches are classified under which annelid class?",
+        options: ["Polychaeta", "Oligochaeta", "Hirudinea", "Insecta"],
+        correct: 2,
+        explanation: "Leeches belong to Class Hirudinea, characterized by anterior/posterior suckers, flattened bodies, fixed segment counts, and complete absence of setae."
+      },
+      {
+        id: 54,
+        slo: "SLO 10.7.2: Classification of Annelids",
+        question: "Members of Class Hirudinea (leeches) are unique among annelids because they completely lack:",
+        options: ["Internal blood vessels", "Setae and parapodia", "Anterior suckers", "True tissue layers"],
+        correct: 1,
+        explanation: "Unlike polychaetes and oligochaetes, members of Hirudinea have completely lost both setae and parapodia, relying instead on oral/caudal suckers for movement."
+      },
+      {
+        id: 55,
+        slo: "SLO 10.7.2: Classification of Annelids",
+        question: "During breeding periods, earthworms display a thickened glandular ring that secretes an egg cocoon, known as the:",
+        options: ["Scolex", "Clitellum", "Parapodium", "Proglottid"],
+        correct: 1,
+        explanation: "The clitellum is a prominent glandular band on earthworms and leeches that secretes mucus during mating and produces a protective cocoon for developing eggs."
+      },
+
+      // SLO 10.7.3
+      {
+        id: 56,
+        slo: "SLO 10.7.3: Importance of Annelids",
+        question: "Earthworms improve agricultural soil quality primarily because their burrowing activities:",
+        options: ["Increase soil aeration, water drainage, and nutrient mixing", "Destroy harmful soil weeds", "Secrete synthetic pesticides into roots", "Trap methane gas underground"],
+        correct: 0,
+        explanation: "Earthworm tunneling aerates topsoil, enhances water percolation, mixes mineral horizons, and converts plant debris into bioavailable organic matter."
+      },
+      {
+        id: 57,
+        slo: "SLO 10.7.3: Importance of Annelids",
+        question: "(Scenario 12) Surgeons performing reattachment surgery on a severed finger occasionally apply medicinal leeches (Hirudo medicinalis) to the site. Which anticoagulant in leech saliva prevents blood clotting?",
+        options: ["Heparinase", "Fibrinogen", "Hirudin", "Insulin"],
+        correct: 2,
+        explanation: "Leech saliva contains hirudin, a powerful peptide anticoagulant that inhibits thrombin, preventing blood clots and relieving post-surgical venous congestion."
+      },
+      {
+        id: 58,
+        slo: "SLO 10.7.3: Importance of Annelids",
+        question: "Worm castings (earthworm excrement) are economically valuable in organic farming as:",
+        options: ["Synthetic nitrogen powder", "Chemical pest deterrents", "Livestock feed supplement", "Nutrient-rich organic compost (vermicompost)"],
+        correct: 3,
+        explanation: "Earthworm castings form vermicompost—an organic soil conditioner rich in nitrates, humic acid, beneficial microbes, and trace minerals."
+      },
+      {
+        id: 59,
+        slo: "SLO 10.7.3: Importance of Annelids",
+        question: "Marine polychaetes play a vital role in ocean ecology primarily by serving as:",
+        options: ["Primary producers that photosynthesize", "Key food sources for bottom-feeding marine fish and crabs", "Destructive agents of coral reefs", "Neutralizers of ocean salt levels"],
+        correct: 1,
+        explanation: "Marine polychaetes form an essential trophic link in marine food webs, serving as a primary food supply for benthic fish, crustaceans, and wading birds."
+      },
+      {
+        id: 60,
+        slo: "SLO 10.7.3: Importance of Annelids",
+        question: "Overpopulation of leeches in commercial fish farms causes economic loss by acting as:",
+        options: ["Ectoparasites that suck blood from fish and livestock", "Consumers of lily pads", "Poisonous polluters of fresh water", "Blockages in water drainage pipes"],
+        correct: 0,
+        explanation: "Blood-sucking leeches behave as ectoparasites on fish and livestock, causing anemia, open wounds, tissue necrosis, and secondary bacterial infections."
+      },
+
+      // SLO 10.8.1
+      {
+        id: 61,
+        slo: "SLO 10.8.1: Arthropods (General Characteristics)",
+        question: "Which characteristic feature is shared by ALL members of Phylum Arthropoda?",
+        options: ["An exoskeleton made of chitin and jointed appendages", "Soft body covered by a calcareous shell", "Radial body symmetry in adult forms", "Hydrostatic skeleton with internal septa"],
+        correct: 0,
+        explanation: "Phylum Arthropoda is universally defined by jointed appendages and a hard chitinous exoskeleton that undergoes ecdysis during growth."
+      },
+      {
+        id: 62,
+        slo: "SLO 10.8.1: Arthropods (General Characteristics)",
+        question: "To allow body growth, arthropods periodically shed their hard exoskeleton in a process known as:",
+        options: ["Metamorphosis", "Encystment", "Ecdysis (Molting)", "Regeneration"],
+        correct: 2,
+        explanation: "Ecdysis (molting) is the periodic hormone-regulated shedding of the old cuticle to allow tissue expansion and body growth."
+      },
+      {
+        id: 63,
+        slo: "SLO 10.8.1: Arthropods (General Characteristics)",
+        question: "Arthropods possess an open circulatory system where blood fills a open body cavity called a:",
+        options: ["Coelom", "Hemocoel", "Pseudocoelom", "Gastrovascular cavity"],
+        correct: 1,
+        explanation: "Arthropods have an open circulatory system where a tubular heart pumps hemolymph into a spacious hemocoel that directly bathes internal organs."
+      },
+      {
+        id: 64,
+        slo: "SLO 10.8.1: Arthropods (General Characteristics)",
+        question: "Respiration in aquatic arthropods occurs via gills, whereas terrestrial insects breathe through:",
+        options: ["Flame cells", "Direct skin diffusion", "Book lungs exclusively", "A tracheal tube system opening via spiracles"],
+        correct: 3,
+        explanation: "Terrestrial insects exchange gases via a branching network of air-filled chitinous pipes (tracheae) that open to the outside via spiracles."
+      },
+      {
+        id: 65,
+        slo: "SLO 10.8.1: Arthropods (General Characteristics)",
+        question: "Nitrogenous waste excretion in land insects is carried out by:",
+        options: ["Nephridia", "Malpighian tubules", "Choanocytes", "Green glands"],
+        correct: 1,
+        explanation: "Malpighian tubules absorb nitrogenous waste from the hemolymph and excrete dry uric acid crystals into the hindgut to conserve body water."
+      },
+
+      // SLO 10.8.2
+      {
+        id: 66,
+        slo: "SLO 10.8.2: Major Classes of Arthropods",
+        question: "Spiders, scorpions, and ticks possess four pairs of walking legs and no antennae. They belong to Class:",
+        options: ["Crustacea", "Insecta", "Arachnida", "Myriapoda"],
+        correct: 2,
+        explanation: "Class Arachnida includes terrestrial chelicerates with two tagmata (cephalothorax and abdomen), 4 pairs of walking legs, and no antennae."
+      },
+      {
+        id: 67,
+        slo: "SLO 10.8.2: Major Classes of Arthropods",
+        question: "(Scenario 13) A student catches a marine crab with two pairs of antennae, a calcified outer shell, and gills for breathing. To which class does this animal belong?",
+        options: ["Crustacea", "Insecta", "Arachnida", "Myriapoda"],
+        correct: 0,
+        explanation: "Class Crustacea (crabs, lobsters, shrimp) is characterized by two pairs of antennae, calcified exoskeletons, biramous appendages, and gill respiration."
+      },
+      {
+        id: 68,
+        slo: "SLO 10.8.2: Major Classes of Arthropods",
+        question: "Members of Class Insecta are distinguished from all other arthropod groups by having:",
+        options: ["Four pairs of legs and no wings", "Three distinct body regions (head, thorax, abdomen) and three pairs of legs", "Identical legs on all body segments", "Two pairs of antennae and book lungs"],
+        correct: 1,
+        explanation: "Insects are hexapods defined by three distinct body tagmata (head, thorax, abdomen), 3 pairs of thoracic walking legs, and one pair of antennae."
+      },
+      {
+        id: 69,
+        slo: "SLO 10.8.2: Major Classes of Arthropods",
+        question: "Centipedes and millipedes, featuring elongated bodies with numerous segmented leg pairs, belong to Class:",
+        options: ["Arachnida", "Myriapoda", "Crustacea", "Insecta"],
+        correct: 1,
+        explanation: "Class Myriapoda ('many feet') encompasses multi-segmented arthropods such as chilopods (centipedes) and diplopods (millipedes)."
+      },
+      {
+        id: 70,
+        slo: "SLO 10.8.2: Major Classes of Arthropods",
+        question: "Which pair correctly matches an arthropod class with its characteristic excretory/respiratory feature?",
+        options: ["Arachnida - Green glands", "Insecta - Malpighian tubules & Tracheae", "Crustacea - Book lungs", "Myriapoda - Flame cells"],
+        correct: 1,
+        explanation: "Insects rely on Malpighian tubules for nitrogenous waste excretion and an internal tracheal system opening via spiracles for gas exchange."
+      },
+
+      // SLO 10.8.3
+      {
+        id: 71,
+        slo: "SLO 10.8.3: Metamorphosis in Insects",
+        question: "Complete metamorphosis (holometabolous development) in insects includes four sequential stages in order:",
+        options: ["Egg -> Larva -> Pupa -> Adult", "Egg -> Nymph -> Adult", "Egg -> Pupa -> Nymph -> Adult", "Larva -> Egg -> Pupa -> Adult"],
+        correct: 0,
+        explanation: "Holometabolous insects undergo complete metamorphosis involving four morphologically distinct life stages: Egg -> Larva -> Pupa -> Adult."
+      },
+      {
+        id: 72,
+        slo: "SLO 10.8.3: Metamorphosis in Insects",
+        question: "(Scenario 14) An agricultural technician finds an immature insect in a wheat field that resembles a small, wingless adult grasshopper and feeds on the same leaves. What is this developmental stage called?",
+        options: ["Larva", "Pupa", "Caterpillar", "Nymph"],
+        correct: 3,
+        explanation: "In incomplete (hemimetabolous) metamorphosis, immature insects are called nymphs; they resemble small wingless adults and share identical food sources."
+      },
+      {
+        id: 73,
+        slo: "SLO 10.8.3: Metamorphosis in Insects",
+        question: "During which stage of complete metamorphosis does internal tissue breakdown and adult organ reconstruction take place inside a protective shell or cocoon?",
+        options: ["Egg stage", "Larval stage", "Pupal stage", "Adult stage"],
+        correct: 2,
+        explanation: "The pupal stage is a non-feeding transformation period inside a cocoon where larval tissues break down (histolysis) to rebuild adult body organs."
+      },
+      {
+        id: 74,
+        slo: "SLO 10.8.3: Metamorphosis in Insects",
+        question: "Incomplete metamorphosis (hemimetabolous development) differs from complete metamorphosis because it lacks a:",
+        options: ["Larval stage", "Pupal stage", "Adult stage", "Egg stage"],
+        correct: 1,
+        explanation: "Hemimetabolous insects transition directly through successive nymphal instars into winged adults without passing through a resting pupal stage."
+      },
+      {
+        id: 75,
+        slo: "SLO 10.8.3: Metamorphosis in Insects",
+        question: "Molting and metamorphosis in insects are regulated chemically by juvenile hormone and:",
+        options: ["Insulin", "Thyroxine", "Ecdysone", "Adrenaline"],
+        correct: 2,
+        explanation: "Ecdysone (molting hormone) secreted by prothoracic glands triggers ecdysis, while juvenile hormone levels control whether the insect remains a larva or metamorphoses."
+      },
+
+      // SLO 10.8.4
+      {
+        id: 76,
+        slo: "SLO 10.8.4: Economic Importance of Insects (Beneficial & Harmful)",
+        question: "(Scenario 15) A farmer places honeybee hives (Apis mellifera) near his mustard crop field. Aside from producing honey, how do these insects economically benefit the farmer?",
+        options: ["By consuming parasitic soil nematodes", "By aerating heavy soil", "By serving as efficient pollinators that increase seed yield", "By eating field weeds"],
+        correct: 2,
+        explanation: "Honeybees are crucial agricultural pollinators; cross-pollination during foraging significantly increases fruit and seed crop yields."
+      },
+      {
+        id: 77,
+        slo: "SLO 10.8.4: Economic Importance of Insects (Beneficial & Harmful)",
+        question: "Which insect larva yields valuable natural fiber used worldwide in the luxury clothing industry?",
+        options: ["Tsetse fly", "Silkworm moth (Bombyx mori)", "Lac insect", "Honeybee"],
+        correct: 1,
+        explanation: "The caterpillar larva of the silkworm moth (Bombyx mori) spins silk cocoons harvested in sericulture for luxury silk fabric."
+      },
+      {
+        id: 78,
+        slo: "SLO 10.8.4: Economic Importance of Insects (Beneficial & Harmful)",
+        question: "Female Anopheles mosquitoes are economically and medically harmful because they transmit the parasite that causes:",
+        options: ["Malaria", "Dengue fever", "Typhoid", "Cholera"],
+        correct: 0,
+        explanation: "Female Anopheles mosquitoes act as biological vectors transmitting Plasmodium protozoans, the causative parasitic agent of malaria."
+      },
+      {
+        id: 79,
+        slo: "SLO 10.8.4: Economic Importance of Insects (Beneficial & Harmful)",
+        question: "Desert locust swarms cause catastrophic agricultural loss primarily by:",
+        options: ["Sucking sap from plant roots", "Injecting toxins into farm animals", "Devouring entire fields of green crops and leaves within hours", "Spreading fungal grain diseases"],
+        correct: 2,
+        explanation: "Desert locust swarms form voracious agricultural pests that consume massive quantities of green foliage daily, causing severe crop failure and famine."
+      },
+      {
+        id: 80,
+        slo: "SLO 10.8.4: Economic Importance of Insects (Beneficial & Harmful)",
+        question: "(Scenario 16) A homeowner discovers wooden roof beams full of fine powdery dust and internal hollow tunnels. The damage is caused by social insects that digest wood cellulose with the aid of intestinal protozoans. What insect is responsible?",
+        options: ["Bedbugs", "Carpenter bees", "Mosquitoes", "Termites"],
+        correct: 3,
+        explanation: "Termites are social insects that utilize symbiotic intestinal flagellates/bacteria to break down wood cellulose, causing extensive structural damage to buildings."
+      },
+
+      // SLO 10.8.5
+      {
+        id: 81,
+        slo: "SLO 10.8.5: Insects as a Successful Group of Animals",
+        question: "Insects represent over 70% of all described animal species on Earth. Which evolutionary adaptation contributed most to their ability to spread to new geographic regions and evade land predators?",
+        options: ["Absence of eyes", "Development of wings and powered flight", "Dependence on aquatic habitats", "Heavy calcified shells"],
+        correct: 1,
+        explanation: "Powered flight enabled insects to rapidly colonize geographically isolated habitats, forage efficiently, escape ground predators, and disperse across wide regions."
+      },
+      {
+        id: 82,
+        slo: "SLO 10.8.5: Insects as a Successful Group of Animals",
+        question: "The waterproof quality of an insect's outer chitinous exoskeleton is primarily due to an outer surface layer containing:",
+        options: ["Waxy lipids", "Cellulose fibers", "Calcium carbonate", "Gelatinous proteins"],
+        correct: 0,
+        explanation: "The outermost epicuticle layer contains hydrophobic waxy lipids and proteins that prevent lethal water evaporation in terrestrial habitats."
+      },
+      {
+        id: 83,
+        slo: "SLO 10.8.5: Insects as a Successful Group of Animals",
+        question: "Small body size in insects is an evolutionary advantage because it:",
+        options: ["Allows them to attack large animals", "Makes them invisible to all predators", "Requires minimal food and allows exploitation of tiny ecological niches", "Eliminates the need for excretion"],
+        correct: 2,
+        explanation: "Small body dimensions require minimal food/space resources and enable insects to occupy micro-habitats inaccessible to larger competitors."
+      },
+      {
+        id: 84,
+        slo: "SLO 10.8.5: Insects as a Successful Group of Animals",
+        question: "High reproductive rates in insects enhance evolutionary success because:",
+        options: ["They produce very few long-lived offspring", "Rapid reproduction with large offspring numbers allows fast adaptation to changing environments", "Eggs do not require energy", "Genetic variation is completely prevented"],
+        correct: 1,
+        explanation: "Short life cycles combined with high fecundity yield rapid population turnover, allowing beneficial evolutionary adaptations to spread swiftly."
+      },
+      {
+        id: 85,
+        slo: "SLO 10.8.5: Insects as a Successful Group of Animals",
+        question: "Insect sensory systems are advanced due to compound eyes consisting of thousands of individual visual units called:",
+        options: ["Nematocysts", "Spiracles", "Statocysts", "Ommatidia"],
+        correct: 3,
+        explanation: "Insect compound eyes are constructed of thousands of independent optical units called ommatidia, providing exceptional motion sensitivity and broad field of vision."
+      }
+    ];
+
+    function App() {
+      // Quiz Navigation & State Management
+      const [quizStarted, setQuizStarted] = useState(false);
+      const [quizMode, setQuizMode] = useState('practice'); // 'practice' or 'blind'
+      const [currentIdx, setCurrentIdx] = useState(0);
+      const [userAnswers, setUserAnswers] = useState({}); // { [qIdx]: selectedOptionIdx }
+      const [timeLeft, setTimeLeft] = useState(5700); // 95 minutes = 5700 seconds
+      const [isSubmitted, setIsSubmitted] = useState(false);
+
+      // Timer Effect
+      useEffect(() => {
+        let timer = null;
+        if (quizStarted && !isSubmitted && timeLeft > 0) {
+          timer = setInterval(() => {
+            setTimeLeft(prev => {
+              if (prev <= 1) {
+                clearInterval(timer);
+                setIsSubmitted(true);
+                return 0;
+              }
+              return prev - 1;
+            });
+          }, 1000);
+        }
+        return () => clearInterval(timer);
+      }, [quizStarted, isSubmitted, timeLeft]);
+
+      // Format time string MM:SS or HH:MM:SS
+      const formatTime = (secs) => {
+        const h = Math.floor(secs / 3600);
+        const m = Math.floor((secs % 3600) / 60);
+        const s = secs % 60;
+        if (h > 0) {
+          return `${h}:${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+        }
+        return `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+      };
+
+      // Select Option & Lock Answer
+      const handleSelectOption = (optionIdx) => {
+        if (userAnswers.hasOwnProperty(currentIdx) || isSubmitted) return; // Answer locked
+        setUserAnswers(prev => ({
+          ...prev,
+          [currentIdx]: optionIdx
+        }));
+      };
+
+      // Scoring Calculations
+      const scoreData = useMemo(() => {
+        let correctCount = 0;
+        let wrongCount = 0;
+        let unattemptedCount = 0;
+
+        QUESTIONS.forEach((q, idx) => {
+          if (!userAnswers.hasOwnProperty(idx)) {
+            unattemptedCount++;
+          } else if (userAnswers[idx] === q.correct) {
+            correctCount++;
+          } else {
+            wrongCount++;
+          }
+        });
+
+        const grossMarks = correctCount * 1.0;
+        const penalty = wrongCount * 0.25;
+        const netMarks = Math.max(0, grossMarks - penalty);
+        const maxMarks = QUESTIONS.length * 1.0;
+        const percentage = Number(((netMarks / maxMarks) * 100).toFixed(1));
+
+        return { correctCount, wrongCount, unattemptedCount, grossMarks, penalty, netMarks, maxMarks, percentage };
+      }, [userAnswers]);
+
+      // SLO Weak Area Analysis
+      const sloAnalysis = useMemo(() => {
+        const stats = {};
+        QUESTIONS.forEach((q, idx) => {
+          const sloKey = q.slo;
+          if (!stats[sloKey]) {
+            stats[sloKey] = { total: 0, correct: 0, wrong: 0, unattempted: 0 };
+          }
+          stats[sloKey].total++;
+          if (!userAnswers.hasOwnProperty(idx)) {
+            stats[sloKey].unattempted++;
+          } else if (userAnswers[idx] === q.correct) {
+            stats[sloKey].correct++;
+          } else {
+            stats[sloKey].wrong++;
+          }
+        });
+        return stats;
+      }, [userAnswers]);
+
+      // Motivational Quote based on percentage
+      const getMotivationalQuote = (pct) => {
+        if (pct >= 85) return { quote: "Exceptional Excellence! Your understanding of Kingdom Animalia and body plans is outstanding.", author: "Qashqarian Academy Academic Board" };
+        if (pct >= 70) return { quote: "Great Achievement! Review targeted SLO topics to turn your good score into perfection.", author: "Qashqarian Biology Faculty" };
+        if (pct >= 50) return { quote: "Solid Conceptual Foundation! Analyze your incorrect attempts carefully to cement core invertebrate concepts.", author: "Biology Mentor Team" };
+        return { quote: "Every error is an opportunity to learn. Study the detailed explanations and attempt again!", author: "Qashqarian Academy" };
+      };
+
+      // Current question reference
+      const currentQ = QUESTIONS[currentIdx];
+      const isAnswered = userAnswers.hasOwnProperty(currentIdx);
+      const selectedOption = userAnswers[currentIdx];
+
+      // START SCREEN
+      if (!quizStarted) {
+        return (
+          <div className="min-h-screen flex items-center justify-center p-4 sm:p-6">
+            <div className="max-w-2xl w-full bg-white rounded-2xl shadow-xl border border-sky-100 overflow-hidden animate-fadeIn">
+              {/* Header Banner */}
+              <div className="bg-gradient-to-r from-sky-700 via-sky-600 to-science-800 p-6 sm:p-8 text-white relative">
+                <div className="flex justify-between items-center mb-3">
+                  <span className="bg-sky-500/30 text-sky-100 text-xs font-bold px-3 py-1 rounded-full backdrop-blur-sm border border-sky-300/20">
+                    🏔️ QASHQARIAN ACADEMY
+                  </span>
+                  <span className="text-xs font-semibold bg-white/10 px-2.5 py-1 rounded-md border border-white/20">
+                    Class: XI Biology
+                  </span>
+                </div>
+                <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
+                  Kingdom Animalia (Part-1)
+                </h1>
+                <p className="text-sky-100 text-sm mt-1">
+                  SLO-Based Invertebrate Zoology Assessment (85 MCQs)
+                </p>
+              </div>
+
+              {/* Instructions Content */}
+              <div className="p-6 sm:p-8 space-y-6">
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="bg-sky-50 rounded-xl p-4 border border-sky-100 flex items-center gap-3">
+                    <div className="p-2.5 bg-sky-600 text-white rounded-lg">
+                      <Icon name="clock" className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <p className="text-xs text-slate-500 font-medium">Time Limit</p>
+                      <p className="text-sm font-bold text-slate-800">85 Minutes</p>
+                    </div>
+                  </div>
+                  <div className="bg-sky-50 rounded-xl p-4 border border-sky-100 flex items-center gap-3">
+                    <div className="p-2.5 bg-sky-600 text-white rounded-lg">
+                      <Icon name="award" className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <p className="text-xs text-slate-500 font-medium">Marking Scheme</p>
+                      <p className="text-sm font-bold text-slate-800">+1.0 / -0.25</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Mode Selector */}
+                <div>
+                  <label className="block text-sm font-bold text-slate-700 mb-3">
+                    Select Test Mode:
+                  </label>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <button
+                      type="button"
+                      onClick={() => setQuizMode('practice')}
+                      className={`p-4 rounded-xl text-left border-2 transition-all flex flex-col gap-1.5 ${
+                        quizMode === 'practice'
+                          ? 'border-sky-600 bg-sky-50/80 ring-2 ring-sky-500/20'
+                          : 'border-slate-200 hover:border-sky-300 bg-white'
+                      }`}
+                    >
+                      <div className="flex items-center justify-between">
+                        <span className="font-bold text-sm text-sky-900 flex items-center gap-1.5">
+                          <Icon name="zap" className="w-4 h-4 text-sky-600" />
+                          Practice Mode
+                        </span>
+                        {quizMode === 'practice' && <Icon name="check" className="w-4 h-4 text-sky-600" />}
+                      </div>
+                      <p className="text-xs text-slate-500 leading-relaxed">
+                        Instant answer verification with scientific rationales immediately after locking your choice.
+                      </p>
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => setQuizMode('blind')}
+                      className={`p-4 rounded-xl text-left border-2 transition-all flex flex-col gap-1.5 ${
+                        quizMode === 'blind'
+                          ? 'border-sky-600 bg-sky-50/80 ring-2 ring-sky-500/20'
+                          : 'border-slate-200 hover:border-sky-300 bg-white'
+                      }`}
+                    >
+                      <div className="flex items-center justify-between">
+                        <span className="font-bold text-sm text-sky-900 flex items-center gap-1.5">
+                          <Icon name="shield" className="w-4 h-4 text-sky-600" />
+                          Exam / Blind Mode
+                        </span>
+                        {quizMode === 'blind' && <Icon name="check" className="w-4 h-4 text-sky-600" />}
+                      </div>
+                      <p className="text-xs text-slate-500 leading-relaxed">
+                        Simulate real board exam conditions. Detailed solutions and marks revealed after test submission.
+                      </p>
+                    </button>
+                  </div>
+                </div>
+
+                {/* Important Rules List */}
+                <div className="bg-amber-50/80 border border-amber-200 rounded-xl p-4 text-xs text-amber-900 space-y-1.5">
+                  <p className="font-bold text-amber-950 flex items-center gap-1.5">
+                    <Icon name="alert-triangle" className="w-4 h-4 text-amber-600" />
+                    Test Rules & Negative Marking Instructions:
+                  </p>
+                  <ul className="list-disc list-inside space-y-1 pl-1 text-amber-800">
+                    <li>Selecting an option locks your response permanently for that question.</li>
+                    <li>Incorrect choices incur a deduction of <strong>0.25 marks</strong>.</li>
+                    <li>Unattempted questions carry zero penalty.</li>
+                  </ul>
+                </div>
+
+                <button
+                  onClick={() => setQuizStarted(true)}
+                  className="w-full bg-sky-600 hover:bg-sky-700 text-white font-bold py-3.5 px-6 rounded-xl shadow-lg shadow-sky-600/25 transition-all flex items-center justify-center gap-2 group"
+                >
+                  <span>Start Assessment</span>
+                  <Icon name="arrow-right" className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                </button>
+              </div>
+            </div>
+          </div>
+        );
+      }
+
+      // FINAL RESULTS SCREEN
+      if (isSubmitted) {
+        const quoteObj = getMotivationalQuote(scoreData.percentage);
+
+        return (
+          <div className="min-h-screen py-8 px-4 sm:px-6 flex justify-center">
+            <div className="max-w-4xl w-full bg-white rounded-2xl shadow-xl border border-sky-100 overflow-hidden animate-fadeIn space-y-6">
+              
+              {/* Header Banner */}
+              <div className="bg-gradient-to-r from-sky-700 via-sky-600 to-science-800 p-6 sm:p-8 text-white relative">
+                <div className="flex justify-between items-center mb-2">
+                  <span className="text-xs font-bold bg-white/20 px-3 py-1 rounded-full">
+                    🏔️ QASHQARIAN ACADEMY
+                  </span>
+                  <span className="text-xs font-semibold bg-white/10 px-2.5 py-1 rounded-md">
+                    Class: XI Biology
+                  </span>
+                </div>
+                <h1 className="text-2xl sm:text-3xl font-extrabold">
+                  Assessment Performance Summary
+                </h1>
+                <p className="text-sky-100 text-xs sm:text-sm mt-1">
+                  Kingdom Animalia (Part-1) SLO Mock Test
+                </p>
+              </div>
+
+              <div className="p-6 sm:p-8 space-y-8">
+                
+                {/* Motivational Quote Box */}
+                <div className="bg-sky-50/80 border-l-4 border-sky-600 p-4 rounded-r-xl space-y-1">
+                  <p className="text-sm font-semibold text-sky-950 italic">
+                    "{quoteObj.quote}"
+                  </p>
+                  <p className="text-xs text-sky-700 font-bold">— {quoteObj.author}</p>
+                </div>
+
+                {/* Main Score Metrics */}
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                  <div className="bg-sky-50 border border-sky-100 rounded-xl p-4 text-center">
+                    <p className="text-xs text-slate-500 font-semibold mb-1">Net Percentage</p>
+                    <p className="text-3xl font-black text-sky-600">{scoreData.percentage}%</p>
+                  </div>
+                  <div className="bg-emerald-50 border border-emerald-100 rounded-xl p-4 text-center">
+                    <p className="text-xs text-emerald-700 font-semibold mb-1">Correct Answers</p>
+                    <p className="text-3xl font-black text-emerald-600">{scoreData.correctCount}</p>
+                    <p className="text-[10px] text-emerald-600 font-medium">+{scoreData.grossMarks} Marks</p>
+                  </div>
+                  <div className="bg-rose-50 border border-rose-100 rounded-xl p-4 text-center">
+                    <p className="text-xs text-rose-700 font-semibold mb-1">Wrong Answers</p>
+                    <p className="text-3xl font-black text-rose-600">{scoreData.wrongCount}</p>
+                    <p className="text-[10px] text-rose-600 font-medium">-{scoreData.penalty} Penalty</p>
+                  </div>
+                  <div className="bg-amber-50 border border-amber-100 rounded-xl p-4 text-center">
+                    <p className="text-xs text-amber-700 font-semibold mb-1">Unattempted</p>
+                    <p className="text-3xl font-black text-amber-600">{scoreData.unattemptedCount}</p>
+                    <p className="text-[10px] text-amber-600 font-medium">0 Penalty</p>
+                  </div>
+                </div>
+
+                {/* Net Marks Summary */}
+                <div className="bg-slate-900 text-white rounded-xl p-4 flex justify-between items-center text-sm">
+                  <span>Final Net Score:</span>
+                  <span className="font-extrabold text-sky-400 text-base">
+                    {scoreData.netMarks} / {scoreData.maxMarks} Marks
+                  </span>
+                </div>
+
+                {/* Weak Area SLO Breakdown */}
+                <div className="space-y-3">
+                  <h3 className="text-base font-bold text-slate-800 flex items-center gap-2">
+                    <Icon name="bar-chart" className="w-5 h-5 text-sky-600" />
+                    SLO Topic Mastery Analysis
+                  </h3>
+
+                  <div className="space-y-3 max-h-80 overflow-y-auto pr-2 custom-scrollbar">
+                    {Object.entries(sloAnalysis).map(([slo, stats], idx) => {
+                      const sloPct = stats.total > 0 ? Math.round((stats.correct / stats.total) * 100) : 0;
+                      return (
+                        <div key={idx} className="bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs space-y-2">
+                          <div className="flex justify-between items-start gap-2">
+                            <span className="font-semibold text-slate-800">{slo}</span>
+                            <span className={`font-bold px-2 py-0.5 rounded text-[11px] ${
+                              sloPct >= 80 ? 'bg-emerald-100 text-emerald-800' :
+                              sloPct >= 50 ? 'bg-amber-100 text-amber-800' : 'bg-rose-100 text-rose-800'
+                            }`}>
+                              {sloPct}% Mastered
+                            </span>
+                          </div>
+                          <div className="w-full bg-slate-200 h-2 rounded-full overflow-hidden">
+                            <div 
+                              className={`h-full transition-all duration-500 ${
+                                sloPct >= 80 ? 'bg-emerald-500' : sloPct >= 50 ? 'bg-amber-500' : 'bg-rose-500'
+                              }`}
+                              style={{ width: `${sloPct}%` }}
+                            />
+                          </div>
+                          <div className="flex gap-4 text-[11px] text-slate-500">
+                            <span>Correct: {stats.correct}</span>
+                            <span>Wrong: {stats.wrong}</span>
+                            <span>Skipped: {stats.unattempted}</span>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                {/* Detailed Analysis of Questions */}
+                <div className="space-y-4">
+                  <h3 className="text-base font-bold text-slate-800 flex items-center gap-2">
+                    <Icon name="book-open" className="w-5 h-5 text-sky-600" />
+                    Detailed Answer Explanations & Corrections
+                  </h3>
+
+                  <div className="space-y-4 max-h-96 overflow-y-auto pr-2 custom-scrollbar">
+                    {QUESTIONS.map((q, qIdx) => {
+                      const userSel = userAnswers[qIdx];
+                      const isCorrect = userSel === q.correct;
+                      const isUnattempted = !userAnswers.hasOwnProperty(qIdx);
+
+                      return (
+                        <div 
+                          key={q.id}
+                          className={`p-4 rounded-xl border text-xs space-y-2.5 ${
+                            isCorrect ? 'bg-emerald-50/50 border-emerald-200' :
+                            isUnattempted ? 'bg-amber-50/50 border-amber-200' : 'bg-rose-50/50 border-rose-200'
+                          }`}
+                        >
+                          <div className="flex justify-between items-start gap-2">
+                            <span className="font-bold text-slate-900">
+                              Q{qIdx + 1}. {q.question}
+                            </span>
+                            <span className={`px-2 py-0.5 rounded font-bold text-[10px] whitespace-nowrap ${
+                              isCorrect ? 'bg-emerald-600 text-white' :
+                              isUnattempted ? 'bg-amber-500 text-white' : 'bg-rose-600 text-white'
+                            }`}>
+                              {isCorrect ? 'CORRECT (+1.0)' : isUnattempted ? 'SKIPPED (0.0)' : 'WRONG (-0.25)'}
+                            </span>
+                          </div>
+
+                          <p className="text-[11px] text-slate-500 font-medium">{q.slo}</p>
+
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                            {q.options.map((opt, oIdx) => {
+                              const isOptCorrect = oIdx === q.correct;
+                              const isOptUserChoice = oIdx === userSel;
+
+                              return (
+                                <div 
+                                  key={oIdx}
+                                  className={`p-2 rounded-lg border font-medium flex items-center justify-between ${
+                                    isOptCorrect ? 'bg-emerald-100 border-emerald-300 text-emerald-900 font-bold' :
+                                    isOptUserChoice ? 'bg-rose-100 border-rose-300 text-rose-900' : 'bg-white border-slate-200 text-slate-600'
+                                  }`}
+                                >
+                                  <span>{String.fromCharCode(65 + oIdx)}. {opt}</span>
+                                  {isOptCorrect && <Icon name="check" className="w-3.5 h-3.5 text-emerald-700" />}
+                                  {isOptUserChoice && !isOptCorrect && <Icon name="x" className="w-3.5 h-3.5 text-rose-700" />}
+                                </div>
+                              );
+                            })}
+                          </div>
+
+                          <div className="bg-white/80 p-2.5 rounded-lg border border-slate-200 text-slate-700 leading-relaxed">
+                            <span className="font-bold text-sky-900">Explanation: </span>
+                            {q.explanation}
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                {/* Restart Button */}
+                <button
+                  onClick={() => {
+                    setIsSubmitted(false);
+                    setQuizStarted(false);
+                    setCurrentIdx(0);
+                    setUserAnswers({});
+                    setTimeLeft(5700);
+                  }}
+                  className="w-full bg-sky-600 hover:bg-sky-700 text-white font-bold py-3.5 px-6 rounded-xl shadow-lg shadow-sky-600/25 transition-all flex items-center justify-center gap-2"
+                >
+                  <Icon name="rotate-ccw" className="w-5 h-5" />
+                  <span>Restart Assessment</span>
+                </button>
+
+              </div>
+            </div>
+          </div>
+        );
+      }
+
+      // ACTIVE QUIZ SCREEN
+      return (
+        <div className="min-h-screen py-6 px-4 sm:px-6 flex flex-col items-center">
+          
+          {/* Top Header Card */}
+          <div className="max-w-3xl w-full bg-white rounded-2xl shadow-sm border border-sky-100 p-4 mb-4 space-y-3">
+            
+            {/* Academy Name Header */}
+            <div className="flex justify-between items-center text-xs sm:text-sm font-bold text-sky-900">
+              <span className="flex items-center gap-1.5">
+                <span className="text-base">🏔️</span> Qashqarian Academy
+              </span>
+              <span className="bg-sky-100 text-sky-800 px-2.5 py-0.5 rounded-md font-semibold text-xs">
+                Kingdom Animalia (Part-1)
+              </span>
+            </div>
+
+            {/* Progress & Timer Bar */}
+            <div className="flex justify-between items-center text-xs font-semibold text-slate-600">
+              <span>Question {currentIdx + 1} / {QUESTIONS.length}</span>
+              <div className={`flex items-center gap-1.5 px-2.5 py-1 rounded-lg font-mono font-bold ${
+                timeLeft < 300 ? 'bg-rose-100 text-rose-700 animate-pulse' : 'bg-sky-50 text-sky-800'
+              }`}>
+                <Icon name="clock" className="w-3.5 h-3.5" />
+                <span>{formatTime(timeLeft)}</span>
+              </div>
+            </div>
+
+            {/* Visual Progress Bar */}
+            <div className="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+              <div 
+                className="bg-sky-600 h-full transition-all duration-300"
+                style={{ width: `${((currentIdx + 1) / QUESTIONS.length) * 100}%` }}
+              />
+            </div>
+          </div>
+
+          {/* Main Question Card Container */}
+          <div className="max-w-3xl w-full bg-white rounded-2xl shadow-lg border border-sky-100 p-6 sm:p-8 relative overflow-hidden flex flex-col min-h-[460px] justify-between">
+            
+            {/* Watermark Logo */}
+            <div className="watermark-bg">
+              <p className="text-6xl font-black text-sky-900 tracking-widest">
+                🏔️ QASHQARIAN ACADEMY
+              </p>
+            </div>
+
+            {/* Question Content */}
+            <div className="relative z-10 space-y-5">
+              
+              {/* SLO Badge */}
+              <div className="inline-block bg-sky-50 border border-sky-200 text-sky-900 text-xs font-semibold px-3 py-1 rounded-full">
+                {currentQ.slo}
+              </div>
+
+              {/* Question Statement */}
+              <h2 className="text-base sm:text-lg font-bold text-slate-900 leading-snug">
+                Q{currentIdx + 1}. {currentQ.question}
+              </h2>
+
+              {/* Multiple Choice Options */}
+              <div className="space-y-3 pt-2">
+                {currentQ.options.map((optionText, optIdx) => {
+                  const isSelected = selectedOption === optIdx;
+                  const isCorrect = currentQ.correct === optIdx;
+
+                  let btnStyle = "border-slate-200 hover:border-sky-300 hover:bg-sky-50/50 text-slate-800 bg-white";
+
+                  if (isAnswered) {
+                    if (quizMode === 'practice') {
+                      if (isCorrect) {
+                        btnStyle = "border-emerald-500 bg-emerald-50 text-emerald-950 font-semibold ring-2 ring-emerald-500/20";
+                      } else if (isSelected) {
+                        btnStyle = "border-rose-500 bg-rose-50 text-rose-950 font-semibold ring-2 ring-rose-500/20";
+                      } else {
+                        btnStyle = "border-slate-200 opacity-60 bg-white text-slate-500";
+                      }
+                    } else {
+                      // Blind Mode: highlight locked selection neutral
+                      if (isSelected) {
+                        btnStyle = "border-sky-600 bg-sky-50 text-sky-950 font-semibold ring-2 ring-sky-500/20";
+                      } else {
+                        btnStyle = "border-slate-200 opacity-60 bg-white text-slate-500";
+                      }
+                    }
+                  }
+
+                  return (
+                    <button
+                      key={optIdx}
+                      disabled={isAnswered}
+                      onClick={() => handleSelectOption(optIdx)}
+                      className={`w-full p-3.5 sm:p-4 rounded-xl border-2 text-left text-xs sm:text-sm transition-all flex items-center justify-between gap-3 ${btnStyle}`}
+                    >
+                      <div className="flex items-center gap-3">
+                        <span className={`w-7 h-7 rounded-lg flex items-center justify-center font-bold text-xs shrink-0 ${
+                          isSelected ? 'bg-sky-600 text-white' : 'bg-slate-100 text-slate-700'
+                        }`}>
+                          {String.fromCharCode(65 + optIdx)}
+                        </span>
+                        <span>{optionText}</span>
+                      </div>
+
+                      {/* Status Icons for Practice Mode */}
+                      {isAnswered && quizMode === 'practice' && (
+                        <div>
+                          {isCorrect && <Icon name="check" className="w-5 h-5 text-emerald-600" />}
+                          {isSelected && !isCorrect && <Icon name="x" className="w-5 h-5 text-rose-600" />}
+                        </div>
+                      )}
+                    </button>
+                  );
+                })}
+              </div>
+
+              {/* Instant Practice Explanation Box */}
+              {isAnswered && quizMode === 'practice' && (
+                <div className="mt-4 p-4 rounded-xl bg-sky-50/90 border border-sky-200 text-xs text-sky-950 leading-relaxed space-y-1 animate-fadeIn">
+                  <p className="font-bold text-sky-900 flex items-center gap-1.5">
+                    <Icon name="info" className="w-4 h-4 text-sky-600" />
+                    {selectedOption === currentQ.correct ? 'Correct Answer Explanation:' : 'Rationale & Explanation:'}
+                  </p>
+                  <p className="text-slate-700">{currentQ.explanation}</p>
+                </div>
+              )}
+            </div>
+
+            {/* Navigation Controls Footer */}
+            <div className="relative z-10 pt-6 mt-6 border-t border-slate-100 flex justify-between items-center gap-4">
+              <button
+                disabled={currentIdx === 0}
+                onClick={() => setCurrentIdx(prev => prev - 1)}
+                className="px-4 py-2.5 rounded-xl border border-slate-200 text-slate-700 text-xs font-bold hover:bg-slate-50 disabled:opacity-40 disabled:cursor-not-allowed flex items-center gap-1.5"
+              >
+                <Icon name="arrow-left" className="w-4 h-4" />
+                Previous
+              </button>
+
+              <div className="flex gap-2">
+                {currentIdx < QUESTIONS.length - 1 ? (
+                  <button
+                    onClick={() => setCurrentIdx(prev => prev + 1)}
+                    className="px-5 py-2.5 rounded-xl bg-sky-600 hover:bg-sky-700 text-white text-xs font-bold shadow-md shadow-sky-600/20 transition-all flex items-center gap-1.5"
+                  >
+                    Next
+                    <Icon name="arrow-right" className="w-4 h-4" />
+                  </button>
+                ) : (
+                  <button
+                    onClick={() => setIsSubmitted(true)}
+                    className="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold shadow-md shadow-emerald-600/20 transition-all flex items-center gap-1.5"
+                  >
+                    Submit Test
+                    <Icon name="check" className="w-4 h-4" />
+                  </button>
+                )}
+              </div>
+            </div>
+
+          </div>
+        </div>
+      );
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<App />);
+  </script>
+</body>
+</html>
